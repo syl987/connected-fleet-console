@@ -60,14 +60,6 @@
           "buildTarget": "fleet-backend:build:production"
         }
       }
-    },
-    "test": {
-      "executor": "@nx/jest:jest",
-      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
-      "options": {
-        "jestConfig": "apps/fleet-backend/jest.config.cts",
-        "passWithNoTests": true
-      }
     }
   }
 }
