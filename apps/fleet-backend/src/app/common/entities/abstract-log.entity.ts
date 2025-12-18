@@ -1,10 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity } from 'typeorm';
+import { AbstractEntity } from './abstract.entity';
 
 @Entity()
-export abstract class AbstractLog {
-  @PrimaryGeneratedColumn()
-  id!: number;
-
+export abstract class AbstractLog extends AbstractEntity {
   @Column({ type: 'datetime' })
   timestamp!: Date;
 

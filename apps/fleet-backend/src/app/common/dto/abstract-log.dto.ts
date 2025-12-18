@@ -1,9 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { AbstractDto } from './abstract.dto';
 
-export abstract class AbstractLogDto {
-  @ApiProperty({ description: 'Unique identifier' })
-  id!: number;
-
+export abstract class AbstractLogDto extends AbstractDto {
   @ApiProperty({ description: 'Timestamp of the log', type: String })
   timestamp!: string;
 
