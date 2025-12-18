@@ -20,7 +20,10 @@
             "input": "apps/fleet-webapp/public"
           }
         ],
-        "styles": ["apps/fleet-webapp/src/styles.scss"]
+        "styles": ["apps/fleet-webapp/src/styles/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["node_modules/", "apps/fleet-webapp/src/styles/shared"]
+        }
       },
       "configurations": {
         "production": {
@@ -51,9 +54,11 @@
       "executor": "@angular/build:dev-server",
       "configurations": {
         "production": {
+          "proxyConfig": "proxy.conf.json",
           "buildTarget": "fleet-webapp:build:production"
         },
         "development": {
+          "proxyConfig": "proxy.conf.json",
           "buildTarget": "fleet-webapp:build:development"
         }
       },

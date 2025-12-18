@@ -1,0 +1,25 @@
+$tokens: (
+  container-shape: var(--mat-sys-corner-large),
+);
+
+$primary-tokens: (
+  container-color: var(--mat-sys-primary-container),
+  supporting-text-color: var(--mat-sys-on-primary-container),
+  button-color: var(--mat-sys-primary),
+);
+
+$tertiary-tokens: (
+  container-color: var(--mat-sys-tertiary-container),
+  supporting-text-color: var(--mat-sys-on-tertiary-container),
+  button-color: var(--mat-sys-tertiary),
+);
+
+$error-tokens: (
+  container-color: var(--mat-sys-error-container),
+  supporting-text-color: var(--mat-sys-on-error-container),
+  button-color: var(--mat-sys-error),
+);
+
+.mdc-snackbar__surface {
+  border: var(--mat-snack-bar-supporting-text-color) 2px solid;
+}
