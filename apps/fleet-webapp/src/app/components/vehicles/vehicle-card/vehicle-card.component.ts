@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
-import { Vehicle } from '../../../../models/vehicle.model';
+import { Vehicle } from '../../../models/vehicle.model';
 
 @Component({
   selector: 'app-vehicle-card',
