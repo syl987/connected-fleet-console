@@ -12,6 +12,7 @@
 2. Generate empty applications - front-end: angular, back-end: nestjs
 3. Connect remote Git repository - reason: code safety and public access
 4. Setup basic tools (eslint, stylelint and prettier) - reason: clean code and proficiency with auto-corrections
+5. Integrate Swagger API documentation generator - reason: REQUIREMENT
 
 ## Run tasks
 
