@@ -51,9 +51,11 @@
       "executor": "@angular/build:dev-server",
       "configurations": {
         "production": {
+          "proxyConfig": "proxy.conf.json",
           "buildTarget": "fleet-webapp:build:production"
         },
         "development": {
+          "proxyConfig": "proxy.conf.json",
           "buildTarget": "fleet-webapp:build:development"
         }
       },
