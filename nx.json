@@ -29,6 +29,95 @@
       "linter": "eslint",
       "style": "scss",
       "unitTestRunner": "none"
+    },
+    "@schematics/angular:component": {
+      "skipTests": true,
+      "changeDetection": "OnPush",
+      "inlineStyle": true,
+      "style": "scss",
+      "type": "component"
+    },
+    "@schematics/angular:directive": {
+      "skipTests": true,
+      "type": "directive"
+    },
+    "@schematics/angular:pipe": {
+      "skipTests": true,
+      "typeSeparator": "."
+    },
+    "@schematics/angular:service": {
+      "skipTests": true,
+      "type": "service"
+    },
+    "@schematics/angular:resolver": {
+      "skipTests": true,
+      "typeSeparator": "."
+    },
+    "@schematics/angular:guard": {
+      "skipTests": true,
+      "typeSeparator": "."
+    },
+    "@schematics/angular:interceptor": {
+      "skipTests": true,
+      "typeSeparator": "."
+    },
+    "@schematics/angular:module": {
+      "commonModule": false,
+      "typeSeparator": "."
+    },
+    "@schematics/angular:class": {
+      "skipTests": true,
+      "type": "models"
+    },
+    "@schematics/angular:enum": {
+      "type": "models"
+    },
+    "@schematics/angular:interface": {
+      "type": "models"
+    },
+    "@ngrx/schematics:store": {
+      "statePath": "store",
+      "stateInterface": "State"
+    },
+    "@ngrx/schematics:action": {
+      "flat": false,
+      "api": true
+    },
+    "@ngrx/schematics:reducer": {
+      "skipTests": true,
+      "flat": false,
+      "api": true
+    },
+    "@ngrx/schematics:effect": {
+      "skipTests": true,
+      "flat": false,
+      "api": true
+    },
+    "@ngrx/schematics:selector": {
+      "skipTests": true,
+      "flat": false,
+      "api": true
+    },
+    "@ngrx/schematics:entity": {
+      "skipTests": true,
+      "flat": false
+    },
+    "@ngrx/schematics:feature": {
+      "skipTests": true,
+      "flat": false,
+      "api": true
+    },
+    "@ngrx/schematics:container": {
+      "testDepth": "unit",
+      "changeDetection": "OnPush",
+      "inlineStyle": true,
+      "style": "scss"
+    },
+    "@angular-eslint/schematics:application": {
+      "setParserOptionsProject": true
+    },
+    "@angular-eslint/schematics:library": {
+      "setParserOptionsProject": true
     }
   },
   "plugins": [
