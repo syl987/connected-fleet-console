@@ -7,6 +7,10 @@ export const appRoutes: Route[] = [
     redirectTo: 'vehicles',
   },
   {
+    path: '',
+    loadComponent: () => import('./components/welcome-page/welcome-page.component').then(m => m.WelcomePageComponent),
+  },
+  {
     path: '**',
     redirectTo: 'vehicles',
   },
