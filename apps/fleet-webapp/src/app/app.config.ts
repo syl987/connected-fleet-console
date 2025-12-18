@@ -38,7 +38,6 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({ maxAge: 25 }),
     provideAppInitializer(registerVehicleDataService()),
     { provide: DefaultDataServiceConfig, useValue: entityDataServiceConfig },
-    { provide: DefaultDataServiceConfig, useValue: entityDataServiceConfig },
     { provide: APP_OPTIONS, useValue: options },
     { provide: APP_LINKS, useValue: links },
   ],
