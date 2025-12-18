@@ -4,6 +4,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { Router, RouterModule } from '@angular/router';
 import { APP_LINKS, APP_OPTIONS } from '../../models/app.models';
+import { ThemeService } from '../../services/theme.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -19,6 +20,8 @@ import { APP_LINKS, APP_OPTIONS } from '../../models/app.models';
 })
 export class SidenavComponent {
   protected readonly router = inject(Router);
+
+  readonly themeService = inject(ThemeService);
 
   readonly options = inject(APP_OPTIONS);
   readonly links = inject(APP_LINKS);

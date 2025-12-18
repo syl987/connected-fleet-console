@@ -17,6 +17,21 @@
   }
 </mat-nav-list>
 
+<mat-divider class="mx-4" />
+
+<mat-action-list>
+  <button mat-list-item (click)="themeService.toggleTheme()">
+    <mat-icon matListItemIcon>
+      @if (themeService.theme === 'dark') {
+        dark_mode
+      } @else {
+        light_mode
+      }
+    </mat-icon>
+    Theme
+  </button>
+</mat-action-list>
+
 <button mat-icon-button (click)="navigated.emit()" class="absolute end-0 top-0 m-2" aria-label="Close">
   <mat-icon class="align-super">close</mat-icon>
 </button>

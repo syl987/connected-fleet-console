@@ -13,7 +13,6 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { distinctUntilChanged, map } from 'rxjs';
 
-import { ThemeService } from '../../services/theme.service';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
@@ -37,8 +36,6 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
 })
 export class HeaderComponent extends SidenavComponent {
   protected readonly breakpointObserver = inject(BreakpointObserver);
-
-  readonly themeService = inject(ThemeService);
 
   private readonly large$ = this.breakpointObserver.observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge]).pipe(
     map(({ matches }) => matches),
