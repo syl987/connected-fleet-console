@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { TitleBarComponent } from '../__base/title-bar/title-bar.component';
+import { TitleBarComponent } from '../title-bar/title-bar.component';
 
 @Component({
   selector: 'app-welcome-page',

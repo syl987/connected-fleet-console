@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { APP_OPTIONS } from '../../../models/app.models';
+import { APP_OPTIONS } from '../../models/app.models';
 
 @Component({
   selector: 'app-footer',

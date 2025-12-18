@@ -1,4 +1,5 @@
 import { Route } from '@angular/router';
+import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
 
 export const appRoutes: Route[] = [
   {
@@ -9,7 +10,7 @@ export const appRoutes: Route[] = [
   {
     path: 'welcome',
     title: 'Welcome',
-    loadComponent: () => import('./components/welcome-page/welcome-page.component').then(m => m.WelcomePageComponent),
+    component: WelcomePageComponent,
   },
   {
     path: '**',

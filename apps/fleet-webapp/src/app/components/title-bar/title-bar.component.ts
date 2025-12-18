@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, inject, input } from '@angular/core
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { RouterService } from '../../../services/router.service';
+import { RouterService } from '../../services/router.service';
 
 @Component({
   selector: 'app-title-bar',

@@ -13,7 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { distinctUntilChanged, map } from 'rxjs';
 
-import { ThemeService } from '../../../services/theme.service';
+import { ThemeService } from '../../services/theme.service';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
