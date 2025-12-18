@@ -7,7 +7,18 @@ import { provideRouterStore } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { appRoutes } from './app.routes';
+import { APP_LINKS, APP_OPTIONS, AppLinks, AppOptions } from './models/app.models';
 import { effects, entityDataConfig, entityDataServiceConfig, reducers, routerStoreConfig, storeConfig } from './store/app.store';
+
+const options: AppOptions = {
+  applicationName: 'Connected Fleet Console',
+  copyrightName: 'Igor M.',
+  copyrightYear: new Date().getFullYear(),
+};
+
+const links: AppLinks = [
+  { label: `Welcome`, icon: 'home', path: '/welcome' },
+];
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,5 +31,7 @@ export const appConfig: ApplicationConfig = {
     provideEntityData(entityDataConfig, withEffects()),
     provideStoreDevtools({ maxAge: 25 }),
     { provide: DefaultDataServiceConfig, useValue: entityDataServiceConfig },
+    { provide: APP_OPTIONS, useValue: options },
+    { provide: APP_LINKS, useValue: links },
   ],
 };

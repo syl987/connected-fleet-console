@@ -4,14 +4,15 @@ export const appRoutes: Route[] = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'vehicles',
+    redirectTo: 'welcome',
   },
   {
-    path: '',
+    path: 'welcome',
+    title: 'Welcome',
     loadComponent: () => import('./components/welcome-page/welcome-page.component').then(m => m.WelcomePageComponent),
   },
   {
     path: '**',
-    redirectTo: 'vehicles',
+    redirectTo: 'welcome',
   },
 ];

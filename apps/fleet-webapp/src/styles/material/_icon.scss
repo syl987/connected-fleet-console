@@ -1,0 +1,18 @@
+$tokens: ();
+
+$primary-tokens: (
+  color: var(--mat-sys-primary),
+);
+
+$tertiary-tokens: (
+  color: var(--mat-sys-tertiary),
+);
+
+$error-tokens: (
+  color: var(--mat-sys-error),
+);
+
+a mat-icon,
+button mat-icon {
+  color: inherit;
+}

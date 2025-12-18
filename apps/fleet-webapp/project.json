@@ -20,7 +20,10 @@
             "input": "apps/fleet-webapp/public"
           }
         ],
-        "styles": ["apps/fleet-webapp/src/styles.scss"]
+        "styles": ["apps/fleet-webapp/src/styles/styles.scss"],
+        "stylePreprocessorOptions": {
+          "includePaths": ["node_modules/", "apps/fleet-webapp/src/styles/shared"]
+        }
       },
       "configurations": {
         "production": {
