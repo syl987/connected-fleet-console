@@ -3,8 +3,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { Router, RouterModule } from '@angular/router';
-import { APP_LINKS, APP_OPTIONS } from '../../models/app.models';
-import { ThemeService } from '../../services/theme.service';
+import { APP_LINKS, APP_OPTIONS } from '../../../models/app.models';
+import { ThemeService } from '../../../services/theme.service';
 
 @Component({
   selector: 'app-sidenav',

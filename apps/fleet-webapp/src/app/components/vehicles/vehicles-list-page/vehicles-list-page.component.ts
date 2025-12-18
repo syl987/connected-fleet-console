@@ -1,17 +1,16 @@
-import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ActivatedRoute, RouterModule } from '@angular/router';
-import { TitleBarComponent } from '../../../../components/title-bar/title-bar.component';
-import { VehicleService } from '../../../../services/vehicle.service';
+import { RouterModule } from '@angular/router';
+import { VehicleService } from '../../../services/vehicle.service';
+import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
 import { VehicleCardComponent } from '../vehicle-card/vehicle-card.component';
 
 @Component({
-  selector: 'app-vehicles-page',
+  selector: 'app-vehicles-list-page',
   imports: [
     RouterModule,
     MatCardModule,
@@ -20,16 +19,14 @@ import { VehicleCardComponent } from '../vehicle-card/vehicle-card.component';
     MatProgressSpinnerModule,
     TitleBarComponent,
     VehicleCardComponent,
-    DatePipe,
   ],
-  templateUrl: './vehicle-page.component.html',
+  templateUrl: './vehicles-list-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VehiclePageComponent implements OnInit {
+export class VehiclesListPageComponent implements OnInit {
   protected readonly service = inject(VehicleService);
-  protected readonly route = inject(ActivatedRoute);
 
-  readonly vehicle = toSignal(this.service.entityByRouteId$, { requireSync: true });
+  readonly vehicles = toSignal(this.service.filteredEntities$, { requireSync: true });
   readonly loading = toSignal(this.service.loading$, { requireSync: true });
 
   ngOnInit() {

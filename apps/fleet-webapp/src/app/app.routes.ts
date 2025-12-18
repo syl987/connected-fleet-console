@@ -1,5 +1,5 @@
 import { Route } from '@angular/router';
-import { WelcomePageComponent } from './components/welcome-page/welcome-page.component';
+import { WelcomePageComponent } from './components/core/welcome-page/welcome-page.component';
 
 export const appRoutes: Route[] = [
   {
@@ -15,17 +15,17 @@ export const appRoutes: Route[] = [
   {
     path: 'dashboard',
     title: 'Dashboard',
-    loadComponent: () => import('./modules/dashboard/components/dashboard-page/dashboard-page.component').then(m => m.DashboardPageComponent),
+    loadComponent: () => import('./components/dashboard/dashboard-page/dashboard-page.component').then(m => m.DashboardPageComponent),
   },
   {
     path: 'vehicles',
     title: 'Vehicles',
-    loadComponent: () => import('./modules/vehicles/components/vehicles-page/vehicles-page.component').then(m => m.VehiclesPageComponent),
+    loadComponent: () => import('./components/vehicles/vehicles-list-page/vehicles-list-page.component').then(m => m.VehiclesListPageComponent),
   },
   {
     path: 'vehicles/:id',
     title: 'Vehicle Details',
-    loadComponent: () => import('./modules/vehicles/components/vehicle-page/vehicle-page.component').then(m => m.VehiclePageComponent),
+    loadComponent: () => import('./components/vehicles/vehicle-detail-page/vehicle-detail-page.component').then(m => m.VehicleDetailPageComponent),
   },
   {
     path: '**',
