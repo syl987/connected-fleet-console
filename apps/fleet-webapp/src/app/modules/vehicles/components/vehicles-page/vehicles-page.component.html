@@ -1,9 +1,33 @@
 <div class="container">
   <app-title-bar />
 
-  <ul>
+  <p>Explore your vehicle fleet.</p>
+
+  <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
     @for (vehicle of vehicles(); track vehicle) {
-      <li>{{ vehicle.brand }} {{ vehicle.model }} ({{ vehicle.year }})</li>
+      <a [routerLink]="['/vehicles', vehicle.id]" class="text-decoration-none text-inherit">
+        <mat-card class="h-full">
+          <mat-card-header>
+            <mat-card-title>{{ vehicle.brand }} {{ vehicle.model }}</mat-card-title>
+            <mat-card-subtitle class="mt-1">{{ vehicle.year }}</mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-divider class="mx-4 mt-3" />
+
+          <mat-card-content class="flex h-full flex-col gap-3 py-3">
+            <p class="mb-0 grow">VIN: {{ vehicle.vin }}</p>
+            <p class="mb-0 grow">Mileage: {{ vehicle.mileage }} km</p>
+
+            <ng-content />
+          </mat-card-content>
+        </mat-card>
+      </a>
+    } @empty {
+      @if (loading()) {
+        <mat-spinner class="mb-4" aria-label="Loading" />
+      } @else {
+        <p class="text-secondary col-span-full py-2 text-center">No vehicles were found.</p>
+      }
     }
-  </ul>
+  </div>
 </div>

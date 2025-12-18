@@ -1,10 +1,12 @@
+import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { RouterModule } from '@angular/router';
+import { ActivatedRoute, RouterModule } from '@angular/router';
+import { combineLatest, map } from 'rxjs';
 import { TitleBarComponent } from '../../../../components/title-bar/title-bar.component';
 import { VehicleService } from '../../../../services/vehicle.service';
 
@@ -17,14 +19,19 @@ import { VehicleService } from '../../../../services/vehicle.service';
     MatIconModule,
     MatProgressSpinnerModule,
     TitleBarComponent,
+    DatePipe,
   ],
-  templateUrl: './vehicles-page.component.html',
+  templateUrl: './vehicle-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class VehiclesPageComponent implements OnInit {
+export class VehiclePageComponent implements OnInit {
   protected readonly service = inject(VehicleService);
+  protected readonly route = inject(ActivatedRoute);
 
-  readonly vehicles = toSignal(this.service.filteredEntities$, { requireSync: true });
+  readonly id$ = this.route.paramMap.pipe(map(params => Number(params.get('id'))));
+  readonly entity$ = combineLatest([this.id$, this.service.entityMap$]).pipe(map(([id, entityMap]) => entityMap[id]));
+
+  readonly vehicle = toSignal(this.entity$, { requireSync: true });
   readonly loading = toSignal(this.service.loading$, { requireSync: true });
 
   ngOnInit() {
