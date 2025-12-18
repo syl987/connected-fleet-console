@@ -21,6 +21,8 @@ const links: AppLinks = [
   { label: `Welcome`, icon: 'home', path: '/welcome' },
   { label: `Dashboard`, icon: 'dashboard', path: '/dashboard' },
   { label: `Vehicles`, icon: 'directions_car', path: '/vehicles' },
+  { label: `Logs`, icon: 'library_books', path: '/logs' },
+  { label: `Docs`, icon: 'article', path: '/documentation' },
 ];
 
 function registerVehicleDataService(): () => void {
