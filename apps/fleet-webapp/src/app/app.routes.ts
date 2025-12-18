@@ -13,6 +13,11 @@ export const appRoutes: Route[] = [
     component: WelcomePageComponent,
   },
   {
+    path: 'dashboard',
+    title: 'Dashboard',
+    loadComponent: () => import('./modules/dashboard/components/dashboard-page/dashboard-page.component').then(m => m.DashboardPageComponent),
+  },
+  {
     path: 'vehicles',
     title: 'Vehicles',
     loadComponent: () => import('./modules/vehicles/components/vehicles-page/vehicles-page.component').then(m => m.VehiclesPageComponent),

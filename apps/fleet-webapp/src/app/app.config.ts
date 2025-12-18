@@ -19,7 +19,8 @@ const options: AppOptions = {
 
 const links: AppLinks = [
   { label: `Welcome`, icon: 'home', path: '/welcome' },
-  { label: `Vehicles`, icon: 'car', path: '/vehicles' },
+  { label: `Dashboard`, icon: 'dashboard', path: '/dashboard' },
+  { label: `Vehicles`, icon: 'directions_car', path: '/vehicles' },
 ];
 
 function registerVehicleDataService(): () => void {
