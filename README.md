@@ -6,6 +6,13 @@
 
 [Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
 
+## Development Progress
+
+1. Create Nx workspace - reason: a monorepo is needed for front-end and back-end applications
+2. Generate empty applications - front-end: angular, back-end: nestjs
+3. Connect remote Git repository - reason: code safety and public access
+4. Setup basic tools (eslint, stylelint and prettier) - reason: clean code and proficiency with auto-corrections
+
 ## Run tasks
 
 To run the dev server for your app, use:
