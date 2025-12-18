@@ -7,6 +7,4 @@ import { RouterModule } from '@angular/router';
   templateUrl: './app.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
-  protected title = 'fleet-webapp';
-}
+export class AppComponent {}
