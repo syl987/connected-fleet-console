@@ -1,0 +1,16 @@
+<div class="container">
+  <app-title-bar backUrl="/vehicles">
+    <!-- TODO add some actions -->
+  </app-title-bar>
+
+  <p>Examine selected vehicle.</p>
+
+  @if (vehicle(); as vehicle) {
+    <app-vehicle-card [data]="vehicle">
+      <p class="mb-0 grow">Id: {{ vehicle.id }}</p>
+      <p class="mb-0 grow">Created At: {{ vehicle.createdAt | date }}</p>
+      <p class="mb-0 grow">Updated At: {{ vehicle.updatedAt | date }}</p>
+      <p class="mb-0 grow">Version: {{ vehicle.version }}</p>
+    </app-vehicle-card>
+  }
+</div>

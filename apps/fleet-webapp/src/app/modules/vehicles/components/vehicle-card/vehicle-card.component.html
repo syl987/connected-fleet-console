@@ -1,0 +1,17 @@
+@let vehicle = data();
+
+<mat-card class="h-full">
+  <mat-card-header>
+    <mat-card-title>{{ vehicle.brand }} {{ vehicle.model }}</mat-card-title>
+    <mat-card-subtitle class="mt-1">{{ vehicle.year }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-divider class="mx-4 mt-3" />
+
+  <mat-card-content class="flex h-full flex-col gap-3 py-3">
+    <p class="mb-0 grow">VIN: {{ vehicle.vin }}</p>
+    <p class="mb-0 grow">Mileage: {{ vehicle.mileage }} km</p>
+
+    <ng-content />
+  </mat-card-content>
+</mat-card>

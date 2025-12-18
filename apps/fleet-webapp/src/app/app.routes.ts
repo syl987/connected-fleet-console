@@ -13,6 +13,16 @@ export const appRoutes: Route[] = [
     component: WelcomePageComponent,
   },
   {
+    path: 'vehicles',
+    title: 'Vehicles',
+    loadComponent: () => import('./modules/vehicles/components/vehicles-page/vehicles-page.component').then(m => m.VehiclesPageComponent),
+  },
+  {
+    path: 'vehicles/:id',
+    title: 'Vehicle Details',
+    loadComponent: () => import('./modules/vehicles/components/vehicle-page/vehicle-page.component').then(m => m.VehiclePageComponent),
+  },
+  {
     path: '**',
     redirectTo: 'welcome',
   },

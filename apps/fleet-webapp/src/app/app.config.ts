@@ -1,13 +1,14 @@
 import { provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { DefaultDataServiceConfig, provideEntityData, withEffects } from '@ngrx/data';
+import { DefaultDataServiceConfig, EntityDataService, provideEntityData, withEffects } from '@ngrx/data';
 import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { appRoutes } from './app.routes';
 import { APP_LINKS, APP_OPTIONS, AppLinks, AppOptions } from './models/app.models';
+import { VehicleDataService } from './services/vehicle-data.service';
 import { effects, entityDataConfig, entityDataServiceConfig, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
 const options: AppOptions = {
@@ -18,7 +19,12 @@ const options: AppOptions = {
 
 const links: AppLinks = [
   { label: `Welcome`, icon: 'home', path: '/welcome' },
+  { label: `Vehicles`, icon: 'car', path: '/vehicles' },
 ];
+
+function registerVehicleDataService(): () => void {
+  return (data = inject(EntityDataService), vehicleDataService = inject(VehicleDataService)) => data.registerService('Vehicle', vehicleDataService);
+}
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -30,6 +36,7 @@ export const appConfig: ApplicationConfig = {
     provideRouterStore(routerStoreConfig),
     provideEntityData(entityDataConfig, withEffects()),
     provideStoreDevtools({ maxAge: 25 }),
+    provideAppInitializer(registerVehicleDataService()),
     { provide: DefaultDataServiceConfig, useValue: entityDataServiceConfig },
     { provide: APP_OPTIONS, useValue: options },
     { provide: APP_LINKS, useValue: links },
