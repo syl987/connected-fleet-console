@@ -8,27 +8,59 @@ export default [
   {
     files: ['**/*.ts'],
     rules: {
-      '@angular-eslint/directive-selector': [
-        'error',
+      // ==== eslint: suggestions ====
+      'no-restricted-imports': [
+        'warn',
         {
-          type: 'attribute',
-          prefix: 'app',
-          style: 'camelCase',
+          paths: [
+            {
+              name: 'rxjs/operators',
+              message: "Please import from 'rxjs' instead.",
+            },
+            {
+              name: '@angular/forms',
+              importNames: [
+                'FormsModule',
+                'NgForm',
+                'NgModel',
+                'NgModelGroup',
+              ],
+              message: 'Please use reactive forms instead.',
+            },
+          ],
         },
       ],
-      '@angular-eslint/component-selector': [
-        'error',
-        {
-          type: 'element',
-          prefix: 'app',
-          style: 'kebab-case',
-        },
-      ],
+
+      // ==== @angular-eslint: typescript ====
+      '@angular-eslint/component-max-inline-declarations': 'warn',
+      '@angular-eslint/consistent-component-styles': 'warn',
+      '@angular-eslint/contextual-decorator': 'error',
+      '@angular-eslint/no-async-lifecycle-method': 'warn',
+      '@angular-eslint/no-conflicting-lifecycle': 'warn',
+      '@angular-eslint/no-duplicates-in-metadata-arrays': 'warn',
+      '@angular-eslint/no-inputs-metadata-property': 'off', // recommended override: necessary for extending a component
+      '@angular-eslint/no-outputs-metadata-property': 'off', // recommended override: necessary for extending a component
+      '@angular-eslint/no-queries-metadata-property': 'off', // recommended override: necessary for extending a component
+      '@angular-eslint/prefer-on-push-component-change-detection': 'warn',
+      '@angular-eslint/prefer-output-readonly': 'warn',
+      '@angular-eslint/prefer-standalone': 'warn',
+      '@angular-eslint/relative-url-prefix': 'warn',
+      '@angular-eslint/sort-lifecycle-methods': 'warn',
+      '@angular-eslint/use-component-selector': 'warn',
+      '@angular-eslint/use-lifecycle-interface': 'warn',
     },
   },
   {
     files: ['**/*.html'],
-    // Override or add rules here
-    rules: {},
+    rules: {
+      // ==== @angular-eslint: template ====
+      '@angular-eslint/template/eqeqeq': ['warn', { allowNullOrUndefined: true }], // recommended override: provide options
+      '@angular-eslint/template/no-any': 'warn',
+      '@angular-eslint/template/no-duplicate-attributes': 'warn',
+      '@angular-eslint/template/no-interpolation-in-attributes': 'warn',
+      '@angular-eslint/template/no-positive-tabindex': 'warn',
+      '@angular-eslint/template/prefer-control-flow': 'warn',
+      '@angular-eslint/template/prefer-self-closing-tags': 'warn',
+    },
   },
 ];
