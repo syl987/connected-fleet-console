@@ -14,6 +14,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'vehicles',
+    title: 'Vehicles',
     loadComponent: () => import('./modules/vehicles/components/vehicles-page/vehicles-page.component').then(m => m.VehiclesPageComponent),
   },
   {
