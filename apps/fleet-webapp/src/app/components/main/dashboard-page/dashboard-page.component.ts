@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { TitleBarComponent } from '../core/title-bar/title-bar.component';
+import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
 
 @Component({
   selector: 'app-dashboard-page',
