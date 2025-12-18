@@ -6,29 +6,11 @@
   <p>Examine selected vehicle.</p>
 
   @if (vehicle(); as vehicle) {
-    <mat-card class="h-full">
-      <mat-card-header>
-        <mat-card-title>{{ vehicle.brand }} {{ vehicle.model }}</mat-card-title>
-        <mat-card-subtitle class="mt-1">{{ vehicle.year }}</mat-card-subtitle>
-      </mat-card-header>
-
-      <mat-divider class="mx-4 mt-3" />
-
-      <mat-card-content class="flex h-full flex-col gap-3 py-3">
-        <p class="mb-0 grow">VIN: {{ vehicle.vin }}</p>
-        <p class="mb-0 grow">Mileage: {{ vehicle.mileage }} km</p>
-      </mat-card-content>
-
-      <mat-divider class="mx-4" />
-
-      <mat-card-content class="flex h-full flex-col gap-3 py-3">
-        <p class="mb-0 grow">Id: {{ vehicle.id }}</p>
-        <p class="mb-0 grow">Created At: {{ vehicle.createdAt | date }}</p>
-        <p class="mb-0 grow">Updated At: {{ vehicle.updatedAt | date }}</p>
-        <p class="mb-0 grow">Version: {{ vehicle.version }}</p>
-
-        <ng-content />
-      </mat-card-content>
-    </mat-card>
+    <app-vehicle-card [data]="vehicle">
+      <p class="mb-0 grow">Id: {{ vehicle.id }}</p>
+      <p class="mb-0 grow">Created At: {{ vehicle.createdAt | date }}</p>
+      <p class="mb-0 grow">Updated At: {{ vehicle.updatedAt | date }}</p>
+      <p class="mb-0 grow">Version: {{ vehicle.version }}</p>
+    </app-vehicle-card>
   }
 </div>

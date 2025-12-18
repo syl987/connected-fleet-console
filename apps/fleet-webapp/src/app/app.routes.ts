@@ -19,7 +19,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'vehicles/:id',
-    title: 'Vehicle',
+    title: 'Vehicle Details',
     loadComponent: () => import('./modules/vehicles/components/vehicle-page/vehicle-page.component').then(m => m.VehiclePageComponent),
   },
   {

@@ -6,9 +6,9 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { combineLatest, map } from 'rxjs';
 import { TitleBarComponent } from '../../../../components/title-bar/title-bar.component';
 import { VehicleService } from '../../../../services/vehicle.service';
+import { VehicleCardComponent } from '../vehicle-card/vehicle-card.component';
 
 @Component({
   selector: 'app-vehicles-page',
@@ -19,6 +19,7 @@ import { VehicleService } from '../../../../services/vehicle.service';
     MatIconModule,
     MatProgressSpinnerModule,
     TitleBarComponent,
+    VehicleCardComponent,
     DatePipe,
   ],
   templateUrl: './vehicle-page.component.html',
@@ -28,10 +29,7 @@ export class VehiclePageComponent implements OnInit {
   protected readonly service = inject(VehicleService);
   protected readonly route = inject(ActivatedRoute);
 
-  readonly id$ = this.route.paramMap.pipe(map(params => Number(params.get('id'))));
-  readonly entity$ = combineLatest([this.id$, this.service.entityMap$]).pipe(map(([id, entityMap]) => entityMap[id]));
-
-  readonly vehicle = toSignal(this.entity$, { requireSync: true });
+  readonly vehicle = toSignal(this.service.entityByRouteId$, { requireSync: true });
   readonly loading = toSignal(this.service.loading$, { requireSync: true });
 
   ngOnInit() {

@@ -7,6 +7,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterModule } from '@angular/router';
 import { TitleBarComponent } from '../../../../components/title-bar/title-bar.component';
 import { VehicleService } from '../../../../services/vehicle.service';
+import { VehicleCardComponent } from '../vehicle-card/vehicle-card.component';
 
 @Component({
   selector: 'app-vehicles-page',
@@ -17,6 +18,7 @@ import { VehicleService } from '../../../../services/vehicle.service';
     MatIconModule,
     MatProgressSpinnerModule,
     TitleBarComponent,
+    VehicleCardComponent,
   ],
   templateUrl: './vehicles-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
