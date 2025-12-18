@@ -1,0 +1,7 @@
+<div>
+  <h2>Vehicles</h2>
+  <button (click)="reload()">Reload</button>
+  <ul>
+    <li *ngFor="let v of vehicles$ | async">{{ v.brand }} {{ v.model }} ({{ v.year }})</li>
+  </ul>
+</div>
