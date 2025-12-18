@@ -1,0 +1,16 @@
+$tokens: ();
+
+$primary-tokens: (
+  icon-color: var(--mat-sys-primary),
+  state-layer-color: var(--mat-sys-primary),
+);
+
+$tertiary-tokens: (
+  icon-color: var(--mat-sys-tertiary),
+  state-layer-color: var(--mat-sys-tertiary),
+);
+
+$error-tokens: (
+  icon-color: var(--mat-sys-error),
+  state-layer-color: var(--mat-sys-error),
+);

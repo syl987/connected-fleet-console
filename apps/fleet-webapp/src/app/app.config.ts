@@ -7,10 +7,22 @@ import { provideRouterStore } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { appRoutes } from './app.routes';
+import { APP_LINKS, APP_OPTIONS, AppLinks, AppOptions } from './models/app.models';
 import { VehicleDataService } from './services/vehicle-data.service';
 import { effects, entityDataConfig, entityDataServiceConfig, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
-export function registerVehicleDataService(): () => void {
+const options: AppOptions = {
+  applicationName: 'Connected Fleet Console',
+  copyrightName: 'Igor M.',
+  copyrightYear: new Date().getFullYear(),
+};
+
+const links: AppLinks = [
+  { label: `Welcome`, icon: 'home', path: '/welcome' },
+  { label: `Vehicles`, icon: 'car', path: '/vehicles' },
+];
+
+function registerVehicleDataService(): () => void {
   return (data = inject(EntityDataService), vehicleDataService = inject(VehicleDataService)) => data.registerService('Vehicle', vehicleDataService);
 }
 
@@ -26,5 +38,8 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({ maxAge: 25 }),
     provideAppInitializer(registerVehicleDataService()),
     { provide: DefaultDataServiceConfig, useValue: entityDataServiceConfig },
+    { provide: DefaultDataServiceConfig, useValue: entityDataServiceConfig },
+    { provide: APP_OPTIONS, useValue: options },
+    { provide: APP_LINKS, useValue: links },
   ],
 };

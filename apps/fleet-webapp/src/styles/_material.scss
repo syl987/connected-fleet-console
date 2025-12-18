@@ -1,0 +1,84 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+
+@use 'sass:meta';
+
+@use '@angular/material' as mat;
+
+@use 'material/button';
+@use 'material/dialog';
+@use 'material/divider';
+@use 'material/fab';
+@use 'material/form-field';
+@use 'material/icon';
+@use 'material/icon-button';
+@use 'material/progress-spinner';
+@use 'material/sidenav';
+@use 'material/snack-bar';
+@use 'material/tabs';
+@use 'material/toolbar';
+
+@include meta.load-css('material/background');
+@include meta.load-css('material/color');
+@include meta.load-css('material/elevation');
+@include meta.load-css('material/font');
+
+$theme: (
+  color: (
+    primary: mat.$cyan-palette,
+    tertiary: mat.$spring-green-palette,
+  ),
+  typography: Inter,
+);
+
+html {
+  --mat-sys-corner-extra-large: 10px !important;
+  --mat-sys-corner-extra-large-top: 10px 10px 0 0 !important;
+  --mat-sys-corner-extra-small: 2px !important;
+  --mat-sys-corner-extra-small-top: 2px 2px 0 0 !important;
+  --mat-sys-corner-large: 8px !important;
+  --mat-sys-corner-large-end: 0 8px 8px 0 !important;
+  --mat-sys-corner-large-start: 8px 0 0 8px !important;
+  --mat-sys-corner-large-top: 8px 8px 0 0 !important;
+  --mat-sys-corner-medium: 6px !important;
+  --mat-sys-corner-small: 4px !important;
+
+  @include mat.theme($theme);
+
+  @include mat.button-overrides(button.$tokens);
+  @include mat.dialog-overrides(dialog.$tokens);
+  @include mat.divider-overrides(divider.$tokens);
+  @include mat.fab-overrides(fab.$tokens);
+  @include mat.form-field-overrides(form-field.$tokens);
+  @include mat.icon-overrides(icon.$tokens);
+  @include mat.icon-button-overrides(icon-button.$tokens);
+  @include mat.progress-spinner-overrides(progress-spinner.$tokens);
+  @include mat.sidenav-overrides(sidenav.$tokens);
+  @include mat.snack-bar-overrides(snack-bar.$tokens);
+  @include mat.tabs-overrides(tabs.$tokens);
+  @include mat.toolbar-overrides(toolbar.$tokens);
+}
+
+.app-primary {
+  @include mat.icon-overrides(icon.$primary-tokens);
+  @include mat.icon-button-overrides(icon-button.$primary-tokens);
+  @include mat.snack-bar-overrides(snack-bar.$primary-tokens);
+}
+
+.app-tertiary {
+  @include mat.button-overrides(button.$tertiary-tokens);
+  @include mat.fab-overrides(fab.$tertiary-tokens);
+  @include mat.icon-overrides(icon.$tertiary-tokens);
+  @include mat.icon-button-overrides(icon-button.$tertiary-tokens);
+  @include mat.progress-spinner-overrides(progress-spinner.$tertiary-tokens);
+  @include mat.snack-bar-overrides(snack-bar.$tertiary-tokens);
+}
+
+.app-error {
+  @include mat.button-overrides(button.$error-tokens);
+  @include mat.fab-overrides(fab.$error-tokens);
+  @include mat.icon-overrides(icon.$error-tokens);
+  @include mat.icon-button-overrides(icon-button.$error-tokens);
+  @include mat.progress-spinner-overrides(progress-spinner.$error-tokens);
+  @include mat.snack-bar-overrides(snack-bar.$error-tokens);
+}

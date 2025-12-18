@@ -1,0 +1,34 @@
+$tokens: (
+  filled-container-shape: var(--mat-sys-corner-medium),
+  outlined-container-shape: var(--mat-sys-corner-medium),
+  outlined-outline-color: primary,
+  outlined-outline-width: 2px,
+  protected-container-shape: var(--mat-sys-corner-medium),
+  text-container-shape: var(--mat-sys-corner-medium),
+);
+
+$tertiary-tokens: (
+  filled-container-color: var(--mat-sys-tertiary),
+  filled-label-text-color: var(--mat-sys-on-tertiary),
+  filled-state-layer-color: var(--mat-sys-on-tertiary),
+  outlined-label-text-color: var(--mat-sys-tertiary),
+  outlined-state-layer-color: var(--mat-sys-tertiary),
+  outlined-outline-color: var(--mat-sys-tertiary),
+  protected-label-text-color: var(--mat-sys-tertiary),
+  protected-state-layer-color: var(--mat-sys-tertiary),
+  text-label-text-color: var(--mat-sys-tertiary),
+  text-state-layer-color: var(--mat-sys-tertiary),
+);
+
+$error-tokens: (
+  filled-container-color: var(--mat-sys-error),
+  filled-label-text-color: var(--mat-sys-on-error),
+  filled-state-layer-color: var(--mat-sys-on-error),
+  outlined-label-text-color: var(--mat-sys-error),
+  outlined-state-layer-color: var(--mat-sys-error),
+  outlined-outline-color: var(--mat-sys-error),
+  protected-label-text-color: var(--mat-sys-error),
+  protected-state-layer-color: var(--mat-sys-error),
+  text-label-text-color: var(--mat-sys-error),
+  text-state-layer-color: var(--mat-sys-error),
+);

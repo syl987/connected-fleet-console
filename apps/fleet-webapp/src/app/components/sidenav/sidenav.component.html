@@ -1,0 +1,37 @@
+<div class="mt-10 mb-4 flex flex-col items-center">
+  <div class="mb-2 rounded-lg border p-1 text-xs font-normal" style="width: 128px; height: 128px">
+    <div class="bg-surface-container-highest text-surface flex h-full w-full flex-col items-center justify-center rounded-md text-6xl">?</div>
+  </div>
+
+  <div class="text-primary mt-2 text-xl">{{ options.applicationName }}</div>
+</div>
+
+<mat-divider class="mx-4" />
+
+<mat-nav-list>
+  @for (link of links; track link.path) {
+    <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="a.isActive" (click)="navigated.emit()" #a="routerLinkActive">
+      <mat-icon matListItemIcon>{{ link.icon }}</mat-icon>
+      {{ link.label }}
+    </a>
+  }
+</mat-nav-list>
+
+<mat-divider class="mx-4" />
+
+<mat-action-list>
+  <button mat-list-item (click)="themeService.toggleTheme()">
+    <mat-icon matListItemIcon>
+      @if (themeService.theme === 'dark') {
+        dark_mode
+      } @else {
+        light_mode
+      }
+    </mat-icon>
+    Theme
+  </button>
+</mat-action-list>
+
+<button mat-icon-button (click)="navigated.emit()" class="absolute end-0 top-0 m-2" aria-label="Close">
+  <mat-icon class="align-super">close</mat-icon>
+</button>
