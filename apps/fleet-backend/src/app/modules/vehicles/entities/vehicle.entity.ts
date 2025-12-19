@@ -1,6 +1,5 @@
-import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
+import { Column, Entity } from 'typeorm';
 import { AbstractEntity } from '../../../common/entities/abstract.entity';
-import { ImageEntity } from '../../../common/entities/image.entity';
 
 export enum FuelType {
   GAS = 'GAS',
@@ -31,8 +30,4 @@ export class Vehicle extends AbstractEntity {
 
   @Column({ type: 'enum', enum: FuelType, default: FuelType.GAS })
   fuelType!: FuelType;
-
-  @OneToOne(() => ImageEntity, { onDelete: 'CASCADE', nullable: true })
-  @JoinColumn()
-  image?: ImageEntity;
 }

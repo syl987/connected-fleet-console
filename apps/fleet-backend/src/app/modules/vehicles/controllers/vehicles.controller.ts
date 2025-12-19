@@ -98,22 +98,6 @@ export class VehiclesController {
       mileage: v.mileage,
       color: v.color,
       fuelType: v.fuelType,
-      image: v.image ? this.toImageDto(v.image) : undefined,
-    };
-  }
-
-  private toImageDto(i: import('../../../common/entities/image.entity').ImageEntity) {
-    return {
-      id: i.id,
-      createdAt: i.createdAt.toISOString(),
-      updatedAt: i.updatedAt.toISOString(),
-      deletedAt: i.deletedAt?.toISOString?.(),
-      version: i.version,
-      filename: i.filename,
-      url: `/vehicles/images/${i.id}`,
-      thumbnailUrl: i.thumbnailUrl,
-      mimeType: i.mimeType,
-      size: i.size,
     };
   }
 }
