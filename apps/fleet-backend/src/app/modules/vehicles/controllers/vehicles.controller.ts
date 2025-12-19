@@ -11,6 +11,7 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+
 import { CreateVehicleDto } from '../dto/create-vehicle.dto';
 import { UpdateVehicleDto } from '../dto/update-vehicle.dto';
 import { VehicleDto } from '../dto/vehicle.dto';
@@ -95,6 +96,8 @@ export class VehiclesController {
       year: v.year,
       vin: v.vin,
       mileage: v.mileage,
+      color: v.color,
+      fuelType: v.fuelType,
     };
   }
 }

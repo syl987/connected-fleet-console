@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Vehicle } from './modules/vehicles/entities/vehicle.entity';
 import { VehiclesModule } from './modules/vehicles/vehicles.module';
 
 @Module({
@@ -9,7 +8,7 @@ import { VehiclesModule } from './modules/vehicles/vehicles.module';
       type: 'sqlite',
       database: ':memory:',
       synchronize: true,
-      entities: [Vehicle],
+      autoLoadEntities: true,
     }),
     VehiclesModule,
   ],

@@ -1,0 +1,902 @@
+[
+  {
+    "brand": "Toyota",
+    "model": "Corolla",
+    "year": 2007,
+    "vin": "VIN00000000000001",
+    "mileage": 14196,
+    "color": "Black",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Ford",
+    "model": "Focus",
+    "year": 2014,
+    "vin": "VIN00000000000002",
+    "mileage": 71982,
+    "color": "White",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Honda",
+    "model": "CR-V",
+    "year": 2021,
+    "vin": "VIN00000000000003",
+    "mileage": 65994,
+    "color": "Blue",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Chevrolet",
+    "model": "Camaro",
+    "year": 2002,
+    "vin": "VIN00000000000004",
+    "mileage": 194854,
+    "color": "Gray",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Nissan",
+    "model": "Altima",
+    "year": 2009,
+    "vin": "VIN00000000000005",
+    "mileage": 125977,
+    "color": "Red",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "BMW",
+    "model": "5 Series",
+    "year": 2016,
+    "vin": "VIN00000000000006",
+    "mileage": 56181,
+    "color": "Silver",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Mercedes-Benz",
+    "model": "GLC",
+    "year": 2023,
+    "vin": "VIN00000000000007",
+    "mileage": 194772,
+    "color": "Green",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q7",
+    "year": 2004,
+    "vin": "VIN00000000000008",
+    "mileage": 30184,
+    "color": "Yellow",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Hyundai",
+    "model": "Elantra",
+    "year": 2011,
+    "vin": "VIN00000000000009",
+    "mileage": 71952,
+    "color": "Brown",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Kia",
+    "model": "Optima",
+    "year": 2018,
+    "vin": "VIN00000000000010",
+    "mileage": 29338,
+    "color": "Orange",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Volkswagen",
+    "model": "Passat",
+    "year": 2025,
+    "vin": "VIN00000000000011",
+    "mileage": 129352,
+    "color": "Black",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Subaru",
+    "model": "Crosstrek",
+    "year": 2006,
+    "vin": "VIN00000000000012",
+    "mileage": 189833,
+    "color": "White",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Mazda",
+    "model": "Mazda3",
+    "year": 2013,
+    "vin": "VIN00000000000013",
+    "mileage": 39059,
+    "color": "Blue",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Tesla",
+    "model": "Model 3",
+    "year": 2020,
+    "vin": "VIN00000000000014",
+    "mileage": 102062,
+    "color": "Gray",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Volvo",
+    "model": "XC60",
+    "year": 2001,
+    "vin": "VIN00000000000015",
+    "mileage": 33199,
+    "color": "Red",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Jeep",
+    "model": "Renegade",
+    "year": 2008,
+    "vin": "VIN00000000000016",
+    "mileage": 74615,
+    "color": "Silver",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Dodge",
+    "model": "Charger",
+    "year": 2015,
+    "vin": "VIN00000000000017",
+    "mileage": 30511,
+    "color": "Green",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "GMC",
+    "model": "Terrain",
+    "year": 2022,
+    "vin": "VIN00000000000018",
+    "mileage": 183291,
+    "color": "Yellow",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Lexus",
+    "model": "RX",
+    "year": 2003,
+    "vin": "VIN00000000000019",
+    "mileage": 28441,
+    "color": "Brown",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Acura",
+    "model": "MDX",
+    "year": 2010,
+    "vin": "VIN00000000000020",
+    "mileage": 78061,
+    "color": "Orange",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Corolla",
+    "year": 2017,
+    "vin": "VIN00000000000021",
+    "mileage": 109411,
+    "color": "Black",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Ford",
+    "model": "Focus",
+    "year": 2024,
+    "vin": "VIN00000000000022",
+    "mileage": 30201,
+    "color": "White",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Honda",
+    "model": "CR-V",
+    "year": 2005,
+    "vin": "VIN00000000000023",
+    "mileage": 74667,
+    "color": "Blue",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Chevrolet",
+    "model": "Camaro",
+    "year": 2012,
+    "vin": "VIN00000000000024",
+    "mileage": 91202,
+    "color": "Gray",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Nissan",
+    "model": "Altima",
+    "year": 2019,
+    "vin": "VIN00000000000025",
+    "mileage": 67237,
+    "color": "Red",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "BMW",
+    "model": "5 Series",
+    "year": 2000,
+    "vin": "VIN00000000000026",
+    "mileage": 128786,
+    "color": "Silver",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Mercedes-Benz",
+    "model": "GLC",
+    "year": 2007,
+    "vin": "VIN00000000000027",
+    "mileage": 164605,
+    "color": "Green",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q7",
+    "year": 2014,
+    "vin": "VIN00000000000028",
+    "mileage": 80479,
+    "color": "Yellow",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Hyundai",
+    "model": "Elantra",
+    "year": 2021,
+    "vin": "VIN00000000000029",
+    "mileage": 153083,
+    "color": "Brown",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Kia",
+    "model": "Optima",
+    "year": 2002,
+    "vin": "VIN00000000000030",
+    "mileage": 96105,
+    "color": "Orange",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Volkswagen",
+    "model": "Passat",
+    "year": 2009,
+    "vin": "VIN00000000000031",
+    "mileage": 106994,
+    "color": "Black",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Subaru",
+    "model": "Crosstrek",
+    "year": 2016,
+    "vin": "VIN00000000000032",
+    "mileage": 197101,
+    "color": "White",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Mazda",
+    "model": "Mazda3",
+    "year": 2023,
+    "vin": "VIN00000000000033",
+    "mileage": 59788,
+    "color": "Blue",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Tesla",
+    "model": "Model 3",
+    "year": 2024,
+    "vin": "VIN00000000000034",
+    "mileage": 143194,
+    "color": "Gray",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Volvo",
+    "model": "XC60",
+    "year": 2011,
+    "vin": "VIN00000000000035",
+    "mileage": 28590,
+    "color": "Red",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Jeep",
+    "model": "Renegade",
+    "year": 2018,
+    "vin": "VIN00000000000036",
+    "mileage": 162000,
+    "color": "Silver",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Dodge",
+    "model": "Charger",
+    "year": 2025,
+    "vin": "VIN00000000000037",
+    "mileage": 23728,
+    "color": "Green",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "GMC",
+    "model": "Terrain",
+    "year": 2006,
+    "vin": "VIN00000000000038",
+    "mileage": 160813,
+    "color": "Yellow",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Lexus",
+    "model": "RX",
+    "year": 2013,
+    "vin": "VIN00000000000039",
+    "mileage": 15546,
+    "color": "Brown",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Acura",
+    "model": "MDX",
+    "year": 2020,
+    "vin": "VIN00000000000040",
+    "mileage": 166733,
+    "color": "Orange",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Corolla",
+    "year": 2001,
+    "vin": "VIN00000000000041",
+    "mileage": 86099,
+    "color": "Black",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Ford",
+    "model": "Focus",
+    "year": 2008,
+    "vin": "VIN00000000000042",
+    "mileage": 1898,
+    "color": "White",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Honda",
+    "model": "CR-V",
+    "year": 2015,
+    "vin": "VIN00000000000043",
+    "mileage": 95657,
+    "color": "Blue",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Chevrolet",
+    "model": "Camaro",
+    "year": 2022,
+    "vin": "VIN00000000000044",
+    "mileage": 116826,
+    "color": "Gray",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Nissan",
+    "model": "Altima",
+    "year": 2003,
+    "vin": "VIN00000000000045",
+    "mileage": 157504,
+    "color": "Red",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "BMW",
+    "model": "5 Series",
+    "year": 2010,
+    "vin": "VIN00000000000046",
+    "mileage": 183391,
+    "color": "Silver",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Mercedes-Benz",
+    "model": "GLC",
+    "year": 2017,
+    "vin": "VIN00000000000047",
+    "mileage": 109910,
+    "color": "Green",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q7",
+    "year": 2024,
+    "vin": "VIN00000000000048",
+    "mileage": 93593,
+    "color": "Yellow",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Hyundai",
+    "model": "Elantra",
+    "year": 2005,
+    "vin": "VIN00000000000049",
+    "mileage": 112782,
+    "color": "Brown",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Kia",
+    "model": "Optima",
+    "year": 2012,
+    "vin": "VIN00000000000050",
+    "mileage": 50611,
+    "color": "Orange",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Corolla",
+    "year": 2004,
+    "vin": "VIN00000000000051",
+    "mileage": 72354,
+    "color": "Red",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Ford",
+    "model": "Focus",
+    "year": 2014,
+    "vin": "VIN00000000000052",
+    "mileage": 158118,
+    "color": "Gray",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "BMW",
+    "model": "5 Series",
+    "year": 2005,
+    "vin": "VIN00000000000053",
+    "mileage": 164894,
+    "color": "Blue",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Corolla",
+    "year": 2008,
+    "vin": "VIN00000000000054",
+    "mileage": 126240,
+    "color": "Orange",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Lexus",
+    "model": "RX",
+    "year": 2016,
+    "vin": "VIN00000000000055",
+    "mileage": 199745,
+    "color": "Black",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Mazda",
+    "model": "Mazda3",
+    "year": 2004,
+    "vin": "VIN00000000000056",
+    "mileage": 34360,
+    "color": "Orange",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Honda",
+    "model": "CR-V",
+    "year": 2013,
+    "vin": "VIN00000000000057",
+    "mileage": 54804,
+    "color": "Orange",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Nissan",
+    "model": "Altima",
+    "year": 2011,
+    "vin": "VIN00000000000058",
+    "mileage": 22380,
+    "color": "Silver",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Jeep",
+    "model": "Renegade",
+    "year": 2014,
+    "vin": "VIN00000000000059",
+    "mileage": 163888,
+    "color": "Orange",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Ford",
+    "model": "Focus",
+    "year": 2007,
+    "vin": "VIN00000000000060",
+    "mileage": 147921,
+    "color": "Blue",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Volvo",
+    "model": "XC60",
+    "year": 2018,
+    "vin": "VIN00000000000061",
+    "mileage": 166561,
+    "color": "Brown",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Chevrolet",
+    "model": "Camaro",
+    "year": 2017,
+    "vin": "VIN00000000000062",
+    "mileage": 70753,
+    "color": "Brown",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Corolla",
+    "year": 2011,
+    "vin": "VIN00000000000063",
+    "mileage": 71013,
+    "color": "Black",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Nissan",
+    "model": "Altima",
+    "year": 2009,
+    "vin": "VIN00000000000064",
+    "mileage": 107528,
+    "color": "Brown",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Ford",
+    "model": "Focus",
+    "year": 2020,
+    "vin": "VIN00000000000065",
+    "mileage": 46204,
+    "color": "Yellow",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Lexus",
+    "model": "RX",
+    "year": 2012,
+    "vin": "VIN00000000000066",
+    "mileage": 192695,
+    "color": "Green",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "BMW",
+    "model": "5 Series",
+    "year": 2010,
+    "vin": "VIN00000000000067",
+    "mileage": 77887,
+    "color": "Orange",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Nissan",
+    "model": "Altima",
+    "year": 2018,
+    "vin": "VIN00000000000068",
+    "mileage": 146252,
+    "color": "Red",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "GMC",
+    "model": "Terrain",
+    "year": 2019,
+    "vin": "VIN00000000000069",
+    "mileage": 66860,
+    "color": "Orange",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q7",
+    "year": 2003,
+    "vin": "VIN00000000000070",
+    "mileage": 111682,
+    "color": "Yellow",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "BMW",
+    "model": "5 Series",
+    "year": 2019,
+    "vin": "VIN00000000000071",
+    "mileage": 186978,
+    "color": "Brown",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Honda",
+    "model": "CR-V",
+    "year": 2022,
+    "vin": "VIN00000000000072",
+    "mileage": 182300,
+    "color": "Gray",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Corolla",
+    "year": 2025,
+    "vin": "VIN00000000000073",
+    "mileage": 118543,
+    "color": "Red",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Volvo",
+    "model": "XC60",
+    "year": 2016,
+    "vin": "VIN00000000000074",
+    "mileage": 100550,
+    "color": "White",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Nissan",
+    "model": "Altima",
+    "year": 2020,
+    "vin": "VIN00000000000075",
+    "mileage": 130060,
+    "color": "Brown",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q7",
+    "year": 2012,
+    "vin": "VIN00000000000076",
+    "mileage": 194171,
+    "color": "Silver",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Mercedes-Benz",
+    "model": "GLC",
+    "year": 2010,
+    "vin": "VIN00000000000077",
+    "mileage": 117390,
+    "color": "Red",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Nissan",
+    "model": "Altima",
+    "year": 2007,
+    "vin": "VIN00000000000078",
+    "mileage": 55209,
+    "color": "Red",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Mazda",
+    "model": "Mazda3",
+    "year": 2000,
+    "vin": "VIN00000000000079",
+    "mileage": 49579,
+    "color": "Orange",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Ford",
+    "model": "Focus",
+    "year": 2003,
+    "vin": "VIN00000000000080",
+    "mileage": 136741,
+    "color": "Brown",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Volkswagen",
+    "model": "Passat",
+    "year": 2005,
+    "vin": "VIN00000000000081",
+    "mileage": 33699,
+    "color": "Orange",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q7",
+    "year": 2012,
+    "vin": "VIN00000000000082",
+    "mileage": 24361,
+    "color": "Brown",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Corolla",
+    "year": 2014,
+    "vin": "VIN00000000000083",
+    "mileage": 145657,
+    "color": "Brown",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Honda",
+    "model": "CR-V",
+    "year": 2012,
+    "vin": "VIN00000000000084",
+    "mileage": 112190,
+    "color": "Orange",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Ford",
+    "model": "Focus",
+    "year": 2012,
+    "vin": "VIN00000000000085",
+    "mileage": 132210,
+    "color": "Black",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Toyota",
+    "model": "Corolla",
+    "year": 2020,
+    "vin": "VIN00000000000086",
+    "mileage": 4127,
+    "color": "Blue",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Chevrolet",
+    "model": "Camaro",
+    "year": 2011,
+    "vin": "VIN00000000000087",
+    "mileage": 154083,
+    "color": "White",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Acura",
+    "model": "MDX",
+    "year": 2000,
+    "vin": "VIN00000000000088",
+    "mileage": 16981,
+    "color": "Green",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Mercedes-Benz",
+    "model": "GLC",
+    "year": 2002,
+    "vin": "VIN00000000000089",
+    "mileage": 25910,
+    "color": "Green",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Kia",
+    "model": "Optima",
+    "year": 2004,
+    "vin": "VIN00000000000090",
+    "mileage": 9877,
+    "color": "White",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Nissan",
+    "model": "Altima",
+    "year": 2014,
+    "vin": "VIN00000000000091",
+    "mileage": 96944,
+    "color": "Black",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "BMW",
+    "model": "5 Series",
+    "year": 2014,
+    "vin": "VIN00000000000092",
+    "mileage": 157745,
+    "color": "Black",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Honda",
+    "model": "CR-V",
+    "year": 2005,
+    "vin": "VIN00000000000093",
+    "mileage": 136391,
+    "color": "White",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "BMW",
+    "model": "5 Series",
+    "year": 2005,
+    "vin": "VIN00000000000094",
+    "mileage": 147277,
+    "color": "Yellow",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Audi",
+    "model": "Q7",
+    "year": 2005,
+    "vin": "VIN00000000000095",
+    "mileage": 187579,
+    "color": "Black",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Jeep",
+    "model": "Renegade",
+    "year": 2021,
+    "vin": "VIN00000000000096",
+    "mileage": 122706,
+    "color": "Black",
+    "fuelType": "ELECTRIC"
+  },
+  {
+    "brand": "Ford",
+    "model": "Focus",
+    "year": 2023,
+    "vin": "VIN00000000000097",
+    "mileage": 97057,
+    "color": "Red",
+    "fuelType": "HYBRID"
+  },
+  {
+    "brand": "Jeep",
+    "model": "Renegade",
+    "year": 2003,
+    "vin": "VIN00000000000098",
+    "mileage": 54944,
+    "color": "Orange",
+    "fuelType": "DIESEL"
+  },
+  {
+    "brand": "Jeep",
+    "model": "Renegade",
+    "year": 2011,
+    "vin": "VIN00000000000099",
+    "mileage": 173874,
+    "color": "Orange",
+    "fuelType": "GAS"
+  },
+  {
+    "brand": "Subaru",
+    "model": "Crosstrek",
+    "year": 2024,
+    "vin": "VIN00000000000100",
+    "mileage": 183982,
+    "color": "Orange",
+    "fuelType": "DIESEL"
+  }
+]

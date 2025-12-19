@@ -2,6 +2,13 @@
 
 <mat-card class="h-full">
   <mat-card-header>
+    @if (vehicle.image?.thumbnailUrl; as thumbnail) {
+      <img mat-card-image [src]="thumbnail" alt="vehicle image" class="order-first me-4" />
+    } @else {
+      <div mat-card-image class="order-first me-4 flex w-14 items-center justify-center rounded-sm border">
+        <mat-icon [ngStyle]="{ color: color }" style="transform: scale(1.75)">directions_car</mat-icon>
+      </div>
+    }
     <mat-card-title>{{ vehicle.brand }} {{ vehicle.model }}</mat-card-title>
     <mat-card-subtitle class="mt-1">{{ vehicle.year }}</mat-card-subtitle>
   </mat-card-header>
@@ -9,8 +16,12 @@
   <mat-divider class="mx-4 mt-3" />
 
   <mat-card-content class="flex h-full flex-col gap-3 py-3">
-    <p class="mb-0 grow">VIN: {{ vehicle.vin }}</p>
-    <p class="mb-0 grow">Mileage: {{ vehicle.mileage }} km</p>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-x-8 gap-y-1">
+      <p class="mb-0 whitespace-nowrap">VIN: {{ vehicle.vin }}</p>
+      <p class="mb-0 whitespace-nowrap">Fuel Type: {{ vehicle.fuelType | lowercase }}</p>
+      <p class="mb-0 whitespace-nowrap">Color: {{ vehicle.color | lowercase }}</p>
+      <p class="mb-0 whitespace-nowrap">Mileage: {{ vehicle.mileage }} km</p>
+    </div>
 
     <ng-content />
   </mat-card-content>
