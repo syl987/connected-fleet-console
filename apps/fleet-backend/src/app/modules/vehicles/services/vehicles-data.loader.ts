@@ -8,10 +8,23 @@ import { Vehicle } from '../entities/vehicle.entity';
 // Load vehicles data from JSON file at runtime
 function loadVehiclesFromJson() {
   try {
-    // Use __dirname for production compatibility - resolves relative to compiled code location
-    const filePath = join(__dirname, '../../../../assets/vehicles.json');
-    const fileContent = readFileSync(filePath, 'utf-8');
-    return JSON.parse(fileContent);
+    // Try multiple possible paths for different environments
+    const possiblePaths = [
+      join(process.cwd(), 'apps/fleet-backend/src/assets/vehicles.json'), // Development
+      join(process.cwd(), 'dist/apps/fleet-backend/assets/vehicles.json'), // Production
+    ];
+
+    for (const filePath of possiblePaths) {
+      try {
+        const fileContent = readFileSync(filePath, 'utf-8');
+        console.log(`Successfully loaded vehicles from: ${filePath}`);
+        return JSON.parse(fileContent);
+      } catch {
+        // Try next path
+      }
+    }
+
+    throw new Error('vehicles.json not found in any expected location');
   } catch (error) {
     console.error('Failed to load vehicles.json:', (error as Error).message);
     return [];
