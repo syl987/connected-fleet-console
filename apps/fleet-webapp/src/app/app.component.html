@@ -1,7 +1,7 @@
 <mat-sidenav-container>
   <mat-sidenav fixedInViewport role="navigation" #sidenav><app-sidenav (navigated)="sidenav.close()" /></mat-sidenav>
 
-  <mat-sidenav-content role="main" class="flex min-h-screen flex-col">
+  <mat-sidenav-content role="main" class="bg-surface-container-lowest flex min-h-screen flex-col">
     <app-header (sidenavToggle)="sidenav.toggle()" />
 
     <div class="flex grow flex-col">

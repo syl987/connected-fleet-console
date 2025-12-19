@@ -3,26 +3,11 @@
 <mat-card class="h-full">
   <mat-card-header>
     @if (vehicle.image?.thumbnailUrl; as thumbnail) {
-      <img mat-card-sm-image [src]="thumbnail" alt="volume cover" class="order-first me-4" i18n-alt />
+      <img mat-card-image [src]="thumbnail" alt="volume cover" class="order-first me-4" />
     } @else {
-      <svg
-        class="order-first me-4"
-        width="96"
-        height="128"
-        viewBox="0 0 96 128"
-        role="img"
-        focusable="false"
-        i18n-aria-label
-        aria-label="No cover available"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <rect width="96" height="128" rx="8" [attr.fill]="vehicle.color" />
-        <path d="M22 32h52v6H22z" fill="#d1d5db" />
-        <path d="M22 46h52v6H22z" fill="#d1d5db" />
-        <path d="M22 60h36v6H22z" fill="#d1d5db" />
-        <path d="M22 86h36v6H22z" fill="#d1d5db" />
-        <path d="M22 100h26v6H22z" fill="#d1d5db" />
-      </svg>
+      <div mat-card-image class="order-first me-4 flex w-14 items-center justify-center rounded-sm border">
+        <mat-icon [ngStyle]="{ color: color }" style="transform: scale(1.75)">directions_car</mat-icon>
+      </div>
     }
     <mat-card-title>{{ vehicle.brand }} {{ vehicle.model }}</mat-card-title>
     <mat-card-subtitle class="mt-1">{{ vehicle.year }}</mat-card-subtitle>

@@ -1,6 +1,12 @@
 import { isDevMode } from '@angular/core';
 import { DefaultDataServiceConfig, PropsFilterFnFactory } from '@ngrx/data';
-import { MinimalRouterStateSnapshot, routerReducer, RouterReducerState, RouterState, StoreRouterConfig } from '@ngrx/router-store';
+import {
+  MinimalRouterStateSnapshot,
+  routerReducer,
+  RouterReducerState,
+  RouterState,
+  StoreRouterConfig,
+} from '@ngrx/router-store';
 import { ActionReducerMap, RootStoreConfig } from '@ngrx/store';
 import { AppEntityCache, AppEntityDataModuleConfig } from '../models/app.models';
 import { EntityType } from '../models/entity.models';
