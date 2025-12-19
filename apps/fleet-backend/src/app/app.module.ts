@@ -8,7 +8,7 @@ import { VehiclesModule } from './modules/vehicles/vehicles.module';
       type: 'sqlite',
       database: ':memory:',
       synchronize: true,
-      entities: [],
+      autoLoadEntities: true,
     }),
     VehiclesModule,
   ],

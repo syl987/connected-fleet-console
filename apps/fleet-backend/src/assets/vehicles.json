@@ -1,9 +1,5 @@
 [
   {
-    "id": 1,
-    "createdAt": "2023-04-08T06:00:00.000Z",
-    "updatedAt": "2023-04-09T06:00:00.000Z",
-    "version": 1,
     "brand": "Toyota",
     "model": "Corolla",
     "year": 2007,
@@ -13,10 +9,6 @@
     "fuelType": "GAS"
   },
   {
-    "id": 2,
-    "createdAt": "2020-07-15T06:00:00.000Z",
-    "updatedAt": "2020-07-17T06:00:00.000Z",
-    "version": 1,
     "brand": "Ford",
     "model": "Focus",
     "year": 2014,
@@ -26,10 +18,6 @@
     "fuelType": "DIESEL"
   },
   {
-    "id": 3,
-    "createdAt": "2025-10-22T06:00:00.000Z",
-    "updatedAt": "2025-10-25T06:00:00.000Z",
-    "version": 1,
     "brand": "Honda",
     "model": "CR-V",
     "year": 2021,
@@ -39,10 +27,6 @@
     "fuelType": "ELECTRIC"
   },
   {
-    "id": 4,
-    "createdAt": "2022-01-02T07:00:00.000Z",
-    "updatedAt": "2022-01-06T07:00:00.000Z",
-    "version": 1,
     "brand": "Chevrolet",
     "model": "Camaro",
     "year": 2002,
@@ -52,10 +36,6 @@
     "fuelType": "HYBRID"
   },
   {
-    "id": 5,
-    "createdAt": "2019-04-09T06:00:00.000Z",
-    "updatedAt": "2019-04-14T06:00:00.000Z",
-    "version": 1,
     "brand": "Nissan",
     "model": "Altima",
     "year": 2009,
@@ -65,10 +45,6 @@
     "fuelType": "GAS"
   },
   {
-    "id": 6,
-    "createdAt": "2024-07-16T06:00:00.000Z",
-    "updatedAt": "2024-07-22T06:00:00.000Z",
-    "version": 1,
     "brand": "BMW",
     "model": "5 Series",
     "year": 2016,
@@ -78,10 +54,6 @@
     "fuelType": "DIESEL"
   },
   {
-    "id": 7,
-    "createdAt": "2021-10-23T06:00:00.000Z",
-    "updatedAt": "2021-10-30T06:00:00.000Z",
-    "version": 1,
     "brand": "Mercedes-Benz",
     "model": "GLC",
     "year": 2023,
@@ -91,10 +63,6 @@
     "fuelType": "ELECTRIC"
   },
   {
-    "id": 8,
-    "createdAt": "2018-01-03T07:00:00.000Z",
-    "updatedAt": "2018-01-11T07:00:00.000Z",
-    "version": 1,
     "brand": "Audi",
     "model": "Q7",
     "year": 2004,
@@ -104,10 +72,6 @@
     "fuelType": "HYBRID"
   },
   {
-    "id": 9,
-    "createdAt": "2023-04-10T06:00:00.000Z",
-    "updatedAt": "2023-04-19T06:00:00.000Z",
-    "version": 1,
     "brand": "Hyundai",
     "model": "Elantra",
     "year": 2011,
@@ -117,10 +81,6 @@
     "fuelType": "GAS"
   },
   {
-    "id": 10,
-    "createdAt": "2020-07-17T06:00:00.000Z",
-    "updatedAt": "2020-07-27T06:00:00.000Z",
-    "version": 1,
     "brand": "Kia",
     "model": "Optima",
     "year": 2018,
@@ -130,10 +90,6 @@
     "fuelType": "DIESEL"
   },
   {
-    "id": 11,
-    "createdAt": "2025-10-24T06:00:00.000Z",
-    "updatedAt": "2025-11-04T06:00:00.000Z",
-    "version": 1,
     "brand": "Volkswagen",
     "model": "Passat",
     "year": 2025,
@@ -143,10 +99,6 @@
     "fuelType": "ELECTRIC"
   },
   {
-    "id": 12,
-    "createdAt": "2022-01-04T07:00:00.000Z",
-    "updatedAt": "2022-01-16T07:00:00.000Z",
-    "version": 1,
     "brand": "Subaru",
     "model": "Crosstrek",
     "year": 2006,
@@ -156,10 +108,6 @@
     "fuelType": "HYBRID"
   },
   {
-    "id": 13,
-    "createdAt": "2019-04-11T06:00:00.000Z",
-    "updatedAt": "2019-04-24T06:00:00.000Z",
-    "version": 1,
     "brand": "Mazda",
     "model": "Mazda3",
     "year": 2013,
@@ -169,10 +117,6 @@
     "fuelType": "GAS"
   },
   {
-    "id": 14,
-    "createdAt": "2024-07-18T06:00:00.000Z",
-    "updatedAt": "2024-08-01T06:00:00.000Z",
-    "version": 1,
     "brand": "Tesla",
     "model": "Model 3",
     "year": 2020,
@@ -182,10 +126,6 @@
     "fuelType": "ELECTRIC"
   },
   {
-    "id": 15,
-    "createdAt": "2021-10-25T06:00:00.000Z",
-    "updatedAt": "2021-11-09T06:00:00.000Z",
-    "version": 1,
     "brand": "Volvo",
     "model": "XC60",
     "year": 2001,
@@ -195,10 +135,6 @@
     "fuelType": "ELECTRIC"
   },
   {
-    "id": 16,
-    "createdAt": "2018-01-05T07:00:00.000Z",
-    "updatedAt": "2018-01-21T07:00:00.000Z",
-    "version": 1,
     "brand": "Jeep",
     "model": "Renegade",
     "year": 2008,
@@ -208,10 +144,6 @@
     "fuelType": "HYBRID"
   },
   {
-    "id": 17,
-    "createdAt": "2023-04-12T06:00:00.000Z",
-    "updatedAt": "2023-04-29T06:00:00.000Z",
-    "version": 1,
     "brand": "Dodge",
     "model": "Charger",
     "year": 2015,
@@ -221,10 +153,6 @@
     "fuelType": "GAS"
   },
   {
-    "id": 18,
-    "createdAt": "2020-07-19T06:00:00.000Z",
-    "updatedAt": "2020-08-06T06:00:00.000Z",
-    "version": 1,
     "brand": "GMC",
     "model": "Terrain",
     "year": 2022,
@@ -234,10 +162,6 @@
     "fuelType": "DIESEL"
   },
   {
-    "id": 19,
-    "createdAt": "2025-10-26T07:00:00.000Z",
-    "updatedAt": "2025-11-14T07:00:00.000Z",
-    "version": 1,
     "brand": "Lexus",
     "model": "RX",
     "year": 2003,
@@ -247,10 +171,6 @@
     "fuelType": "ELECTRIC"
   },
   {
-    "id": 20,
-    "createdAt": "2022-01-06T07:00:00.000Z",
-    "updatedAt": "2022-01-26T07:00:00.000Z",
-    "version": 1,
     "brand": "Acura",
     "model": "MDX",
     "year": 2010,
@@ -260,10 +180,6 @@
     "fuelType": "HYBRID"
   },
   {
-    "id": 21,
-    "createdAt": "2019-04-13T06:00:00.000Z",
-    "updatedAt": "2019-05-04T06:00:00.000Z",
-    "version": 1,
     "brand": "Toyota",
     "model": "Corolla",
     "year": 2017,
@@ -273,10 +189,6 @@
     "fuelType": "GAS"
   },
   {
-    "id": 22,
-    "createdAt": "2024-07-20T06:00:00.000Z",
-    "updatedAt": "2024-08-11T06:00:00.000Z",
-    "version": 1,
     "brand": "Ford",
     "model": "Focus",
     "year": 2024,
@@ -286,10 +198,6 @@
     "fuelType": "DIESEL"
   },
   {
-    "id": 23,
-    "createdAt": "2021-10-27T06:00:00.000Z",
-    "updatedAt": "2021-11-19T06:00:00.000Z",
-    "version": 1,
     "brand": "Honda",
     "model": "CR-V",
     "year": 2005,
@@ -299,10 +207,6 @@
     "fuelType": "ELECTRIC"
   },
   {
-    "id": 24,
-    "createdAt": "2018-01-07T07:00:00.000Z",
-    "updatedAt": "2018-01-31T07:00:00.000Z",
-    "version": 1,
     "brand": "Chevrolet",
     "model": "Camaro",
     "year": 2012,
@@ -312,10 +216,6 @@
     "fuelType": "HYBRID"
   },
   {
-    "id": 25,
-    "createdAt": "2023-04-14T06:00:00.000Z",
-    "updatedAt": "2023-05-09T06:00:00.000Z",
-    "version": 1,
     "brand": "Nissan",
     "model": "Altima",
     "year": 2019,
@@ -325,10 +225,6 @@
     "fuelType": "GAS"
   },
   {
-    "id": 26,
-    "createdAt": "2020-07-21T06:00:00.000Z",
-    "updatedAt": "2020-08-16T06:00:00.000Z",
-    "version": 1,
     "brand": "BMW",
     "model": "5 Series",
     "year": 2000,
@@ -338,10 +234,6 @@
     "fuelType": "DIESEL"
   },
   {
-    "id": 27,
-    "createdAt": "2025-10-01T06:00:00.000Z",
-    "updatedAt": "2025-10-28T06:00:00.000Z",
-    "version": 1,
     "brand": "Mercedes-Benz",
     "model": "GLC",
     "year": 2007,
@@ -351,10 +243,6 @@
     "fuelType": "ELECTRIC"
   },
   {
-    "id": 28,
-    "createdAt": "2022-01-08T07:00:00.000Z",
-    "updatedAt": "2022-02-05T07:00:00.000Z",
-    "version": 1,
     "brand": "Audi",
     "model": "Q7",
     "year": 2014,
@@ -364,10 +252,6 @@
     "fuelType": "HYBRID"
   },
   {
-    "id": 29,
-    "createdAt": "2019-04-15T06:00:00.000Z",
-    "updatedAt": "2019-05-14T06:00:00.000Z",
-    "version": 1,
     "brand": "Hyundai",
     "model": "Elantra",
     "year": 2021,
@@ -377,10 +261,6 @@
     "fuelType": "GAS"
   },
   {
-    "id": 30,
-    "createdAt": "2024-07-22T06:00:00.000Z",
-    "updatedAt": "2024-08-21T06:00:00.000Z",
-    "version": 1,
     "brand": "Kia",
     "model": "Optima",
     "year": 2002,
@@ -390,10 +270,6 @@
     "fuelType": "DIESEL"
   },
   {
-    "id": 31,
-    "createdAt": "2021-10-02T06:00:00.000Z",
-    "updatedAt": "2021-11-02T06:00:00.000Z",
-    "version": 1,
     "brand": "Volkswagen",
     "model": "Passat",
     "year": 2009,
@@ -403,10 +279,6 @@
     "fuelType": "ELECTRIC"
   },
   {
-    "id": 32,
-    "createdAt": "2018-01-09T07:00:00.000Z",
-    "updatedAt": "2018-02-10T07:00:00.000Z",
-    "version": 1,
     "brand": "Subaru",
     "model": "Crosstrek",
     "year": 2016,
@@ -416,10 +288,6 @@
     "fuelType": "HYBRID"
   },
   {
-    "id": 33,
-    "createdAt": "2023-04-16T06:00:00.000Z",
-    "updatedAt": "2023-05-19T06:00:00.000Z",
-    "version": 1,
     "brand": "Mazda",
     "model": "Mazda3",
     "year": 2023,
@@ -429,10 +297,6 @@
     "fuelType": "GAS"
   },
   {
-    "id": 34,
-    "createdAt": "2020-07-23T06:00:00.000Z",
-    "updatedAt": "2020-08-26T06:00:00.000Z",
-    "version": 1,
     "brand": "Tesla",
     "model": "Model 3",
     "year": 2004,
@@ -442,10 +306,6 @@
     "fuelType": "ELECTRIC"
   },
   {
-    "id": 35,
-    "createdAt": "2025-10-03T06:00:00.000Z",
-    "updatedAt": "2025-11-07T06:00:00.000Z",
-    "version": 1,
     "brand": "Volvo",
     "model": "XC60",
     "year": 2011,
@@ -455,10 +315,6 @@
     "fuelType": "ELECTRIC"
   },
   {
-    "id": 36,
-    "createdAt": "2022-01-10T07:00:00.000Z",
-    "updatedAt": "2022-02-15T07:00:00.000Z",
-    "version": 1,
     "brand": "Jeep",
     "model": "Renegade",
     "year": 2018,
@@ -468,10 +324,6 @@
     "fuelType": "HYBRID"
   },
   {
-    "id": 37,
-    "createdAt": "2019-04-17T06:00:00.000Z",
-    "updatedAt": "2019-05-24T06:00:00.000Z",
-    "version": 1,
     "brand": "Dodge",
     "model": "Charger",
     "year": 2025,
@@ -481,10 +333,6 @@
     "fuelType": "GAS"
   },
   {
-    "id": 38,
-    "createdAt": "2024-07-24T06:00:00.000Z",
-    "updatedAt": "2024-08-31T06:00:00.000Z",
-    "version": 1,
     "brand": "GMC",
     "model": "Terrain",
     "year": 2006,
@@ -494,10 +342,6 @@
     "fuelType": "DIESEL"
   },
   {
-    "id": 39,
-    "createdAt": "2021-10-04T06:00:00.000Z",
-    "updatedAt": "2021-11-12T06:00:00.000Z",
-    "version": 1,
     "brand": "Lexus",
     "model": "RX",
     "year": 2013,
@@ -507,10 +351,6 @@
     "fuelType": "ELECTRIC"
   },
   {
-    "id": 40,
-    "createdAt": "2018-01-11T07:00:00.000Z",
-    "updatedAt": "2018-02-20T07:00:00.000Z",
-    "version": 1,
     "brand": "Acura",
     "model": "MDX",
     "year": 2020,
@@ -520,10 +360,6 @@
     "fuelType": "HYBRID"
   },
   {
-    "id": 41,
-    "createdAt": "2023-04-18T06:00:00.000Z",
-    "updatedAt": "2023-05-29T06:00:00.000Z",
-    "version": 1,
     "brand": "Toyota",
     "model": "Corolla",
     "year": 2001,
@@ -533,10 +369,6 @@
     "fuelType": "GAS"
   },
   {
-    "id": 42,
-    "createdAt": "2020-07-25T06:00:00.000Z",
-    "updatedAt": "2020-09-05T06:00:00.000Z",
-    "version": 1,
     "brand": "Ford",
     "model": "Focus",
     "year": 2008,
@@ -546,10 +378,6 @@
     "fuelType": "DIESEL"
   },
   {
-    "id": 43,
-    "createdAt": "2025-10-05T06:00:00.000Z",
-    "updatedAt": "2025-11-17T06:00:00.000Z",
-    "version": 1,
     "brand": "Honda",
     "model": "CR-V",
     "year": 2015,
@@ -559,10 +387,6 @@
     "fuelType": "ELECTRIC"
   },
   {
-    "id": 44,
-    "createdAt": "2022-01-12T07:00:00.000Z",
-    "updatedAt": "2022-02-25T07:00:00.000Z",
-    "version": 1,
     "brand": "Chevrolet",
     "model": "Camaro",
     "year": 2022,
@@ -572,10 +396,6 @@
     "fuelType": "HYBRID"
   },
   {
-    "id": 45,
-    "createdAt": "2019-04-19T06:00:00.000Z",
-    "updatedAt": "2019-06-03T06:00:00.000Z",
-    "version": 1,
     "brand": "Nissan",
     "model": "Altima",
     "year": 2003,
@@ -585,10 +405,6 @@
     "fuelType": "GAS"
   },
   {
-    "id": 46,
-    "createdAt": "2024-07-26T06:00:00.000Z",
-    "updatedAt": "2024-09-10T06:00:00.000Z",
-    "version": 1,
     "brand": "BMW",
     "model": "5 Series",
     "year": 2010,
@@ -598,10 +414,6 @@
     "fuelType": "DIESEL"
   },
   {
-    "id": 47,
-    "createdAt": "2021-10-06T06:00:00.000Z",
-    "updatedAt": "2021-11-22T06:00:00.000Z",
-    "version": 1,
     "brand": "Mercedes-Benz",
     "model": "GLC",
     "year": 2017,
@@ -611,10 +423,6 @@
     "fuelType": "ELECTRIC"
   },
   {
-    "id": 48,
-    "createdAt": "2018-01-13T07:00:00.000Z",
-    "updatedAt": "2018-03-02T07:00:00.000Z",
-    "version": 1,
     "brand": "Audi",
     "model": "Q7",
     "year": 2024,
@@ -624,10 +432,6 @@
     "fuelType": "HYBRID"
   },
   {
-    "id": 49,
-    "createdAt": "2023-04-20T06:00:00.000Z",
-    "updatedAt": "2023-06-08T06:00:00.000Z",
-    "version": 1,
     "brand": "Hyundai",
     "model": "Elantra",
     "year": 2005,
@@ -637,10 +441,6 @@
     "fuelType": "GAS"
   },
   {
-    "id": 50,
-    "createdAt": "2020-07-27T06:00:00.000Z",
-    "updatedAt": "2020-09-15T06:00:00.000Z",
-    "version": 1,
     "brand": "Kia",
     "model": "Optima",
     "year": 2012,

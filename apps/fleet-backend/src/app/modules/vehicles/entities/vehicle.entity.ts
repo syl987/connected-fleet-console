@@ -28,6 +28,7 @@ export class Vehicle extends AbstractEntity {
   @Column({ nullable: true })
   color?: string;
 
-  @Column({ type: 'enum', enum: FuelType, default: FuelType.GAS })
+  // Use simple-enum for SQLite compatibility
+  @Column({ type: 'simple-enum', enum: FuelType, default: FuelType.GAS })
   fuelType!: FuelType;
 }
