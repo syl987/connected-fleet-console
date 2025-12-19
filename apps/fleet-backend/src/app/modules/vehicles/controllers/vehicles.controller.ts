@@ -98,6 +98,18 @@ export class VehiclesController {
       mileage: v.mileage,
       color: v.color,
       fuelType: v.fuelType,
+      logs: v.logs.map((log) => ({
+        id: log.id,
+        createdAt: log.createdAt.toISOString(),
+        updatedAt: log.updatedAt.toISOString(),
+        deletedAt: log.deletedAt?.toISOString?.(),
+        version: log.version,
+        message: log.message,
+        severity: log.severity,
+        timestamp: log.timestamp.toISOString(),
+        code: log.code,
+        vehicleId: log.vehicle.id,
+      })),
     };
   }
 }

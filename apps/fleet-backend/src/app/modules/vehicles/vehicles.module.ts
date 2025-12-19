@@ -4,8 +4,8 @@ import { VehicleLogsController } from './controllers/vehicle-logs.controller';
 import { VehiclesController } from './controllers/vehicles.controller';
 import { VehicleLog } from './entities/vehicle-log.entity';
 import { Vehicle } from './entities/vehicle.entity';
+import { VehicleLogsDataLoader } from './loader/vehicle-logs-data.loader';
 import { VehiclesDataLoader } from './loader/vehicles-data.loader';
-import { VehicleLogsDataLoader } from './services/vehicle-logs-data.loader';
 import { VehicleLogsService } from './services/vehicle-logs.service';
 import { VehiclesService } from './services/vehicles.service';
 
