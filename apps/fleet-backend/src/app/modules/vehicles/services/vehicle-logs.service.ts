@@ -56,6 +56,7 @@ export class VehicleLogsService {
 
     return this.vehicleLogsRepository.find({
       where: { vehicle: { id: vehicleId } },
+      relations: ['vehicle'],
       order: { timestamp: 'DESC' },
     });
   }
