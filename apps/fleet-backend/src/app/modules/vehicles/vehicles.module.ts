@@ -5,19 +5,29 @@ import { VehiclesController } from './controllers/vehicles.controller';
 import { VehicleLog } from './entities/vehicle-log.entity';
 import { Vehicle } from './entities/vehicle.entity';
 import { VehiclesDataLoader } from './loader/vehicles-data.loader';
+import { VehicleLogsDataLoader } from './services/vehicle-logs-data.loader';
 import { VehicleLogsService } from './services/vehicle-logs.service';
 import { VehiclesService } from './services/vehicles.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Vehicle, VehicleLog])],
-  providers: [VehiclesService, VehicleLogsService, VehiclesDataLoader],
+  providers: [
+    VehiclesService,
+    VehicleLogsService,
+    VehiclesDataLoader,
+    VehicleLogsDataLoader,
+  ],
   controllers: [VehiclesController, VehicleLogsController],
   exports: [VehiclesService, VehicleLogsService],
 })
 export class VehiclesModule implements OnModuleInit {
-  constructor(private readonly dataLoader: VehiclesDataLoader) {}
+  constructor(
+    private readonly vehiclesDataLoader: VehiclesDataLoader,
+    private readonly vehicleLogsDataLoader: VehicleLogsDataLoader,
+  ) {}
 
   async onModuleInit(): Promise<void> {
-    await this.dataLoader.loadInitialData();
+    await this.vehiclesDataLoader.loadInitialData();
+    await this.vehicleLogsDataLoader.loadInitialData(Math.floor(Math.random() * 100));
   }
 }
