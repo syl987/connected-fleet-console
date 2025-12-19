@@ -108,7 +108,7 @@ export class VehiclesController {
         severity: log.severity,
         timestamp: log.timestamp.toISOString(),
         code: log.code,
-        vehicleId: log.vehicle.id,
+        vehicleId: v.id,
       })),
     };
   }

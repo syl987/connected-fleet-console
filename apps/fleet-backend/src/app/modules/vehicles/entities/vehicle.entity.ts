@@ -33,6 +33,6 @@ export class Vehicle extends BaseEntity {
   @Column({ type: 'simple-enum', enum: FuelType, default: FuelType.GAS })
   fuelType!: FuelType;
 
-  @OneToMany(() => VehicleLog, (log) => log.vehicle)
-  logs!: VehicleLog[];
+  @OneToMany(() => VehicleLog, (log) => log.vehicle, { nullable: true })
+  logs?: VehicleLog[];
 }

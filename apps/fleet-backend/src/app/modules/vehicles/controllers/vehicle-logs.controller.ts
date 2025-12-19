@@ -18,7 +18,7 @@ import { VehicleLog } from '../../vehicles/entities/vehicle-log.entity';
 import { VehicleLogsService } from '../services/vehicle-logs.service';
 
 @ApiTags('Vehicle Logs')
-@Controller('logs')
+@Controller('vehicles/logs')
 export class VehicleLogsController {
   constructor(private readonly vehicleLogsService: VehicleLogsService) {}
 
