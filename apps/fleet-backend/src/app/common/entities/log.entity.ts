@@ -2,7 +2,7 @@ import { Column, Entity } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
 
 @Entity()
-export abstract class AbstractLog extends AbstractEntity {
+export class LogEntity extends AbstractEntity {
   @Column({ type: 'datetime' })
   timestamp!: Date;
 
