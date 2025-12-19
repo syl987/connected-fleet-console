@@ -1,22 +1,26 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, VersionColumn } from 'typeorm';
+import {
+  CreateDateColumn,
+  DeleteDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+  VersionColumn,
+} from 'typeorm';
 
-@Entity()
+@Entity({ orderBy: { createdAt: 'DESC' } })
 export abstract class AbstractEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
-  @Column({ type: 'datetime' })
-  @CreateDateColumn()
+  @CreateDateColumn({ type: 'datetime' })
   createdAt!: Date;
 
-  @Column({ type: 'datetime' })
-  @UpdateDateColumn()
+  @UpdateDateColumn({ type: 'datetime' })
   updatedAt!: Date;
 
   @DeleteDateColumn({ type: 'datetime', nullable: true })
   deletedAt?: Date;
 
-  @Column()
   @VersionColumn()
   version!: number;
 }

@@ -41,10 +41,6 @@ export class VehiclesService {
   }
 
   findDeleted(): Promise<Vehicle[]> {
-    return this.repository
-      .createQueryBuilder('vehicle')
-      .withDeleted()
-      .where('vehicle.deletedAt IS NOT NULL')
-      .getMany();
+    return this.repository.createQueryBuilder('vehicle').withDeleted().where('vehicle.deletedAt IS NOT NULL').getMany();
   }
 }
