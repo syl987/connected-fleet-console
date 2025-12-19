@@ -1,4 +1,3 @@
-import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatCardModule } from '@angular/material/card';
@@ -20,7 +19,6 @@ import { VehicleCardComponent } from '../vehicle-card/vehicle-card.component';
     MatProgressSpinnerModule,
     TitleBarComponent,
     VehicleCardComponent,
-    DatePipe,
   ],
   templateUrl: './vehicle-detail-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,

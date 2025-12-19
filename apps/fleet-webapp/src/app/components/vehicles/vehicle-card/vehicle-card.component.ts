@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, LowerCasePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
@@ -12,6 +12,7 @@ import { Vehicle } from '../../../models/vehicle.models';
     MatCardModule,
     MatIconModule,
     MatDividerModule,
+    LowerCasePipe,
   ],
   templateUrl: './vehicle-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
