@@ -1,5 +1,16 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  DefaultValuePipe,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
+import { ApiBody, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateVehicleDto } from '../dto/create-vehicle.dto';
 import { UpdateVehicleDto } from '../dto/update-vehicle.dto';
 import { VehicleDto } from '../dto/vehicle.dto';
@@ -21,11 +32,16 @@ export class VehiclesController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List vehicles' })
+  @ApiOperation({ summary: 'List vehicles with optional pagination' })
+  @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
+  @ApiQuery({ name: 'size', required: false, type: Number, example: 10 })
   @ApiResponse({ status: 200, description: 'Vehicle list', type: [VehicleDto] })
-  async findAll(): Promise<VehicleDto[]> {
-    const list = await this.service.findAll();
-    return list.map(v => this.toDto(v));
+  async findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('size', new DefaultValuePipe(10), ParseIntPipe) size: number,
+  ): Promise<{ data: VehicleDto[]; total: number; page: number; size: number }> {
+    const { items, total } = await this.service.findAll(page, size);
+    return { data: items.map((v) => this.toDto(v)), total, page, size };
   }
 
   @Get(':id')
@@ -46,16 +62,33 @@ export class VehiclesController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a vehicle' })
+  @ApiOperation({ summary: 'Soft-delete a vehicle' })
   async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
     await this.service.remove(id);
+  }
+
+  @Post(':id/restore')
+  @ApiOperation({ summary: 'Restore a soft-deleted vehicle' })
+  @ApiResponse({ status: 200, description: 'Restored vehicle', type: VehicleDto })
+  async restore(@Param('id', ParseIntPipe) id: number): Promise<VehicleDto> {
+    const v = await this.service.restore(id);
+    return this.toDto(v);
+  }
+
+  @Get('deleted')
+  @ApiOperation({ summary: 'List soft-deleted vehicles' })
+  @ApiResponse({ status: 200, description: 'Deleted vehicles', type: [VehicleDto] })
+  async findDeleted(): Promise<VehicleDto[]> {
+    const list = await this.service.findDeleted();
+    return list.map((v) => this.toDto(v));
   }
 
   private toDto(v: Vehicle): VehicleDto {
     return {
       id: v.id,
-      createdAt: v.createdAt?.toISOString?.() ?? new Date().toISOString(),
-      updatedAt: v.updatedAt?.toISOString?.() ?? new Date().toISOString(),
+      createdAt: v.createdAt.toISOString(),
+      updatedAt: v.updatedAt.toISOString(),
+      deletedAt: v.deletedAt?.toISOString?.(),
       version: v.version,
       brand: v.brand,
       model: v.model,
