@@ -1,17 +1,9 @@
-import { Column, Entity } from 'typeorm';
+import { Entity, ManyToOne } from 'typeorm';
 import { LogEntity } from '../../../common/entities/log.entity';
+import { Vehicle } from '../../vehicles/entities/vehicle.entity';
 
 @Entity()
 export class VehicleLog extends LogEntity {
-  @Column({ type: 'datetime' })
-  timestamp!: Date;
-
-  @Column()
-  severity!: string;
-
-  @Column()
-  code!: number;
-
-  @Column('text')
-  message!: string;
+  @ManyToOne(() => Vehicle, (vehicle) => vehicle.logs, { nullable: false, onDelete: 'CASCADE' })
+  vehicle!: Vehicle;
 }

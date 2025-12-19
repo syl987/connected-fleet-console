@@ -1,5 +1,6 @@
-import { Column, Entity } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from '../../../common/entities/abstract.entity';
+import { VehicleLog } from '../../logs/entities/vehicle-log.entity';
 
 export enum FuelType {
   GAS = 'GAS',
@@ -31,4 +32,7 @@ export class Vehicle extends AbstractEntity {
   // Use simple-enum for SQLite compatibility
   @Column({ type: 'simple-enum', enum: FuelType, default: FuelType.GAS })
   fuelType!: FuelType;
+
+  @OneToMany(() => VehicleLog, (log) => log.vehicle)
+  logs!: VehicleLog[];
 }
