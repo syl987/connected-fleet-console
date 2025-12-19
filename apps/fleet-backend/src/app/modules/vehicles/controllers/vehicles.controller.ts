@@ -95,6 +95,8 @@ export class VehiclesController {
       year: v.year,
       vin: v.vin,
       mileage: v.mileage,
+      color: v.color,
+      fuelType: v.fuelType,
     };
   }
 }

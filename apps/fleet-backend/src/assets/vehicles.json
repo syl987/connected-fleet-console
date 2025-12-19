@@ -8,7 +8,9 @@
     "model": "Corolla",
     "year": 2007,
     "vin": "VIN00000000000001",
-    "mileage": 14196
+    "mileage": 14196,
+    "color": "Black",
+    "fuelType": "GAS"
   },
   {
     "id": 2,
@@ -19,7 +21,9 @@
     "model": "Focus",
     "year": 2014,
     "vin": "VIN00000000000002",
-    "mileage": 71982
+    "mileage": 71982,
+    "color": "White",
+    "fuelType": "DIESEL"
   },
   {
     "id": 3,
@@ -30,7 +34,9 @@
     "model": "CR-V",
     "year": 2021,
     "vin": "VIN00000000000003",
-    "mileage": 65994
+    "mileage": 65994,
+    "color": "Blue",
+    "fuelType": "ELECTRIC"
   },
   {
     "id": 4,
@@ -41,7 +47,9 @@
     "model": "Camaro",
     "year": 2002,
     "vin": "VIN00000000000004",
-    "mileage": 194854
+    "mileage": 194854,
+    "color": "Gray",
+    "fuelType": "HYBRID"
   },
   {
     "id": 5,
@@ -52,7 +60,9 @@
     "model": "Altima",
     "year": 2009,
     "vin": "VIN00000000000005",
-    "mileage": 125977
+    "mileage": 125977,
+    "color": "Red",
+    "fuelType": "GAS"
   },
   {
     "id": 6,
@@ -63,7 +73,9 @@
     "model": "5 Series",
     "year": 2016,
     "vin": "VIN00000000000006",
-    "mileage": 56181
+    "mileage": 56181,
+    "color": "Silver",
+    "fuelType": "DIESEL"
   },
   {
     "id": 7,
@@ -74,7 +86,9 @@
     "model": "GLC",
     "year": 2023,
     "vin": "VIN00000000000007",
-    "mileage": 194772
+    "mileage": 194772,
+    "color": "Green",
+    "fuelType": "ELECTRIC"
   },
   {
     "id": 8,
@@ -85,7 +99,9 @@
     "model": "Q7",
     "year": 2004,
     "vin": "VIN00000000000008",
-    "mileage": 30184
+    "mileage": 30184,
+    "color": "Yellow",
+    "fuelType": "HYBRID"
   },
   {
     "id": 9,
@@ -96,7 +112,9 @@
     "model": "Elantra",
     "year": 2011,
     "vin": "VIN00000000000009",
-    "mileage": 71952
+    "mileage": 71952,
+    "color": "Brown",
+    "fuelType": "GAS"
   },
   {
     "id": 10,
@@ -107,7 +125,9 @@
     "model": "Optima",
     "year": 2018,
     "vin": "VIN00000000000010",
-    "mileage": 29338
+    "mileage": 29338,
+    "color": "Orange",
+    "fuelType": "DIESEL"
   },
   {
     "id": 11,
@@ -118,7 +138,9 @@
     "model": "Passat",
     "year": 2025,
     "vin": "VIN00000000000011",
-    "mileage": 129352
+    "mileage": 129352,
+    "color": "Black",
+    "fuelType": "ELECTRIC"
   },
   {
     "id": 12,
@@ -129,7 +151,9 @@
     "model": "Crosstrek",
     "year": 2006,
     "vin": "VIN00000000000012",
-    "mileage": 189833
+    "mileage": 189833,
+    "color": "White",
+    "fuelType": "HYBRID"
   },
   {
     "id": 13,
@@ -140,7 +164,9 @@
     "model": "Mazda3",
     "year": 2013,
     "vin": "VIN00000000000013",
-    "mileage": 39059
+    "mileage": 39059,
+    "color": "Blue",
+    "fuelType": "GAS"
   },
   {
     "id": 14,
@@ -151,7 +177,9 @@
     "model": "Model 3",
     "year": 2020,
     "vin": "VIN00000000000014",
-    "mileage": 102062
+    "mileage": 102062,
+    "color": "Gray",
+    "fuelType": "ELECTRIC"
   },
   {
     "id": 15,
@@ -162,7 +190,9 @@
     "model": "XC60",
     "year": 2001,
     "vin": "VIN00000000000015",
-    "mileage": 33199
+    "mileage": 33199,
+    "color": "Red",
+    "fuelType": "ELECTRIC"
   },
   {
     "id": 16,
@@ -173,7 +203,9 @@
     "model": "Renegade",
     "year": 2008,
     "vin": "VIN00000000000016",
-    "mileage": 74615
+    "mileage": 74615,
+    "color": "Silver",
+    "fuelType": "HYBRID"
   },
   {
     "id": 17,
@@ -184,7 +216,9 @@
     "model": "Charger",
     "year": 2015,
     "vin": "VIN00000000000017",
-    "mileage": 30511
+    "mileage": 30511,
+    "color": "Green",
+    "fuelType": "GAS"
   },
   {
     "id": 18,
@@ -195,7 +229,9 @@
     "model": "Terrain",
     "year": 2022,
     "vin": "VIN00000000000018",
-    "mileage": 183291
+    "mileage": 183291,
+    "color": "Yellow",
+    "fuelType": "DIESEL"
   },
   {
     "id": 19,
@@ -206,7 +242,9 @@
     "model": "RX",
     "year": 2003,
     "vin": "VIN00000000000019",
-    "mileage": 28441
+    "mileage": 28441,
+    "color": "Brown",
+    "fuelType": "ELECTRIC"
   },
   {
     "id": 20,
@@ -217,7 +255,9 @@
     "model": "MDX",
     "year": 2010,
     "vin": "VIN00000000000020",
-    "mileage": 78061
+    "mileage": 78061,
+    "color": "Orange",
+    "fuelType": "HYBRID"
   },
   {
     "id": 21,
@@ -228,7 +268,9 @@
     "model": "Corolla",
     "year": 2017,
     "vin": "VIN00000000000021",
-    "mileage": 109411
+    "mileage": 109411,
+    "color": "Black",
+    "fuelType": "GAS"
   },
   {
     "id": 22,
@@ -239,7 +281,9 @@
     "model": "Focus",
     "year": 2024,
     "vin": "VIN00000000000022",
-    "mileage": 30201
+    "mileage": 30201,
+    "color": "White",
+    "fuelType": "DIESEL"
   },
   {
     "id": 23,
@@ -250,7 +294,9 @@
     "model": "CR-V",
     "year": 2005,
     "vin": "VIN00000000000023",
-    "mileage": 74667
+    "mileage": 74667,
+    "color": "Blue",
+    "fuelType": "ELECTRIC"
   },
   {
     "id": 24,
@@ -261,7 +307,9 @@
     "model": "Camaro",
     "year": 2012,
     "vin": "VIN00000000000024",
-    "mileage": 91202
+    "mileage": 91202,
+    "color": "Gray",
+    "fuelType": "HYBRID"
   },
   {
     "id": 25,
@@ -272,7 +320,9 @@
     "model": "Altima",
     "year": 2019,
     "vin": "VIN00000000000025",
-    "mileage": 67237
+    "mileage": 67237,
+    "color": "Red",
+    "fuelType": "GAS"
   },
   {
     "id": 26,
@@ -283,7 +333,9 @@
     "model": "5 Series",
     "year": 2000,
     "vin": "VIN00000000000026",
-    "mileage": 128786
+    "mileage": 128786,
+    "color": "Silver",
+    "fuelType": "DIESEL"
   },
   {
     "id": 27,
@@ -294,7 +346,9 @@
     "model": "GLC",
     "year": 2007,
     "vin": "VIN00000000000027",
-    "mileage": 164605
+    "mileage": 164605,
+    "color": "Green",
+    "fuelType": "ELECTRIC"
   },
   {
     "id": 28,
@@ -305,7 +359,9 @@
     "model": "Q7",
     "year": 2014,
     "vin": "VIN00000000000028",
-    "mileage": 80479
+    "mileage": 80479,
+    "color": "Yellow",
+    "fuelType": "HYBRID"
   },
   {
     "id": 29,
@@ -316,7 +372,9 @@
     "model": "Elantra",
     "year": 2021,
     "vin": "VIN00000000000029",
-    "mileage": 153083
+    "mileage": 153083,
+    "color": "Brown",
+    "fuelType": "GAS"
   },
   {
     "id": 30,
@@ -327,7 +385,9 @@
     "model": "Optima",
     "year": 2002,
     "vin": "VIN00000000000030",
-    "mileage": 96105
+    "mileage": 96105,
+    "color": "Orange",
+    "fuelType": "DIESEL"
   },
   {
     "id": 31,
@@ -338,7 +398,9 @@
     "model": "Passat",
     "year": 2009,
     "vin": "VIN00000000000031",
-    "mileage": 106994
+    "mileage": 106994,
+    "color": "Black",
+    "fuelType": "ELECTRIC"
   },
   {
     "id": 32,
@@ -349,7 +411,9 @@
     "model": "Crosstrek",
     "year": 2016,
     "vin": "VIN00000000000032",
-    "mileage": 197101
+    "mileage": 197101,
+    "color": "White",
+    "fuelType": "HYBRID"
   },
   {
     "id": 33,
@@ -360,7 +424,9 @@
     "model": "Mazda3",
     "year": 2023,
     "vin": "VIN00000000000033",
-    "mileage": 59788
+    "mileage": 59788,
+    "color": "Blue",
+    "fuelType": "GAS"
   },
   {
     "id": 34,
@@ -371,7 +437,9 @@
     "model": "Model 3",
     "year": 2004,
     "vin": "VIN00000000000034",
-    "mileage": 143194
+    "mileage": 143194,
+    "color": "Gray",
+    "fuelType": "ELECTRIC"
   },
   {
     "id": 35,
@@ -382,7 +450,9 @@
     "model": "XC60",
     "year": 2011,
     "vin": "VIN00000000000035",
-    "mileage": 28590
+    "mileage": 28590,
+    "color": "Red",
+    "fuelType": "ELECTRIC"
   },
   {
     "id": 36,
@@ -393,7 +463,9 @@
     "model": "Renegade",
     "year": 2018,
     "vin": "VIN00000000000036",
-    "mileage": 162000
+    "mileage": 162000,
+    "color": "Silver",
+    "fuelType": "HYBRID"
   },
   {
     "id": 37,
@@ -404,7 +476,9 @@
     "model": "Charger",
     "year": 2025,
     "vin": "VIN00000000000037",
-    "mileage": 23728
+    "mileage": 23728,
+    "color": "Green",
+    "fuelType": "GAS"
   },
   {
     "id": 38,
@@ -415,7 +489,9 @@
     "model": "Terrain",
     "year": 2006,
     "vin": "VIN00000000000038",
-    "mileage": 160813
+    "mileage": 160813,
+    "color": "Yellow",
+    "fuelType": "DIESEL"
   },
   {
     "id": 39,
@@ -426,7 +502,9 @@
     "model": "RX",
     "year": 2013,
     "vin": "VIN00000000000039",
-    "mileage": 15546
+    "mileage": 15546,
+    "color": "Brown",
+    "fuelType": "ELECTRIC"
   },
   {
     "id": 40,
@@ -437,7 +515,9 @@
     "model": "MDX",
     "year": 2020,
     "vin": "VIN00000000000040",
-    "mileage": 166733
+    "mileage": 166733,
+    "color": "Orange",
+    "fuelType": "HYBRID"
   },
   {
     "id": 41,
@@ -448,7 +528,9 @@
     "model": "Corolla",
     "year": 2001,
     "vin": "VIN00000000000041",
-    "mileage": 86099
+    "mileage": 86099,
+    "color": "Black",
+    "fuelType": "GAS"
   },
   {
     "id": 42,
@@ -459,7 +541,9 @@
     "model": "Focus",
     "year": 2008,
     "vin": "VIN00000000000042",
-    "mileage": 1898
+    "mileage": 1898,
+    "color": "White",
+    "fuelType": "DIESEL"
   },
   {
     "id": 43,
@@ -470,7 +554,9 @@
     "model": "CR-V",
     "year": 2015,
     "vin": "VIN00000000000043",
-    "mileage": 95657
+    "mileage": 95657,
+    "color": "Blue",
+    "fuelType": "ELECTRIC"
   },
   {
     "id": 44,
@@ -481,7 +567,9 @@
     "model": "Camaro",
     "year": 2022,
     "vin": "VIN00000000000044",
-    "mileage": 116826
+    "mileage": 116826,
+    "color": "Gray",
+    "fuelType": "HYBRID"
   },
   {
     "id": 45,
@@ -492,7 +580,9 @@
     "model": "Altima",
     "year": 2003,
     "vin": "VIN00000000000045",
-    "mileage": 157504
+    "mileage": 157504,
+    "color": "Red",
+    "fuelType": "GAS"
   },
   {
     "id": 46,
@@ -503,7 +593,9 @@
     "model": "5 Series",
     "year": 2010,
     "vin": "VIN00000000000046",
-    "mileage": 183391
+    "mileage": 183391,
+    "color": "Silver",
+    "fuelType": "DIESEL"
   },
   {
     "id": 47,
@@ -514,7 +606,9 @@
     "model": "GLC",
     "year": 2017,
     "vin": "VIN00000000000047",
-    "mileage": 109910
+    "mileage": 109910,
+    "color": "Green",
+    "fuelType": "ELECTRIC"
   },
   {
     "id": 48,
@@ -525,7 +619,9 @@
     "model": "Q7",
     "year": 2024,
     "vin": "VIN00000000000048",
-    "mileage": 93593
+    "mileage": 93593,
+    "color": "Yellow",
+    "fuelType": "HYBRID"
   },
   {
     "id": 49,
@@ -536,7 +632,9 @@
     "model": "Elantra",
     "year": 2005,
     "vin": "VIN00000000000049",
-    "mileage": 112782
+    "mileage": 112782,
+    "color": "Brown",
+    "fuelType": "GAS"
   },
   {
     "id": 50,
@@ -547,6 +645,8 @@
     "model": "Optima",
     "year": 2012,
     "vin": "VIN00000000000050",
-    "mileage": 50611
+    "mileage": 50611,
+    "color": "Orange",
+    "fuelType": "DIESEL"
   }
 ]
