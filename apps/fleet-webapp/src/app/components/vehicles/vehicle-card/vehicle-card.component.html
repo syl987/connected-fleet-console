@@ -2,6 +2,11 @@
 
 <mat-card class="h-full">
   <mat-card-header>
+    @if (vehicle.volumeInfo.imageLinks?.thumbnail; as thumbnail) {
+      <img mat-card-sm-image [src]="thumbnail" alt="volume cover" class="order-first me-4" i18n-alt />
+    } @else {
+      <!-- TODO placeholder -->
+    }
     <mat-card-title>{{ vehicle.brand }} {{ vehicle.model }}</mat-card-title>
     <mat-card-subtitle class="mt-1">{{ vehicle.year }}</mat-card-subtitle>
   </mat-card-header>
@@ -9,8 +14,10 @@
   <mat-divider class="mx-4 mt-3" />
 
   <mat-card-content class="flex h-full flex-col gap-3 py-3">
-    <p class="mb-0 grow">VIN: {{ vehicle.vin }}</p>
-    <p class="mb-0 grow">Mileage: {{ vehicle.mileage }} km</p>
+    <div class="grid lg:grid-rows-2">
+      <p class="mb-0 grow">VIN: {{ vehicle.vin }}</p>
+      <p class="mb-0 grow">Mileage: {{ vehicle.mileage }} km</p>
+    </div>
 
     <ng-content />
   </mat-card-content>

@@ -1,5 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { Image } from './modules/images/entities/image.entity';
+import { ImagesModule } from './modules/images/images.module';
 import { Vehicle } from './modules/vehicles/entities/vehicle.entity';
 import { VehiclesModule } from './modules/vehicles/vehicles.module';
 
@@ -9,9 +11,10 @@ import { VehiclesModule } from './modules/vehicles/vehicles.module';
       type: 'sqlite',
       database: ':memory:',
       synchronize: true,
-      entities: [Vehicle],
+      entities: [Vehicle, Image],
     }),
     VehiclesModule,
+    ImagesModule,
   ],
   controllers: [],
   providers: [],

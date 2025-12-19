@@ -19,15 +19,16 @@ export class VehiclesService {
       const [items, total] = await this.repository.findAndCount({
         skip: (page - 1) * size,
         take: size,
+        relations: ['image'],
       });
       return { items, total };
     }
-    const items = await this.repository.find();
+    const items = await this.repository.find({ relations: ['image'] });
     return { items, total: items.length };
   }
 
   async findOne(id: number): Promise<Vehicle> {
-    const v = await this.repository.findOneBy({ id });
+    const v = await this.repository.findOne({ where: { id }, relations: ['image'] });
     if (!v) throw new NotFoundException(`Vehicle ${id} not found`);
     return v;
   }
