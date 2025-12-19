@@ -8,7 +8,8 @@ import { Vehicle } from '../entities/vehicle.entity';
 // Load vehicles data from JSON file at runtime
 function loadVehiclesFromJson() {
   try {
-    const filePath = join(process.cwd(), 'apps/fleet-backend/src/assets/vehicles.json');
+    // Use __dirname for production compatibility - resolves relative to compiled code location
+    const filePath = join(__dirname, '../../../../assets/vehicles.json');
     const fileContent = readFileSync(filePath, 'utf-8');
     return JSON.parse(fileContent);
   } catch (error) {
@@ -58,7 +59,6 @@ export class VehiclesDataLoader {
       this.logger.log(`Successfully loaded ${vehicles.length} vehicles`);
     } catch (error) {
       this.logger.error(`Failed to load initial vehicle data: ${(error as Error).message}`, (error as Error).stack);
-      throw error;
     }
   }
 }
