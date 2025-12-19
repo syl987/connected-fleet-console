@@ -5,12 +5,12 @@ import { logsFeature } from '../../../store/logs/logs.reducer';
 import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
 
 @Component({
-  selector: 'app-logs-search-page',
+  selector: 'app-search-page',
   imports: [ReactiveFormsModule, TitleBarComponent],
-  templateUrl: './logs-search-page.component.html',
+  templateUrl: './search-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LogsSearchPageComponent {
+export class SearchPageComponent {
   protected readonly store = inject(Store);
 
   readonly form = new FormGroup({
