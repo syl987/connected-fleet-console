@@ -14,8 +14,16 @@ export class VehiclesService {
     return this.repository.save(v);
   }
 
-  findAll(): Promise<Vehicle[]> {
-    return this.repository.find();
+  async findAll(page?: number, size?: number): Promise<{ items: Vehicle[]; total: number }> {
+    if (page && size) {
+      const [items, total] = await this.repository.findAndCount({
+        skip: (page - 1) * size,
+        take: size,
+      });
+      return { items, total };
+    }
+    const items = await this.repository.find();
+    return { items, total: items.length };
   }
 
   async findOne(id: number): Promise<Vehicle> {

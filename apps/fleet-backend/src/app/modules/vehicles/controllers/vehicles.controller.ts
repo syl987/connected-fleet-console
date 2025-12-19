@@ -1,5 +1,16 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post } from '@nestjs/common';
-import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  Body,
+  Controller,
+  DefaultValuePipe,
+  Delete,
+  Get,
+  Param,
+  ParseIntPipe,
+  Patch,
+  Post,
+  Query,
+} from '@nestjs/common';
+import { ApiBody, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateVehicleDto } from '../dto/create-vehicle.dto';
 import { UpdateVehicleDto } from '../dto/update-vehicle.dto';
 import { VehicleDto } from '../dto/vehicle.dto';
@@ -21,11 +32,16 @@ export class VehiclesController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List vehicles' })
+  @ApiOperation({ summary: 'List vehicles with optional pagination' })
+  @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
+  @ApiQuery({ name: 'size', required: false, type: Number, example: 10 })
   @ApiResponse({ status: 200, description: 'Vehicle list', type: [VehicleDto] })
-  async findAll(): Promise<VehicleDto[]> {
-    const list = await this.service.findAll();
-    return list.map((v) => this.toDto(v));
+  async findAll(
+    @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
+    @Query('size', new DefaultValuePipe(10), ParseIntPipe) size: number,
+  ): Promise<{ data: VehicleDto[]; total: number; page: number; size: number }> {
+    const { items, total } = await this.service.findAll(page, size);
+    return { data: items.map((v) => this.toDto(v)), total, page, size };
   }
 
   @Get(':id')
