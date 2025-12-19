@@ -3,7 +3,7 @@ import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalE
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS } from '@angular/material/progress-spinner';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
-import { provideRouter } from '@angular/router';
+import { provideRouter, TitleStrategy } from '@angular/router';
 import { DefaultDataServiceConfig, EntityDataService, provideEntityData, withEffects } from '@ngrx/data';
 import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore } from '@ngrx/router-store';
@@ -15,6 +15,7 @@ import { formFieldOptions } from './options/form-field.options';
 import { progressSpinnerOptions } from './options/progress-spinner.options';
 import { snackBarOptions } from './options/snack-bar.options';
 import { VehicleDataService } from './services/data/vehicle-data.service';
+import { AppTitleStrategy } from './services/title-strategy';
 import {
   effects,
   entityDataConfig,
@@ -61,6 +62,7 @@ export const appConfig: ApplicationConfig = {
     { provide: MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS, useValue: progressSpinnerOptions },
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: snackBarOptions },
     /* { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: tooltipOptions }, */
+    { provide: TitleStrategy, useClass: AppTitleStrategy },
     { provide: APP_OPTIONS, useValue: options },
     { provide: APP_LINKS, useValue: links },
   ],
