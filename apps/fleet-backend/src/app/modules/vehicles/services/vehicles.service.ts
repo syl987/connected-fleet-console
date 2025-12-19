@@ -18,7 +18,6 @@ export class VehiclesService {
     const [items, total] = await this.vehiclesRepository.findAndCount({
       skip: (page - 1) * size,
       take: size,
-      relations: ['logs'],
     });
     return { items, total };
   }

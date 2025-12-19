@@ -46,7 +46,7 @@ export class VehiclesController {
   }
 
   @Get(':id')
-  @ApiOperation({ summary: 'Get a vehicle by id' })
+  @ApiOperation({ summary: 'Get a vehicle by id', description: 'Includes associated logs' })
   @ApiResponse({ status: 200, description: 'Vehicle', type: VehicleDto })
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<VehicleDto> {
     const v = await this.vehiclesService.findOne(id);
@@ -98,7 +98,7 @@ export class VehiclesController {
       mileage: v.mileage,
       color: v.color,
       fuelType: v.fuelType,
-      logs: v.logs.map((log) => ({
+      logs: v.logs?.map((log) => ({
         id: log.id,
         createdAt: log.createdAt.toISOString(),
         updatedAt: log.updatedAt.toISOString(),

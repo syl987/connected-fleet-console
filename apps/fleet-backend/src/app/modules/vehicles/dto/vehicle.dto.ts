@@ -25,6 +25,6 @@ export class VehicleDto extends BaseDto {
   @ApiProperty({ enum: FuelType })
   fuelType!: FuelType;
 
-  @ApiProperty({ type: [VehicleLogDto] })
-  logs!: VehicleLogDto[];
+  @ApiProperty({ type: [VehicleLogDto], nullable: true })
+  logs?: VehicleLogDto[];
 }

@@ -26,8 +26,8 @@ export class Vehicle extends BaseEntity {
   @Column({ default: 0 })
   mileage!: number;
 
-  @Column({ nullable: true })
-  color?: string;
+  @Column()
+  color: string;
 
   // Use simple-enum for SQLite compatibility
   @Column({ type: 'simple-enum', enum: FuelType, default: FuelType.GAS })
