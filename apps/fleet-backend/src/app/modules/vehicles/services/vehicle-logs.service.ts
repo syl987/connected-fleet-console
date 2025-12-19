@@ -27,22 +27,13 @@ export class VehicleLogsService {
     return this.vehicleLogsRepository.save(log);
   }
 
-  async findAll(
-    page?: number,
-    size?: number,
-    vehicleId?: number,
-    search?: string,
-  ): Promise<{ items: VehicleLog[]; total: number }> {
+  async findAll(page?: number, size?: number, search?: string): Promise<{ items: VehicleLog[]; total: number }> {
     const queryBuilder = this.vehicleLogsRepository
       .createQueryBuilder('log')
       .leftJoinAndSelect('log.vehicle', 'vehicle');
 
-    if (vehicleId) {
-      queryBuilder.andWhere('vehicle.id = :vehicleId', { vehicleId });
-    }
-
     if (search) {
-      queryBuilder.andWhere(
+      queryBuilder.where(
         '(log.message LIKE :search OR log.severity LIKE :search OR CAST(log.code AS TEXT) LIKE :search)',
         { search: `%${search}%` },
       );
@@ -59,7 +50,7 @@ export class VehicleLogsService {
   }
 
   async findOne(id: number): Promise<VehicleLog> {
-    const log = await this.vehicleLogsRepository.findOne({ where: { id } });
+    const log = await this.vehicleLogsRepository.findOne({ where: { id }, relations: ['vehicle'] });
     if (!log) throw new NotFoundException(`Vehicle log ${id} not found`);
     return log;
   }
@@ -70,6 +61,7 @@ export class VehicleLogsService {
 
     return this.vehicleLogsRepository.find({
       where: { vehicle: { id: vehicle.id } },
+      relations: ['vehicle'],
       order: { timestamp: 'DESC' },
     });
   }
