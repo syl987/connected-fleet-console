@@ -25,7 +25,7 @@ export class VehiclesController {
   @ApiResponse({ status: 200, description: 'Vehicle list', type: [VehicleDto] })
   async findAll(): Promise<VehicleDto[]> {
     const list = await this.service.findAll();
-    return list.map(v => this.toDto(v));
+    return list.map((v) => this.toDto(v));
   }
 
   @Get(':id')
@@ -46,9 +46,25 @@ export class VehiclesController {
   }
 
   @Delete(':id')
-  @ApiOperation({ summary: 'Delete a vehicle' })
+  @ApiOperation({ summary: 'Soft-delete a vehicle' })
   async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
     await this.service.remove(id);
+  }
+
+  @Post(':id/restore')
+  @ApiOperation({ summary: 'Restore a soft-deleted vehicle' })
+  @ApiResponse({ status: 200, description: 'Restored vehicle', type: VehicleDto })
+  async restore(@Param('id', ParseIntPipe) id: number): Promise<VehicleDto> {
+    const v = await this.service.restore(id);
+    return this.toDto(v);
+  }
+
+  @Get('deleted')
+  @ApiOperation({ summary: 'List soft-deleted vehicles' })
+  @ApiResponse({ status: 200, description: 'Deleted vehicles', type: [VehicleDto] })
+  async findDeleted(): Promise<VehicleDto[]> {
+    const list = await this.service.findDeleted();
+    return list.map((v) => this.toDto(v));
   }
 
   private toDto(v: Vehicle): VehicleDto {
@@ -56,6 +72,7 @@ export class VehiclesController {
       id: v.id,
       createdAt: v.createdAt?.toISOString?.() ?? new Date().toISOString(),
       updatedAt: v.updatedAt?.toISOString?.() ?? new Date().toISOString(),
+      deletedAt: v.deletedAt?.toISOString?.(),
       version: v.version,
       brand: v.brand,
       model: v.model,

@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, VersionColumn } from 'typeorm';
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn, VersionColumn } from 'typeorm';
 
 @Entity()
 export abstract class AbstractEntity {
@@ -12,6 +12,9 @@ export abstract class AbstractEntity {
   @Column({ type: 'datetime' })
   @UpdateDateColumn()
   updatedAt!: Date;
+
+  @DeleteDateColumn({ type: 'datetime', nullable: true })
+  deletedAt?: Date;
 
   @Column()
   @VersionColumn()
