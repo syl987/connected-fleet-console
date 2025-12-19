@@ -32,20 +32,23 @@ export class VehicleLogsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List vehicle logs with optional pagination and vehicle filter' })
+  @ApiOperation({ summary: 'List vehicle logs with optional pagination, vehicle filter, and text search' })
   @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
   @ApiQuery({ name: 'size', required: false, type: Number, example: 10 })
   @ApiQuery({ name: 'vehicleId', required: false, type: Number, example: 1 })
+  @ApiQuery({ name: 'search', required: false, type: String, example: 'engine' })
   @ApiResponse({ status: 200, description: 'Vehicle log list', type: [VehicleLogDto] })
   async findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('size', new DefaultValuePipe(10), ParseIntPipe) size: number,
     @Query('vehicleId') vehicleId?: number,
+    @Query('search') search?: string,
   ): Promise<{ data: VehicleLogDto[]; total: number; page: number; size: number }> {
     const { items, total } = await this.vehicleLogsService.findAll(
       page,
       size,
       vehicleId ? Number(vehicleId) : undefined,
+      search,
     );
     return { data: items.map((log) => this.toDto(log)), total, page, size };
   }

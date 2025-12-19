@@ -27,14 +27,28 @@ export class VehicleLogsService {
     return this.vehicleLogsRepository.save(log);
   }
 
-  async findAll(page?: number, size?: number, vehicleId?: number): Promise<{ items: VehicleLog[]; total: number }> {
+  async findAll(
+    page?: number,
+    size?: number,
+    vehicleId?: number,
+    search?: string,
+  ): Promise<{ items: VehicleLog[]; total: number }> {
     const queryBuilder = this.vehicleLogsRepository
       .createQueryBuilder('log')
       .leftJoinAndSelect('log.vehicle', 'vehicle');
 
     if (vehicleId) {
-      queryBuilder.where('vehicle.id = :vehicleId', { vehicleId });
+      queryBuilder.andWhere('vehicle.id = :vehicleId', { vehicleId });
     }
+
+    if (search) {
+      queryBuilder.andWhere(
+        '(log.message LIKE :search OR log.severity LIKE :search OR CAST(log.code AS TEXT) LIKE :search)',
+        { search: `%${search}%` },
+      );
+    }
+
+    queryBuilder.orderBy('log.timestamp', 'DESC');
 
     if (page && size) {
       queryBuilder.skip((page - 1) * size).take(size);
