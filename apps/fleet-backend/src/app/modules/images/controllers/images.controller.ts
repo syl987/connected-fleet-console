@@ -15,10 +15,12 @@ import {
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
-import { memoryStorage } from 'multer';
-import { ImagesService } from '../services/images.service';
 import { Response } from 'express';
 import type { File as MulterFile } from 'multer';
+import { memoryStorage } from 'multer';
+import { ImageDto } from '../dto/image.dto';
+import { ImageEntity } from '../entities/image.entity';
+import { ImagesService } from '../services/images.service';
 
 @ApiTags('Images')
 @Controller('images')
@@ -82,15 +84,18 @@ export class ImagesController {
     await this.service.remove(id);
   }
 
-  private toDto(i: import('../entities/image.entity').Image) {
+  private toDto(i: ImageEntity): ImageDto {
     return {
       id: i.id,
       createdAt: i.createdAt.toISOString(),
       updatedAt: i.updatedAt.toISOString(),
+      deletedAt: i.deletedAt?.toISOString?.(),
+      version: i.version,
       filename: i.filename,
       mimeType: i.mimeType,
       size: i.size,
       url: `/images/${i.id}/content`,
+      thumbnailUrl: i.thumbnailUrl,
     };
   }
 }

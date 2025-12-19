@@ -1,20 +1,10 @@
-import {
-  Controller,
-  Delete,
-  Get,
-  Param,
-  ParseIntPipe,
-  Post,
-  Res,
-  UploadedFile,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Controller, Delete, Get, Param, ParseIntPipe, Post, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { ImageDto } from '../../../common/dto/image.dto';
 import { Response } from 'express';
 import type { File as MulterFile } from 'multer';
-import { ImageEntity } from '../../../common/entities/image.entity';
+import { ImageDto } from '../../images/dto/image.dto';
+import { ImageEntity } from '../../images/entities/image.entity';
 import { VehicleImagesService } from '../services/vehicle-images.service';
 
 @ApiTags('Vehicle Images')
@@ -34,10 +24,7 @@ export class VehicleImagesController {
     },
   })
   @UseInterceptors(FileInterceptor('file'))
-  async upload(
-    @Param('id', ParseIntPipe) id: number,
-    @UploadedFile() file: MulterFile,
-  ) {
+  async upload(@Param('id', ParseIntPipe) id: number, @UploadedFile() file: MulterFile) {
     const img = await this.imagesService.create(id, file);
     return this.toImageDto(img);
   }

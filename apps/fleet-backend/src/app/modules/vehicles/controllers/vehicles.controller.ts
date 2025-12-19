@@ -102,7 +102,7 @@ export class VehiclesController {
     };
   }
 
-  private toImageDto(i: import('../../../common/entities/image.entity').ImageEntity) {
+  private toImageDto(i: import('../../images/entities/image.entity').ImageEntity) {
     return {
       id: i.id,
       createdAt: i.createdAt.toISOString(),

@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, OneToOne } from 'typeorm';
 import { AbstractEntity } from '../../../common/entities/abstract.entity';
-import { ImageEntity } from '../../../common/entities/image.entity';
+import { ImageEntity } from '../../images/entities/image.entity';
 
 export enum FuelType {
   GAS = 'GAS',

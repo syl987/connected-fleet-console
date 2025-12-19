@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { AbstractDto } from '../../../common/dto/abstract.dto';
-import { ImageDto } from '../../../common/dto/image.dto';
+import { ImageDto } from '../../images/dto/image.dto';
 import { FuelType } from '../entities/vehicle.entity';
 
 export class VehicleDto extends AbstractDto {
