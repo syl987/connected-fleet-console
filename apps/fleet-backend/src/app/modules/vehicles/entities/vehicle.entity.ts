@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany } from 'typeorm';
-import { AbstractEntity } from '../../../common/entities/abstract.entity';
+import { BaseEntity } from '../../../common/entities/base.entity';
 import { VehicleLog } from '../../logs/entities/vehicle-log.entity';
 
 export enum FuelType {
@@ -10,7 +10,7 @@ export enum FuelType {
 }
 
 @Entity()
-export class Vehicle extends AbstractEntity {
+export class Vehicle extends BaseEntity {
   @Column()
   brand!: string;
 

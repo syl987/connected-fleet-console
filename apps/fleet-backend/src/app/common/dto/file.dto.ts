@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { AbstractDto } from './abstract.dto';
+import { BaseDto } from './base.dto';
 
-export class FileDto extends AbstractDto {
+export class FileDto extends BaseDto {
   @ApiProperty()
   filename!: string;
 

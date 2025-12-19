@@ -21,14 +21,14 @@ import { VehiclesService } from '../services/vehicles.service';
 @ApiTags('Vehicles')
 @Controller('vehicles')
 export class VehiclesController {
-  constructor(private readonly service: VehiclesService) {}
+  constructor(private readonly vehiclesService: VehiclesService) {}
 
   @Post()
   @ApiOperation({ summary: 'Create a vehicle' })
   @ApiBody({ type: CreateVehicleDto })
   @ApiResponse({ status: 201, description: 'Created vehicle', type: VehicleDto })
   async create(@Body() createDto: CreateVehicleDto): Promise<VehicleDto> {
-    const v = await this.service.create(createDto);
+    const v = await this.vehiclesService.create(createDto);
     return this.toDto(v);
   }
 
@@ -41,7 +41,7 @@ export class VehiclesController {
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('size', new DefaultValuePipe(10), ParseIntPipe) size: number,
   ): Promise<{ data: VehicleDto[]; total: number; page: number; size: number }> {
-    const { items, total } = await this.service.findAll(page, size);
+    const { items, total } = await this.vehiclesService.findAll(page, size);
     return { data: items.map((v) => this.toDto(v)), total, page, size };
   }
 
@@ -49,7 +49,7 @@ export class VehiclesController {
   @ApiOperation({ summary: 'Get a vehicle by id' })
   @ApiResponse({ status: 200, description: 'Vehicle', type: VehicleDto })
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<VehicleDto> {
-    const v = await this.service.findOne(id);
+    const v = await this.vehiclesService.findOne(id);
     return this.toDto(v);
   }
 
@@ -58,21 +58,21 @@ export class VehiclesController {
   @ApiBody({ type: UpdateVehicleDto })
   @ApiResponse({ status: 200, description: 'Updated vehicle', type: VehicleDto })
   async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateVehicleDto): Promise<VehicleDto> {
-    const v = await this.service.update(id, dto);
+    const v = await this.vehiclesService.update(id, dto);
     return this.toDto(v);
   }
 
   @Delete(':id')
   @ApiOperation({ summary: 'Soft-delete a vehicle' })
   async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
-    await this.service.remove(id);
+    await this.vehiclesService.remove(id);
   }
 
   @Post(':id/restore')
   @ApiOperation({ summary: 'Restore a soft-deleted vehicle' })
   @ApiResponse({ status: 200, description: 'Restored vehicle', type: VehicleDto })
   async restore(@Param('id', ParseIntPipe) id: number): Promise<VehicleDto> {
-    const v = await this.service.restore(id);
+    const v = await this.vehiclesService.restore(id);
     return this.toDto(v);
   }
 
@@ -80,7 +80,7 @@ export class VehiclesController {
   @ApiOperation({ summary: 'List soft-deleted vehicles' })
   @ApiResponse({ status: 200, description: 'Deleted vehicles', type: [VehicleDto] })
   async findDeleted(): Promise<VehicleDto[]> {
-    const list = await this.service.findDeleted();
+    const list = await this.vehiclesService.findDeleted();
     return list.map((v) => this.toDto(v));
   }
 

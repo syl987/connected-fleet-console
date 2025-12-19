@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export abstract class AbstractDto {
+export abstract class BaseDto {
   @ApiProperty({ description: 'Unique identifier' })
   id!: number;
 

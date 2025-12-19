@@ -35,10 +35,10 @@ function loadVehiclesFromJson() {
 export class VehiclesDataLoader {
   private readonly logger = new Logger(VehiclesDataLoader.name);
 
-  constructor(@InjectRepository(Vehicle) private readonly repository: Repository<Vehicle>) {}
+  constructor(@InjectRepository(Vehicle) private readonly vehiclesRepository: Repository<Vehicle>) {}
 
   async loadInitialData(): Promise<void> {
-    const count = await this.repository.count();
+    const count = await this.vehiclesRepository.count();
 
     if (count > 0) {
       this.logger.log('Vehicles data already exists, skipping initial data load');
@@ -56,7 +56,7 @@ export class VehiclesDataLoader {
       this.logger.log(`Loading ${initialVehicles.length} vehicles into database...`);
 
       const vehicles = initialVehicles.map((v: any) => {
-        const vehicle = this.repository.create({
+        const vehicle = this.vehiclesRepository.create({
           brand: v.brand,
           model: v.model,
           year: v.year,
@@ -68,7 +68,7 @@ export class VehiclesDataLoader {
         return vehicle;
       });
 
-      await this.repository.save(vehicles);
+      await this.vehiclesRepository.save(vehicles);
       this.logger.log(`Successfully loaded ${vehicles.length} vehicles`);
     } catch (error) {
       this.logger.error(`Failed to load initial vehicle data: ${(error as Error).message}`, (error as Error).stack);
