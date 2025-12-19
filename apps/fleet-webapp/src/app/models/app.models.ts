@@ -1,7 +1,7 @@
 import { InjectionToken } from '@angular/core';
 import { EntityCollection, EntityDataModuleConfig, EntityMetadata, EntityMetadataMap } from '@ngrx/data';
 import { EntityType } from './entity.models';
-import { Vehicle } from './vehicle.model';
+import { Vehicle } from './vehicle.models';
 
 /**
  * App-specific variables.

@@ -8,7 +8,7 @@ import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
 import { appRoutes } from './app.routes';
 import { APP_LINKS, APP_OPTIONS, AppLinks, AppOptions } from './models/app.models';
-import { VehicleDataService } from './services/vehicle-data.service';
+import { VehicleDataService } from './services/data/vehicle-data.service';
 import { effects, entityDataConfig, entityDataServiceConfig, reducers, routerStoreConfig, storeConfig } from './store/app.store';
 
 const options: AppOptions = {

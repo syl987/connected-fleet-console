@@ -3,7 +3,7 @@ import { EntityCollectionServiceBase, EntityCollectionServiceElementsFactory } f
 import { getRouterSelectors } from '@ngrx/router-store';
 import { combineLatest, map } from 'rxjs';
 import { EntityType } from '../models/entity.models';
-import { Vehicle } from '../models/vehicle.model';
+import { Vehicle } from '../models/vehicle.models';
 
 @Injectable({
   providedIn: 'root',
