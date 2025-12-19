@@ -1,8 +1,8 @@
 import { Column, Entity } from 'typeorm';
-import { AbstractEntity } from './abstract.entity';
+import { BaseEntity } from './base.entity';
 
 @Entity()
-export class FileEntity extends AbstractEntity {
+export class FileEntity extends BaseEntity {
   @Column()
   filename!: string;
 

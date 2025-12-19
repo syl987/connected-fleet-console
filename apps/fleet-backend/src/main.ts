@@ -13,7 +13,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder() // Swagger config
     .setTitle('Fleet API')
-    .setDescription('Fleet Backend API')
+    .setDescription('Connected Fleet Backend API')
     .setVersion('1.0')
     .build();
 

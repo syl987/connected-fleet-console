@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity({ orderBy: { createdAt: 'DESC' } })
-export abstract class AbstractEntity {
+export abstract class BaseEntity {
   @PrimaryGeneratedColumn()
   id!: number;
 
