@@ -86,8 +86,8 @@ export class VehiclesController {
   private toDto(v: Vehicle): VehicleDto {
     return {
       id: v.id,
-      createdAt: v.createdAt?.toISOString?.() ?? new Date().toISOString(),
-      updatedAt: v.updatedAt?.toISOString?.() ?? new Date().toISOString(),
+      createdAt: v.createdAt.toISOString(),
+      updatedAt: v.updatedAt.toISOString(),
       deletedAt: v.deletedAt?.toISOString?.(),
       version: v.version,
       brand: v.brand,
