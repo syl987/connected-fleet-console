@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany } from 'typeorm';
 import { BaseEntity } from '../../../common/entities/base.entity';
-import { VehicleLog } from '../../logs/entities/vehicle-log.entity';
+import { VehicleLog } from './vehicle-log.entity';
 
 export enum FuelType {
   GAS = 'GAS',

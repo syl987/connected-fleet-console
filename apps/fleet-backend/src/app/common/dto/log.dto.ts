@@ -6,7 +6,7 @@ export class LogDto extends BaseDto {
   timestamp!: string;
 
   @ApiProperty({ description: 'Severity' })
-  severity!: 'INFO' | 'WARN' | 'ERROR';
+  severity!: string;
 
   @ApiProperty({ description: 'Numeric code' })
   code!: number;

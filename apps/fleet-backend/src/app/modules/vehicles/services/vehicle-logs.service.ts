@@ -1,34 +1,36 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Vehicle } from '../../vehicles/entities/vehicle.entity';
 import { CreateVehicleLogDto } from '../dto/create-vehicle-log.dto';
 import { UpdateVehicleLogDto } from '../dto/update-vehicle-log.dto';
 import { VehicleLog } from '../entities/vehicle-log.entity';
+import { Vehicle } from '../entities/vehicle.entity';
 
 @Injectable()
-export class LogsService {
+export class VehicleLogsService {
   constructor(
-    @InjectRepository(VehicleLog) private readonly repository: Repository<VehicleLog>,
-    @InjectRepository(Vehicle) private readonly vehicleRepository: Repository<Vehicle>,
+    @InjectRepository(VehicleLog) private readonly vehicleLogsRepository: Repository<VehicleLog>,
+    @InjectRepository(Vehicle) private readonly vehiclesRepository: Repository<Vehicle>,
   ) {}
 
   async create(createDto: CreateVehicleLogDto): Promise<VehicleLog> {
-    const vehicle = await this.vehicleRepository.findOne({ where: { id: createDto.vehicleId } });
+    const vehicle = await this.vehiclesRepository.findOne({ where: { id: createDto.vehicleId } });
     if (!vehicle) throw new NotFoundException(`Vehicle ${createDto.vehicleId} not found`);
 
-    const log = this.repository.create({
+    const log = this.vehicleLogsRepository.create({
       timestamp: new Date(createDto.timestamp),
       severity: createDto.severity,
       code: createDto.code,
       message: createDto.message,
       vehicle,
     });
-    return this.repository.save(log);
+    return this.vehicleLogsRepository.save(log);
   }
 
   async findAll(page?: number, size?: number, vehicleId?: number): Promise<{ items: VehicleLog[]; total: number }> {
-    const queryBuilder = this.repository.createQueryBuilder('log').leftJoinAndSelect('log.vehicle', 'vehicle');
+    const queryBuilder = this.vehicleLogsRepository
+      .createQueryBuilder('log')
+      .leftJoinAndSelect('log.vehicle', 'vehicle');
 
     if (vehicleId) {
       queryBuilder.where('vehicle.id = :vehicleId', { vehicleId });
@@ -43,16 +45,16 @@ export class LogsService {
   }
 
   async findOne(id: number): Promise<VehicleLog> {
-    const log = await this.repository.findOne({ where: { id }, relations: ['vehicle'] });
+    const log = await this.vehicleLogsRepository.findOne({ where: { id }, relations: ['vehicle'] });
     if (!log) throw new NotFoundException(`Vehicle log ${id} not found`);
     return log;
   }
 
   async findByVehicle(vehicleId: number): Promise<VehicleLog[]> {
-    const vehicle = await this.vehicleRepository.findOne({ where: { id: vehicleId } });
+    const vehicle = await this.vehiclesRepository.findOne({ where: { id: vehicleId } });
     if (!vehicle) throw new NotFoundException(`Vehicle ${vehicleId} not found`);
 
-    return this.repository.find({
+    return this.vehicleLogsRepository.find({
       where: { vehicle: { id: vehicleId } },
       order: { timestamp: 'DESC' },
     });
@@ -62,7 +64,7 @@ export class LogsService {
     const log = await this.findOne(id);
 
     if (updateDto.vehicleId && updateDto.vehicleId !== log.vehicle.id) {
-      const vehicle = await this.vehicleRepository.findOne({ where: { id: updateDto.vehicleId } });
+      const vehicle = await this.vehiclesRepository.findOne({ where: { id: updateDto.vehicleId } });
       if (!vehicle) throw new NotFoundException(`Vehicle ${updateDto.vehicleId} not found`);
       log.vehicle = vehicle;
     }
@@ -72,22 +74,22 @@ export class LogsService {
     if (updateDto.code !== undefined) log.code = updateDto.code;
     if (updateDto.message) log.message = updateDto.message;
 
-    return this.repository.save(log);
+    return this.vehicleLogsRepository.save(log);
   }
 
   async remove(id: number): Promise<void> {
-    const res = await this.repository.softDelete(id);
+    const res = await this.vehicleLogsRepository.softDelete(id);
     if (res.affected === 0) throw new NotFoundException(`Vehicle log ${id} not found`);
   }
 
   async restore(id: number): Promise<VehicleLog> {
-    const res = await this.repository.restore(id);
+    const res = await this.vehicleLogsRepository.restore(id);
     if (res.affected === 0) throw new NotFoundException(`Vehicle log ${id} not found or not deleted`);
     return this.findOne(id);
   }
 
   findDeleted(): Promise<VehicleLog[]> {
-    return this.repository
+    return this.vehicleLogsRepository
       .createQueryBuilder('log')
       .leftJoinAndSelect('log.vehicle', 'vehicle')
       .withDeleted()
