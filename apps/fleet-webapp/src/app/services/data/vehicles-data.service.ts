@@ -7,9 +7,6 @@ import { Vehicle } from '../../models/vehicle.models';
 
 @Injectable({ providedIn: 'root' })
 export class VehiclesDataService extends DefaultDataService<Vehicle> {
-  override readonly entitiesUrl = '/api/vehicles'; // kick trailing slash behavior to match backend API
-  override readonly entityUrl = '/api/vehicles/'; // pluralize to match backend API
-
   constructor() {
     super(EntityType.Vehicle, inject(HttpClient), inject(HttpUrlGenerator));
   }
