@@ -59,8 +59,8 @@ export class VehicleLogsController {
     @Query('year') year?: string,
     @Query('severity') severity?: string,
     @Query('code') code?: string,
-    @Query('from', ParseDatePipe) from?: Date,
-    @Query('to', ParseDatePipe) to?: Date,
+    @Query('from', new ParseDatePipe({ optional: true })) from?: Date,
+    @Query('to', new ParseDatePipe({ optional: true })) to?: Date,
   ): Promise<{ data: VehicleLogDto[]; total: number; page: number; size: number }> {
     const { items, total } = await this.vehicleLogsService.findAll(
       page,
