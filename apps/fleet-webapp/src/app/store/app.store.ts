@@ -10,6 +10,7 @@ import {
 import { ActionReducerMap, RootStoreConfig } from '@ngrx/store';
 import { AppDefaultDataServiceConfig, AppEntityCache, AppEntityDataModuleConfig } from '../models/app.models';
 import { EntityType } from '../models/entity.models';
+import { consoleLogMetaReducer } from './app.meta-reducers';
 import { ToastEffects } from './effects/toast.effects';
 import { UndoEffects } from './effects/undo.effects';
 import { LogsEffects } from './logs/logs.effects';
@@ -56,7 +57,7 @@ export const entityDataServiceConfig: AppDefaultDataServiceConfig = {
 export const effects = [LogsEffects, ToastEffects, UndoEffects];
 
 export const storeConfig: RootStoreConfig<RootState> = {
-  metaReducers: [],
+  metaReducers: [consoleLogMetaReducer],
   runtimeChecks: {
     strictStateImmutability: isDevMode(),
     strictStateSerializability: isDevMode(),
