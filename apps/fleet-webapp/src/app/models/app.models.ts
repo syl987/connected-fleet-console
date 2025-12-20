@@ -74,3 +74,19 @@ export interface AppEntityCache {
   [EntityType.Vehicle]?: EntityCollection<Vehicle>;
   [EntityType.VehicleLog]?: EntityCollection<VehicleLog>;
 }
+
+/**
+ * Tech-stack item.
+ */
+export interface AppTechStackItem {
+  /** Display name. */
+  readonly title: string;
+  /** Short description. */
+  readonly subtitle: string;
+  /** Block description. */
+  readonly description: string;
+  /** Image URL. */
+  readonly image: string;
+  /** Image element classes. Intended for layout adjustments. */
+  readonly imageClass?: string;
+}

@@ -1,9 +1,36 @@
 <div class="container">
   <app-title-bar />
 
-  <p class="mb-2">Welcome to my Bookstore sample app!</p>
+  <p class="mb-2">Welcome to <b class="text-primary">Connected Fleet Console</b> App!</p>
 
-  <p class="mb-2">Please try it out! You can manage your vehicles and operate logs.</p>
+  <p class="mb-2">Please try it out! You can manage your vehicles and operate vehicle logs.</p>
 
-  <p class="text-error text-sm">Note: the application is currently under active development as changes can occur on a daily basis.</p>
+  <p class="text-error text-sm">
+    Note: the application is currently under active development as changes can occur on a daily basis.
+  </p>
+
+  <h2 class="mt-0">Tech-Stack</h2>
+
+  <p>These technologies are the backbone of the application and its development process.</p>
+
+  <div class="mb-4 grid gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+    @for (item of techStack; track item.title) {
+      <mat-card class="text-center">
+        <img
+          mat-card-image
+          [src]="item.image"
+          [alt]="item.title + ' logo'"
+          class="mx-auto mt-4 h-[128px] rounded-none"
+          [ngClass]="item.imageClass"
+        />
+
+        <mat-card-header class="mb-2 block">
+          <mat-card-title>{{ item.title }}</mat-card-title>
+          <mat-card-subtitle>{{ item.subtitle }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>{{ item.description }}</mat-card-content>
+      </mat-card>
+    }
+  </div>
 </div>
