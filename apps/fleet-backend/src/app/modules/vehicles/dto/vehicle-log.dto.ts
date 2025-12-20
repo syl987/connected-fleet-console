@@ -4,5 +4,5 @@ import { VehicleDto } from './vehicle.dto';
 
 export class VehicleLogDto extends LogDto {
   @ApiProperty({ description: 'Vehicle ID' })
-  vehicle?: VehicleDto;
+  vehicle!: VehicleDto;
 }

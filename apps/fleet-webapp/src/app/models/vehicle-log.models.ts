@@ -10,5 +10,5 @@ export interface VehicleLog {
   code: string;
   severity: string;
   message: string;
-  vehicle?: Vehicle;
+  vehicle: Vehicle;
 }
