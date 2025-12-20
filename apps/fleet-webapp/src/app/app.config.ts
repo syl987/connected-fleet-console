@@ -54,12 +54,9 @@ export const appConfig: ApplicationConfig = {
     { provide: DefaultDataServiceFactory, useClass: AppDefaultDataServiceFactory },
     { provide: DefaultDataServiceConfig, useValue: entityDataServiceConfig },
 
-    /* { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions }, */
-    /* { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: dialogOptions }, */
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: formFieldOptions },
     { provide: MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS, useValue: progressSpinnerOptions },
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: snackBarOptions },
-    /* { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: tooltipOptions }, */
 
     { provide: TitleStrategy, useClass: AppTitleStrategy },
     { provide: APP_OPTIONS, useValue: options },
