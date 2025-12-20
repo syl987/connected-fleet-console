@@ -1,3 +1,5 @@
+import { Vehicle } from './vehicle.models';
+
 export interface VehicleLog {
   id: number;
   createdAt: string;
@@ -8,5 +10,5 @@ export interface VehicleLog {
   code: string;
   severity: string;
   message: string;
-  vehicleId: number;
+  vehicle?: Vehicle;
 }

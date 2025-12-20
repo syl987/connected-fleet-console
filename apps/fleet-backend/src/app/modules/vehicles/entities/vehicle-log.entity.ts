@@ -6,5 +6,5 @@ import { Vehicle } from './vehicle.entity';
 export class VehicleLog extends LogEntity {
   @ManyToOne(() => Vehicle, (vehicle) => vehicle.logs, { nullable: false, onDelete: 'CASCADE' })
   @JoinColumn()
-  vehicle!: Vehicle;
+  vehicle?: Vehicle;
 }
