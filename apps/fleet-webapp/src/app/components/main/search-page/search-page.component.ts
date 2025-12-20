@@ -73,19 +73,10 @@ export class SearchPageComponent {
   constructor() {
     effect(() => {
       this.dataSource.data = this.vehicleLogs();
-      this.dataSource.paginator = this.paginator();
-
-      const paginator = this.paginator();
-
-      if (paginator) {
-        paginator.pageIndex = this.page();
-        paginator.pageSize = this.size();
-        paginator.length = this.total();
-      }
     });
   }
 
-  search(): void {
+  search(options?: { page?: number; size?: number }): void {
     const params: SearchLogsParams = {
       search: this.form.value.search ?? undefined,
       vehicle: this.form.value.vehicle ?? undefined,
@@ -95,6 +86,9 @@ export class SearchPageComponent {
       code: this.form.value.code ?? undefined,
       from: this.form.value.from ?? undefined,
       to: this.form.value.to ?? undefined,
+
+      page: options?.page ?? 1,
+      size: options?.size ?? this.paginator()?.pageSize ?? 10,
     };
     this.store.dispatch(SearchActions.searchLogs({ params }));
   }

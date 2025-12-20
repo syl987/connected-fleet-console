@@ -105,7 +105,15 @@
             <tr mat-row *matRowDef="let row; columns: tableColumns" class="font-mono"></tr>
           </table>
 
-          <mat-paginator [pageSizeOptions]="[5, 20, 50, 100]" showFirstLastButtons aria-label="Select page" />
+          <mat-paginator
+            [pageIndex]="page()"
+            [pageSize]="size()"
+            [length]="total()"
+            [pageSizeOptions]="[5, 20, 50, 100]"
+            (page)="search({ page: $event.pageIndex, size: $event.pageSize })"
+            showFirstLastButtons
+            aria-label="Select page"
+          />
         </div>
       </mat-card>
     } @else if (!loading()) {

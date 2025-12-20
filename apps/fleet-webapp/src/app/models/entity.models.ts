@@ -17,6 +17,14 @@ export enum EntityType {
 }
 
 /**
+ * Generic params for paginated requests.
+ */
+export interface PaginationParams {
+  page: number;
+  size: number;
+}
+
+/**
  * Generic page interface for paginated responses.
  */
 export interface Page<T> {

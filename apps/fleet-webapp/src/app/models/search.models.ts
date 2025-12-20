@@ -1,6 +1,6 @@
-export interface SearchLogsParams {
-  page?: number;
-  size?: number;
+import { PaginationParams } from './entity.models';
+
+export interface SearchLogsParams extends PaginationParams {
   search?: string;
   mileage?: number;
   year?: number;
