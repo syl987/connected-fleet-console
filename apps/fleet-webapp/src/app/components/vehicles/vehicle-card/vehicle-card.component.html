@@ -17,7 +17,7 @@
       <p class="mb-0 whitespace-nowrap">VIN: {{ vehicle.vin }}</p>
       <p class="mb-0 whitespace-nowrap">Fuel Type: {{ vehicle.fuelType | lowercase }}</p>
       <p class="mb-0 whitespace-nowrap">Color: {{ vehicle.color | lowercase }}</p>
-      <p class="mb-0 whitespace-nowrap">Mileage: {{ vehicle.mileage }} km</p>
+      <p class="mb-0 whitespace-nowrap">Mileage: {{ vehicle.mileage | number }} km</p>
     </div>
 
     <ng-content />
