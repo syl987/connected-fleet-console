@@ -2,12 +2,14 @@ import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, inject, viewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { Store } from '@ngrx/store';
 import { SearchLogsParams } from '../../../models/search.models';
 import { VehicleLog } from '../../../models/vehicle-log.models';
@@ -28,12 +30,14 @@ const tableColumns = [
   imports: [
     ReactiveFormsModule,
     MatButtonModule,
+    MatCardModule,
     MatDatepickerModule,
     MatInputModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
     MatSelectModule,
     MatTableModule,
+    MatTabsModule,
     TitleBarComponent,
     DatePipe,
   ],
