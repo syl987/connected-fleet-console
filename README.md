@@ -19,7 +19,6 @@
 ## Current Bugs
 
 - date param invalid format 400 on backend
-- first next page click loads same data
 
 ## Missing Features
 

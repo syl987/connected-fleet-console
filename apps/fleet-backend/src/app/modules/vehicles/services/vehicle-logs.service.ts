@@ -39,9 +39,9 @@ export class VehicleLogsService {
     page: number,
     size: number,
     search?: string,
-    mileage?: string,
-    year?: string,
-    vehicle?: string,
+    mileage?: number,
+    year?: number,
+    vehicle?: number,
     severity?: string,
     code?: string,
     from?: Date,
@@ -76,7 +76,7 @@ export class VehicleLogsService {
       queryBuilder.andWhere('log.timestamp <= :to', { to: to.toISOString() });
     }
     queryBuilder.orderBy('log.timestamp', 'DESC');
-    queryBuilder.skip((page - 1) * size).take(size);
+    queryBuilder.skip(page * size).take(size);
 
     const [items, total] = await queryBuilder.getManyAndCount();
     return { items, total };
