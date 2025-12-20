@@ -35,6 +35,7 @@ export const entityDataConfig: AppEntityDataModuleConfig = {
   entityMetadata: {
     [EntityType.Vehicle]: {
       filterFn: PropsFilterFnFactory([
+        'id',
         'brand',
         'model',
         'year',
@@ -45,7 +46,7 @@ export const entityDataConfig: AppEntityDataModuleConfig = {
     [EntityType.VehicleLog]: {
       sortComparer: (a, b) => b.timestamp.localeCompare(a.timestamp), // DESC by timestamp
       filterFn: PropsFilterFnFactory([
-        'vehicleId',
+        'id',
         'severity',
         'code',
         'message',
