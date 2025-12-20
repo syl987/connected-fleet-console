@@ -34,7 +34,6 @@ export interface AppState extends RootState {
 export const entityDataConfig: AppEntityDataModuleConfig = {
   entityMetadata: {
     [EntityType.Vehicle]: {
-      sortComparer: undefined, // TODO add default comparer
       filterFn: PropsFilterFnFactory([
         'brand',
         'model',
@@ -43,14 +42,27 @@ export const entityDataConfig: AppEntityDataModuleConfig = {
         'mileage',
       ]),
     },
+    [EntityType.VehicleLog]: {
+      sortComparer: (a, b) => b.timestamp.localeCompare(a.timestamp), // DESC by timestamp
+      filterFn: PropsFilterFnFactory([
+        'vehicleId',
+        'severity',
+        'code',
+        'message',
+      ]),
+    },
   },
 };
 
 export const entityDataServiceConfig: AppDefaultDataServiceConfig = {
   entityHttpResourceUrls: {
     [EntityType.Vehicle]: {
-      entityResourceUrl: '/api/vehicles/', // kick trailing slash behavior to match backend API
-      collectionResourceUrl: '/api/vehicles', // pluralize to match backend API
+      collectionResourceUrl: '/api/vehicles', // kick trailing slash behavior to match backend API
+      entityResourceUrl: '/api/vehicles/', // pluralize to match backend API
+    },
+    [EntityType.VehicleLog]: {
+      collectionResourceUrl: '/api/logs/vehicles', // kick trailing slash behavior to match backend API
+      entityResourceUrl: '/api/logs/vehicles/', // pluralize to match backend API
     },
   },
 };

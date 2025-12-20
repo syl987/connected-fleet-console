@@ -13,6 +13,7 @@ export interface EntityBaseDTO {
  */
 export enum EntityType {
   Vehicle = 'Vehicle',
+  VehicleLog = 'VehicleLog',
 }
 
 /**

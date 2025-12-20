@@ -7,7 +7,7 @@ import {
   HttpResourceUrls,
 } from '@ngrx/data';
 import { EntityType } from './entity.models';
-import { Vehicle } from './vehicle.models';
+import { Vehicle, VehicleLog } from './vehicle.models';
 
 /**
  * App-specific variables.
@@ -48,9 +48,11 @@ export const APP_LINKS = new InjectionToken<AppLinks>('APP_LINKS');
 export interface AppEntityDataModuleConfig extends EntityDataModuleConfig {
   entityMetadata: {
     [EntityType.Vehicle]: Partial<EntityMetadata<Vehicle>>;
+    [EntityType.VehicleLog]: Partial<EntityMetadata<VehicleLog>>;
   };
   pluralNames?: {
     [EntityType.Vehicle]?: string;
+    [EntityType.VehicleLog]?: string;
   };
 }
 
@@ -60,6 +62,7 @@ export interface AppEntityDataModuleConfig extends EntityDataModuleConfig {
 export interface AppDefaultDataServiceConfig extends DefaultDataServiceConfig {
   entityHttpResourceUrls: {
     [EntityType.Vehicle]?: HttpResourceUrls;
+    [EntityType.VehicleLog]?: HttpResourceUrls;
   };
 }
 
@@ -68,4 +71,5 @@ export interface AppDefaultDataServiceConfig extends DefaultDataServiceConfig {
  */
 export interface AppEntityCache {
   [EntityType.Vehicle]?: EntityCollection<Vehicle>;
+  [EntityType.VehicleLog]?: EntityCollection<VehicleLog>;
 }

@@ -11,6 +11,7 @@ export interface Vehicle {
   id: number;
   createdAt: string;
   updatedAt: string;
+  deletedAt?: string;
   version: number;
   brand: string;
   model: string;
@@ -20,4 +21,17 @@ export interface Vehicle {
   color?: string;
   fuelType: FuelType;
   logs?: Log[];
+}
+
+export interface VehicleLog {
+  id: number;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt?: string;
+  version: number;
+  timestamp: string;
+  severity: string;
+  code: number;
+  message: string;
+  vehicleId: number;
 }
