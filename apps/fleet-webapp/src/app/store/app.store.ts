@@ -1,5 +1,5 @@
 import { isDevMode } from '@angular/core';
-import { DefaultDataServiceConfig, PropsFilterFnFactory } from '@ngrx/data';
+import { PropsFilterFnFactory } from '@ngrx/data';
 import {
   MinimalRouterStateSnapshot,
   routerReducer,
@@ -8,7 +8,7 @@ import {
   StoreRouterConfig,
 } from '@ngrx/router-store';
 import { ActionReducerMap, RootStoreConfig } from '@ngrx/store';
-import { AppEntityCache, AppEntityDataModuleConfig } from '../models/app.models';
+import { AppDefaultDataServiceConfig, AppEntityCache, AppEntityDataModuleConfig } from '../models/app.models';
 import { EntityType } from '../models/entity.models';
 import { ToastEffects } from './effects/toast.effects';
 import { UndoEffects } from './effects/undo.effects';
@@ -25,14 +25,9 @@ export const reducers: ActionReducerMap<RootState> = {
   logs: fromLogs.reducer,
 };
 
-export const entityDataServiceConfig: DefaultDataServiceConfig = {
-  entityHttpResourceUrls: {
-    [EntityType.Vehicle]: {
-      entityResourceUrl: '/api/vehicles/', // kick trailing slash behavior to match backend API
-      collectionResourceUrl: '/api/vehicles', // pluralize to match backend API
-    },
-  },
-};
+export interface AppState extends RootState {
+  entityCache: AppEntityCache;
+}
 
 export const entityDataConfig: AppEntityDataModuleConfig = {
   entityMetadata: {
@@ -49,11 +44,16 @@ export const entityDataConfig: AppEntityDataModuleConfig = {
   },
 };
 
-export const effects = [LogsEffects, ToastEffects, UndoEffects];
+export const entityDataServiceConfig: AppDefaultDataServiceConfig = {
+  entityHttpResourceUrls: {
+    [EntityType.Vehicle]: {
+      entityResourceUrl: '/api/vehicles/', // kick trailing slash behavior to match backend API
+      collectionResourceUrl: '/api/vehicles', // pluralize to match backend API
+    },
+  },
+};
 
-export interface AppState extends RootState {
-  entityCache: AppEntityCache;
-}
+export const effects = [LogsEffects, ToastEffects, UndoEffects];
 
 export const storeConfig: RootStoreConfig<RootState> = {
   metaReducers: [],

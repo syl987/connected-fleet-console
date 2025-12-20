@@ -1,5 +1,11 @@
 import { InjectionToken } from '@angular/core';
-import { EntityCollection, EntityDataModuleConfig, EntityMetadata, EntityMetadataMap } from '@ngrx/data';
+import {
+  DefaultDataServiceConfig,
+  EntityCollection,
+  EntityDataModuleConfig,
+  EntityMetadata,
+  HttpResourceUrls,
+} from '@ngrx/data';
 import { EntityType } from './entity.models';
 import { Vehicle } from './vehicle.models';
 
@@ -40,19 +46,26 @@ export const APP_LINKS = new InjectionToken<AppLinks>('APP_LINKS');
  * Type-safe entity data config.
  */
 export interface AppEntityDataModuleConfig extends EntityDataModuleConfig {
-  entityMetadata: AppEntityMetadataMap;
+  entityMetadata: {
+    [EntityType.Vehicle]: Partial<EntityMetadata<Vehicle>>;
+  };
+  pluralNames?: {
+    [EntityType.Vehicle]?: string;
+  };
 }
 
 /**
- * Type-safe entity metadata map.
+ * Type-safe default data service config.
  */
-export interface AppEntityMetadataMap extends EntityMetadataMap {
-  [EntityType.Vehicle]: Partial<EntityMetadata<Vehicle>>;
+export interface AppDefaultDataServiceConfig extends DefaultDataServiceConfig {
+  entityHttpResourceUrls: {
+    [EntityType.Vehicle]?: HttpResourceUrls;
+  };
 }
 
 /**
  * Type-safe entity cache.
  */
 export interface AppEntityCache {
-  [EntityType.Vehicle]: EntityCollection<Vehicle>;
+  [EntityType.Vehicle]?: EntityCollection<Vehicle>;
 }
