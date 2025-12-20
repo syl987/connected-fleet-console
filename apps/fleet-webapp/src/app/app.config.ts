@@ -1,4 +1,6 @@
+import { registerLocaleData } from '@angular/common';
 import { provideHttpClient } from '@angular/common/http';
+import localeDe from '@angular/common/locales/de';
 import { ApplicationConfig, DEFAULT_CURRENCY_CODE, LOCALE_ID, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS } from '@angular/material/progress-spinner';
@@ -24,6 +26,8 @@ import {
   routerStoreConfig,
   storeConfig,
 } from './store/app.store';
+
+registerLocaleData(localeDe);
 
 const options: AppOptions = {
   applicationName: 'Connected Fleet Console',
