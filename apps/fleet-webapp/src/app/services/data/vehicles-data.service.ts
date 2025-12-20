@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { DefaultDataService, HttpOptions, HttpUrlGenerator, QueryParams } from '@ngrx/data';
 import { map, Observable } from 'rxjs';
-import { EntityType } from '../../models/entity.models';
+import { EntityType, Page } from '../../models/entity.models';
 import { Vehicle } from '../../models/vehicle.models';
 
 @Injectable({ providedIn: 'root' })
