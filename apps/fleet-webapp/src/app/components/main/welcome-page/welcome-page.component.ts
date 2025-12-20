@@ -18,6 +18,13 @@ const techStack: AppTechStackItem[] = [
     image: 'https://nestjs.com/logo-small-gradient.0ed287ce.svg',
   },
   {
+    title: `TypeScript`,
+    subtitle: `JavaScript Extended`,
+    description: `Strictly configured for null-safety, safe variable initialization and reliable use of types.`,
+    image: 'https://iconape.com/wp-content/png_logo_vector/typescript.png',
+    imageClass: 'pt-2',
+  },
+  {
     title: `Nx`,
     subtitle: `Monorepo Tool`,
     description: `Extensible dev tools for monorepos, helping with build, test, and deployment.`,
@@ -25,10 +32,10 @@ const techStack: AppTechStackItem[] = [
     imageClass: 'pt-6 pb-1',
   },
   {
-    title: `Firebase`,
-    subtitle: `Backend Services`,
-    description: `Using web hosting and app hosting services for a seamless deployment experience.`,
-    image: 'assets/img/logo/firebase_full_color.png',
+    title: `Material 3`,
+    subtitle: `Angular Components`,
+    description: `Native Angular components with customized theming, typography and general appearance.`,
+    image: 'https://v16.material.angular.io/assets/img/angular-material-logo.svg',
   },
   {
     title: `NGRX`,
@@ -43,16 +50,10 @@ const techStack: AppTechStackItem[] = [
     image: 'https://rxjs.dev/generated/images/marketing/home/Rx_Logo-512-512.png',
   },
   {
-    title: `Material 3`,
-    subtitle: `Angular Components`,
-    description: `Native Angular components with customized theming, typography and general appearance.`,
-    image: 'https://v16.material.angular.io/assets/img/angular-material-logo.svg',
-  },
-  {
-    title: `TypeScript`,
-    subtitle: `JavaScript Extended`,
-    description: `Strictly configured for null-safety, safe variable initialization and reliable use of types.`,
-    image: 'https://iconape.com/wp-content/png_logo_vector/typescript.png',
+    title: `Firebase`,
+    subtitle: `Backend Services`,
+    description: `Using web hosting and app hosting services for a seamless deployment experience.`,
+    image: 'assets/img/logo/firebase_full_color.png',
   },
   {
     title: `TypeORM`,
