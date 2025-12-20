@@ -5,8 +5,8 @@ import { VehicleLogDto } from '../../vehicles/dto/vehicle-log.dto';
 import { VehicleLog } from '../../vehicles/entities/vehicle-log.entity';
 import { VehicleLogsService } from '../services/vehicle-logs.service';
 
-@ApiTags('Vehicle Logs')
-@Controller('logs')
+@ApiTags('Logs')
+@Controller('logs/vehicles')
 export class VehicleLogsController {
   constructor(private readonly vehicleLogsService: VehicleLogsService) {}
 
@@ -20,7 +20,7 @@ export class VehicleLogsController {
   }
 
   @Get()
-  @ApiOperation({ summary: 'List vehicle logs with optional pagination, vehicle filter, and text search' })
+  @ApiOperation({ summary: 'List vehicle logs with optional pagination and text search' })
   @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
   @ApiQuery({ name: 'size', required: false, type: Number, example: 10 })
   @ApiQuery({ name: 'search', required: false, type: String, example: 'engine' })
@@ -35,7 +35,7 @@ export class VehicleLogsController {
   }
 
   @Get('vehicle/:vehicleId')
-  @ApiOperation({ summary: 'Get all logs for a specific vehicle' })
+  @ApiOperation({ summary: 'Get vehicle logs for a specific vehicle' })
   @ApiResponse({ status: 200, description: 'Vehicle logs', type: [VehicleLogDto] })
   async findByVehicle(@Param('vehicleId', ParseIntPipe) vehicleId: number): Promise<VehicleLogDto[]> {
     const logs = await this.vehicleLogsService.findByVehicle(vehicleId);
