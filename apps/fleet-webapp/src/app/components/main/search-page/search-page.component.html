@@ -18,46 +18,49 @@
         <div class="mt-5 flex flex-wrap gap-4">
           <mat-form-field>
             <mat-label>ID</mat-label>
-            <input type="number" matInput formControlName="vehicle" />
+            <input matInput formControlName="vehicle" />
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Mileage</mat-label>
-            <input type="number" matInput formControlName="mileage" />
+            <input matInput formControlName="mileage" />
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Year</mat-label>
-            <input type="number" matInput formControlName="year" />
+            <input matInput formControlName="year" />
           </mat-form-field>
         </div>
       </mat-tab>
 
       <mat-tab label="Advanced Params">
         <div class="mt-5 flex flex-wrap gap-4">
-          <!-- <mat-form-field>
-            <mat-label>Vehicle ID</mat-label>
-            <input type="number" matInput formControlName="vehicle" />
-          </mat-form-field> -->
-
-          <!-- <mat-form-field>
-            <mat-label>Vehicle Mileage</mat-label>
-            <input type="number" matInput formControlName="mileage" />
-          </mat-form-field> -->
-
-          <!-- <mat-form-field>
-            <mat-label>Vehicle Year</mat-label>
-            <input type="number" matInput formControlName="year" />
-          </mat-form-field> -->
-
-          <!-- TODO severity control -->
+          <mat-form-field>
+            <mat-label>Severity</mat-label>
+            <mat-select formControlName="severity">
+              <mat-option [value]="undefined" />
+              <mat-option value="CRITICAL">Critical</mat-option>
+              <mat-option value="ERROR">Error</mat-option>
+              <mat-option value="WARNING">Warning</mat-option>
+              <mat-option value="INFO">Info</mat-option>
+            </mat-select>
+          </mat-form-field>
 
           <mat-form-field>
             <mat-label>Code</mat-label>
             <input matInput formControlName="code" />
           </mat-form-field>
 
-          <!-- TODO from-to double control -->
+          <mat-form-field>
+            <mat-label>Timestamp Range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate formControlName="from" placeholder="From" />
+              <input matEndDate formControlName="to" placeholder="To" />
+            </mat-date-range-input>
+
+            <mat-datepicker-toggle matIconSuffix [for]="picker" />
+            <mat-date-range-picker #picker />
+          </mat-form-field>
         </div>
       </mat-tab>
     </mat-tab-group>
