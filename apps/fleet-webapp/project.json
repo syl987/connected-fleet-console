@@ -16,6 +16,11 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           {
+            "glob": "(ARCHITECTURE|FEATURES|REQUIREMENTS).md",
+            "input": "",
+            "output": "/assets/docs"
+          },
+          {
             "glob": "**/*",
             "input": "apps/fleet-webapp/public"
           }
