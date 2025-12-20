@@ -7,5 +7,41 @@
 
   @if (vehicle(); as vehicle) {
     <app-vehicle-card [data]="vehicle" />
+
+    <h2>Vehicle Logs</h2>
+
+    <div class="overflow-x-auto">
+      <table mat-table [dataSource]="dataSource">
+        <ng-container matColumnDef="timestamp">
+          <th mat-header-cell *matHeaderCellDef>Time</th>
+          <td mat-cell *matCellDef="let log">{{ log.timestamp | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="vehicleId">
+          <th mat-header-cell *matHeaderCellDef>Vehicle ID</th>
+          <td mat-cell *matCellDef="let log">{{ log.vehicleId }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="severity">
+          <th mat-header-cell *matHeaderCellDef>Severity</th>
+          <td mat-cell *matCellDef="let log">{{ log.severity }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="code">
+          <th mat-header-cell *matHeaderCellDef>Code</th>
+          <td mat-cell *matCellDef="let log">{{ log.code }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="message">
+          <th mat-header-cell *matHeaderCellDef>Message</th>
+          <td mat-cell *matCellDef="let log">{{ log.message }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: tableColumns"></tr>
+      </table>
+    </div>
+
+    <mat-paginator [pageSizeOptions]="[5, 20,50, 100]" showFirstLastButtons aria-label="Select page" />
   }
 </div>

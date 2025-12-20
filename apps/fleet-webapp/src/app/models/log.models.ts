@@ -7,7 +7,7 @@ export interface Log {
   code: string;
   severity: string;
   message: string;
-  mileage: number;
+  vehicleId: number;
 }
 
 export interface SearchLogsParams {
