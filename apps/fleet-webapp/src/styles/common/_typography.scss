@@ -10,13 +10,19 @@ h2 {
   font-weight: 700;
 }
 
-h3,
+h3 {
+  margin-top: 1rem * 1.5;
+  margin-bottom: 1rem;
+  font: var(--mat-sys-title-medium);
+  font-weight: 700;
+}
+
 h4,
 h5,
 h6 {
   margin-top: 1rem * 1.25;
   margin-bottom: 1rem;
-  font: var(--mat-sys-title-medium);
+  font: var(--mat-sys-title-small);
   font-weight: 700;
 }
 
