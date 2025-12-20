@@ -28,6 +28,6 @@ export class VehiclesModule implements OnModuleInit {
 
   async onModuleInit(): Promise<void> {
     await this.vehiclesDataLoader.loadInitialData();
-    await this.vehicleLogsDataLoader.loadInitialData(Math.floor(Math.random() * 100));
+    await this.vehicleLogsDataLoader.loadInitialData();
   }
 }

@@ -75,7 +75,7 @@ export class VehicleLogsDataLoader {
     @InjectRepository(Vehicle) private readonly vehiclesRepository: Repository<Vehicle>,
   ) {}
 
-  async loadInitialData(logsPerVehicle = 10): Promise<void> {
+  async loadInitialData(maxLogsPerVehicle = 100): Promise<void> {
     const count = await this.vehicleLogsRepository.count();
 
     if (count > 0) {
@@ -91,12 +91,12 @@ export class VehicleLogsDataLoader {
         return;
       }
 
-      this.logger.log(`Generating ${logsPerVehicle} logs for each of ${vehicles.length} vehicles...`);
+      this.logger.log(`Generating randomly up to ${maxLogsPerVehicle} logs for each of ${vehicles.length} vehicles...`);
 
       const logs: VehicleLog[] = [];
 
       for (const vehicle of vehicles) {
-        const vehicleLogs = this.generateLogsForVehicle(vehicle, logsPerVehicle);
+        const vehicleLogs = this.generateLogsForVehicle(vehicle, Math.floor(Math.random() * maxLogsPerVehicle));
         logs.push(...vehicleLogs);
       }
 
