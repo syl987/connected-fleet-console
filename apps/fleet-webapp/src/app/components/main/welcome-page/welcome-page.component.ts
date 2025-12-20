@@ -27,7 +27,7 @@ const techStack: AppTechStackItem[] = [
   {
     title: `Firebase`,
     subtitle: `Backend Services`,
-    description: `Using authentication, NoSQL realtime database, file storage and web hosting services.`,
+    description: `Using web hosting and app hosting services for a seamless deployment experience.`,
     image: 'assets/img/logo/firebase_full_color.png',
   },
   {
