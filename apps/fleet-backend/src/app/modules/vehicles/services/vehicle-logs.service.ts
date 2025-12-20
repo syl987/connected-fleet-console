@@ -27,7 +27,16 @@ export class VehicleLogsService {
     return this.vehicleLogsRepository.save(log);
   }
 
-  async findAll(page: number, size: number, search?: string): Promise<{ items: VehicleLog[]; total: number }> {
+  async findAll(
+    page: number,
+    size: number,
+    search?: string,
+    vehicle?: string,
+    severity?: string,
+    code?: string,
+    from?: Date,
+    to?: Date,
+  ): Promise<{ items: VehicleLog[]; total: number }> {
     const queryBuilder = this.vehicleLogsRepository
       .createQueryBuilder('log')
       .leftJoinAndSelect('log.vehicle', 'vehicle');
