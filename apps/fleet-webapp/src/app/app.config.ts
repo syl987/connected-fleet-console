@@ -12,6 +12,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideMarkdown } from 'ngx-markdown';
 import { appRoutes } from './app.routes';
 import { APP_LINKS, APP_OPTIONS, AppLinks, AppOptions } from './models/app.models';
 import { formFieldOptions } from './options/form-field.options';
@@ -41,7 +42,7 @@ const links: AppLinks = [
   // { label: `Dashboard`, icon: 'dashboard', path: '/dashboard' },
   { label: `Vehicles`, icon: 'directions_car', path: '/vehicles' },
   { label: `Search`, icon: 'search', path: '/search' },
-  // { label: `Docs`, icon: 'library_books', path: '/documentation' },
+  { label: `Docs`, icon: 'library_books', path: '/documentation' },
 ];
 
 export const appConfig: ApplicationConfig = {
@@ -56,6 +57,8 @@ export const appConfig: ApplicationConfig = {
     provideRouterStore(routerStoreConfig),
     provideEntityData(entityDataConfig, withEffects()),
     provideStoreDevtools({ maxAge: 25 }),
+
+    provideMarkdown(),
 
     { provide: DefaultDataServiceFactory, useClass: AppDefaultDataServiceFactory },
     { provide: DefaultDataServiceConfig, useValue: entityDataServiceConfig },
