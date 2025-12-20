@@ -14,3 +14,13 @@ export interface EntityBaseDTO {
 export enum EntityType {
   Vehicle = 'Vehicle',
 }
+
+/**
+ * Generic page interface for paginated responses.
+ */
+export interface Page<T> {
+  data: T[];
+  total: number;
+  page: number;
+  size: number;
+}

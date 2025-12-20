@@ -16,7 +16,7 @@ export class LogsEffects {
       switchMap(({ params }) =>
         this.service.search(params).pipe(
           mapResponse({
-            next: logs => LogsActions.searchSUCCESS({ logs }),
+            next: (page) => LogsActions.searchSUCCESS({ page }),
             error: () => LogsActions.searchERROR(),
           }),
         )),
