@@ -15,7 +15,7 @@ export class VehiclesDataService extends DefaultDataService<Vehicle> {
   }
 
   override getAll(): Observable<Vehicle[]> {
-    return (super.getAll() as unknown as Observable<{ data: Vehicle[] }>).pipe(
+    return (super.getAll() as unknown as Observable<Page<Vehicle>>).pipe(
       map(({ data }) => data), // unwrap data property from paginated API response
     );
   }
