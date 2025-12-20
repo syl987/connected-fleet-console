@@ -8,7 +8,7 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { ActivatedRoute, RouterModule } from '@angular/router';
-import { Log } from '../../../models/log.models';
+import { VehicleLog } from '../../../models/log.models';
 import { VehicleService } from '../../../services/vehicle.service';
 import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
 import { VehicleCardComponent } from '../vehicle-card/vehicle-card.component';
@@ -47,7 +47,7 @@ export class VehicleDetailPageComponent {
   readonly paginator = viewChild(MatPaginator);
 
   readonly tableColumns = tableColumns;
-  readonly dataSource = new MatTableDataSource<Log>([]);
+  readonly dataSource = new MatTableDataSource<VehicleLog>([]);
 
   constructor() {
     effect(() => {

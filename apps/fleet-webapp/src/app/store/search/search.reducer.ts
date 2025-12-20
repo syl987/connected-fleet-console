@@ -1,44 +1,45 @@
-import { EntityAdapter, EntityState, createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { PageIds } from '../../models/entity.models';
 import { SearchActions } from './search.actions';
-import { Search } from './search.model';
 
-export const searchesFeatureKey = 'searches';
+export const searchFeatureKey = 'search';
 
-export type State = EntityState<Search>;
+export interface State {
+  pageIds?: PageIds;
+  loading: boolean;
+}
 
-export const adapter: EntityAdapter<Search> = createEntityAdapter<Search>();
-
-export const initialState: State = adapter.getInitialState({
-  // additional entity state properties
-});
+export const initialState: State = {
+  loading: false,
+};
 
 export const reducer = createReducer(
   initialState,
-  on(SearchActions.searchLogs, (state, { params }) => ({
+  on(SearchActions.searchLogs, (state) => ({
     ...state,
-    pagination: { page: params.page, size: params.size },
     loading: true,
   })),
-  on(SearchActions.searchLogsSUCCESS, (state, { page }) =>
-    adapter.upsertMany(page.data, {
-      ...state,
-      currentIds: page.data.map((log) => log.id),
-      loading: false,
-    })),
+  on(SearchActions.searchLogsSUCCESS, (state, { page }) => ({
+    ...state,
+    pageIds: {
+      ids: page.data.map((log) => log.id),
+      page: page.page,
+      size: page.size,
+      total: page.total,
+    },
+    loading: false,
+  })),
   on(SearchActions.searchLogsERROR, (state) => ({
     ...state,
     loading: false,
   })),
-  on(SearchActions.clearLogs, (state) => adapter.removeAll(state)),
+  on(SearchActions.clearLogs, (state) => ({ ...state, pageIds: undefined })),
 );
 
-export const searchesFeature = createFeature({
-  name: searchesFeatureKey,
+export const searchFeature = createFeature({
+  name: searchFeatureKey,
   reducer,
-  extraSelectors: ({ selectSearchesState }) => ({
-    ...adapter.getSelectors(selectSearchesState),
+  extraSelectors: (state) => ({
+    selectPageIds: state.selectors.selectState((s) => s.pageIds),
   }),
 });
-
-export const { selectIds, selectEntities, selectAll, selectTotal } = searchesFeature;

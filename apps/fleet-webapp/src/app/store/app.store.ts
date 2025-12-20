@@ -14,17 +14,17 @@ import { EntityType } from '../models/entity.models';
 import { consoleLogMetaReducer } from './app.meta-reducers';
 import { ToastEffects } from './core/toast.effects';
 import { UndoEffects } from './core/undo.effects';
-import { LogsEffects } from './logs/logs.effects';
-import * as fromLogs from './logs/logs.reducer';
+import { SearchEffects } from './search/search.effects';
+import * as fromSearch from './search/search.reducer';
 
 export interface RootState {
   router: RouterReducerState<MinimalRouterStateSnapshot>;
-  logs: fromLogs.State;
+  search: fromSearch.State;
 }
 
 export const reducers: ActionReducerMap<RootState> = {
   router: routerReducer,
-  logs: fromLogs.reducer,
+  search: fromSearch.reducer,
 };
 
 export interface AppState extends RootState {
@@ -67,7 +67,7 @@ export const entityDataServiceConfig: AppDefaultDataServiceConfig = {
   },
 };
 
-export const effects = [LogsEffects, ToastEffects, UndoEffects];
+export const effects = [SearchEffects, ToastEffects, UndoEffects];
 
 export const storeConfig: RootStoreConfig<RootState> = {
   metaReducers: [consoleLogMetaReducer],
