@@ -1,10 +1,10 @@
 import { provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, inject, provideAppInitializer, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS } from '@angular/material/progress-spinner';
 import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 import { PreloadAllModules, provideRouter, TitleStrategy, withPreloading } from '@angular/router';
-import { DefaultDataServiceConfig, EntityDataService, provideEntityData, withEffects } from '@ngrx/data';
+import { DefaultDataServiceConfig, DefaultDataServiceFactory, provideEntityData, withEffects } from '@ngrx/data';
 import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
@@ -14,7 +14,7 @@ import { APP_LINKS, APP_OPTIONS, AppLinks, AppOptions } from './models/app.model
 import { formFieldOptions } from './options/form-field.options';
 import { progressSpinnerOptions } from './options/progress-spinner.options';
 import { snackBarOptions } from './options/snack-bar.options';
-import { VehiclesDataService } from './services/data/vehicles-data.service';
+import { AppDefaultDataServiceFactory } from './services/data/default-data.service';
 import { AppTitleStrategy } from './services/title-strategy';
 import {
   effects,
@@ -39,11 +39,6 @@ const links: AppLinks = [
   { label: `Docs`, icon: 'library_books', path: '/documentation' },
 ];
 
-function registerVehicleDataService(): () => void {
-  return (data = inject(EntityDataService), vehicleDataService = inject(VehiclesDataService)) =>
-    data.registerService('Vehicle', vehicleDataService);
-}
-
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
@@ -54,7 +49,7 @@ export const appConfig: ApplicationConfig = {
     provideRouterStore(routerStoreConfig),
     provideEntityData(entityDataConfig, withEffects()),
     provideStoreDevtools({ maxAge: 25 }),
-    provideAppInitializer(registerVehicleDataService()),
+    { provide: DefaultDataServiceFactory, useClass: AppDefaultDataServiceFactory },
     { provide: DefaultDataServiceConfig, useValue: entityDataServiceConfig },
     /* { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions }, */
     /* { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: dialogOptions }, */

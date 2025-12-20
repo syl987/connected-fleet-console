@@ -26,7 +26,12 @@ export const reducers: ActionReducerMap<RootState> = {
 };
 
 export const entityDataServiceConfig: DefaultDataServiceConfig = {
-  root: '/api',
+  entityHttpResourceUrls: {
+    [EntityType.Vehicle]: {
+      entityResourceUrl: '/api/vehicles/', // kick trailing slash behavior to match backend API
+      collectionResourceUrl: '/api/vehicles', // pluralize to match backend API
+    },
+  },
 };
 
 export const entityDataConfig: AppEntityDataModuleConfig = {
