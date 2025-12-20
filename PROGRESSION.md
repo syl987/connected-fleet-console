@@ -24,7 +24,7 @@
 3. Create search page (FE)
 4. Refine feature (both)
 
-### 4. Documentation
+### 4. Feature: Documentation
 
 1. Create welcome page with tech-stack (FE)
 2. Create docs page (FE)
