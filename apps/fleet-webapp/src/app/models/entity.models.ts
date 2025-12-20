@@ -24,3 +24,13 @@ export interface Page<T> {
   page: number;
   size: number;
 }
+
+/**
+ * Generic page interface with item ids only.
+ */
+export interface PageIds {
+  ids: number[];
+  total: number;
+  page: number;
+  size: number;
+}

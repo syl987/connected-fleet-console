@@ -14,7 +14,7 @@ import { APP_LINKS, APP_OPTIONS, AppLinks, AppOptions } from './models/app.model
 import { formFieldOptions } from './options/form-field.options';
 import { progressSpinnerOptions } from './options/progress-spinner.options';
 import { snackBarOptions } from './options/snack-bar.options';
-import { VehicleDataService } from './services/data/vehicle-data.service';
+import { VehiclesDataService } from './services/data/vehicles-data.service';
 import { AppTitleStrategy } from './services/title-strategy';
 import {
   effects,
@@ -40,7 +40,7 @@ const links: AppLinks = [
 ];
 
 function registerVehicleDataService(): () => void {
-  return (data = inject(EntityDataService), vehicleDataService = inject(VehicleDataService)) =>
+  return (data = inject(EntityDataService), vehicleDataService = inject(VehiclesDataService)) =>
     data.registerService('Vehicle', vehicleDataService);
 }
 
