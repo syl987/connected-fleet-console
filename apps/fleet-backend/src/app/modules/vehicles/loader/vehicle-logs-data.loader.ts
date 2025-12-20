@@ -119,10 +119,12 @@ export class VehicleLogsDataLoader {
       const daysAgo = Math.floor(Math.random() * 365);
       const hoursAgo = Math.floor(Math.random() * 24);
       const minutesAgo = Math.floor(Math.random() * 60);
+      const secondsAgo = Math.floor(Math.random() * 60);
       const timestamp = new Date(now);
       timestamp.setDate(timestamp.getDate() - daysAgo);
       timestamp.setHours(timestamp.getHours() - hoursAgo);
       timestamp.setMinutes(timestamp.getMinutes() - minutesAgo);
+      timestamp.setSeconds(timestamp.getSeconds() - secondsAgo);
 
       // Pick random severity
       const severity = this.pickRandom(this.severities);
