@@ -40,7 +40,14 @@ export const reducer = createReducer(
     loading: false,
     loaded: false,
   })),
-  on(SearchActions.clearLogs, (state) => ({ ...state, ids: [], page: 0, size: 0, total: 0, loaded: false })),
+  on(SearchActions.clearLogs, (state) => ({
+    ...state,
+    ids: [],
+    page: 0,
+    size: 0,
+    total: 0,
+    loaded: false,
+  })),
 );
 
 export const searchFeature = createFeature({
