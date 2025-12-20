@@ -16,19 +16,19 @@ import { ToastEffects } from './core/toast.effects';
 import { UndoEffects } from './core/undo.effects';
 import { SearchEffects } from './search/search.effects';
 import * as fromSearch from './search/search.reducer';
-import { VehicleEffects } from './vehicles/vehicle.effects';
-import * as fromVehicles from './vehicles/vehicle.reducer';
+import { VehicleLogEffects } from './vehicle-logs/vehicle-log.effects';
+import * as fromVehicleLogs from './vehicle-logs/vehicle-log.reducer';
 
 export interface RootState {
   router: RouterReducerState<MinimalRouterStateSnapshot>;
   search: fromSearch.State;
-  vehicles: fromVehicles.State;
+  vehicleLogs: fromVehicleLogs.State;
 }
 
 export const reducers: ActionReducerMap<RootState> = {
   router: routerReducer,
   search: fromSearch.reducer,
-  vehicles: fromVehicles.reducer,
+  vehicleLogs: fromVehicleLogs.reducer,
 };
 
 export interface AppState extends RootState {
@@ -74,7 +74,7 @@ export const entityDataServiceConfig: AppDefaultDataServiceConfig = {
 
 export const effects = [
   SearchEffects,
-  VehicleEffects,
+  VehicleLogEffects,
   ToastEffects,
   UndoEffects,
 ];

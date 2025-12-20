@@ -5,10 +5,10 @@ import { switchMap } from 'rxjs';
 import { VehicleLogDataService } from '../../services/data/vehicle-log-data.service';
 import { ToastService } from '../../services/toast.service';
 import { VehicleLogService } from '../../services/vehicle-log.service';
-import { VehicleActions } from './vehicle.actions';
+import { VehicleLogActions } from './vehicle-log.actions';
 
 @Injectable()
-export class VehicleEffects {
+export class VehicleLogEffects {
   protected readonly actions = inject(Actions);
   protected readonly toastService = inject(ToastService);
   protected readonly vehicleLogDataService = inject(VehicleLogDataService);
@@ -16,17 +16,17 @@ export class VehicleEffects {
 
   readonly loadVehicleLogs = createEffect(() => {
     return this.actions.pipe(
-      ofType(VehicleActions.loadVehicleLogs),
+      ofType(VehicleLogActions.loadVehicleLogs),
       switchMap(({ vehicleId }) =>
         this.vehicleLogDataService.getByVehicleId(vehicleId).pipe(
           mapResponse({
             next: (logs) => {
               this.vehicleLogService.upsertManyInCache(logs);
-              return VehicleActions.loadVehicleLogsSUCCESS({ vehicleId, logs });
+              return VehicleLogActions.loadVehicleLogsSUCCESS({ vehicleId, logs });
             },
             error: () => {
               this.toastService.showErrorToast('Error loading vehicle logs.');
-              return VehicleActions.loadVehicleLogsERROR();
+              return VehicleLogActions.loadVehicleLogsERROR();
             },
           }),
         )),

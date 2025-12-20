@@ -2,8 +2,8 @@ import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 import { VehicleLog } from '../../models/vehicle-log.models';
 
-export const VehicleActions = createActionGroup({
-  source: 'Vehicle/API',
+export const VehicleLogActions = createActionGroup({
+  source: 'VehicleLog/API',
   events: {
     loadVehicleLogs: props<{ vehicleId: number }>(),
     loadVehicleLogsSUCCESS: props<{ vehicleId: number; logs: VehicleLog[] }>(),
