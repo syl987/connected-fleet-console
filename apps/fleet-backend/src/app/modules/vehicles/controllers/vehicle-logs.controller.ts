@@ -13,7 +13,7 @@ import {
 import { ApiBody, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateVehicleLogDto } from '../../vehicles/dto/create-vehicle-log.dto';
 import { VehicleLogDto } from '../../vehicles/dto/vehicle-log.dto';
-import { VehicleLog } from '../../vehicles/entities/vehicle-log.entity';
+import { toVehicleLogDto } from '../mappers/vehicle-log.mapper';
 import { VehicleLogsService } from '../services/vehicle-logs.service';
 
 const SEVERITY_VALUES = [
@@ -35,7 +35,7 @@ export class VehicleLogsController {
   @ApiResponse({ status: 201, description: 'Created vehicle log', type: VehicleLogDto })
   async create(@Body() createDto: CreateVehicleLogDto): Promise<VehicleLogDto> {
     const log = await this.vehicleLogsService.create(createDto);
-    return this.toDto(log);
+    return toVehicleLogDto(log);
   }
 
   @Get()
@@ -75,7 +75,7 @@ export class VehicleLogsController {
       from,
       to,
     );
-    return { data: items.map((log) => this.toDto(log)), total, page, size };
+    return { data: items.map(toVehicleLogDto), total, page, size };
   }
 
   @Get('vehicle/:vehicleId')
@@ -83,7 +83,7 @@ export class VehicleLogsController {
   @ApiResponse({ status: 200, description: 'Vehicle logs', type: [VehicleLogDto] })
   async findByVehicle(@Param('vehicleId', ParseIntPipe) vehicleId: number): Promise<VehicleLogDto[]> {
     const logs = await this.vehicleLogsService.findByVehicle(vehicleId);
-    return logs.map((log) => this.toDto(log));
+    return logs.map(toVehicleLogDto);
   }
 
   @Get(':id')
@@ -91,21 +91,6 @@ export class VehicleLogsController {
   @ApiResponse({ status: 200, description: 'Vehicle log', type: VehicleLogDto })
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<VehicleLogDto> {
     const log = await this.vehicleLogsService.findOne(id);
-    return this.toDto(log);
-  }
-
-  private toDto(log: VehicleLog): VehicleLogDto {
-    return {
-      id: log.id,
-      createdAt: log.createdAt.toISOString(),
-      updatedAt: log.updatedAt.toISOString(),
-      deletedAt: log.deletedAt?.toISOString(),
-      version: log.version,
-      timestamp: log.timestamp.toISOString(),
-      severity: log.severity,
-      code: log.code,
-      message: log.message,
-      vehicleId: log.vehicle.id,
-    };
+    return toVehicleLogDto(log);
   }
 }

@@ -15,7 +15,7 @@ import { ApiBody, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/s
 import { CreateVehicleDto } from '../dto/create-vehicle.dto';
 import { UpdateVehicleDto } from '../dto/update-vehicle.dto';
 import { VehicleDto } from '../dto/vehicle.dto';
-import { Vehicle } from '../entities/vehicle.entity';
+import { toVehicleDto } from '../mappers/vehicle.mapper';
 import { VehiclesService } from '../services/vehicles.service';
 
 @ApiTags('Vehicles')
@@ -29,7 +29,7 @@ export class VehiclesController {
   @ApiResponse({ status: 201, description: 'Created vehicle', type: VehicleDto })
   async create(@Body() createDto: CreateVehicleDto): Promise<VehicleDto> {
     const v = await this.vehiclesService.create(createDto);
-    return this.toDto(v);
+    return toVehicleDto(v);
   }
 
   @Get()
@@ -42,7 +42,7 @@ export class VehiclesController {
     @Query('size', new DefaultValuePipe(10), ParseIntPipe) size: number,
   ): Promise<{ data: VehicleDto[]; total: number; page: number; size: number }> {
     const { items, total } = await this.vehiclesService.findAll(page, size);
-    return { data: items.map((v) => this.toDto(v)), total, page, size };
+    return { data: items.map(toVehicleDto), total, page, size };
   }
 
   @Get('deleted')
@@ -50,7 +50,7 @@ export class VehiclesController {
   @ApiResponse({ status: 200, description: 'Deleted vehicles', type: [VehicleDto] })
   async findDeleted(): Promise<VehicleDto[]> {
     const list = await this.vehiclesService.findDeleted();
-    return list.map((v) => this.toDto(v));
+    return list.map(toVehicleDto);
   }
 
   @Get(':id')
@@ -58,7 +58,7 @@ export class VehiclesController {
   @ApiResponse({ status: 200, description: 'Vehicle', type: VehicleDto })
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<VehicleDto> {
     const v = await this.vehiclesService.findOne(id);
-    return this.toDto(v);
+    return toVehicleDto(v);
   }
 
   @Patch(':id')
@@ -67,7 +67,7 @@ export class VehiclesController {
   @ApiResponse({ status: 200, description: 'Updated vehicle', type: VehicleDto })
   async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateVehicleDto): Promise<VehicleDto> {
     const v = await this.vehiclesService.update(id, dto);
-    return this.toDto(v);
+    return toVehicleDto(v);
   }
 
   @Delete(':id')
@@ -81,35 +81,6 @@ export class VehiclesController {
   @ApiResponse({ status: 200, description: 'Restored vehicle', type: VehicleDto })
   async restore(@Param('id', ParseIntPipe) id: number): Promise<VehicleDto> {
     const v = await this.vehiclesService.restore(id);
-    return this.toDto(v);
-  }
-
-  private toDto(v: Vehicle): VehicleDto {
-    return {
-      id: v.id,
-      createdAt: v.createdAt.toISOString(),
-      updatedAt: v.updatedAt.toISOString(),
-      deletedAt: v.deletedAt?.toISOString(),
-      version: v.version,
-      brand: v.brand,
-      model: v.model,
-      year: v.year,
-      vin: v.vin,
-      mileage: v.mileage,
-      color: v.color,
-      fuelType: v.fuelType,
-      logs: v.logs?.map((log) => ({
-        id: log.id,
-        createdAt: log.createdAt.toISOString(),
-        updatedAt: log.updatedAt.toISOString(),
-        deletedAt: log.deletedAt?.toISOString(),
-        version: log.version,
-        timestamp: log.timestamp.toISOString(),
-        severity: log.severity,
-        code: log.code,
-        message: log.message,
-        vehicleId: v.id,
-      })),
-    };
+    return toVehicleDto(v);
   }
 }
