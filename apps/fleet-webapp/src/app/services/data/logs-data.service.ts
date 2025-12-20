@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { toHttpParams } from '../../helpers/http.helpers';
-import { Log, SearchLogsParams } from '../../models/log.models';
+import { SearchLogsParams, VehicleLog } from '../../models/log.models';
 
 @Injectable({ providedIn: 'root' })
 export class LogsDataService {
@@ -10,8 +10,8 @@ export class LogsDataService {
 
   readonly url = 'api/logs/vehicles';
 
-  search(params: SearchLogsParams): Observable<Log[]> {
-    return this.http.get<Log[]>(this.url, {
+  search(params: SearchLogsParams): Observable<VehicleLog[]> {
+    return this.http.get<VehicleLog[]>(this.url, {
       params: toHttpParams(params),
     });
   }

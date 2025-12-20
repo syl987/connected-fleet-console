@@ -1,4 +1,4 @@
-import { Log } from './log.models';
+import { VehicleLog } from './log.models';
 
 export enum FuelType {
   GAS = 'GAS',
@@ -11,6 +11,7 @@ export interface Vehicle {
   id: number;
   createdAt: string;
   updatedAt: string;
+  deletedAt?: string;
   version: number;
   brand: string;
   model: string;
@@ -19,5 +20,5 @@ export interface Vehicle {
   mileage: number;
   color?: string;
   fuelType: FuelType;
-  logs?: Log[];
+  logs?: VehicleLog[];
 }
