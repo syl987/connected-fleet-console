@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { EntityCollectionServiceBase, EntityCollectionServiceElementsFactory } from '@ngrx/data';
 import { EntityType } from '../models/entity.models';
-import { VehicleLog } from '../models/log.models';
+import { VehicleLog } from '../models/vehicle-log.models';
 
 @Injectable({
   providedIn: 'root',

@@ -1,7 +1,7 @@
 import { createEntityCacheSelector, EntityCollection } from '@ngrx/data';
 import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
 import { EntityType, PageIds } from '../../models/entity.models';
-import { VehicleLog } from '../../models/log.models';
+import { VehicleLog } from '../../models/vehicle-log.models';
 import { SearchActions } from './search.actions';
 
 export const searchFeatureKey = 'search';

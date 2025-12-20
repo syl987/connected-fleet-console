@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { toHttpParams } from '../../helpers/http.helpers';
 import { Page } from '../../models/entity.models';
-import { SearchLogsParams, VehicleLog } from '../../models/log.models';
+import { SearchLogsParams, VehicleLog } from '../../models/vehicle-log.models';
 
 @Injectable({ providedIn: 'root' })
 export class SearchDataService {

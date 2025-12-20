@@ -7,7 +7,8 @@ import {
   HttpResourceUrls,
 } from '@ngrx/data';
 import { EntityType } from './entity.models';
-import { Vehicle, VehicleLog } from './vehicle.models';
+import { VehicleLog } from './vehicle-log.models';
+import { Vehicle } from './vehicle.models';
 
 /**
  * App-specific variables.
