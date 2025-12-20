@@ -19,3 +19,8 @@ export interface Vehicle {
   color?: string;
   fuelType: FuelType;
 }
+
+export interface VehicleLogIds {
+  vehicleId: number;
+  logIds: number[];
+}

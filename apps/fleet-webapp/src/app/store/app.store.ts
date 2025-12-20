@@ -16,15 +16,19 @@ import { ToastEffects } from './core/toast.effects';
 import { UndoEffects } from './core/undo.effects';
 import { SearchEffects } from './search/search.effects';
 import * as fromSearch from './search/search.reducer';
+import { VehicleEffects } from './vehicles/vehicle.effects';
+import * as fromVehicles from './vehicles/vehicle.reducer';
 
 export interface RootState {
   router: RouterReducerState<MinimalRouterStateSnapshot>;
   search: fromSearch.State;
+  vehicles: fromVehicles.State;
 }
 
 export const reducers: ActionReducerMap<RootState> = {
   router: routerReducer,
   search: fromSearch.reducer,
+  vehicles: fromVehicles.reducer,
 };
 
 export interface AppState extends RootState {
@@ -68,7 +72,12 @@ export const entityDataServiceConfig: AppDefaultDataServiceConfig = {
   },
 };
 
-export const effects = [SearchEffects, ToastEffects, UndoEffects];
+export const effects = [
+  SearchEffects,
+  VehicleEffects,
+  ToastEffects,
+  UndoEffects,
+];
 
 export const storeConfig: RootStoreConfig<RootState> = {
   metaReducers: [consoleLogMetaReducer],
