@@ -49,9 +49,9 @@ export class SearchPageComponent {
 
   readonly form = new FormGroup({
     search: new FormControl<string | null>(null),
-    vehicle: new FormControl<number | null>(null),
-    mileage: new FormControl<number | null>(null),
-    year: new FormControl<number | null>(null),
+    vehicle: new FormControl<string | null>(null),
+    mileage: new FormControl<string | null>(null),
+    year: new FormControl<string | null>(null),
     severity: new FormControl<string | null>(null),
     code: new FormControl<string | null>(null),
     from: new FormControl<string | null>(null),
@@ -78,17 +78,17 @@ export class SearchPageComponent {
 
   search(options?: { page?: number; size?: number }): void {
     const params: SearchLogsParams = {
-      search: this.form.value.search ?? undefined,
-      vehicle: this.form.value.vehicle ?? undefined,
-      mileage: this.form.value.mileage ?? undefined,
-      year: this.form.value.year ?? undefined,
-      severity: this.form.value.severity ?? undefined,
-      code: this.form.value.code ?? undefined,
-      from: this.form.value.from ?? undefined,
-      to: this.form.value.to ?? undefined,
+      search: this.form.value.search || undefined,
+      vehicle: this.form.value.vehicle || undefined,
+      mileage: this.form.value.mileage || undefined,
+      year: this.form.value.year || undefined,
+      severity: this.form.value.severity || undefined,
+      code: this.form.value.code || undefined,
+      from: this.form.value.from || undefined,
+      to: this.form.value.to || undefined,
 
       page: options?.page ?? 1,
-      size: options?.size ?? this.paginator()?.pageSize ?? 10,
+      size: options?.size ?? this.paginator()?.pageSize ?? 5,
     };
     this.store.dispatch(SearchActions.searchLogs({ params }));
   }

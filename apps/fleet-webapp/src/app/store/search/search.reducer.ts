@@ -25,7 +25,6 @@ export const reducer = createReducer(
   on(SearchActions.searchLogs, (state) => ({
     ...state,
     loading: true,
-    loaded: false,
   })),
   on(SearchActions.searchLogsSUCCESS, (state, { page }) => ({
     ...state,

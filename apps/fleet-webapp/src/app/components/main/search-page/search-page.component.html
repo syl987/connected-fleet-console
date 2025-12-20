@@ -3,7 +3,7 @@
 
   <p>Search any logs from the database. TODO describe technicalities of this page.</p>
 
-  <form [formGroup]="form" (ngSubmit)="search()">
+  <form [formGroup]="form" (ngSubmit)="search({ page: 0 })">
     <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms">
       <mat-tab label="Main Query">
         <div class="mt-5 flex max-w-md flex-wrap gap-4">
@@ -66,7 +66,7 @@
     </mat-tab-group>
 
     <div class="mt-1 mb-8 flex gap-2">
-      <button type="submit" mat-flat-button>Search</button>
+      <button type="submit" mat-flat-button [disabled]="loading()">Search</button>
       <button type="reset" mat-stroked-button>Reset</button>
     </div>
   </form>
@@ -109,7 +109,7 @@
             [pageIndex]="page()"
             [pageSize]="size()"
             [length]="total()"
-            [pageSizeOptions]="[5, 20, 50, 100]"
+            [pageSizeOptions]="[5, 10, 20, 100]"
             (page)="search({ page: $event.pageIndex, size: $event.pageSize })"
             showFirstLastButtons
             aria-label="Select page"
