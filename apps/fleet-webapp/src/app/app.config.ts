@@ -1,5 +1,5 @@
 import { provideHttpClient } from '@angular/common/http';
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, DEFAULT_CURRENCY_CODE, LOCALE_ID, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS } from '@angular/material/progress-spinner';
@@ -56,15 +56,15 @@ export const appConfig: ApplicationConfig = {
     { provide: DefaultDataServiceFactory, useClass: AppDefaultDataServiceFactory },
     { provide: DefaultDataServiceConfig, useValue: entityDataServiceConfig },
 
-    /* { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions }, */
-    /* { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: dialogOptions }, */
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: formFieldOptions },
     { provide: MAT_PROGRESS_SPINNER_DEFAULT_OPTIONS, useValue: progressSpinnerOptions },
     { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: snackBarOptions },
-    /* { provide: MAT_TOOLTIP_DEFAULT_OPTIONS, useValue: tooltipOptions }, */
 
     { provide: TitleStrategy, useClass: AppTitleStrategy },
     { provide: APP_OPTIONS, useValue: options },
     { provide: APP_LINKS, useValue: links },
+
+    { provide: DEFAULT_CURRENCY_CODE, useValue: 'EUR' },
+    { provide: LOCALE_ID, useValue: 'de-DE' },
   ],
 };
