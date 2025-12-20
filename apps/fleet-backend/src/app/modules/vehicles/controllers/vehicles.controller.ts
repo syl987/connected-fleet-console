@@ -45,8 +45,16 @@ export class VehiclesController {
     return { data: items.map((v) => this.toDto(v)), total, page, size };
   }
 
+  @Get('deleted')
+  @ApiOperation({ summary: 'List soft-deleted vehicles' })
+  @ApiResponse({ status: 200, description: 'Deleted vehicles', type: [VehicleDto] })
+  async findDeleted(): Promise<VehicleDto[]> {
+    const list = await this.vehiclesService.findDeleted();
+    return list.map((v) => this.toDto(v));
+  }
+
   @Get(':id')
-  @ApiOperation({ summary: 'Get a vehicle by id' })
+  @ApiOperation({ summary: 'Get a vehicle by id', description: 'Includes associated logs' })
   @ApiResponse({ status: 200, description: 'Vehicle', type: VehicleDto })
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<VehicleDto> {
     const v = await this.vehiclesService.findOne(id);
@@ -76,20 +84,12 @@ export class VehiclesController {
     return this.toDto(v);
   }
 
-  @Get('deleted')
-  @ApiOperation({ summary: 'List soft-deleted vehicles' })
-  @ApiResponse({ status: 200, description: 'Deleted vehicles', type: [VehicleDto] })
-  async findDeleted(): Promise<VehicleDto[]> {
-    const list = await this.vehiclesService.findDeleted();
-    return list.map((v) => this.toDto(v));
-  }
-
   private toDto(v: Vehicle): VehicleDto {
     return {
       id: v.id,
       createdAt: v.createdAt.toISOString(),
       updatedAt: v.updatedAt.toISOString(),
-      deletedAt: v.deletedAt?.toISOString?.(),
+      deletedAt: v.deletedAt?.toISOString(),
       version: v.version,
       brand: v.brand,
       model: v.model,
@@ -98,6 +98,18 @@ export class VehiclesController {
       mileage: v.mileage,
       color: v.color,
       fuelType: v.fuelType,
+      logs: v.logs?.map((log) => ({
+        id: log.id,
+        createdAt: log.createdAt.toISOString(),
+        updatedAt: log.updatedAt.toISOString(),
+        deletedAt: log.deletedAt?.toISOString(),
+        version: log.version,
+        message: log.message,
+        severity: log.severity,
+        timestamp: log.timestamp.toISOString(),
+        code: log.code,
+        vehicleId: v.id,
+      })),
     };
   }
 }

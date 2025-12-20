@@ -21,14 +21,6 @@ export const appRoutes: Route[] = [
       import('./components/main/dashboard-page/dashboard-page.component').then((m) => m.DashboardPageComponent),
   },
   {
-    path: 'documentation',
-    title: 'Documentation',
-    loadComponent: () =>
-      import('./components/main/documentation-page/documentation-page.component').then(
-        (m) => m.DocumentationPageComponent,
-      ),
-  },
-  {
     path: 'vehicles',
     title: 'Vehicles',
     resolve: { vehicles: loadVehiclesResolver },
@@ -47,10 +39,18 @@ export const appRoutes: Route[] = [
       ),
   },
   {
-    path: 'logs',
-    title: 'Logs',
+    path: 'search',
+    title: 'Search',
     loadComponent: () =>
-      import('./components/main/logs-search-page/logs-search-page.component').then((m) => m.LogsSearchPageComponent),
+      import('./components/main/search-page/search-page.component').then((m) => m.SearchPageComponent),
+  },
+  {
+    path: 'documentation',
+    title: 'Documentation',
+    loadComponent: () =>
+      import('./components/main/documentation-page/documentation-page.component').then(
+        (m) => m.DocumentationPageComponent,
+      ),
   },
   {
     path: '**',

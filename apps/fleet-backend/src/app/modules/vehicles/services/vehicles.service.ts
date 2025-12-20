@@ -14,20 +14,16 @@ export class VehiclesService {
     return this.vehiclesRepository.save(v);
   }
 
-  async findAll(page?: number, size?: number): Promise<{ items: Vehicle[]; total: number }> {
-    if (page && size) {
-      const [items, total] = await this.vehiclesRepository.findAndCount({
-        skip: (page - 1) * size,
-        take: size,
-      });
-      return { items, total };
-    }
-    const items = await this.vehiclesRepository.find();
-    return { items, total: items.length };
+  async findAll(page: number, size: number): Promise<{ items: Vehicle[]; total: number }> {
+    const [items, total] = await this.vehiclesRepository.findAndCount({
+      skip: (page - 1) * size,
+      take: size,
+    });
+    return { items, total };
   }
 
   async findOne(id: number): Promise<Vehicle> {
-    const v = await this.vehiclesRepository.findOne({ where: { id } });
+    const v = await this.vehiclesRepository.findOne({ where: { id }, relations: ['logs'] });
     if (!v) throw new NotFoundException(`Vehicle ${id} not found`);
     return v;
   }
