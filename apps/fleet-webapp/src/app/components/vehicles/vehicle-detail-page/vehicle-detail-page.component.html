@@ -3,10 +3,10 @@
     <!-- TODO add some actions -->
   </app-title-bar>
 
-  <p class="max-w-prose">
-    This page loads a single vehicle with aggregated logs on navigation and saves the data in memory shared with the
-    vehicle list for faster subsequent access.<br />
-    The logs data is not removed when navigating back.
+  <p class="max-w-prose">View vehicle details and associated vehicle logs.</p>
+
+  <p class="font-mono opacity-75">
+    dual endpoint calls (vehicle, logs) / local table pagination / dual store design (entity cache, references)
   </p>
 
   @if (vehicle(); as vehicle) {
@@ -14,7 +14,7 @@
 
     <h2>Vehicle Logs</h2>
 
-    @if (vehicle.logs && vehicle.logs.length > 0) {
+    @if (vehicleLogs().length > 0) {
       <mat-card>
         <div class="overflow-x-auto rounded-md">
           <table mat-table [dataSource]="dataSource">
@@ -45,12 +45,12 @@
           <mat-paginator [pageSizeOptions]="[5, 10, 20, 100]" showFirstLastButtons aria-label="Select page" />
         </div>
       </mat-card>
-    } @else if (loading()) {
+    } @else if (vehicleLogsLoading()) {
       <mat-spinner class="mb-4" aria-label="Loading" />
     } @else {
       <p class="text-secondary col-span-full py-2 text-center">No logs were found for this vehicle.</p>
     }
-  } @else if (loading()) {
+  } @else if (vehicleLoading()) {
     <mat-spinner class="mb-4" aria-label="Loading" />
   } @else {
     <p class="text-error col-span-full py-2 text-center">Error loading vehicle data.</p>

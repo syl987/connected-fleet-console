@@ -1,10 +1,9 @@
 <div class="container">
   <app-title-bar />
 
-  <p class="max-w-prose">
-    This page loads all fleet vehicles without their logs on navigation and saves the data in memory for faster
-    subsequent navigation.
-  </p>
+  <p class="max-w-prose">Full list of fleet vehicles.</p>
+
+  <p class="font-mono opacity-75">singular store design and endpoint calls (entity cache)</p>
 
   <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
     @for (vehicle of vehicles(); track vehicle.id) {

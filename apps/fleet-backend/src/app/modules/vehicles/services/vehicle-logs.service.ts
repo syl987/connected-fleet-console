@@ -88,7 +88,7 @@ export class VehicleLogsService {
     return log;
   }
 
-  async findByVehicle(vehicleId: number): Promise<VehicleLog[]> {
+  findByVehicle(vehicleId: number): Promise<VehicleLog[]> {
     return this.vehicleLogsRepository.find({
       where: { vehicle: { id: vehicleId } },
       relations: ['vehicle'],

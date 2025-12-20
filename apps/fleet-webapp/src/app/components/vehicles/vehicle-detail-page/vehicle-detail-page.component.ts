@@ -7,9 +7,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
-import { ActivatedRoute, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
+import { Store } from '@ngrx/store';
 import { VehicleLog } from '../../../models/vehicle-log.models';
+import { VehicleLogService } from '../../../services/vehicle-log.service';
 import { VehicleService } from '../../../services/vehicle.service';
+import { vehicleLogsFeature } from '../../../store/vehicle-logs/vehicle-log.reducer';
 import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
 import { VehicleCardComponent } from '../vehicle-card/vehicle-card.component';
 
@@ -38,11 +41,15 @@ const tableColumns = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VehicleDetailPageComponent {
-  protected readonly service = inject(VehicleService);
-  protected readonly route = inject(ActivatedRoute);
+  protected readonly store = inject(Store);
+  protected readonly vehicleService = inject(VehicleService);
+  protected readonly vehicleLogService = inject(VehicleLogService);
 
-  readonly vehicle = toSignal(this.service.entityByRouteId$, { requireSync: true });
-  readonly loading = toSignal(this.service.loading$, { requireSync: true });
+  readonly vehicle = toSignal(this.vehicleService.entityByRouteId$, { requireSync: true });
+  readonly vehicleLoading = toSignal(this.vehicleService.loading$, { requireSync: true });
+
+  readonly vehicleLogs = toSignal(this.vehicleLogService.entitiesByRouteId$, { requireSync: true });
+  readonly vehicleLogsLoading = this.store.selectSignal(vehicleLogsFeature.selectLoading);
 
   readonly paginator = viewChild(MatPaginator);
 
@@ -51,7 +58,7 @@ export class VehicleDetailPageComponent {
 
   constructor() {
     effect(() => {
-      this.dataSource.data = this.vehicle()?.logs || [];
+      this.dataSource.data = this.vehicleLogs();
       this.dataSource.paginator = this.paginator();
     });
   }

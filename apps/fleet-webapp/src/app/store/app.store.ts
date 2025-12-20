@@ -38,6 +38,7 @@ export interface AppState extends RootState {
 export const entityDataConfig: AppEntityDataModuleConfig = {
   entityMetadata: {
     [EntityType.Vehicle]: {
+      sortComparer: (a, b) => b.id - a.id, // ASC by id
       filterFn: PropsFilterFnFactory([
         'id',
         'brand',

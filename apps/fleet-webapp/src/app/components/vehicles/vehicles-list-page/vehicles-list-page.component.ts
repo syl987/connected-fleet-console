@@ -24,8 +24,8 @@ import { VehicleCardComponent } from '../vehicle-card/vehicle-card.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VehiclesListPageComponent {
-  protected readonly service = inject(VehicleService);
+  protected readonly vehicleService = inject(VehicleService);
 
-  readonly vehicles = toSignal(this.service.filteredEntities$, { requireSync: true });
-  readonly loading = toSignal(this.service.loading$, { requireSync: true });
+  readonly vehicles = toSignal(this.vehicleService.filteredEntities$, { requireSync: true });
+  readonly loading = toSignal(this.vehicleService.loading$, { requireSync: true });
 }

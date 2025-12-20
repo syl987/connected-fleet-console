@@ -11,7 +11,9 @@ import { Vehicle } from '../models/vehicle.models';
 export class VehicleService extends EntityCollectionServiceBase<Vehicle> {
   readonly routeId$ = this.store.select(getRouterSelectors().selectRouteParam('id'));
 
-  readonly entityByRouteId$ = combineLatest([this.routeId$, this.entityMap$]).pipe(map(([id, entityMap]) => (id ? entityMap[id] : undefined)));
+  readonly entityByRouteId$ = combineLatest([this.routeId$, this.entityMap$]).pipe(
+    map(([id, entityMap]) => (id ? entityMap[id] : undefined)),
+  );
 
   constructor() {
     super(EntityType.Vehicle, inject(EntityCollectionServiceElementsFactory));

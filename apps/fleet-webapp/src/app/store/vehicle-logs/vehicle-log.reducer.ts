@@ -7,7 +7,7 @@ import { VehicleLogIds } from '../../models/vehicle.models';
 import { VehicleLogActions } from './vehicle-log.actions';
 import { createVehicleLogIds } from './vehicle-log.helpers';
 
-export const vehicleFeatureKey = 'vehicleLogs';
+export const vehicleLogsFeatureKey = 'vehicleLogs';
 
 export interface State extends EntityState<VehicleLogIds> {
   loading: boolean;
@@ -42,17 +42,18 @@ export const reducer = createReducer(
   })),
 );
 
-export const vehicleFeature = createFeature({
-  name: vehicleFeatureKey,
+export const vehicleLogsFeature = createFeature({
+  name: vehicleLogsFeatureKey,
   reducer,
   extraSelectors: ({ selectEntities }) => ({
-    selectAllByVehicleId: createSelector(
-      createSelector(createEntityCacheSelector('entityCache'), (cache) => cache[EntityType.VehicleLog]),
-      selectEntities,
-      (cache: EntityCollection<VehicleLog>, entities) => (vehicleId: number) =>
-        entities[vehicleId]?.logIds
-          .map((id) => cache.entities[id])
-          .filter((log): log is NonNullable<typeof log> => log != null),
-    ),
+    selectAllByVehicleId: (vehicleId: string | number) =>
+      createSelector(
+        createSelector(createEntityCacheSelector('entityCache'), (cache) => cache[EntityType.VehicleLog]),
+        selectEntities,
+        (cache: EntityCollection<VehicleLog>, entities) =>
+          entities[vehicleId]?.logIds
+            .map((id) => cache.entities[id])
+            .filter((log): log is NonNullable<typeof log> => log != null),
+      ),
   }),
 });

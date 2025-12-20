@@ -1,5 +1,6 @@
 import { Route } from '@angular/router';
 import { WelcomePageComponent } from './components/main/welcome-page/welcome-page.component';
+import { loadVehicleLogsResolver } from './resolvers/load-vehicle-logs.resolver';
 import { loadVehicleResolver } from './resolvers/load-vehicle.resolver';
 import { loadVehiclesResolver } from './resolvers/load-vehicles.resolver';
 
@@ -32,7 +33,7 @@ export const appRoutes: Route[] = [
   {
     path: 'vehicles/:id',
     title: 'Vehicle Details',
-    resolve: { vehicles: loadVehicleResolver },
+    resolve: { vehicles: loadVehicleResolver, vehicleLogs: loadVehicleLogsResolver },
     loadComponent: () =>
       import('./components/vehicles/vehicle-detail-page/vehicle-detail-page.component').then(
         (m) => m.VehicleDetailPageComponent,
