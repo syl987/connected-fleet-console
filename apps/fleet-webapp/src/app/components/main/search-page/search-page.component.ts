@@ -21,6 +21,9 @@ const tableColumns = [
   'timestamp',
   'severity',
   'code',
+  'brand',
+  'model',
+  'year',
   'message',
 ];
 

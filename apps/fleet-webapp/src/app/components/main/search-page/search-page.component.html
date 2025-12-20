@@ -3,7 +3,10 @@
 
   <p class="max-w-prose">Search any vehicle logs from the database.</p>
 
-  <p class="font-mono">form handling | server-side table pagination | dual store design (entities, references)</p>
+  <p class="font-mono">
+    form handling / server-side table pagination / joint data (log, vehicle) / dual store design (entity cache,
+    references)
+  </p>
 
   <form [formGroup]="form" (ngSubmit)="search({ page: 0 })">
     <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms">
@@ -96,6 +99,36 @@
             <ng-container matColumnDef="message">
               <th mat-header-cell *matHeaderCellDef>Message</th>
               <td mat-cell *matCellDef="let log">{{ log.message }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="brand">
+              <th mat-header-cell *matHeaderCellDef>Brand</th>
+              <td mat-cell *matCellDef="let log">{{ log.vehicle?.brand }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="model">
+              <th mat-header-cell *matHeaderCellDef>Model</th>
+              <td mat-cell *matCellDef="let log">{{ log.vehicle?.model }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="year">
+              <th mat-header-cell *matHeaderCellDef>Year</th>
+              <td mat-cell *matCellDef="let log">{{ log.vehicle?.year }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="fuelType">
+              <th mat-header-cell *matHeaderCellDef>Fuel Type</th>
+              <td mat-cell *matCellDef="let log">{{ log.vehicle?.fuelType }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="color">
+              <th mat-header-cell *matHeaderCellDef>Color</th>
+              <td mat-cell *matCellDef="let log">{{ log.vehicle?.color }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="mileage">
+              <th mat-header-cell *matHeaderCellDef>Mileage</th>
+              <td mat-cell *matCellDef="let log">{{ log.vehicle?.mileage }} km</td>
             </ng-container>
 
             <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
