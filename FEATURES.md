@@ -6,7 +6,7 @@ In general, individual pages list their main technical features below the title 
 
 Welcome text with a visual overview of technologies used in this project.
 
-### Dashboard Page
+<!-- ### Dashboard Page
 
 Disclaimer: not yet available / currently under construction...
 
@@ -14,7 +14,7 @@ Showcases real-time event tracking using interval-generated logs.
 
 Aggregated data for specific data analytics.
 
-Visual charts for best readability and UX.
+Visual charts for best readability and UX. -->
 
 ### Vehicles Page
 
