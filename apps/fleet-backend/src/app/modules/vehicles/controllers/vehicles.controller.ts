@@ -45,6 +45,14 @@ export class VehiclesController {
     return { data: items.map((v) => this.toDto(v)), total, page, size };
   }
 
+  @Get('deleted')
+  @ApiOperation({ summary: 'List soft-deleted vehicles' })
+  @ApiResponse({ status: 200, description: 'Deleted vehicles', type: [VehicleDto] })
+  async findDeleted(): Promise<VehicleDto[]> {
+    const list = await this.vehiclesService.findDeleted();
+    return list.map((v) => this.toDto(v));
+  }
+
   @Get(':id')
   @ApiOperation({ summary: 'Get a vehicle by id', description: 'Includes associated logs' })
   @ApiResponse({ status: 200, description: 'Vehicle', type: VehicleDto })
@@ -74,14 +82,6 @@ export class VehiclesController {
   async restore(@Param('id', ParseIntPipe) id: number): Promise<VehicleDto> {
     const v = await this.vehiclesService.restore(id);
     return this.toDto(v);
-  }
-
-  @Get('deleted')
-  @ApiOperation({ summary: 'List soft-deleted vehicles' })
-  @ApiResponse({ status: 200, description: 'Deleted vehicles', type: [VehicleDto] })
-  async findDeleted(): Promise<VehicleDto[]> {
-    const list = await this.vehiclesService.findDeleted();
-    return list.map((v) => this.toDto(v));
   }
 
   private toDto(v: Vehicle): VehicleDto {

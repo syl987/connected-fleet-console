@@ -56,11 +56,8 @@ export class VehicleLogsService {
   }
 
   async findByVehicle(vehicleId: number): Promise<VehicleLog[]> {
-    const vehicle = await this.vehiclesRepository.findOne({ where: { id: vehicleId } });
-    if (!vehicle) throw new NotFoundException(`Vehicle ${vehicleId} not found`);
-
     return this.vehicleLogsRepository.find({
-      where: { vehicle: { id: vehicle.id } },
+      where: { vehicle: { id: vehicleId } },
       relations: ['vehicle'],
       order: { timestamp: 'DESC' },
     });
@@ -75,10 +72,10 @@ export class VehicleLogsService {
       log.vehicle = vehicle;
     }
 
-    if (updateDto.timestamp) log.timestamp = new Date(updateDto.timestamp);
-    if (updateDto.severity) log.severity = updateDto.severity;
-    if (updateDto.code !== undefined) log.code = updateDto.code;
-    if (updateDto.message) log.message = updateDto.message;
+    if (updateDto.timestamp != null) log.timestamp = new Date(updateDto.timestamp);
+    if (updateDto.severity != null) log.severity = updateDto.severity;
+    if (updateDto.code != null) log.code = updateDto.code;
+    if (updateDto.message != null) log.message = updateDto.message;
 
     return this.vehicleLogsRepository.save(log);
   }
