@@ -19,6 +19,10 @@
 ## Current Bugs
 
 - date param invalid format 400 on backend
+- first next page click loads same data
+
+## Missing Features
+
 - missing loading spinner on search button
 
 ## Additional Tasks

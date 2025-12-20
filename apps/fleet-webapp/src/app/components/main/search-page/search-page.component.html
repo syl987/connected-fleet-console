@@ -1,7 +1,9 @@
 <div class="container">
   <app-title-bar />
 
-  <p>Search any logs from the database. TODO describe technicalities of this page.</p>
+  <p class="max-w-prose">Search any vehicle logs from the database.</p>
+
+  <p class="font-mono">form handling | server-side table pagination | dual store design (entities, references)</p>
 
   <form [formGroup]="form" (ngSubmit)="search({ page: 0 })">
     <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms">
@@ -9,7 +11,7 @@
         <div class="mt-5 flex max-w-md flex-wrap gap-4">
           <mat-form-field class="grow">
             <mat-label>Search Term</mat-label>
-            <input matInput formControlName="search" />
+            <input matInput formControlName="search" placeholder="Search message, brand, model, VIN, color..." />
           </mat-form-field>
         </div>
       </mat-tab>
