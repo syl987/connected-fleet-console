@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mapResponse } from '@ngrx/operators';
 import { switchMap } from 'rxjs';
-import { SearchDataService } from '../../services/data/search-data.service';
+import { VehicleLogDataService } from '../../services/data/vehicle-log-data.service';
 import { ToastService } from '../../services/toast.service';
 import { VehicleLogService } from '../../services/vehicle-log.service';
 import { SearchActions } from './search.actions';
@@ -11,14 +11,14 @@ import { SearchActions } from './search.actions';
 export class SearchEffects {
   protected readonly actions = inject(Actions);
   protected readonly toastService = inject(ToastService);
-  protected readonly searchDataService = inject(SearchDataService);
+  protected readonly vehicleLogDataService = inject(VehicleLogDataService);
   protected readonly vehicleLogService = inject(VehicleLogService);
 
-  readonly search = createEffect(() => {
+  readonly searchVehicleLogs = createEffect(() => {
     return this.actions.pipe(
       ofType(SearchActions.searchLogs),
       switchMap(({ params }) =>
-        this.searchDataService.search(params).pipe(
+        this.vehicleLogDataService.getBySearchParams(params).pipe(
           mapResponse({
             next: (page) => {
               this.vehicleLogService.upsertManyInCache(page.data);
