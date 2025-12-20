@@ -74,6 +74,14 @@ export class SearchPageComponent {
     effect(() => {
       this.dataSource.data = this.vehicleLogs();
       this.dataSource.paginator = this.paginator();
+
+      const paginator = this.paginator();
+
+      if (paginator) {
+        paginator.pageIndex = this.page();
+        paginator.pageSize = this.size();
+        paginator.length = this.total();
+      }
     });
   }
 
