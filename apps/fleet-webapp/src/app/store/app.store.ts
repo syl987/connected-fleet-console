@@ -48,8 +48,8 @@ export const entityDataConfig: AppEntityDataModuleConfig = {
 export const entityDataServiceConfig: AppDefaultDataServiceConfig = {
   entityHttpResourceUrls: {
     [EntityType.Vehicle]: {
-      entityResourceUrl: '/api/vehicles/', // kick trailing slash behavior to match backend API
-      collectionResourceUrl: '/api/vehicles', // pluralize to match backend API
+      collectionResourceUrl: '/api/vehicles', // kick trailing slash behavior to match backend API
+      entityResourceUrl: '/api/vehicles/', // pluralize to match backend API
     },
   },
 };
