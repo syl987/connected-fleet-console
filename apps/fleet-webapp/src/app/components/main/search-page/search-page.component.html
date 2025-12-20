@@ -20,17 +20,17 @@
         <div class="mt-5 flex flex-wrap gap-4">
           <mat-form-field>
             <mat-label>ID</mat-label>
-            <input matInput formControlName="vehicle" />
+            <input matInput formControlName="vehicle" placeholder="Exact ID..." />
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Mileage</mat-label>
-            <input matInput formControlName="mileage" />
+            <input matInput formControlName="mileage" placeholder="Greater then..." />
           </mat-form-field>
 
           <mat-form-field>
             <mat-label>Year</mat-label>
-            <input matInput formControlName="year" />
+            <input matInput formControlName="year" placeholder="Exact year..." />
           </mat-form-field>
         </div>
       </mat-tab>
@@ -39,7 +39,7 @@
         <div class="mt-5 flex flex-wrap gap-4">
           <mat-form-field>
             <mat-label>Severity</mat-label>
-            <mat-select formControlName="severity">
+            <mat-select formControlName="severity" placeholder="Select severity...">
               <mat-option [value]="undefined" />
               <mat-option value="CRITICAL">Critical</mat-option>
               <mat-option value="ERROR">Error</mat-option>
@@ -50,7 +50,7 @@
 
           <mat-form-field>
             <mat-label>Code</mat-label>
-            <input matInput formControlName="code" />
+            <input matInput formControlName="code" placeholder="Exact code..." />
           </mat-form-field>
 
           <mat-form-field>
