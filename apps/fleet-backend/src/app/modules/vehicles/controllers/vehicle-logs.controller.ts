@@ -98,7 +98,7 @@ export class VehicleLogsController {
       id: log.id,
       createdAt: log.createdAt.toISOString(),
       updatedAt: log.updatedAt.toISOString(),
-      deletedAt: log.deletedAt?.toISOString?.(),
+      deletedAt: log.deletedAt?.toISOString(),
       version: log.version,
       timestamp: log.timestamp.toISOString(),
       severity: log.severity,
