@@ -1,5 +1,7 @@
-import { createFeature, createReducer, on } from '@ngrx/store';
-import { PageIds } from '../../models/entity.models';
+import { createEntityCacheSelector, EntityCollection } from '@ngrx/data';
+import { createFeature, createReducer, createSelector, on } from '@ngrx/store';
+import { EntityType, PageIds } from '../../models/entity.models';
+import { VehicleLog } from '../../models/log.models';
 import { SearchActions } from './search.actions';
 
 export const searchFeatureKey = 'search';
@@ -40,4 +42,12 @@ export const reducer = createReducer(
 export const searchFeature = createFeature({
   name: searchFeatureKey,
   reducer,
+  extraSelectors: ({ selectIds }) => ({
+    selectAll: createSelector(
+      createSelector(createEntityCacheSelector('entityCache'), (cache) => cache[EntityType.VehicleLog]),
+      selectIds,
+      (cache: EntityCollection<VehicleLog>, ids) =>
+        ids.map((id) => cache.entities[id]).filter((log): log is NonNullable<typeof log> => log != null),
+    ),
+  }),
 });

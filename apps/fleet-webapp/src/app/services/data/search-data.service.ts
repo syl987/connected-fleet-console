@@ -6,7 +6,7 @@ import { Page } from '../../models/entity.models';
 import { SearchLogsParams, VehicleLog } from '../../models/log.models';
 
 @Injectable({ providedIn: 'root' })
-export class LogsDataService {
+export class SearchDataService {
   protected readonly http = inject(HttpClient);
 
   readonly url = '/api/logs/vehicles';

@@ -1,7 +1,9 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { logsFeature } from '../../../store/logs/logs.reducer';
+import { SearchLogsParams } from '../../../models/log.models';
+import { SearchActions } from '../../../store/search/search.actions';
+import { searchFeature } from '../../../store/search/search.reducer';
 import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
 
 @Component({
@@ -20,6 +22,19 @@ export class SearchPageComponent {
     to: new FormControl<string | null>(''),
   });
 
-  readonly logs = this.store.selectSignal(logsFeature.selectAll);
-  readonly searching = this.store.selectSignal(logsFeature.selectSearching);
+  readonly vehicleLogs = this.store.selectSignal(searchFeature.selectAll);
+  readonly page = this.store.selectSignal(searchFeature.selectPage);
+  readonly size = this.store.selectSignal(searchFeature.selectSize);
+  readonly total = this.store.selectSignal(searchFeature.selectTotal);
+  readonly loading = this.store.selectSignal(searchFeature.selectLoading);
+
+  search(): void {
+    const params: SearchLogsParams = {
+      search: this.form.value.query ?? undefined,
+      severity: this.form.value.severity ?? undefined,
+      from: this.form.value.from ?? undefined,
+      to: this.form.value.to ?? undefined,
+    };
+    this.store.dispatch(SearchActions.searchLogs({ params }));
+  }
 }
