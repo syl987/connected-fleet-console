@@ -20,7 +20,6 @@ import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
 const tableColumns = [
   'timestamp',
   'severity',
-  'vehicleId',
   'code',
   'message',
 ];
