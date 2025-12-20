@@ -1,14 +1,5 @@
 import { DatePipe } from '@angular/common';
-import {
-  afterNextRender,
-  ChangeDetectionStrategy,
-  Component,
-  effect,
-  inject,
-  Injector,
-  runInInjectionContext,
-  viewChild,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, inject, viewChild } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -50,7 +41,6 @@ const tableColumns = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchPageComponent {
-  protected readonly injector = inject(Injector);
   protected readonly store = inject(Store);
 
   readonly form = new FormGroup({
@@ -78,11 +68,8 @@ export class SearchPageComponent {
 
   constructor() {
     effect(() => {
-      runInInjectionContext(this.injector, () =>
-        afterNextRender(() => {
-          this.dataSource.data = this.vehicleLogs();
-          this.dataSource.paginator = this.paginator();
-        }));
+      this.dataSource.data = this.vehicleLogs();
+      this.dataSource.paginator = this.paginator();
     });
   }
 
