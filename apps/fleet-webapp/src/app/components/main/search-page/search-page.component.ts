@@ -1,10 +1,21 @@
 import { DatePipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, effect, inject, viewChild } from '@angular/core';
+import {
+  afterNextRender,
+  ChangeDetectionStrategy,
+  Component,
+  effect,
+  inject,
+  Injector,
+  runInInjectionContext,
+  viewChild,
+} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSelectModule } from '@angular/material/select';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Store } from '@ngrx/store';
 import { SearchLogsParams } from '../../../models/search.models';
@@ -26,9 +37,11 @@ const tableColumns = [
   imports: [
     ReactiveFormsModule,
     MatButtonModule,
+    MatDatepickerModule,
     MatInputModule,
     MatPaginatorModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
     MatTableModule,
     TitleBarComponent,
     DatePipe,
@@ -37,13 +50,18 @@ const tableColumns = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchPageComponent {
+  protected readonly injector = inject(Injector);
   protected readonly store = inject(Store);
 
   readonly form = new FormGroup({
-    search: new FormControl<string | null>(''),
-    severity: new FormControl<string | null>(''),
-    from: new FormControl<string | null>(''),
-    to: new FormControl<string | null>(''),
+    search: new FormControl<string | null>(null),
+    vehicle: new FormControl<number | null>(null),
+    mileage: new FormControl<number | null>(null),
+    year: new FormControl<number | null>(null),
+    severity: new FormControl<string | null>(null),
+    code: new FormControl<string | null>(null),
+    from: new FormControl<string | null>(null),
+    to: new FormControl<string | null>(null),
   });
 
   readonly vehicleLogs = this.store.selectSignal(searchFeature.selectAll);
@@ -60,15 +78,22 @@ export class SearchPageComponent {
 
   constructor() {
     effect(() => {
-      this.dataSource.data = this.vehicleLogs() || [];
-      this.dataSource.paginator = this.paginator();
+      runInInjectionContext(this.injector, () =>
+        afterNextRender(() => {
+          this.dataSource.data = this.vehicleLogs();
+          this.dataSource.paginator = this.paginator();
+        }));
     });
   }
 
   search(): void {
     const params: SearchLogsParams = {
       search: this.form.value.search ?? undefined,
+      vehicle: this.form.value.vehicle ?? undefined,
+      mileage: this.form.value.mileage ?? undefined,
+      year: this.form.value.year ?? undefined,
       severity: this.form.value.severity ?? undefined,
+      code: this.form.value.code ?? undefined,
       from: this.form.value.from ?? undefined,
       to: this.form.value.to ?? undefined,
     };

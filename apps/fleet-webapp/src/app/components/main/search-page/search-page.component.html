@@ -3,15 +3,37 @@
 
   <p>Search any logs from the database. TODO describe technicalities of this page.</p>
 
-  <p>TODO fields and search button TODO table of results</p>
-
-  <form [formGroup]="form" (ngSubmit)="search()">
-    <mat-form-field class="example-full-width">
+  <form [formGroup]="form" (ngSubmit)="search()" class="mb-4 flex flex-wrap gap-4">
+    <mat-form-field>
       <mat-label>Search query</mat-label>
       <input matInput formControlName="search" />
     </mat-form-field>
 
-    <button type="submit" mat-button>Search</button>
+    <mat-form-field>
+      <mat-label>Vehicle ID</mat-label>
+      <input type="number" matInput formControlName="vehicle" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Mileage</mat-label>
+      <input type="number" matInput formControlName="mileage" />
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Year</mat-label>
+      <input type="number" matInput formControlName="year" />
+    </mat-form-field>
+
+    <!-- TODO severity control -->
+
+    <mat-form-field>
+      <mat-label>Code</mat-label>
+      <input matInput formControlName="code" />
+    </mat-form-field>
+
+    <!-- TODO from-to double control -->
+
+    <button mat-button>Search</button>
     <button type="reset" mat-button>Reset</button>
   </form>
 
