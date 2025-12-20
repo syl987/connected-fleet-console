@@ -27,8 +27,6 @@ export const reducers: ActionReducerMap<RootState> = {
 
 export const entityDataServiceConfig: DefaultDataServiceConfig = {
   root: '/api',
-  getDelay: 4500, // fake delay for showcasing loading indicators
-  saveDelay: 750, // fake delay for showcasing loading indicators
 };
 
 export const entityDataConfig: AppEntityDataModuleConfig = {
