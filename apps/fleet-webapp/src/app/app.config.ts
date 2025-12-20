@@ -14,7 +14,7 @@ import { APP_LINKS, APP_OPTIONS, AppLinks, AppOptions } from './models/app.model
 import { formFieldOptions } from './options/form-field.options';
 import { progressSpinnerOptions } from './options/progress-spinner.options';
 import { snackBarOptions } from './options/snack-bar.options';
-import { VehicleDataService } from './services/data/vehicle-data.service';
+import { VehiclesDataService } from './services/data/vehicles-data.service';
 import { AppTitleStrategy } from './services/title-strategy';
 import {
   effects,
@@ -39,9 +39,10 @@ const links: AppLinks = [
   { label: `Docs`, icon: 'library_books', path: '/documentation' },
 ];
 
-function registerVehicleDataService(): () => void {
-  return (data = inject(EntityDataService), vehicleDataService = inject(VehicleDataService)) =>
-    data.registerService('Vehicle', vehicleDataService);
+function registerDataServices(): () => void {
+  return (entityDataService = inject(EntityDataService), vehiclesDataService = inject(VehiclesDataService)) => {
+    entityDataService.registerService('Vehicle', vehiclesDataService);
+  };
 }
 
 export const appConfig: ApplicationConfig = {
@@ -54,7 +55,7 @@ export const appConfig: ApplicationConfig = {
     provideRouterStore(routerStoreConfig),
     provideEntityData(entityDataConfig, withEffects()),
     provideStoreDevtools({ maxAge: 25 }),
-    provideAppInitializer(registerVehicleDataService()),
+    provideAppInitializer(registerDataServices()),
     { provide: DefaultDataServiceConfig, useValue: entityDataServiceConfig },
     /* { provide: MAT_CHECKBOX_DEFAULT_OPTIONS, useValue: checkboxOptions }, */
     /* { provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: dialogOptions }, */

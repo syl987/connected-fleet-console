@@ -6,7 +6,7 @@ import { EntityType } from '../../models/entity.models';
 import { Vehicle } from '../../models/vehicle.models';
 
 @Injectable({ providedIn: 'root' })
-export class VehicleDataService extends DefaultDataService<Vehicle> {
+export class VehiclesDataService extends DefaultDataService<Vehicle> {
   override readonly entitiesUrl = '/api/vehicles'; // kick trailing slash behavior to match backend API
   override readonly entityUrl = '/api/vehicles/'; // pluralize to match backend API
 
@@ -21,7 +21,7 @@ export class VehicleDataService extends DefaultDataService<Vehicle> {
   }
 
   override getWithQuery(queryParams: QueryParams | string | undefined, options?: HttpOptions): Observable<Vehicle[]> {
-    return (super.getWithQuery(queryParams, options) as unknown as Observable<{ data: Vehicle[] }>).pipe(
+    return (super.getWithQuery(queryParams, options) as unknown as Observable<Page<Vehicle>>).pipe(
       map(({ data }) => data), // unwrap data property from paginated API response
     );
   }
