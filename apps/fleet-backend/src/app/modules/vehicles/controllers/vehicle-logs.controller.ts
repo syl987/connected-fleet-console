@@ -1,9 +1,28 @@
-import { Body, Controller, DefaultValuePipe, Get, Param, ParseIntPipe, Post, Query } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  DefaultValuePipe,
+  Get,
+  Param,
+  ParseDatePipe,
+  ParseEnumPipe,
+  ParseIntPipe,
+  Post,
+  Query,
+} from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateVehicleLogDto } from '../../vehicles/dto/create-vehicle-log.dto';
 import { VehicleLogDto } from '../../vehicles/dto/vehicle-log.dto';
 import { VehicleLog } from '../../vehicles/entities/vehicle-log.entity';
 import { VehicleLogsService } from '../services/vehicle-logs.service';
+
+const SEVERITY_VALUES = [
+  'DEBUG',
+  'INFO',
+  'WARNING',
+  'ERROR',
+  'CRITICAL',
+];
 
 @ApiTags('Logs')
 @Controller('logs/vehicles')
@@ -24,13 +43,38 @@ export class VehicleLogsController {
   @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
   @ApiQuery({ name: 'size', required: false, type: Number, example: 10 })
   @ApiQuery({ name: 'search', required: false, type: String, example: 'engine' })
+  @ApiQuery({ name: 'mileage', required: false, type: Number, example: 50000 })
+  @ApiQuery({ name: 'year', required: false, type: Number, example: 2023 })
+  @ApiQuery({ name: 'vehicle', required: false, type: Number, example: 24 })
+  @ApiQuery({ name: 'severity', required: false, type: String, example: 'CRITICAL', enum: SEVERITY_VALUES })
+  @ApiQuery({ name: 'code', required: false, type: String, example: 'E123' })
+  @ApiQuery({ name: 'from', required: false, type: Date, example: '2023-01-01T00:00:00Z' })
+  @ApiQuery({ name: 'to', required: false, type: Date, example: '2026-11-30T23:59:59Z' })
   @ApiResponse({ status: 200, description: 'Vehicle log list', type: [VehicleLogDto] })
   async findAll(
     @Query('page', new DefaultValuePipe(1), ParseIntPipe) page: number,
     @Query('size', new DefaultValuePipe(10), ParseIntPipe) size: number,
     @Query('search') search?: string,
+    @Query('vehicle', new ParseIntPipe({ optional: true })) vehicle?: number,
+    @Query('mileage', new ParseIntPipe({ optional: true })) mileage?: number,
+    @Query('year', new ParseIntPipe({ optional: true })) year?: number,
+    @Query('severity', new ParseEnumPipe(SEVERITY_VALUES, { optional: true })) severity?: string,
+    @Query('code') code?: string,
+    @Query('from', new ParseDatePipe({ optional: true })) from?: Date,
+    @Query('to', new ParseDatePipe({ optional: true })) to?: Date,
   ): Promise<{ data: VehicleLogDto[]; total: number; page: number; size: number }> {
-    const { items, total } = await this.vehicleLogsService.findAll(page, size, search);
+    const { items, total } = await this.vehicleLogsService.findAll(
+      page,
+      size,
+      search,
+      mileage,
+      year,
+      vehicle,
+      severity,
+      code,
+      from,
+      to,
+    );
     return { data: items.map((log) => this.toDto(log)), total, page, size };
   }
 

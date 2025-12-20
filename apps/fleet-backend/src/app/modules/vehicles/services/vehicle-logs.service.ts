@@ -5,6 +5,15 @@ import { CreateVehicleLogDto } from '../dto/create-vehicle-log.dto';
 import { VehicleLog } from '../entities/vehicle-log.entity';
 import { Vehicle } from '../entities/vehicle.entity';
 
+const SEARCH_QUERIES = [
+  'log.message LIKE :search',
+  'CAST(log.code AS TEXT) LIKE :search',
+  'vehicle.brand LIKE :search',
+  'vehicle.model LIKE :search',
+  'vehicle.vin LIKE :search',
+  'vehicle.color LIKE :search',
+];
+
 @Injectable()
 export class VehicleLogsService {
   constructor(
@@ -26,23 +35,48 @@ export class VehicleLogsService {
     return this.vehicleLogsRepository.save(log);
   }
 
-  async findAll(page?: number, size?: number, search?: string): Promise<{ items: VehicleLog[]; total: number }> {
+  async findAll(
+    page: number,
+    size: number,
+    search?: string,
+    mileage?: number,
+    year?: number,
+    vehicle?: number,
+    severity?: string,
+    code?: string,
+    from?: Date,
+    to?: Date,
+  ): Promise<{ items: VehicleLog[]; total: number }> {
     const queryBuilder = this.vehicleLogsRepository
       .createQueryBuilder('log')
       .leftJoinAndSelect('log.vehicle', 'vehicle');
 
     if (search) {
-      queryBuilder.where(
-        '(log.message LIKE :search OR log.severity LIKE :search OR CAST(log.code AS TEXT) LIKE :search)',
-        { search: `%${search}%` },
-      );
+      queryBuilder.andWhere(`(${SEARCH_QUERIES.join(' OR ')})`, { search: `%${search}%` });
     }
-
+    if (vehicle) {
+      queryBuilder.andWhere('vehicle.id = :vehicleId', { vehicleId: vehicle });
+    }
+    if (mileage) {
+      queryBuilder.andWhere('vehicle.mileage >= :mileage', { mileage });
+    }
+    if (year) {
+      queryBuilder.andWhere('vehicle.year = :year', { year });
+    }
+    if (severity) {
+      queryBuilder.andWhere('log.severity = :severity', { severity });
+    }
+    if (code) {
+      queryBuilder.andWhere('log.code = :code', { code });
+    }
+    if (from) {
+      queryBuilder.andWhere('log.timestamp >= :from', { from: from.toISOString() });
+    }
+    if (to) {
+      queryBuilder.andWhere('log.timestamp <= :to', { to: to.toISOString() });
+    }
     queryBuilder.orderBy('log.timestamp', 'DESC');
-
-    if (page && size) {
-      queryBuilder.skip((page - 1) * size).take(size);
-    }
+    queryBuilder.skip(page * size).take(size);
 
     const [items, total] = await queryBuilder.getManyAndCount();
     return { items, total };

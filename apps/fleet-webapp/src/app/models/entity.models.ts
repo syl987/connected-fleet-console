@@ -13,6 +13,15 @@ export interface EntityBaseDTO {
  */
 export enum EntityType {
   Vehicle = 'Vehicle',
+  VehicleLog = 'VehicleLog',
+}
+
+/**
+ * Generic params for paginated requests.
+ */
+export interface PaginationParams {
+  page: number;
+  size: number;
 }
 
 /**

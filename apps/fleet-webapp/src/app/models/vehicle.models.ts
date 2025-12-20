@@ -1,4 +1,4 @@
-import { VehicleLog } from './log.models';
+import { VehicleLog } from './vehicle-log.models';
 
 export enum FuelType {
   GAS = 'GAS',

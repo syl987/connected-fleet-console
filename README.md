@@ -13,6 +13,22 @@
 3. Connect remote Git repository - reason: code safety and public access
 4. Setup basic tools (eslint, stylelint and prettier) - reason: clean code and proficiency with auto-corrections
 5. Integrate Swagger API documentation generator - reason: REQUIREMENT
+6. Create Vehicle Crud endpoints, create generated vehicle data, webapp pages
+7. Create Vehicle-log endpoints, auto-generation of data, webapp search page
+
+## Current Bugs
+
+- date param invalid format 400 on backend
+
+## Missing Features
+
+- missing loading spinner on search button
+
+## Additional Tasks
+
+- consider some sort of loading spinner for search
+- consider aggregating vehicle data into logs
+- consider splitting vehicle logs from vehicles and create separate store and use separate endpoint for that
 
 ## Run tasks
 

@@ -40,7 +40,7 @@ export const appRoutes: Route[] = [
   },
   {
     path: 'search',
-    title: 'Search',
+    title: 'Search Vehicle Logs',
     loadComponent: () =>
       import('./components/main/search-page/search-page.component').then((m) => m.SearchPageComponent),
   },

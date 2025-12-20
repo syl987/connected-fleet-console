@@ -10,10 +10,3 @@ export interface VehicleLog {
   message: string;
   vehicleId: number;
 }
-
-export interface SearchLogsParams {
-  query?: string;
-  severity?: string;
-  from?: string;
-  to?: string;
-}

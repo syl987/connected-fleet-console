@@ -1,5 +1,120 @@
 <div class="container">
   <app-title-bar />
 
-  <p>Search any logs from the database.</p>
+  <p class="max-w-prose">Search any vehicle logs from the database.</p>
+
+  <p class="font-mono">form handling | server-side table pagination | dual store design (entities, references)</p>
+
+  <form [formGroup]="form" (ngSubmit)="search({ page: 0 })">
+    <mat-tab-group mat-stretch-tabs="false" animationDuration="0ms">
+      <mat-tab label="Main Query">
+        <div class="mt-5 flex max-w-md flex-wrap gap-4">
+          <mat-form-field class="grow">
+            <mat-label>Search Term</mat-label>
+            <input matInput formControlName="search" placeholder="Search message, brand, model, VIN, color..." />
+          </mat-form-field>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Vehicle Details">
+        <div class="mt-5 flex flex-wrap gap-4">
+          <mat-form-field>
+            <mat-label>ID</mat-label>
+            <input matInput formControlName="vehicle" placeholder="Exact ID..." />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Mileage</mat-label>
+            <input matInput formControlName="mileage" placeholder="Greater then..." />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Year</mat-label>
+            <input matInput formControlName="year" placeholder="Exact year..." />
+          </mat-form-field>
+        </div>
+      </mat-tab>
+
+      <mat-tab label="Advanced Params">
+        <div class="mt-5 flex flex-wrap gap-4">
+          <mat-form-field>
+            <mat-label>Severity</mat-label>
+            <mat-select formControlName="severity" placeholder="Select severity...">
+              <mat-option [value]="undefined" />
+              <mat-option value="CRITICAL">Critical</mat-option>
+              <mat-option value="ERROR">Error</mat-option>
+              <mat-option value="WARNING">Warning</mat-option>
+              <mat-option value="INFO">Info</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Code</mat-label>
+            <input matInput formControlName="code" placeholder="Exact code..." />
+          </mat-form-field>
+
+          <mat-form-field>
+            <mat-label>Timestamp Range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+              <input matStartDate formControlName="from" placeholder="From" />
+              <input matEndDate formControlName="to" placeholder="To" />
+            </mat-date-range-input>
+
+            <mat-datepicker-toggle matIconSuffix [for]="picker" />
+            <mat-date-range-picker #picker />
+          </mat-form-field>
+        </div>
+      </mat-tab>
+    </mat-tab-group>
+
+    <div class="mt-1 mb-8 flex gap-2">
+      <button type="submit" mat-flat-button>Search</button>
+      <button type="reset" mat-stroked-button>Reset</button>
+    </div>
+  </form>
+
+  @if (loaded()) {
+    @if (vehicleLogs().length > 0) {
+      <mat-card>
+        <div class="overflow-x-auto rounded-md">
+          <table mat-table [dataSource]="dataSource">
+            <ng-container matColumnDef="timestamp">
+              <th mat-header-cell *matHeaderCellDef>Timestamp</th>
+              <td mat-cell *matCellDef="let log">{{ log.timestamp | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="severity">
+              <th mat-header-cell *matHeaderCellDef>Severity</th>
+              <td mat-cell *matCellDef="let log">{{ log.severity }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="code">
+              <th mat-header-cell *matHeaderCellDef>Code</th>
+              <td mat-cell *matCellDef="let log">{{ log.code }}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="message">
+              <th mat-header-cell *matHeaderCellDef>Message</th>
+              <td mat-cell *matCellDef="let log">{{ log.message }}</td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: tableColumns" class="font-mono"></tr>
+          </table>
+
+          <mat-paginator
+            [pageIndex]="page()"
+            [pageSize]="size()"
+            [length]="total()"
+            [pageSizeOptions]="[5, 10, 20, 100]"
+            (page)="search({ page: $event.pageIndex, size: $event.pageSize })"
+            showFirstLastButtons
+            aria-label="Select page"
+          />
+        </div>
+      </mat-card>
+    } @else if (!loading()) {
+      <p class="text-secondary col-span-full py-2 text-center">No vehicle logs were found.</p>
+    }
+  }
 </div>
