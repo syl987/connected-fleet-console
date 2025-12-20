@@ -2,18 +2,15 @@ import {
   Body,
   Controller,
   DefaultValuePipe,
-  Delete,
   Get,
   Param,
   ParseDatePipe,
   ParseIntPipe,
-  Patch,
   Post,
   Query,
 } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { CreateVehicleLogDto } from '../../vehicles/dto/create-vehicle-log.dto';
-import { UpdateVehicleLogDto } from '../../vehicles/dto/update-vehicle-log.dto';
 import { VehicleLogDto } from '../../vehicles/dto/vehicle-log.dto';
 import { VehicleLog } from '../../vehicles/entities/vehicle-log.entity';
 import { VehicleLogsService } from '../services/vehicle-logs.service';
@@ -45,6 +42,8 @@ export class VehicleLogsController {
   @ApiQuery({ name: 'page', required: false, type: Number, example: 1 })
   @ApiQuery({ name: 'size', required: false, type: Number, example: 10 })
   @ApiQuery({ name: 'search', required: false, type: String, example: 'engine' })
+  @ApiQuery({ name: 'mileage', required: false, type: Number, example: 50000 })
+  @ApiQuery({ name: 'year', required: false, type: Number, example: 2023 })
   @ApiQuery({ name: 'vehicle', required: false, type: Number, example: 24 })
   @ApiQuery({ name: 'severity', required: false, type: String, example: 'CRITICAL', enum: SEVERITY_VALUES })
   @ApiQuery({ name: 'code', required: false, type: String, example: 'E123' })
@@ -56,6 +55,8 @@ export class VehicleLogsController {
     @Query('size', new DefaultValuePipe(10), ParseIntPipe) size: number,
     @Query('search') search?: string,
     @Query('vehicle') vehicle?: string,
+    @Query('mileage') mileage?: string,
+    @Query('year') year?: string,
     @Query('severity') severity?: string,
     @Query('code') code?: string,
     @Query('from', ParseDatePipe) from?: Date,
@@ -65,6 +66,8 @@ export class VehicleLogsController {
       page,
       size,
       search,
+      mileage,
+      year,
       vehicle,
       severity,
       code,
@@ -72,14 +75,6 @@ export class VehicleLogsController {
       to,
     );
     return { data: items.map((log) => this.toDto(log)), total, page, size };
-  }
-
-  @Get('deleted')
-  @ApiOperation({ summary: 'List soft-deleted vehicle logs' })
-  @ApiResponse({ status: 200, description: 'Deleted vehicle logs', type: [VehicleLogDto] })
-  async findDeleted(): Promise<VehicleLogDto[]> {
-    const logs = await this.vehicleLogsService.findDeleted();
-    return logs.map((log) => this.toDto(log));
   }
 
   @Get('vehicle/:vehicleId')
@@ -95,29 +90,6 @@ export class VehicleLogsController {
   @ApiResponse({ status: 200, description: 'Vehicle log', type: VehicleLogDto })
   async findOne(@Param('id', ParseIntPipe) id: number): Promise<VehicleLogDto> {
     const log = await this.vehicleLogsService.findOne(id);
-    return this.toDto(log);
-  }
-
-  @Patch(':id')
-  @ApiOperation({ summary: 'Update a vehicle log' })
-  @ApiBody({ type: UpdateVehicleLogDto })
-  @ApiResponse({ status: 200, description: 'Updated vehicle log', type: VehicleLogDto })
-  async update(@Param('id', ParseIntPipe) id: number, @Body() dto: UpdateVehicleLogDto): Promise<VehicleLogDto> {
-    const log = await this.vehicleLogsService.update(id, dto);
-    return this.toDto(log);
-  }
-
-  @Delete(':id')
-  @ApiOperation({ summary: 'Soft-delete a vehicle log' })
-  async remove(@Param('id', ParseIntPipe) id: number): Promise<void> {
-    await this.vehicleLogsService.remove(id);
-  }
-
-  @Post(':id/restore')
-  @ApiOperation({ summary: 'Restore a soft-deleted vehicle log' })
-  @ApiResponse({ status: 200, description: 'Restored vehicle log', type: VehicleLogDto })
-  async restore(@Param('id', ParseIntPipe) id: number): Promise<VehicleLogDto> {
-    const log = await this.vehicleLogsService.restore(id);
     return this.toDto(log);
   }
 

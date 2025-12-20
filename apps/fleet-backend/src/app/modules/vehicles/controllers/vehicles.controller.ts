@@ -104,10 +104,10 @@ export class VehiclesController {
         updatedAt: log.updatedAt.toISOString(),
         deletedAt: log.deletedAt?.toISOString(),
         version: log.version,
-        message: log.message,
-        severity: log.severity,
         timestamp: log.timestamp.toISOString(),
+        severity: log.severity,
         code: log.code,
+        message: log.message,
         vehicleId: v.id,
       })),
     };

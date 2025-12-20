@@ -2,9 +2,17 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { CreateVehicleLogDto } from '../dto/create-vehicle-log.dto';
-import { UpdateVehicleLogDto } from '../dto/update-vehicle-log.dto';
 import { VehicleLog } from '../entities/vehicle-log.entity';
 import { Vehicle } from '../entities/vehicle.entity';
+
+const SEARCH_QUERIES = [
+  'log.message LIKE :search',
+  'CAST(log.code AS TEXT) LIKE :search',
+  'vehicle.brand LIKE :search',
+  'vehicle.model LIKE :search',
+  'vehicle.vin LIKE :search',
+  'vehicle.color LIKE :search',
+];
 
 @Injectable()
 export class VehicleLogsService {
@@ -31,6 +39,8 @@ export class VehicleLogsService {
     page: number,
     size: number,
     search?: string,
+    mileage?: string,
+    year?: string,
     vehicle?: string,
     severity?: string,
     code?: string,
@@ -42,14 +52,30 @@ export class VehicleLogsService {
       .leftJoinAndSelect('log.vehicle', 'vehicle');
 
     if (search) {
-      queryBuilder.andWhere(
-        '(log.message LIKE :search OR log.severity LIKE :search OR CAST(log.code AS TEXT) LIKE :search)',
-        { search: `%${search}%` },
-      );
+      queryBuilder.andWhere(`(${SEARCH_QUERIES.join(' OR ')})`, { search: `%${search}%` });
     }
-
+    if (vehicle) {
+      queryBuilder.andWhere('vehicle.id = :vehicleId', { vehicleId: vehicle });
+    }
+    if (mileage) {
+      queryBuilder.andWhere('vehicle.mileage >= :mileage', { mileage });
+    }
+    if (year) {
+      queryBuilder.andWhere('vehicle.year = :year', { year });
+    }
+    if (severity) {
+      queryBuilder.andWhere('log.severity = :severity', { severity });
+    }
+    if (code) {
+      queryBuilder.andWhere('log.code = :code', { code });
+    }
+    if (from) {
+      queryBuilder.andWhere('log.timestamp >= :from', { from: from.toISOString() });
+    }
+    if (to) {
+      queryBuilder.andWhere('log.timestamp <= :to', { to: to.toISOString() });
+    }
     queryBuilder.orderBy('log.timestamp', 'DESC');
-
     queryBuilder.skip((page - 1) * size).take(size);
 
     const [items, total] = await queryBuilder.getManyAndCount();
@@ -68,42 +94,5 @@ export class VehicleLogsService {
       relations: ['vehicle'],
       order: { timestamp: 'DESC' },
     });
-  }
-
-  async update(id: number, updateDto: UpdateVehicleLogDto): Promise<VehicleLog> {
-    const log = await this.findOne(id);
-
-    if (updateDto.vehicleId && updateDto.vehicleId !== log.vehicle.id) {
-      const vehicle = await this.vehiclesRepository.findOne({ where: { id: updateDto.vehicleId } });
-      if (!vehicle) throw new NotFoundException(`Vehicle ${updateDto.vehicleId} not found`);
-      log.vehicle = vehicle;
-    }
-
-    if (updateDto.timestamp != null) log.timestamp = new Date(updateDto.timestamp);
-    if (updateDto.severity != null) log.severity = updateDto.severity;
-    if (updateDto.code != null) log.code = updateDto.code;
-    if (updateDto.message != null) log.message = updateDto.message;
-
-    return this.vehicleLogsRepository.save(log);
-  }
-
-  async remove(id: number): Promise<void> {
-    const res = await this.vehicleLogsRepository.softDelete(id);
-    if (res.affected === 0) throw new NotFoundException(`Vehicle log ${id} not found`);
-  }
-
-  async restore(id: number): Promise<VehicleLog> {
-    const res = await this.vehicleLogsRepository.restore(id);
-    if (res.affected === 0) throw new NotFoundException(`Vehicle log ${id} not found or not deleted`);
-    return this.findOne(id);
-  }
-
-  findDeleted(): Promise<VehicleLog[]> {
-    return this.vehicleLogsRepository
-      .createQueryBuilder('log')
-      .leftJoinAndSelect('log.vehicle', 'vehicle')
-      .withDeleted()
-      .where('log.deletedAt IS NOT NULL')
-      .getMany();
   }
 }
