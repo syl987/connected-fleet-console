@@ -6,7 +6,9 @@ import { LogsActions } from './logs.actions';
 export const logsFeatureKey = 'logs';
 
 export interface State extends EntityState<Log> {
-  searching: boolean;
+  currentIds: number[];
+  pagination?: { page: number; size: number };
+  loading: boolean;
 }
 
 export const adapter: EntityAdapter<Log> = createEntityAdapter<Log>({
@@ -14,15 +16,21 @@ export const adapter: EntityAdapter<Log> = createEntityAdapter<Log>({
 });
 
 export const initialState: State = adapter.getInitialState({
-  searching: false,
+  currentIds: [],
+  loading: false,
 });
 
 export const reducer = createReducer(
   initialState,
-  on(LogsActions.search, (state, { params }) => ({ ...state, searching: true })),
-  on(LogsActions.searchSUCCESS, (state, { logs }) => adapter.upsertMany(logs, adapter.removeAll({ ...state, searching: false }))),
-  on(LogsActions.searchERROR, state => ({ ...state, searching: false })),
-  on(LogsActions.clear, state => adapter.removeAll(state)),
+  on(LogsActions.search, (state, { params }) => ({
+    ...state,
+    pagination: { page: params.page, size: params.size },
+    loading: true,
+  })),
+  on(LogsActions.searchSUCCESS, (state, { page }) =>
+    adapter.upsertMany(page.data, { ...state, currentIds: page.data.map((log) => log.id), loading: false })),
+  on(LogsActions.searchERROR, (state) => ({ ...state, loading: false })),
+  on(LogsActions.clear, (state) => adapter.removeAll(state)),
 );
 
 export const logsFeature = createFeature({
