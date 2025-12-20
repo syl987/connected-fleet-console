@@ -1,6 +1,10 @@
 <div class="mt-10 mb-4 flex flex-col items-center">
   <div class="mb-2 rounded-lg border p-1 text-xs font-normal" style="width: 128px; height: 128px">
-    <div class="bg-surface-container-highest text-surface flex h-full w-full flex-col items-center justify-center rounded-md text-6xl">?</div>
+    <div
+      class="bg-surface-container-highest text-surface flex h-full w-full flex-col items-center justify-center rounded-md text-6xl"
+    >
+      ?
+    </div>
   </div>
 
   <div class="text-primary mt-2 text-xl">{{ options.applicationName }}</div>
@@ -10,7 +14,14 @@
 
 <mat-nav-list>
   @for (link of links; track link.path) {
-    <a mat-list-item [routerLink]="link.path" routerLinkActive [activated]="a.isActive" (click)="navigated.emit()" #a="routerLinkActive">
+    <a
+      mat-list-item
+      [routerLink]="link.path"
+      routerLinkActive
+      [activated]="a.isActive"
+      (click)="navigated.emit()"
+      #a="routerLinkActive"
+    >
       <mat-icon matListItemIcon>{{ link.icon }}</mat-icon>
       {{ link.label }}
     </a>

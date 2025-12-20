@@ -10,13 +10,31 @@ export class UndoEffects {
 
   readonly undoOne$ = createEffect(() =>
     this.actions.pipe(
-      ofEntityOp(EntityOp.SAVE_ADD_ONE_ERROR, EntityOp.SAVE_UPDATE_ONE_ERROR, EntityOp.SAVE_UPSERT_ONE_ERROR, EntityOp.SAVE_DELETE_ONE_ERROR),
-      map(action => this.factory.createFromAction(action, { entityOp: EntityOp.UNDO_ONE, data: action.payload.data.originalAction.payload.data })),
+      ofEntityOp(
+        EntityOp.SAVE_ADD_ONE_ERROR,
+        EntityOp.SAVE_UPDATE_ONE_ERROR,
+        EntityOp.SAVE_UPSERT_ONE_ERROR,
+        EntityOp.SAVE_DELETE_ONE_ERROR,
+      ),
+      map((action) =>
+        this.factory.createFromAction(action, {
+          entityOp: EntityOp.UNDO_ONE,
+          data: action.payload.data.originalAction.payload.data,
+        })),
     ));
 
   readonly undoMany$ = createEffect(() =>
     this.actions.pipe(
-      ofEntityOp(EntityOp.SAVE_ADD_MANY_ERROR, EntityOp.SAVE_UPDATE_MANY_ERROR, EntityOp.SAVE_UPSERT_MANY_ERROR, EntityOp.SAVE_DELETE_MANY_ERROR),
-      map(action => this.factory.createFromAction(action, { entityOp: EntityOp.UNDO_MANY, data: action.payload.data.originalAction.payload.data })), // not tested
+      ofEntityOp(
+        EntityOp.SAVE_ADD_MANY_ERROR,
+        EntityOp.SAVE_UPDATE_MANY_ERROR,
+        EntityOp.SAVE_UPSERT_MANY_ERROR,
+        EntityOp.SAVE_DELETE_MANY_ERROR,
+      ),
+      map((action) =>
+        this.factory.createFromAction(action, {
+          entityOp: EntityOp.UNDO_MANY,
+          data: action.payload.data.originalAction.payload.data,
+        })), // not tested
     ));
 }

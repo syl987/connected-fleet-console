@@ -5,7 +5,7 @@ export function toHttpParams(obj: Record<string, any>): HttpParams {
   Object.entries(obj).forEach(([key, val]) => {
     if (val == null) return; // skip null/undefined
     if (Array.isArray(val)) {
-      val.forEach(v => {
+      val.forEach((v) => {
         p = p.append(key, String(v));
       }); // repeated params: ?tag=a&tag=b
     } else if (typeof val === 'object') {
