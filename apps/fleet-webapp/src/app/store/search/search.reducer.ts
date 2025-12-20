@@ -4,12 +4,15 @@ import { SearchActions } from './search.actions';
 
 export const searchFeatureKey = 'search';
 
-export interface State {
-  pageIds?: PageIds;
+export interface State extends PageIds {
   loading: boolean;
 }
 
 export const initialState: State = {
+  ids: [],
+  page: 0,
+  size: 0,
+  total: 0,
   loading: false,
 };
 
@@ -21,25 +24,20 @@ export const reducer = createReducer(
   })),
   on(SearchActions.searchLogsSUCCESS, (state, { page }) => ({
     ...state,
-    pageIds: {
-      ids: page.data.map((log) => log.id),
-      page: page.page,
-      size: page.size,
-      total: page.total,
-    },
+    ids: page.data.map((log) => log.id),
+    page: page.page,
+    size: page.size,
+    total: page.total,
     loading: false,
   })),
   on(SearchActions.searchLogsERROR, (state) => ({
     ...state,
     loading: false,
   })),
-  on(SearchActions.clearLogs, (state) => ({ ...state, pageIds: undefined })),
+  on(SearchActions.clearLogs, (state) => ({ ...state, ids: [], page: 0, size: 0, total: 0 })),
 );
 
 export const searchFeature = createFeature({
   name: searchFeatureKey,
   reducer,
-  extraSelectors: (state) => ({
-    selectPageIds: state.selectors.selectState((s) => s.pageIds),
-  }),
 });
