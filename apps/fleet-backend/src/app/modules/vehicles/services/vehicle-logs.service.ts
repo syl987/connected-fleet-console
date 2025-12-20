@@ -27,13 +27,13 @@ export class VehicleLogsService {
     return this.vehicleLogsRepository.save(log);
   }
 
-  async findAll(page?: number, size?: number, search?: string): Promise<{ items: VehicleLog[]; total: number }> {
+  async findAll(page: number, size: number, search?: string): Promise<{ items: VehicleLog[]; total: number }> {
     const queryBuilder = this.vehicleLogsRepository
       .createQueryBuilder('log')
       .leftJoinAndSelect('log.vehicle', 'vehicle');
 
     if (search) {
-      queryBuilder.where(
+      queryBuilder.andWhere(
         '(log.message LIKE :search OR log.severity LIKE :search OR CAST(log.code AS TEXT) LIKE :search)',
         { search: `%${search}%` },
       );
@@ -41,9 +41,7 @@ export class VehicleLogsService {
 
     queryBuilder.orderBy('log.timestamp', 'DESC');
 
-    if (page && size) {
-      queryBuilder.skip((page - 1) * size).take(size);
-    }
+    queryBuilder.skip((page - 1) * size).take(size);
 
     const [items, total] = await queryBuilder.getManyAndCount();
     return { items, total };
