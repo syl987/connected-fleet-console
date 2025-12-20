@@ -10,14 +10,24 @@
     @if (large()) {
       <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="ms-2">
         @for (link of links; track link.path) {
-          <a mat-tab-link [routerLink]="link.path" routerLinkActive [active]="a.isActive" class="px-3" #a="routerLinkActive">{{ link.label }}</a>
+          <a
+            mat-tab-link
+            [routerLink]="link.path"
+            routerLinkActive
+            [active]="a.isActive"
+            class="px-3"
+            #a="routerLinkActive"
+            >{{ link.label }}</a
+          >
         }
       </nav>
     }
     <span class="ms-2 me-auto"></span>
 
     @if (large()) {
-      <div class="px-2 text-base">Github</div>
+      <a mat-button href="https://github.com/syl987/connected-fleet-console" target="_blank" rel="noopener">
+        View source on GitHub
+      </a>
 
       <mat-divider vertical class="h-8" />
 
