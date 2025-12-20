@@ -10,8 +10,8 @@ import {
 import { ActionReducerMap, RootStoreConfig } from '@ngrx/store';
 import { AppEntityCache, AppEntityDataModuleConfig } from '../models/app.models';
 import { EntityType } from '../models/entity.models';
-import { ToastEffects } from './effects/toast.effects';
-import { UndoEffects } from './effects/undo.effects';
+import { ToastEffects } from './core/toast.effects';
+import { UndoEffects } from './core/undo.effects';
 import { LogsEffects } from './logs/logs.effects';
 import * as fromLogs from './logs/logs.reducer';
 
