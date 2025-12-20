@@ -3,5 +3,55 @@
 
   <p>Search any logs from the database. TODO describe technicalities of this page.</p>
 
-  TODO fields and search button TODO table of results
+  <p>TODO fields and search button TODO table of results</p>
+
+  <form [formGroup]="form" (ngSubmit)="search()">
+    <mat-form-field class="example-full-width">
+      <mat-label>Search query</mat-label>
+      <input matInput formControlName="search" />
+    </mat-form-field>
+
+    <button type="submit" mat-button>Search</button>
+    <button type="reset" mat-button>Reset</button>
+  </form>
+
+  @if (loaded()) {
+    @if (vehicleLogs().length > 0) {
+      <div class="overflow-x-auto">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="timestamp">
+            <th mat-header-cell *matHeaderCellDef>Timestamp</th>
+            <td mat-cell *matCellDef="let log">{{ log.timestamp | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="vehicleId">
+            <th mat-header-cell *matHeaderCellDef>Vehicle ID</th>
+            <td mat-cell *matCellDef="let log">{{ log.vehicleId }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="severity">
+            <th mat-header-cell *matHeaderCellDef>Severity</th>
+            <td mat-cell *matCellDef="let log">{{ log.severity }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef>Code</th>
+            <td mat-cell *matCellDef="let log">{{ log.code }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="message">
+            <th mat-header-cell *matHeaderCellDef>Message</th>
+            <td mat-cell *matCellDef="let log">{{ log.message }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: tableColumns" class="font-mono"></tr>
+        </table>
+      </div>
+
+      <mat-paginator [pageSizeOptions]="[5, 20,50, 100]" showFirstLastButtons aria-label="Select page" />
+    } @else if (!loading()) {
+      <p class="text-secondary col-span-full py-2 text-center">No vehicle logs were found.</p>
+    }
+  }
 </div>

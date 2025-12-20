@@ -8,6 +8,7 @@ export const searchFeatureKey = 'search';
 
 export interface State extends PageIds {
   loading: boolean;
+  loaded: boolean;
 }
 
 export const initialState: State = {
@@ -16,6 +17,7 @@ export const initialState: State = {
   size: 0,
   total: 0,
   loading: false,
+  loaded: false,
 };
 
 export const reducer = createReducer(
@@ -23,6 +25,7 @@ export const reducer = createReducer(
   on(SearchActions.searchLogs, (state) => ({
     ...state,
     loading: true,
+    loaded: false,
   })),
   on(SearchActions.searchLogsSUCCESS, (state, { page }) => ({
     ...state,
@@ -31,12 +34,14 @@ export const reducer = createReducer(
     size: page.size,
     total: page.total,
     loading: false,
+    loaded: true,
   })),
   on(SearchActions.searchLogsERROR, (state) => ({
     ...state,
     loading: false,
+    loaded: false,
   })),
-  on(SearchActions.clearLogs, (state) => ({ ...state, ids: [], page: 0, size: 0, total: 0 })),
+  on(SearchActions.clearLogs, (state) => ({ ...state, ids: [], page: 0, size: 0, total: 0, loaded: false })),
 );
 
 export const searchFeature = createFeature({
