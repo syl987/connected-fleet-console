@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BaseDto } from '../../../common/dto/base.dto';
 import { FuelType } from '../entities/vehicle.entity';
-import { VehicleLogDto } from './vehicle-log.dto';
 
 export class VehicleDto extends BaseDto {
   @ApiProperty()
@@ -24,7 +23,4 @@ export class VehicleDto extends BaseDto {
 
   @ApiProperty({ enum: FuelType })
   fuelType!: FuelType;
-
-  @ApiProperty({ type: [VehicleLogDto], nullable: true })
-  logs?: VehicleLogDto[];
 }

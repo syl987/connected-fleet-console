@@ -1,6 +1,5 @@
 import { VehicleDto } from '../dto/vehicle.dto';
 import { Vehicle } from '../entities/vehicle.entity';
-import { toVehicleLogDto } from './vehicle-log.mapper';
 
 export function toVehicleDto(e: Vehicle): VehicleDto {
   return {
@@ -16,6 +15,5 @@ export function toVehicleDto(e: Vehicle): VehicleDto {
     mileage: e.mileage,
     color: e.color,
     fuelType: e.fuelType,
-    logs: e.logs ? e.logs.map(toVehicleLogDto) : undefined,
   };
 }

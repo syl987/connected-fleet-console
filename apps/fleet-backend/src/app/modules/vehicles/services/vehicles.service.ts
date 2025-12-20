@@ -23,7 +23,7 @@ export class VehiclesService {
   }
 
   async findOne(id: number): Promise<Vehicle> {
-    const v = await this.vehiclesRepository.findOne({ where: { id }, relations: ['logs'] });
+    const v = await this.vehiclesRepository.findOne({ where: { id } });
     if (!v) throw new NotFoundException(`Vehicle ${id} not found`);
     return v;
   }
