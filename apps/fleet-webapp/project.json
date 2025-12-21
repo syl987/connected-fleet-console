@@ -16,6 +16,11 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           {
+            "glob": "*.md",
+            "input": "docs",
+            "output": "/assets/docs"
+          },
+          {
             "glob": "**/*",
             "input": "apps/fleet-webapp/public"
           }
