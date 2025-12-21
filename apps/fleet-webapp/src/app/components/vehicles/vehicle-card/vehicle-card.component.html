@@ -1,6 +1,6 @@
 @let vehicle = data();
 
-<mat-card class="h-full">
+<mat-card class="text-decoration-none h-full">
   <mat-card-header>
     <div mat-card-image class="order-first me-4 flex w-14 items-center justify-center rounded-sm border">
       <mat-icon [ngStyle]="{ color: color }" style="transform: scale(1.75)">directions_car</mat-icon>
@@ -14,10 +14,10 @@
 
   <mat-card-content class="flex h-full flex-col gap-3 py-3">
     <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-x-8 gap-y-1">
-      <p class="mb-0 whitespace-nowrap">VIN: {{ vehicle.vin }}</p>
-      <p class="mb-0 whitespace-nowrap">Fuel Type: {{ vehicle.fuelType | lowercase }}</p>
-      <p class="mb-0 whitespace-nowrap">Color: {{ vehicle.color | lowercase }}</p>
-      <p class="mb-0 whitespace-nowrap">Mileage: {{ vehicle.mileage | number }} km</p>
+      <p class="my-0 whitespace-nowrap">VIN: {{ vehicle.vin }}</p>
+      <p class="my-0 whitespace-nowrap">Fuel Type: {{ vehicle.fuelType | lowercase }}</p>
+      <p class="my-0 whitespace-nowrap">Color: {{ vehicle.color | lowercase }}</p>
+      <p class="my-0 whitespace-nowrap">Mileage: {{ vehicle.mileage | number }} km</p>
     </div>
 
     <ng-content />
