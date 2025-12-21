@@ -1,15 +1,13 @@
 ## Requirements
 
-### Assignment
-
-#### Overview
+### Overview
 
 - [ ] Real-time event monitoring
 - [check] Browse events using various search parameters -> Search Page
 - [ ] Quick overview of critical issues and affected vehicles
 - [check] Implement as full-stack application (Angular + NestJS)
 
-#### Objectives
+### Objectives
 
 - [ ] Input and process logs (from a file or a stream)
 - [check] Database storage with flexible querying and aggregation -> Vehicle, VehicleLog (linked entities)
@@ -20,25 +18,25 @@
 - [ ] Live updates in dashboard
 - [check] Two or more views of the same data -> Search Page / Vehicle Details (per vehicle)
 
-#### Non-Functional
+### Non-Functional
 
 - [check] Endpoint validations and parsing -> VehicleLogController
 - [check] Separation of concerns (parsing, storage, logic, controller) -> using standard folder / file / code structure
 - [check] Basic API documentation -> Swagger API with descriptions at http://localhost:3000/api
 
-#### Input Data
+### Input Data
 
 - [ ] Support log text format
 - [check] Support either file upload, seed script or a simple generator -> seed script, generated data
 
-#### Back-End
+### Back-End
 
 - [ ] Parse log text file into the database
 - [check] Store data in memory and a simple database -> in-memory database
 - [check] Design a query API with various filter params -> VehicleLogController
 - [ ] Provide an aggregated endpoint (errors per vehicle in a time range, most frequent error codes, vehicles in critical state)
 
-#### Front-End
+### Front-End
 
 - [check] Use Angular 15+
 - [check] Consume backend APIs
@@ -55,14 +53,14 @@
 - [check] Use ngrx, signals, rxjs -> using all of these
 - [check] Explain in a concept -> check ARCHITECTURE.md
 
-#### UI/UX
+### UI/UX
 
 - [check] Clean design, responsive layout
 - [check] Basic accessibility -> handled mostly by material components with a few additions of mine
 - [check] Reusable components -> not very practicable in this project but check VehicleCardComponent (used twice)
 - [check] Thoughtful structure -> intuitive and self-explanatory layout and navigation
 
-#### Organizational
+### Organizational
 
 - [check] Github link for source code -> check webapp header
 - [check] Requirements description -> this file
@@ -72,7 +70,7 @@
 - [check] API documentation -> check Swagger API at http://localhost:3000/api
 - [ ] (optional) Containerization with Docker
 
-### Assumptions
+## Assumptions
 
 - [check] Browsable vehicle metadata (interconnect with logs) -> Vehicles Page
 - [check] Editable vehicle metadata with CRUD operations -> Vehicles Controller
