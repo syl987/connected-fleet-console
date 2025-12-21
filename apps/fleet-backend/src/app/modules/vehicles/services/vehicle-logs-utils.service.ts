@@ -11,7 +11,7 @@ export class VehicleLogsUtilsService {
 
   constructor(private readonly vehicleLogsDataLoader: VehicleLogsDataLoader) {}
 
-  generateStart(generateDto: GenerateVehicleLogsDto): void {
+  startGeneratingLogs(generateDto: GenerateVehicleLogsDto): void {
     if (this._generating) {
       throw new ConflictException('Vehicle logs generation is already in progress');
     }
@@ -35,7 +35,7 @@ export class VehicleLogsUtilsService {
       });
   }
 
-  generateStop(): void {
+  stopGeneratingLogs(): void {
     this._generateStopSignal.next();
   }
 }

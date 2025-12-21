@@ -13,14 +13,14 @@ export class VehicleLogsUtilsController {
   @ApiBody({ type: GenerateVehicleLogsDto })
   @ApiResponse({ status: 200, description: 'Triggered vehicle logs generation' })
   @ApiResponse({ status: 409, description: 'Vehicle logs generation is already in progress' })
-  generateStart(@Body() generateDto: GenerateVehicleLogsDto): void {
-    this.vehicleLogsUtilsService.generateStart(generateDto);
+  startGeneratingLogs(@Body() generateDto: GenerateVehicleLogsDto): void {
+    this.vehicleLogsUtilsService.startGeneratingLogs(generateDto);
   }
 
   @Post('generate/stop')
   @ApiOperation({ summary: 'Stop generating vehicle logs.' })
   @ApiResponse({ status: 200, description: 'Any potentially ongoing vehicle logs generation has been stopped' })
-  generateStop(): void {
-    this.vehicleLogsUtilsService.generateStop();
+  stopGeneratingLogs(): void {
+    this.vehicleLogsUtilsService.stopGeneratingLogs();
   }
 }
