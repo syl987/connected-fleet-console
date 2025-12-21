@@ -16,9 +16,9 @@ export class DashboardPageComponent {
 
   startGeneratingLogs(): void {
     const options: GenerateVehicleLogsOptions = {
-      duration: 5 * 60 * 1000, // for 5 minutes
+      duration: 2 * 60 * 1000, // for 2 minutes
       interval: 2 * 1000, // every 2 seconds
-      max: 5, // maximum 5 logs per interval
+      max: 2, // maximum 2 logs per interval
     };
     this.dashboardService.startGeneratingLogs(options);
   }
