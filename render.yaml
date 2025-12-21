@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: fleet-backend
+    runtime: node
+    region: oregon
+    plan: free
+    buildCommand: npm install && npx nx build fleet-backend --configuration=production && npx nx prune fleet-backend
+    startCommand: cd dist/apps/fleet-backend && node main.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        fromGroup: web
+    healthCheckPath: /api
