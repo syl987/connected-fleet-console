@@ -1,4 +1,4 @@
-import { AsyncPipe, DatePipe, DecimalPipe, JsonPipe, KeyValuePipe } from '@angular/common';
+import { DatePipe, DecimalPipe, KeyValuePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -23,10 +23,8 @@ import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
 @Component({
   selector: 'app-dashboard-page',
   imports: [
-    AsyncPipe,
     DatePipe,
     DecimalPipe,
-    JsonPipe,
     KeyValuePipe,
     MatButtonModule,
     MatCardModule,
