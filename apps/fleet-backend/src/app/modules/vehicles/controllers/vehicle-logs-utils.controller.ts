@@ -3,7 +3,7 @@ import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { GenerateVehicleLogsDto } from '../dto/generate-vehicle-logs.dto';
 import { VehicleLogsUtilsService } from '../services/vehicle-logs-utils.service';
 
-@ApiTags('Logs')
+@ApiTags('Logs Utilities')
 @Controller('logs/utils/vehicles')
 export class VehicleLogsUtilsController {
   constructor(private readonly vehicleLogsUtilsService: VehicleLogsUtilsService) {}
