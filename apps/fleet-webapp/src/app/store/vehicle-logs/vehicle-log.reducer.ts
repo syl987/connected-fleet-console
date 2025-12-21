@@ -34,7 +34,8 @@ export const reducer = createReducer(
       ...state,
       loading: false,
       loaded: true,
-    })),
+    }),
+  ),
   on(VehicleLogActions.loadVehicleLogsERROR, (state) => ({
     ...state,
     loading: false,

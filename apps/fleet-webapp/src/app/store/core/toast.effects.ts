@@ -59,7 +59,8 @@ export class ToastEffects {
           EntityOp.SAVE_DELETE_MANY_SUCCESS,
         ]),
         tap(({ payload }) =>
-          this.toastService.showSuccessToast(getSuccessMessage(payload.entityName, payload.entityOp))),
+          this.toastService.showSuccessToast(getSuccessMessage(payload.entityName, payload.entityOp)),
+        ),
       ),
     { dispatch: false },
   );

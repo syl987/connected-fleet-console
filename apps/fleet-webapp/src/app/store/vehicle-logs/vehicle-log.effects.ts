@@ -29,7 +29,8 @@ export class VehicleLogEffects {
               return VehicleLogActions.loadVehicleLogsERROR();
             },
           }),
-        )),
+        ),
+      ),
     );
   });
 }

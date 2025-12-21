@@ -20,8 +20,10 @@ export class UndoEffects {
         this.factory.createFromAction(action, {
           entityOp: EntityOp.UNDO_ONE,
           data: action.payload.data.originalAction.payload.data,
-        })),
-    ));
+        }),
+      ),
+    ),
+  );
 
   readonly undoMany$ = createEffect(() =>
     this.actions.pipe(
@@ -35,6 +37,8 @@ export class UndoEffects {
         this.factory.createFromAction(action, {
           entityOp: EntityOp.UNDO_MANY,
           data: action.payload.data.originalAction.payload.data,
-        })), // not tested
-    ));
+        }),
+      ), // not tested
+    ),
+  );
 }

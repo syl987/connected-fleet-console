@@ -29,7 +29,8 @@ export class SearchEffects {
               return SearchActions.searchLogsERROR();
             },
           }),
-        )),
+        ),
+      ),
     );
   });
 }
