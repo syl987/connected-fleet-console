@@ -15,6 +15,8 @@ export class VehicleLogsUtilsService {
     if (this._generating) {
       throw new ConflictException('Vehicle logs generation is already in progress');
     }
+    this._generating = true;
+
     interval(generateDto.interval)
       .pipe(
         // generate logs at each interval and wait for each completion
@@ -31,8 +33,6 @@ export class VehicleLogsUtilsService {
         error: () => (this._generating = false),
         complete: () => (this._generating = false),
       });
-
-    this._generating = true;
   }
 
   generateStop(): void {
