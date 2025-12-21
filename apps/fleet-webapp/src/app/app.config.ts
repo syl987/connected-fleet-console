@@ -39,7 +39,7 @@ const options: AppOptions = {
 
 const links: AppLinks = [
   { label: `Welcome`, icon: 'home', path: '/welcome' },
-  // { label: `Dashboard`, icon: 'dashboard', path: '/dashboard' },
+  { label: `Dashboard`, icon: 'dashboard', path: '/dashboard' },
   { label: `Vehicles`, icon: 'directions_car', path: '/vehicles' },
   { label: `Search`, icon: 'search', path: '/search' },
   { label: `Docs`, icon: 'library_books', path: '/documentation' },

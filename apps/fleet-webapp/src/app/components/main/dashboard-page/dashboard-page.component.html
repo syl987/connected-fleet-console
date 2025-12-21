@@ -1,5 +1,12 @@
 <div class="container">
-  <app-title-bar />
+  <app-title-bar>
+    <button mat-stroked-button class="app-tertiary" (click)="startGeneratingLogs()">Start Generating Logs</button>
+    <button mat-stroked-button class="app-error" (click)="stopGeneratingLogs()" aria-label="Stop Generating Logs">
+      Stop
+    </button>
+  </app-title-bar>
 
-  <p>Quick overview of relevant data.</p>
+  <p>Overview of critical metrics based on vehicle logs.</p>
+
+  <p class="font-mono opacity-75">async log generation start / stop</p>
 </div>

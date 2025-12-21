@@ -12,3 +12,9 @@ export interface VehicleLog {
   message: string;
   vehicle: Vehicle;
 }
+
+export interface GenerateVehicleLogsOptions {
+  duration: number;
+  interval: number;
+  max: number;
+}
