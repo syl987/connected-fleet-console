@@ -1,10 +1,41 @@
-import { Injectable } from '@nestjs/common';
-import { CreateVehicleLogDto } from '../dto/create-vehicle-log.dto';
-import { VehicleLogsService } from './vehicle-logs.service';
+import { ConflictException, Injectable } from '@nestjs/common';
+import { concatMap, interval, Subject, takeUntil, timer } from 'rxjs';
+import { GenerateVehicleLogsDto } from '../dto/generate-vehicle-logs.dto';
+import { VehicleLogsDataLoader } from '../loader/vehicle-logs-data.loader';
 
 @Injectable()
 export class VehicleLogsUtilsService {
-  constructor(private readonly vehicleLogsService: VehicleLogsService) {}
+  private readonly _generateStopSignal = new Subject<void>();
 
-  async generateStart(createDto: CreateVehicleLogDto): Promise<void> {}
+  private _generating = false;
+
+  constructor(private readonly vehicleLogsDataLoader: VehicleLogsDataLoader) {}
+
+  generateStart(generateDto: GenerateVehicleLogsDto): void {
+    if (this._generating) {
+      throw new ConflictException('Vehicle logs generation is already in progress');
+    }
+    interval(generateDto.interval)
+      .pipe(
+        // generate logs at each interval and wait for each completion
+        concatMap(() => this.vehicleLogsDataLoader.generateAndSaveVehicleLogs(generateDto.max)),
+        takeUntil(
+          // stop after the specified duration
+          timer(generateDto.duration).pipe(
+            takeUntil(this._generateStopSignal), // allow external stop signal
+          ),
+        ),
+        takeUntil(this._generateStopSignal), // allow external stop signal
+      )
+      .subscribe({
+        error: () => (this._generating = false),
+        complete: () => (this._generating = false),
+      });
+
+    this._generating = true;
+  }
+
+  generateStop(): void {
+    this._generateStopSignal.next();
+  }
 }

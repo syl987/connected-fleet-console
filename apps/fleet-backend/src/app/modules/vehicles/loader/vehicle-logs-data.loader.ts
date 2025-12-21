@@ -75,14 +75,7 @@ export class VehicleLogsDataLoader {
     @InjectRepository(Vehicle) private readonly vehiclesRepository: Repository<Vehicle>,
   ) {}
 
-  async loadInitialData(maxLogsPerVehicle = 100): Promise<void> {
-    const count = await this.vehicleLogsRepository.count();
-
-    if (count > 0) {
-      this.logger.log('Vehicle logs data already exists, skipping initial data load');
-      return;
-    }
-
+  async generateAndSaveVehicleLogs(maxLogsPerVehicle = 100): Promise<void> {
     try {
       const vehicles = await this.vehiclesRepository.find({ where: { deletedAt: null } });
 

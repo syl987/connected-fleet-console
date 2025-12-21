@@ -1,19 +1,26 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
-import { CreateVehicleLogDto } from '../dto/create-vehicle-log.dto';
-import { VehicleLogDto } from '../dto/vehicle-log.dto';
-import { VehicleLogsService } from '../services/vehicle-logs.service';
+import { GenerateVehicleLogsDto } from '../dto/generate-vehicle-logs.dto';
+import { VehicleLogsUtilsService } from '../services/vehicle-logs-utils.service';
 
 @ApiTags('Logs')
 @Controller('logs/utils/vehicles')
 export class VehicleLogsUtilsController {
-  constructor(private readonly vehicleLogsService: VehicleLogsService) {}
+  constructor(private readonly vehicleLogsUtilsService: VehicleLogsUtilsService) {}
 
   @Post('generate/start')
-  @ApiOperation({ summary: 'Generate vehicle logs in real-time for a specified duration.' })
-  @ApiBody({ type: CreateVehicleLogDto })
-  @ApiResponse({ status: 201, description: 'Triggered vehicle logs generation', type: VehicleLogDto })
-  async generateStart(@Body() createDto: CreateVehicleLogDto): Promise<void> {
-    throw new Error('Method not implemented.');
+  @ApiOperation({ summary: 'Start generating vehicle logs in real-time for a specified duration.' })
+  @ApiBody({ type: GenerateVehicleLogsDto })
+  @ApiResponse({ status: 200, description: 'Triggered vehicle logs generation' })
+  @ApiResponse({ status: 409, description: 'Vehicle logs generation is already in progress' })
+  generateStart(@Body() generateDto: GenerateVehicleLogsDto): void {
+    this.vehicleLogsUtilsService.generateStart(generateDto);
+  }
+
+  @Post('generate/stop')
+  @ApiOperation({ summary: 'Stop generating vehicle logs.' })
+  @ApiResponse({ status: 200, description: 'Any potentially ongoing vehicle logs generation has been stopped' })
+  generateStop(): void {
+    this.vehicleLogsUtilsService.generateStop();
   }
 }
