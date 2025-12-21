@@ -20,7 +20,7 @@ export class DashboardEffects {
         this.vehicleLogUtilsDataService.startGeneratingLogs(options).pipe(
           mapResponse({
             next: () => {
-              const message = `Started generating vehicle logs for ${options.duration} seconds.`;
+              const message = `Started generating vehicle logs for ${Math.ceil(options.duration / 60 / 1000)} minutes.`;
               this.toastService.showSuccessToast(message);
               return DashboardActions.startGeneratingLogsSUCCESS();
             },

@@ -104,7 +104,7 @@ export class VehicleLogsDataLoader {
       }
 
       await this.vehicleLogsRepository.save(logs);
-      this.logger.log(`Successfully loaded ${logs.length} vehicle logs`);
+      this.logger.log(`Successfully saved ${logs.length} vehicle logs`);
     } catch (error) {
       this.logger.error(
         `Failed to load initial vehicle logs data: ${(error as Error).message}`,
