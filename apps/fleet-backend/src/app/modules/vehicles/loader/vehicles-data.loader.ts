@@ -10,8 +10,10 @@ function loadVehiclesFromJson() {
   try {
     // Try multiple possible paths for different environments
     const possiblePaths = [
-      join(process.cwd(), 'apps/fleet-backend/src/assets/vehicles.json'), // Development
-      join(process.cwd(), 'dist/apps/fleet-backend/assets/vehicles.json'), // Production
+      join(process.cwd(), 'apps/fleet-backend/src/assets/vehicles.json'), // Development from workspace root
+      join(process.cwd(), 'dist/apps/fleet-backend/assets/vehicles.json'), // Production from workspace root
+      join(process.cwd(), 'assets/vehicles.json'), // Production: running from dist/apps/fleet-backend
+      join(__dirname, 'assets/vehicles.json'), // Production: __dirname relative
     ];
 
     for (const filePath of possiblePaths) {
