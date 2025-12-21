@@ -14,7 +14,7 @@ To install necessary packages to run the apps, use:
 npm ci
 ```
 
-To run the backend on a dev server at http://localhost:3000/api, use:
+To run the backend on a dev server at http://localhost:3000/api (Swagger API Docs), use:
 
 ```sh
 npx nx serve fleet-backend
