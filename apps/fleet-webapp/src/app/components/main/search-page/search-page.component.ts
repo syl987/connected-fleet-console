@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, effect, inject, viewChild } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -10,11 +11,9 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
-import { Store } from '@ngrx/store';
-import { SearchLogsParams } from '../../../models/search.models';
+import { SearchVehicleLogsParams } from '../../../models/search.models';
 import { VehicleLog } from '../../../models/vehicle-log.models';
-import { SearchActions } from '../../../store/search/search.actions';
-import { searchFeature } from '../../../store/search/search.reducer';
+import { SearchService } from '../../../services/search.service';
 import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
 
 const tableColumns = [
@@ -47,7 +46,7 @@ const tableColumns = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SearchPageComponent {
-  protected readonly store = inject(Store);
+  protected readonly searchService = inject(SearchService);
 
   readonly form = new FormGroup({
     search: new FormControl<string | null>(null),
@@ -60,12 +59,12 @@ export class SearchPageComponent {
     to: new FormControl<string | null>(null),
   });
 
-  readonly vehicleLogs = this.store.selectSignal(searchFeature.selectAll);
-  readonly page = this.store.selectSignal(searchFeature.selectPage);
-  readonly size = this.store.selectSignal(searchFeature.selectSize);
-  readonly total = this.store.selectSignal(searchFeature.selectTotal);
-  readonly loading = this.store.selectSignal(searchFeature.selectLoading);
-  readonly loaded = this.store.selectSignal(searchFeature.selectLoaded);
+  readonly vehicleLogs = toSignal(this.searchService.vehicleLogs$, { requireSync: true });
+  readonly page = toSignal(this.searchService.page$, { requireSync: true });
+  readonly size = toSignal(this.searchService.size$, { requireSync: true });
+  readonly total = toSignal(this.searchService.total$, { requireSync: true });
+  readonly loading = toSignal(this.searchService.loading$, { requireSync: true });
+  readonly loaded = toSignal(this.searchService.loaded$, { requireSync: true });
 
   readonly paginator = viewChild(MatPaginator);
 
@@ -79,7 +78,7 @@ export class SearchPageComponent {
   }
 
   search(options?: { page?: number; size?: number }): void {
-    const params: SearchLogsParams = {
+    const params: SearchVehicleLogsParams = {
       search: this.form.value.search || undefined,
       vehicle: this.form.value.vehicle || undefined,
       mileage: this.form.value.mileage || undefined,
@@ -92,10 +91,10 @@ export class SearchPageComponent {
       page: options?.page ?? 1,
       size: options?.size ?? this.paginator()?.pageSize ?? 5,
     };
-    this.store.dispatch(SearchActions.searchVehicleLogs({ params }));
+    this.searchService.search(params);
   }
 
   clearVehicleLogs(): void {
-    this.store.dispatch(SearchActions.clearVehicleLogs());
+    this.searchService.clearVehicleLogs();
   }
 }
