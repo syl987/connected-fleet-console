@@ -22,7 +22,7 @@ export class VehicleLogsUtilsService {
 
     interval(generateDto.interval)
       .pipe(
-        // generate logs at each interval tick and wait for each completion
+        // generate logs on each interval tick and wait for each completion
         concatMap(() => this.vehicleLogsDataLoader.generateAndSaveVehicleLogs(generateDto.max)),
         takeUntil(
           // stop after the specified duration
