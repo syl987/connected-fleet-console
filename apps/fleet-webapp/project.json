@@ -16,8 +16,8 @@
         "inlineStyleLanguage": "scss",
         "assets": [
           {
-            "glob": "(ARCHITECTURE|FEATURES|PROGRESSION|REQUIREMENTS).md",
-            "input": "",
+            "glob": "*.md",
+            "input": "docs",
             "output": "/assets/docs"
           },
           {
