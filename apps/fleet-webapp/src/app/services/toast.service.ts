@@ -19,7 +19,7 @@ export class ToastService {
       action: options?.action,
     };
     return this.snackbar.openFromComponent(ToastComponent, {
-      duration: 9 * 1000,
+      duration: 12 * 1000,
       ...options,
       data,
       panelClass: 'app-primary',
@@ -33,7 +33,7 @@ export class ToastService {
       action: options?.action,
     };
     return this.snackbar.openFromComponent(ToastComponent, {
-      duration: 5 * 1000,
+      duration: 6 * 1000,
       ...options,
       data,
       panelClass: 'app-tertiary',
@@ -47,7 +47,7 @@ export class ToastService {
       action: options?.action,
     };
     return this.snackbar.openFromComponent(ToastComponent, {
-      duration: 7 * 1000,
+      duration: 9 * 1000,
       ...options,
       data,
       panelClass: 'app-error',
