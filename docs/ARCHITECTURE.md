@@ -2,7 +2,7 @@
 
 ### Overview
 
-The **State Management** with ngrx is the center-piece of the Front-End architecture.
+The **State Management** with ngrx is the centerpiece of the Front-End architecture.
 
 It implements a reactive, event-driven approach with separation of concerns principle in mind (MVC concept).
 
