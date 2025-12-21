@@ -1,15 +1,18 @@
-/**
- * This is not a production server yet!
- * This is only a minimal backend to get started.
- */
-
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { NestExpressApplication } from '@nestjs/platform-express';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import { join } from 'path';
 import { AppModule } from './app/app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  // Serve static files from Angular build
+  app.useStaticAssets(join(__dirname, '..', 'fleet-webapp'), {
+    prefix: '/',
+    index: false,
+  });
 
   app.useGlobalPipes(
     new ValidationPipe({
@@ -30,6 +33,15 @@ async function bootstrap() {
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document); // docs available at /api
+
+  // Fallback to index.html for Angular routing
+  app.use((req, res, next) => {
+    if (!req.url.startsWith('/api')) {
+      res.sendFile(join(__dirname, '..', 'fleet-webapp', 'index.html'));
+    } else {
+      next();
+    }
+  });
 
   const port = process.env.PORT || 3000;
   await app.listen(port);

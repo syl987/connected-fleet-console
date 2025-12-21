@@ -1,10 +1,10 @@
 services:
   - type: web
-    name: fleet-backend
+    name: connected-fleet-console
     runtime: node
-    region: oregon
+    region: frankfurt
     plan: free
-    buildCommand: npm install && npx nx build fleet-backend --configuration=production && npx nx prune fleet-backend
+    buildCommand: npm ci && npx nx build fleet-webapp --configuration=production && npx nx build fleet-backend --configuration=production
     startCommand: cd dist/apps/fleet-backend && node main.js
     envVars:
       - key: NODE_ENV
