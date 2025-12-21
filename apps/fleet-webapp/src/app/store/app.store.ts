@@ -14,6 +14,8 @@ import { EntityType } from '../models/entity.models';
 import { consoleLogMetaReducer } from './app.meta-reducers';
 import { ToastEffects } from './core/toast.effects';
 import { UndoEffects } from './core/undo.effects';
+import { DashboardEffects } from './dashboard/dashboard.effects';
+import * as fromDashboard from './dashboard/dashboard.reducer';
 import { SearchEffects } from './search/search.effects';
 import * as fromSearch from './search/search.reducer';
 import { VehicleLogEffects } from './vehicle-logs/vehicle-log.effects';
@@ -22,12 +24,14 @@ import * as fromVehicleLogs from './vehicle-logs/vehicle-log.reducer';
 export interface RootState {
   router: RouterReducerState<MinimalRouterStateSnapshot>;
   search: fromSearch.State;
+  dashboard: fromDashboard.State;
   vehicleLogs: fromVehicleLogs.State;
 }
 
 export const reducers: ActionReducerMap<RootState> = {
   router: routerReducer,
   search: fromSearch.reducer,
+  dashboard: fromDashboard.reducer,
   vehicleLogs: fromVehicleLogs.reducer,
 };
 
@@ -75,6 +79,7 @@ export const entityDataServiceConfig: AppDefaultDataServiceConfig = {
 
 export const effects = [
   SearchEffects,
+  DashboardEffects,
   VehicleLogEffects,
   ToastEffects,
   UndoEffects,

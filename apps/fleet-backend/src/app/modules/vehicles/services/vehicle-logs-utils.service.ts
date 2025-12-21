@@ -1,10 +1,12 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, Logger } from '@nestjs/common';
 import { concatMap, endWith, interval, Subject, takeUntil, timer } from 'rxjs';
 import { GenerateVehicleLogsDto } from '../dto/generate-vehicle-logs.dto';
 import { VehicleLogsDataLoader } from '../loader/vehicle-logs-data.loader';
 
 @Injectable()
 export class VehicleLogsUtilsService {
+  private readonly logger = new Logger(VehicleLogsUtilsService.name);
+
   private readonly _generateStopSignal = new Subject<void>();
 
   private _generating = false;
@@ -16,26 +18,36 @@ export class VehicleLogsUtilsService {
       throw new ConflictException('Vehicle logs generation is already in progress');
     }
     this._generating = true;
+    this.logger.log(`Starting vehicle logs generation for ${generateDto.duration} ms...`);
 
     interval(generateDto.interval)
       .pipe(
-        // generate logs at each interval and wait for each completion
+        // generate logs on each interval tick and wait for each completion
         concatMap(() => this.vehicleLogsDataLoader.generateAndSaveVehicleLogs(generateDto.max)),
         takeUntil(
           // stop after the specified duration
           timer(generateDto.duration).pipe(
-            endWith(undefined), // propagate external stop signal to the outer takeUntil
-            takeUntil(this._generateStopSignal), // allow external stop signal
+            // allow external stop signal
+            takeUntil(this._generateStopSignal),
+            // propagate external stop signal to the outer takeUntil
+            endWith(undefined),
           ),
         ),
       )
       .subscribe({
-        error: () => (this._generating = false),
-        complete: () => (this._generating = false),
+        error: () => {
+          this._generating = false;
+          this.logger.log('Vehicle logs generation stopped due to error');
+        },
+        complete: () => {
+          this._generating = false;
+          this.logger.log('Stopped vehicle logs generation');
+        },
       });
   }
 
   stopGeneratingLogs(): void {
+    this.logger.log('Stop signal sent for vehicle logs generation');
     this._generateStopSignal.next();
   }
 }

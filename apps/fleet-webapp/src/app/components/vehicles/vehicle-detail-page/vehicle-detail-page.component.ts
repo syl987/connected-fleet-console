@@ -8,11 +8,9 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterModule } from '@angular/router';
-import { Store } from '@ngrx/store';
 import { VehicleLog } from '../../../models/vehicle-log.models';
 import { VehicleLogService } from '../../../services/vehicle-log.service';
 import { VehicleService } from '../../../services/vehicle.service';
-import { vehicleLogsFeature } from '../../../store/vehicle-logs/vehicle-log.reducer';
 import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
 import { VehicleCardComponent } from '../vehicle-card/vehicle-card.component';
 
@@ -41,7 +39,6 @@ const tableColumns = [
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VehicleDetailPageComponent {
-  protected readonly store = inject(Store);
   protected readonly vehicleService = inject(VehicleService);
   protected readonly vehicleLogService = inject(VehicleLogService);
 
@@ -49,7 +46,7 @@ export class VehicleDetailPageComponent {
   readonly vehicleLoading = toSignal(this.vehicleService.loading$, { requireSync: true });
 
   readonly vehicleLogs = toSignal(this.vehicleLogService.entitiesByRouteId$, { requireSync: true });
-  readonly vehicleLogsLoading = this.store.selectSignal(vehicleLogsFeature.selectLoading);
+  readonly vehicleLogsLoading = toSignal(this.vehicleLogService.vehicleLogsLoading$, { requireSync: true });
 
   readonly paginator = viewChild(MatPaginator);
 

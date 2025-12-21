@@ -11,7 +11,7 @@ export class GenerateVehicleLogsDto {
   @ApiProperty({ description: 'Interval how often to generate logs in milliseconds', example: 1000, type: Number })
   @IsInt()
   @Min(1000)
-  @Max(5 * 60 * 1000)
+  @Max(60 * 1000)
   interval!: number;
 
   @ApiProperty({

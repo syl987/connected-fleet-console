@@ -3,7 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { toHttpParams } from '../../helpers/http.helpers';
 import { Page } from '../../models/entity.models';
-import { SearchLogsParams } from '../../models/search.models';
+import { SearchVehicleLogsParams } from '../../models/search.models';
 import { VehicleLog } from '../../models/vehicle-log.models';
 
 @Injectable({ providedIn: 'root' })
@@ -16,7 +16,7 @@ export class VehicleLogDataService {
     return this.http.post<VehicleLog>(this.url, log);
   }
 
-  getBySearchParams(params: SearchLogsParams): Observable<Page<VehicleLog>> {
+  getBySearchParams(params: SearchVehicleLogsParams): Observable<Page<VehicleLog>> {
     return this.http.get<Page<VehicleLog>>(this.url, {
       params: toHttpParams(params),
     });

@@ -16,17 +16,17 @@ export class SearchEffects {
 
   readonly searchVehicleLogs = createEffect(() => {
     return this.actions.pipe(
-      ofType(SearchActions.searchLogs),
+      ofType(SearchActions.searchVehicleLogs),
       switchMap(({ params }) =>
         this.vehicleLogDataService.getBySearchParams(params).pipe(
           mapResponse({
             next: (page) => {
               this.vehicleLogService.upsertManyInCache(page.data);
-              return SearchActions.searchLogsSUCCESS({ page });
+              return SearchActions.searchVehicleLogsSUCCESS({ page });
             },
             error: () => {
               this.toastService.showErrorToast('Error loading vehicle logs.');
-              return SearchActions.searchLogsERROR();
+              return SearchActions.searchVehicleLogsERROR();
             },
           }),
         ),

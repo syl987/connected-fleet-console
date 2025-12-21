@@ -1,15 +1,15 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 
 import { Page } from '../../models/entity.models';
-import { SearchLogsParams } from '../../models/search.models';
+import { SearchVehicleLogsParams } from '../../models/search.models';
 import { VehicleLog } from '../../models/vehicle-log.models';
 
 export const SearchActions = createActionGroup({
-  source: 'Search/API',
+  source: 'VehicleLogs/API',
   events: {
-    searchLogs: props<{ params: SearchLogsParams }>(),
-    searchLogsSUCCESS: props<{ page: Page<VehicleLog> }>(),
-    searchLogsERROR: emptyProps(),
-    clearLogs: emptyProps(),
+    searchVehicleLogs: props<{ params: SearchVehicleLogsParams }>(),
+    searchVehicleLogsSUCCESS: props<{ page: Page<VehicleLog> }>(),
+    searchVehicleLogsERROR: emptyProps(),
+    clearVehicleLogs: emptyProps(),
   },
 });

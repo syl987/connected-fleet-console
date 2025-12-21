@@ -72,6 +72,7 @@
 
 ## Assumptions
 
+- [check] Create endpoints to start / stop generating logs in real-time
 - [check] Browseable vehicle metadata (interconnect with logs) -> Vehicles Page
 - [check] Editable vehicle metadata with CRUD operations -> Vehicles Controller
 - [ ] Check deployment opportunities with Firebase
