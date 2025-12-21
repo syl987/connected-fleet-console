@@ -53,7 +53,7 @@
 - [check] Usage of complex rxjs operators -> check .effects, .service files + .reducer files for complex selectors
 - [check] Handle in-flight requests -> check .effects files for switchMap (other mappers not relevant in this app)
 - [check] Use ngrx, signals, rxjs -> using all of these
-- [ ] Explain in a concept -> check ARCHITECTURE.md
+- [check] Explain in a concept -> check ARCHITECTURE.md
 
 #### UI/UX
 
@@ -64,12 +64,12 @@
 
 #### Organizational
 
-- [ ] Github link for source code -> check webapp header
+- [check] Github link for source code -> check webapp header
 - [check] Requirements description -> this file
-- [ ] List assumptions -> this file below
-- [ ] Concept / architecture description -> check ARCHITECTURE.md file
+- [check] List assumptions -> this file below
+- [check] Concept / architecture description -> check ARCHITECTURE.md file
 - [ ] Relevant README.md with how-to and prerequisites, overview of what works
-- [ ] API documentation -> check Swagger API at http://localhost:3000/api
+- [check] API documentation -> check Swagger API at http://localhost:3000/api
 - [ ] (optional) Containerization with Docker
 
 ### Assumptions
