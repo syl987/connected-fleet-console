@@ -1,5 +1,5 @@
 import { ConflictException, Injectable } from '@nestjs/common';
-import { concatMap, interval, Subject, takeUntil, timer } from 'rxjs';
+import { concatMap, endWith, interval, Subject, takeUntil, timer } from 'rxjs';
 import { GenerateVehicleLogsDto } from '../dto/generate-vehicle-logs.dto';
 import { VehicleLogsDataLoader } from '../loader/vehicle-logs-data.loader';
 
@@ -24,10 +24,10 @@ export class VehicleLogsUtilsService {
         takeUntil(
           // stop after the specified duration
           timer(generateDto.duration).pipe(
+            endWith(undefined), // propagate external stop signal to the outer takeUntil
             takeUntil(this._generateStopSignal), // allow external stop signal
           ),
         ),
-        takeUntil(this._generateStopSignal), // allow external stop signal
       )
       .subscribe({
         error: () => (this._generating = false),

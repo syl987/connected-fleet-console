@@ -4,13 +4,13 @@ import { IsInt, Max, Min } from 'class-validator';
 export class GenerateVehicleLogsDto {
   @ApiProperty({ description: 'Duration in milliseconds', example: 60000, type: Number })
   @IsInt()
-  @Min(1)
+  @Min(1000)
   @Max(10 * 60 * 1000)
   duration!: number;
 
   @ApiProperty({ description: 'Interval how often to generate logs in milliseconds', example: 1000, type: Number })
   @IsInt()
-  @Min(5 * 1000)
+  @Min(1000)
   @Max(5 * 60 * 1000)
   interval!: number;
 
