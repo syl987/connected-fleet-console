@@ -66,7 +66,7 @@
 - [check] Requirements description -> this file
 - [check] List assumptions -> this file below
 - [check] Concept / architecture description -> check ARCHITECTURE.md file
-- [ ] Relevant README.md with how-to and prerequisites, overview of what works
+- [check] Relevant README.md with how-to and prerequisites, overview of what works
 - [check] API documentation -> check Swagger API at http://localhost:3000/api
 - [ ] (optional) Containerization with Docker
 
