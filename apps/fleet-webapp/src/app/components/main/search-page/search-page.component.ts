@@ -92,6 +92,10 @@ export class SearchPageComponent {
       page: options?.page ?? 1,
       size: options?.size ?? this.paginator()?.pageSize ?? 5,
     };
-    this.store.dispatch(SearchActions.searchLogs({ params }));
+    this.store.dispatch(SearchActions.searchVehicleLogs({ params }));
+  }
+
+  clearVehicleLogs(): void {
+    this.store.dispatch(SearchActions.clearVehicleLogs());
   }
 }

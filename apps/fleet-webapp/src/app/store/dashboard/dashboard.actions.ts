@@ -2,7 +2,7 @@ import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import { GenerateVehicleLogsOptions } from '../../models/vehicle-log.models';
 
 export const DashboardActions = createActionGroup({
-  source: 'Dashboard/API',
+  source: 'VehicleLogs/API',
   events: {
     startGeneratingLogs: props<{ options: GenerateVehicleLogsOptions }>(),
     startGeneratingLogsSUCCESS: emptyProps(),

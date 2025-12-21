@@ -5,11 +5,11 @@ import { SearchLogsParams } from '../../models/search.models';
 import { VehicleLog } from '../../models/vehicle-log.models';
 
 export const SearchActions = createActionGroup({
-  source: 'Search/API',
+  source: 'VehicleLogs/API',
   events: {
-    searchLogs: props<{ params: SearchLogsParams }>(),
-    searchLogsSUCCESS: props<{ page: Page<VehicleLog> }>(),
-    searchLogsERROR: emptyProps(),
-    clearLogs: emptyProps(),
+    searchVehicleLogs: props<{ params: SearchLogsParams }>(),
+    searchVehicleLogsSUCCESS: props<{ page: Page<VehicleLog> }>(),
+    searchVehicleLogsERROR: emptyProps(),
+    clearVehicleLogs: emptyProps(),
   },
 });
