@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { CreateVehicleLogDto } from '../dto/create-vehicle-log.dto';
 import { VehicleLog } from '../entities/vehicle-log.entity';
 import { Vehicle } from '../entities/vehicle.entity';
@@ -33,6 +33,36 @@ export class VehicleLogsService {
       vehicle,
     });
     return this.vehicleLogsRepository.save(log);
+  }
+
+  async createMany(createDtos: CreateVehicleLogDto[]): Promise<VehicleLog[]> {
+    if (!createDtos.length) return [];
+
+    // Get unique vehicle IDs
+    const vehicleIds = [...new Set(createDtos.map((dto) => dto.vehicleId))];
+
+    // Fetch all vehicles at once
+    const vehicles = await this.vehiclesRepository.findBy({ id: In(vehicleIds) });
+    const vehicleMap = new Map(vehicles.map((v) => [v.id, v]));
+
+    // Validate all vehicles exist
+    const missingVehicleIds = vehicleIds.filter((id) => !vehicleMap.has(id));
+    if (missingVehicleIds.length > 0) {
+      throw new NotFoundException(`Vehicles not found: ${missingVehicleIds.join(', ')}`);
+    }
+
+    // Create logs
+    const logs = createDtos.map((dto) =>
+      this.vehicleLogsRepository.create({
+        timestamp: new Date(dto.timestamp),
+        severity: dto.severity,
+        code: dto.code,
+        message: dto.message,
+        vehicle: vehicleMap.get(dto.vehicleId),
+      }),
+    );
+
+    return this.vehicleLogsRepository.save(logs);
   }
 
   async findAll(
