@@ -86,7 +86,7 @@ const techStack: AppTechStackItem[] = [
     subtitle: `Style Linting`,
     description: `Standard SCSS configuration with plugins for standardized code automation.`,
     image: 'https://stylelint.io/img/dark.svg',
-    imageClass: 'px-12',
+    imageClass: 'pt-2 w-2/3',
   },
   {
     title: `Prettier`,

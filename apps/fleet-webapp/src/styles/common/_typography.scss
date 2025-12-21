@@ -27,6 +27,7 @@ h6 {
 }
 
 p {
+  margin-top: 0;
   margin-bottom: 1rem;
 }
 
@@ -40,4 +41,10 @@ dl {
   dd {
     margin-bottom: 0.5rem;
   }
+}
+
+a {
+  color: inherit !important;
+  -webkit-text-decoration: inherit !important;
+  text-decoration: inherit;
 }

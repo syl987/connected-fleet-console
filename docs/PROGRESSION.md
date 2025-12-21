@@ -31,14 +31,14 @@
 3. Document features
 4. Document requirements match
 5. Document Progression
-6. TODO Document Architecture
+6. Document Architecture
 7. Refine feature (FE)
 
 ### 5. Organizational
 
-1. TODO Document README.md
-2. TODO Check Firebase hosting opportunities
-3. TODO Open GitHub project to public
+1. Document README.md
+2. Check Firebase hosting opportunities
+3. Open GitHub project to public
 
 ### 6. Feature: Real-Time Dashboard
 
