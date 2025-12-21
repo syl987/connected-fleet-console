@@ -4,9 +4,244 @@
     <button mat-stroked-button class="app-error" (click)="stopGeneratingLogs()" aria-label="Stop Generating Logs">
       Stop
     </button>
+    <button mat-stroked-button (click)="loadAnalytics()" [disabled]="loading()">
+      <mat-icon>refresh</mat-icon>
+      Refresh
+    </button>
   </app-title-bar>
 
-  <p>Overview of critical metrics based on vehicle logs.</p>
+  @if (loading()) {
+    <div class="loading-container">
+      <mat-spinner diameter="40"></mat-spinner>
+      <p>Loading analytics...</p>
+    </div>
+  }
 
-  <p class="font-mono opacity-75">async log generation start / stop</p>
+  <!-- Summary Cards -->
+  @if (summary(); as data) {
+    <div class="summary-grid">
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>list_alt</mat-icon>
+          <mat-card-title>Total Logs</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stat-value">{{ data.totalLogs | number }}</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>directions_car</mat-icon>
+          <mat-card-title>Unique Vehicles</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stat-value">{{ data.uniqueVehicles }}</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>code</mat-icon>
+          <mat-card-title>Error Codes</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div class="stat-value">{{ data.uniqueCodes }}</div>
+        </mat-card-content>
+      </mat-card>
+
+      @if (trends(); as trendData) {
+        <mat-card appearance="outlined">
+          <mat-card-header>
+            <mat-icon mat-card-avatar>{{ getTrendIcon(trendData.overallTrend) }}</mat-icon>
+            <mat-card-title>Trend</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <div class="stat-value">{{ trendData.overallTrend }}</div>
+            <div class="stat-subtitle">{{ trendData.changeRate | number: '1.1-1' }}% change</div>
+          </mat-card-content>
+        </mat-card>
+      }
+    </div>
+  }
+
+  <!-- Severity Distribution -->
+  @if (summary(); as data) {
+    <mat-card appearance="outlined" class="severity-card">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>pie_chart</mat-icon>
+        <mat-card-title>Severity Distribution</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="severity-chips">
+          @for (item of data.bySeverity | keyvalue; track item.key) {
+            <mat-chip [highlighted]="true" [color]="getSeverityColor(item.key)">
+              {{ item.key }}: {{ item.value | number }}
+            </mat-chip>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- Top Errors Table -->
+  @if (topErrors().length > 0) {
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>error_outline</mat-icon>
+        <mat-card-title>Top Error Codes</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <table mat-table [dataSource]="topErrors()" class="analytics-table">
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef>Code</th>
+            <td mat-cell *matCellDef="let error">
+              <strong>{{ error.code }}</strong>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="severity">
+            <th mat-header-cell *matHeaderCellDef>Severity</th>
+            <td mat-cell *matCellDef="let error">
+              <mat-chip [color]="getSeverityColor(error.severity)">{{ error.severity }}</mat-chip>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="count">
+            <th mat-header-cell *matHeaderCellDef>Occurrences</th>
+            <td mat-cell *matCellDef="let error">{{ error.count | number }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="affectedVehicles">
+            <th mat-header-cell *matHeaderCellDef>Affected Vehicles</th>
+            <td mat-cell *matCellDef="let error">{{ error.affectedVehicles }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="lastOccurrence">
+            <th mat-header-cell *matHeaderCellDef>Last Occurrence</th>
+            <td mat-cell *matCellDef="let error">{{ error.lastOccurrence | date: 'short' }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="topErrorColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: topErrorColumns"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- Vehicle Health -->
+  @if (vehicleHealth().length > 0) {
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>health_and_safety</mat-icon>
+        <mat-card-title>Vehicle Health Status</mat-card-title>
+        <mat-card-subtitle>Top 10 vehicles by activity</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <table mat-table [dataSource]="vehicleHealth()" class="analytics-table">
+          <ng-container matColumnDef="vehicle">
+            <th mat-header-cell *matHeaderCellDef>Vehicle</th>
+            <td mat-cell *matCellDef="let vh">
+              <div class="vehicle-cell">
+                <strong>{{ vh.vehicleName }}</strong>
+                <span class="vin">{{ vh.vin }}</span>
+              </div>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef>Status</th>
+            <td mat-cell *matCellDef="let vh">
+              <mat-chip [color]="getStatusColor(vh.status)">
+                <mat-icon>{{ getStatusIcon(vh.status) }}</mat-icon>
+                {{ vh.status }}
+              </mat-chip>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="healthScore">
+            <th mat-header-cell *matHeaderCellDef>Health Score</th>
+            <td mat-cell *matCellDef="let vh">
+              <strong>{{ vh.healthScore | number: '1.1-1' }}</strong>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="critical">
+            <th mat-header-cell *matHeaderCellDef>Critical</th>
+            <td mat-cell *matCellDef="let vh">{{ vh.criticalCount }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="error">
+            <th mat-header-cell *matHeaderCellDef>Errors</th>
+            <td mat-cell *matCellDef="let vh">{{ vh.errorCount }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="warning">
+            <th mat-header-cell *matHeaderCellDef>Warnings</th>
+            <td mat-cell *matCellDef="let vh">{{ vh.warningCount }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="total">
+            <th mat-header-cell *matHeaderCellDef>Total</th>
+            <td mat-cell *matCellDef="let vh">{{ vh.totalLogs }}</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="vehicleHealthColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: vehicleHealthColumns"></tr>
+        </table>
+      </mat-card-content>
+    </mat-card>
+  }
+
+  <!-- Trends & Predictions -->
+  @if (trends(); as trendData) {
+    <mat-card appearance="outlined">
+      <mat-card-header>
+        <mat-icon mat-card-avatar>analytics</mat-icon>
+        <mat-card-title>Trends & Predictions</mat-card-title>
+        <mat-card-subtitle>Last 7 days analysis</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="trends-grid">
+          <div class="trend-item">
+            <label>Overall Trend</label>
+            <div class="trend-value">
+              <mat-icon>{{ getTrendIcon(trendData.overallTrend) }}</mat-icon>
+              {{ trendData.overallTrend }}
+            </div>
+          </div>
+          <div class="trend-item">
+            <label>Change Rate</label>
+            <div class="trend-value">{{ trendData.changeRate | number: '1.1-1' }}%</div>
+          </div>
+          <div class="trend-item">
+            <label>Next Day Prediction</label>
+            <div class="trend-value">{{ trendData.predictions.nextDay | number }}</div>
+          </div>
+          <div class="trend-item">
+            <label>Next Week Prediction</label>
+            <div class="trend-value">{{ trendData.predictions.nextWeek | number }}</div>
+          </div>
+        </div>
+
+        @if (trendData.anomalies.length > 0) {
+          <mat-divider></mat-divider>
+          <div class="anomalies-section">
+            <h3>Detected Anomalies</h3>
+            <div class="anomalies-list">
+              @for (anomaly of trendData.anomalies; track anomaly.date) {
+                <div class="anomaly-item">
+                  <mat-icon color="warn">warning</mat-icon>
+                  <span class="date">{{ anomaly.date | date: 'mediumDate' }}</span>
+                  <span class="count">{{ anomaly.count }} logs</span>
+                  <span class="expected">(expected: {{ anomaly.expected }})</span>
+                  <mat-chip color="warn">{{ anomaly.deviation | number: '1.1-1' }}σ</mat-chip>
+                </div>
+              }
+            </div>
+          </div>
+        }
+      </mat-card-content>
+    </mat-card>
+  }
 </div>
