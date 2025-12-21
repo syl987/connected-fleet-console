@@ -47,7 +47,7 @@ export class VehicleLogsUtilsService {
   }
 
   stopGeneratingLogs(): void {
-    this.logger.log('Stopping vehicle logs generation');
+    this.logger.log('Stop signal sent for vehicle logs generation');
     this._generateStopSignal.next();
   }
 }
