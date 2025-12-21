@@ -74,8 +74,8 @@ export class VehicleLogsAnalyticsController {
     },
   })
   async getSeverityDistribution(
-    @Query('from', new DefaultValuePipe(null), ParseDatePipe) from?: Date,
-    @Query('to', new DefaultValuePipe(null), ParseDatePipe) to?: Date,
+    @Query('from', new DefaultValuePipe(null), new ParseDatePipe()) from?: Date,
+    @Query('to', new DefaultValuePipe(null), new ParseDatePipe()) to?: Date,
     @Query('vehicle', new DefaultValuePipe(null), ParseIntPipe) vehicleId?: number,
   ) {
     return this.analyticsService.getSeverityDistribution(from, to, vehicleId);
@@ -108,8 +108,8 @@ export class VehicleLogsAnalyticsController {
     @Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number,
     @Query('severity', new DefaultValuePipe(null), new ParseEnumPipe(SEVERITY_VALUES, { optional: true }))
     severity?: string,
-    @Query('from', new DefaultValuePipe(null), ParseDatePipe) from?: Date,
-    @Query('to', new DefaultValuePipe(null), ParseDatePipe) to?: Date,
+    @Query('from', new DefaultValuePipe(null), new ParseDatePipe()) from?: Date,
+    @Query('to', new DefaultValuePipe(null), new ParseDatePipe()) to?: Date,
   ) {
     return this.analyticsService.getTopErrors(limit, severity, from, to);
   }
@@ -141,8 +141,8 @@ export class VehicleLogsAnalyticsController {
   })
   async getTimeline(
     @Query('groupBy', new DefaultValuePipe('day'), new ParseEnumPipe(['hour', 'day', 'month'])) groupBy: string,
-    @Query('from', new DefaultValuePipe(null), ParseDatePipe) from?: Date,
-    @Query('to', new DefaultValuePipe(null), ParseDatePipe) to?: Date,
+    @Query('from', new DefaultValuePipe(null), new ParseDatePipe()) from?: Date,
+    @Query('to', new DefaultValuePipe(null), new ParseDatePipe()) to?: Date,
     @Query('severity', new DefaultValuePipe(null), new ParseEnumPipe(SEVERITY_VALUES, { optional: true }))
     severity?: string,
     @Query('vehicle', new DefaultValuePipe(null), ParseIntPipe) vehicleId?: number,
@@ -177,8 +177,8 @@ export class VehicleLogsAnalyticsController {
     },
   })
   async getVehicleHealth(
-    @Query('from', new DefaultValuePipe(null), ParseDatePipe) from?: Date,
-    @Query('to', new DefaultValuePipe(null), ParseDatePipe) to?: Date,
+    @Query('from', new DefaultValuePipe(null), new ParseDatePipe()) from?: Date,
+    @Query('to', new DefaultValuePipe(null), new ParseDatePipe()) to?: Date,
   ) {
     return this.analyticsService.getVehicleHealth(from, to);
   }
@@ -214,8 +214,8 @@ export class VehicleLogsAnalyticsController {
   })
   async getCodePatterns(
     @Query('code', new DefaultValuePipe(null), ParseIntPipe) code?: number,
-    @Query('from', new DefaultValuePipe(null), ParseDatePipe) from?: Date,
-    @Query('to', new DefaultValuePipe(null), ParseDatePipe) to?: Date,
+    @Query('from', new DefaultValuePipe(null), new ParseDatePipe()) from?: Date,
+    @Query('to', new DefaultValuePipe(null), new ParseDatePipe()) to?: Date,
   ) {
     return this.analyticsService.getCodePatterns(code, from, to);
   }
@@ -244,8 +244,8 @@ export class VehicleLogsAnalyticsController {
   async getAggregations(
     @Query('groupBy', new ParseEnumPipe(GROUPBY_VALUES)) groupBy: string,
     @Query('limit', new DefaultValuePipe(20), ParseIntPipe) limit: number,
-    @Query('from', new DefaultValuePipe(null), ParseDatePipe) from?: Date,
-    @Query('to', new DefaultValuePipe(null), ParseDatePipe) to?: Date,
+    @Query('from', new DefaultValuePipe(null), new ParseDatePipe()) from?: Date,
+    @Query('to', new DefaultValuePipe(null), new ParseDatePipe()) to?: Date,
   ) {
     return this.analyticsService.getAggregations(groupBy, limit, from, to);
   }
