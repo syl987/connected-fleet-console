@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mapResponse } from '@ngrx/operators';
-import { exhaustMap } from 'rxjs';
+import { exhaustMap, switchMap } from 'rxjs';
 import { VehicleLogUtilsDataService } from '../../services/data/vehicle-log-utils-data.service';
 import { ToastService } from '../../services/toast.service';
 import { DashboardActions } from './dashboard.actions';
@@ -43,7 +43,7 @@ export class DashboardEffects {
   readonly stopGeneratingLogs = createEffect(() => {
     return this.actions.pipe(
       ofType(DashboardActions.stopGeneratingLogs),
-      exhaustMap(() =>
+      switchMap(() =>
         this.vehicleLogUtilsDataService.stopGeneratingLogs().pipe(
           mapResponse({
             next: () => {
