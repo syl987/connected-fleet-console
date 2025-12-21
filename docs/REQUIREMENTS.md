@@ -72,6 +72,6 @@
 
 ## Assumptions
 
-- [check] Browsable vehicle metadata (interconnect with logs) -> Vehicles Page
+- [check] Browseable vehicle metadata (interconnect with logs) -> Vehicles Page
 - [check] Editable vehicle metadata with CRUD operations -> Vehicles Controller
 - [ ] Check deployment opportunities with Firebase
