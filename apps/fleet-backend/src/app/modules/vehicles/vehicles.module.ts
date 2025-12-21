@@ -31,6 +31,6 @@ export class VehiclesModule implements OnModuleInit {
 
   async onModuleInit(): Promise<void> {
     await this.vehiclesDataLoader.loadInitialData();
-    await this.vehicleLogsDataLoader.generateAndSaveVehicleLogs();
+    await this.vehicleLogsDataLoader.loadInitialData();
   }
 }
