@@ -1,5 +1,4 @@
 import { ConflictException, Injectable, Logger } from '@nestjs/common';
-import { readFile } from 'fs/promises';
 import { concatMap, endWith, interval, startWith, Subject, takeUntil, timer } from 'rxjs';
 import { LogSeverity } from '../../../common/entities/log.entity';
 import { CreateVehicleLogDto } from '../dto/create-vehicle-log.dto';
@@ -33,8 +32,7 @@ export class VehicleLogsUtilsService {
   }): Promise<VehicleLog[]> {
     this.logger.log(`File received: ${file.originalname} (${file.mimetype}, ${file.size} bytes)`);
 
-    const data = await readFile(file.buffer, 'utf-8');
-    const lines = data.split('\n');
+    const lines = file.buffer.toString('utf-8').split('\n');
 
     let skippedLines = 0;
 
