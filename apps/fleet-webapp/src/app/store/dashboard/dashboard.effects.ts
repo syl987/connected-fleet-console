@@ -2,8 +2,9 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mapResponse } from '@ngrx/operators';
-import { exhaustMap, switchMap } from 'rxjs';
+import { exhaustMap, switchMap, takeUntil, tap } from 'rxjs';
 import { VehicleLogUtilsDataService } from '../../services/data/vehicle-log-utils-data.service';
+import { VehicleLogsAnalyticsStreamService } from '../../services/stream/vehicle-logs-stream.service';
 import { ToastService } from '../../services/toast.service';
 import { DashboardActions } from './dashboard.actions';
 
@@ -12,6 +13,7 @@ export class DashboardEffects {
   protected readonly actions = inject(Actions);
   protected readonly toastService = inject(ToastService);
   protected readonly vehicleLogUtilsDataService = inject(VehicleLogUtilsDataService);
+  protected readonly vehicleLogsAnalyticsStreamService = inject(VehicleLogsAnalyticsStreamService);
 
   readonly startGeneratingLogs = createEffect(() => {
     return this.actions.pipe(
@@ -59,4 +61,34 @@ export class DashboardEffects {
       ),
     );
   });
+
+  readonly streamSummary = createEffect(() => {
+    return this.actions.pipe(
+      ofType(DashboardActions.streamSummary),
+      switchMap(() =>
+        this.vehicleLogsAnalyticsStreamService.streamVehicleLogsSummary().pipe(
+          mapResponse({
+            next: (summary) => {
+              return DashboardActions.streamSummaryNEXT({ summary });
+            },
+            error: () => {
+              this.toastService.showErrorToast('Error streaming vehicle logs summary.');
+              return DashboardActions.streamSummaryERROR();
+            },
+          }),
+          takeUntil(this.actions.pipe(ofType(DashboardActions.streamSummarySTOP))), // TODO required?
+        ),
+      ),
+    );
+  });
+
+  readonly stopStreamingSummary = createEffect(
+    () => {
+      return this.actions.pipe(
+        ofType(DashboardActions.streamSummarySTOP),
+        tap(() => this.vehicleLogsAnalyticsStreamService.disconnect()),
+      );
+    },
+    { dispatch: false },
+  );
 }

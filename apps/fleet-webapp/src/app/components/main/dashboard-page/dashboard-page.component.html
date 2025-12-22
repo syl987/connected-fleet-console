@@ -2,15 +2,11 @@
   <app-title-bar>
     <button mat-stroked-button class="app-tertiary" (click)="startGeneratingLogs()">Start Generating Logs</button>
     <button mat-stroked-button class="app-error" (click)="stopGeneratingLogs()">Stop</button>
-    <button mat-stroked-button (click)="loadAnalytics()" [disabled]="loading()">Refresh</button>
   </app-title-bar>
 
-  @if (loading()) {
-    <div class="loading-container">
-      <mat-spinner diameter="40" />
-      <p>Loading analytics...</p>
-    </div>
-  }
+  <p>Overview of critical metrics based on vehicle logs.</p>
+
+  <p class="font-mono opacity-75">server log generation start, stop / stream summary via SSE start, stop</p>
 
   <!-- Summary Cards -->
   @if (summary(); as data) {
@@ -21,27 +17,38 @@
           <mat-card-title>Total Logs</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <div class="stat-value">{{ data.totalLogs | number }}</div>
+          <div>{{ data.totalLogs | number }}</div>
         </mat-card-content>
       </mat-card>
 
       <mat-card appearance="outlined">
         <mat-card-header>
           <mat-icon mat-card-avatar>directions_car</mat-icon>
-          <mat-card-title>Unique Vehicles</mat-card-title>
+          <mat-card-title>Highest Mileage</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <div class="stat-value">{{ data.uniqueVehicles }}</div>
+          <div>{{ data.highestMileage | number }} km</div>
         </mat-card-content>
       </mat-card>
 
       <mat-card appearance="outlined">
         <mat-card-header>
           <mat-icon mat-card-avatar>code</mat-icon>
-          <mat-card-title>Error Codes</mat-card-title>
+          <mat-card-title>Latest Year</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <div class="stat-value">{{ data.uniqueCodes }}</div>
+          <div>{{ data.latestYear }}</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card appearance="outlined">
+        <mat-card-header>
+          <mat-icon mat-card-avatar>code</mat-icon>
+          <mat-card-title>Time Span</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div>{{ data.earliestDate | date }}</div>
+          <div>{{ data.latestDate | date }}</div>
         </mat-card-content>
       </mat-card>
     </div>

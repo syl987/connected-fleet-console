@@ -1,7 +1,6 @@
-import { Controller, DefaultValuePipe, Logger, ParseIntPipe, Query, Sse } from '@nestjs/common';
+import { Controller, DefaultValuePipe, Logger, MessageEvent, ParseIntPipe, Query, Sse } from '@nestjs/common';
 import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { interval, Observable } from 'rxjs';
-import { VehicleLogsSummaryDto } from '../dto/vehicle-logs-summary.dto';
 import { VehicleLogsAnalyticsService } from '../services/vehicle-logs-analytics.service';
 
 @ApiTags('Logs Stream')
@@ -17,20 +16,25 @@ export class VehicleLogsStreamController {
   @ApiResponse({ status: 200, description: 'SSE stream of vehicle logs summary' })
   getSummary(
     @Query('interval', new DefaultValuePipe(5000), ParseIntPipe) intervalMs: number,
-  ): Observable<VehicleLogsSummaryDto> {
+  ): Observable<MessageEvent> {
     this.logger.log(`Starting vehicle logs summary SSE stream with ${intervalMs}ms interval`);
 
-    return new Observable<VehicleLogsSummaryDto>((observer) => {
+    return new Observable<MessageEvent>((observer) => {
       const subscription = interval(intervalMs).subscribe(async () => {
         try {
           const summary = await this.vehicleLogsAnalyticsService.getSummary();
 
-          observer.next(summary);
+          observer.next({
+            data: JSON.stringify(summary),
+            type: 'summary',
+            id: Date.now().toString(),
+            retry: intervalMs,
+          } as MessageEvent);
         } catch (error) {
           this.logger.error('Error streaming vehicle logs summary:', error);
         }
-        return () => subscription.unsubscribe();
       });
+      return () => subscription.unsubscribe();
     });
   }
 }

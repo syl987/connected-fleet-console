@@ -1,68 +1,61 @@
-import { DecimalPipe } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { AfterViewInit, ChangeDetectionStrategy, Component, inject, OnDestroy } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import { MatChipsModule } from '@angular/material/chips';
-import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatTableModule } from '@angular/material/table';
-import { MatTooltipModule } from '@angular/material/tooltip';
 import { GenerateVehicleLogsOptions } from '../../../models/vehicle-log.models';
 import { DashboardService } from '../../../services/dashboard.service';
-import { LogSummary, VehicleLogsAnalyticsService } from '../../../services/vehicle-logs-analytics.service';
 import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
+
+const GENERATE_LOGS_DURATION = 2 * 60 * 1000;
+const GENERATE_LOGS_INTERVAL = 5 * 1000;
+const GENERATE_LOGS_MAX = 5;
 
 @Component({
   selector: 'app-dashboard-page',
   imports: [
+    CommonModule,
     MatButtonModule,
     MatCardModule,
-    MatChipsModule,
-    MatDividerModule,
     MatIconModule,
-    MatProgressSpinnerModule,
-    MatTableModule,
-    MatTooltipModule,
     TitleBarComponent,
-    DecimalPipe,
   ],
   templateUrl: './dashboard-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DashboardPageComponent implements OnInit {
+export class DashboardPageComponent implements AfterViewInit, OnDestroy {
   private readonly dashboardService = inject(DashboardService);
-  private readonly analyticsService = inject(VehicleLogsAnalyticsService);
 
-  readonly summary = signal<LogSummary | null>(null);
-  readonly loading = signal(false);
+  readonly summary = toSignal(this.dashboardService.summary$, { requireSync: true });
+  readonly streaming = toSignal(this.dashboardService.streaming$, { requireSync: true });
 
-  ngOnInit(): void {
-    this.loadAnalytics();
+  ngAfterViewInit(): void {
+    this.streamSummary();
   }
 
-  loadAnalytics(): void {
-    this.loading.set(true);
+  ngOnDestroy(): void {
+    this.stopStreamingSummary();
+  }
 
-    this.analyticsService.getSummary().subscribe({
-      next: (data) => this.summary.set(data),
-      error: (err) => console.error('Error loading summary:', err),
-    });
+  streamSummary(): void {
+    this.dashboardService.streamSummary();
+  }
+
+  stopStreamingSummary(): void {
+    this.dashboardService.stopStreamingSummary();
   }
 
   startGeneratingLogs(): void {
     const options: GenerateVehicleLogsOptions = {
-      duration: 2 * 60 * 1000, // for 2 minutes
-      interval: 2 * 1000, // every 2 seconds
-      max: 2, // maximum 2 logs per interval
+      duration: GENERATE_LOGS_DURATION,
+      interval: GENERATE_LOGS_INTERVAL,
+      max: GENERATE_LOGS_MAX,
     };
     this.dashboardService.startGeneratingLogs(options);
-    // Reload analytics after a short delay
-    setTimeout(() => this.loadAnalytics(), 3000);
   }
 
   stopGeneratingLogs(): void {
     this.dashboardService.stopGeneratingLogs();
-    this.loadAnalytics();
   }
 }

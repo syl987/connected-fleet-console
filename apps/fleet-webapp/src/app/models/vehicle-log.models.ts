@@ -13,6 +13,14 @@ export interface VehicleLog {
   vehicle: Vehicle;
 }
 
+export interface VehicleLogsSummary {
+  totalLogs: number;
+  earliestDate: string;
+  latestDate: string;
+  highestMileage: number;
+  latestYear: number;
+}
+
 export interface GenerateVehicleLogsOptions {
   duration: number;
   interval: number;
