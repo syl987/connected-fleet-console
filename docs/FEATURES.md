@@ -14,7 +14,7 @@ Welcome text with a visual overview of technologies used in this project.
 
 shows data in real-time using server-side events.
 
-<!-- Shows aggregated data. -->
+Shows aggregated data.
 
 <!-- Visual charts for best readability and UX. -->
 
