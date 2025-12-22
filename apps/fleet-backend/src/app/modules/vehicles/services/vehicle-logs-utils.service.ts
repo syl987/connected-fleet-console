@@ -10,10 +10,6 @@ import { VehicleLogsService } from './vehicle-logs.service';
 const INPUT_FILE_LOG_REGEX =
   /\[(?<timestamp>\w+)\] \[VEHICLE_ID:(?<vehicleId>\d+)\] \[(?<severity>\w+)\] \[CODE:(?<code>\w+)\] \[(?<message>\w+)\]/;
 
-const throwInvalidLogSeverity = () => {
-  throw new Error('Invalid log severity');
-};
-
 function getSeverity(severity: string): LogSeverity {
   return Object.keys(LogSeverity).includes(severity)
     ? (severity as LogSeverity)
