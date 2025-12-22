@@ -11,18 +11,11 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiBody, ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { LogSeverity } from '../../../common/entities/log.entity';
 import { CreateVehicleLogDto } from '../../vehicles/dto/create-vehicle-log.dto';
 import { VehicleLogDto } from '../../vehicles/dto/vehicle-log.dto';
 import { toVehicleLogDto } from '../mappers/vehicle-log.mapper';
 import { VehicleLogsService } from '../services/vehicle-logs.service';
-
-const SEVERITY_VALUES = [
-  'DEBUG',
-  'INFO',
-  'WARNING',
-  'ERROR',
-  'CRITICAL',
-];
 
 @ApiTags('Logs')
 @Controller('logs/vehicles')
@@ -46,7 +39,7 @@ export class VehicleLogsController {
   @ApiQuery({ name: 'mileage', required: false, type: Number, example: 50000 })
   @ApiQuery({ name: 'year', required: false, type: Number, example: 2023 })
   @ApiQuery({ name: 'vehicle', required: false, type: Number, example: 24 })
-  @ApiQuery({ name: 'severity', required: false, type: String, example: 'CRITICAL', enum: SEVERITY_VALUES })
+  @ApiQuery({ name: 'severity', required: false, type: String, example: 'CRITICAL', enum: Object.values(LogSeverity) })
   @ApiQuery({ name: 'code', required: false, type: String, example: 'E123' })
   @ApiQuery({ name: 'from', required: false, type: Date, example: '2023-01-01T00:00:00Z' })
   @ApiQuery({ name: 'to', required: false, type: Date, example: '2026-11-30T23:59:59Z' })
@@ -58,7 +51,7 @@ export class VehicleLogsController {
     @Query('vehicle', new ParseIntPipe({ optional: true })) vehicle?: number,
     @Query('mileage', new ParseIntPipe({ optional: true })) mileage?: number,
     @Query('year', new ParseIntPipe({ optional: true })) year?: number,
-    @Query('severity', new ParseEnumPipe(SEVERITY_VALUES, { optional: true })) severity?: string,
+    @Query('severity', new ParseEnumPipe(Object.values(LogSeverity), { optional: true })) severity?: string,
     @Query('code') code?: string,
     @Query('from', new ParseDatePipe({ optional: true })) from?: Date,
     @Query('to', new ParseDatePipe({ optional: true })) to?: Date,

@@ -1,21 +1,13 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { LogSeverity } from '../../../common/entities/log.entity';
 import { VehicleLog } from '../entities/vehicle-log.entity';
 import { Vehicle } from '../entities/vehicle.entity';
 
 @Injectable()
 export class VehicleLogsDataLoader {
   private readonly logger = new Logger(VehicleLogsDataLoader.name);
-
-  // Log severity levels
-  private readonly severities = [
-    'INFO',
-    'WARNING',
-    'ERROR',
-    'CRITICAL',
-    'DEBUG',
-  ];
 
   // Sample log messages for different severities
   private readonly messages = {
@@ -75,14 +67,17 @@ export class VehicleLogsDataLoader {
     @InjectRepository(Vehicle) private readonly vehiclesRepository: Repository<Vehicle>,
   ) {}
 
-  async loadInitialData(maxLogsPerVehicle = 100): Promise<void> {
+  async loadInitialData(maxLogsPerVehicle = 20): Promise<void> {
     const count = await this.vehicleLogsRepository.count();
 
     if (count > 0) {
       this.logger.log('Vehicle logs data already exists, skipping initial data load');
       return;
     }
+    await this.generateAndSaveVehicleLogs(maxLogsPerVehicle);
+  }
 
+  async generateAndSaveVehicleLogs(maxLogsPerVehicle: number): Promise<void> {
     try {
       const vehicles = await this.vehiclesRepository.find({ where: { deletedAt: null } });
 
@@ -101,7 +96,7 @@ export class VehicleLogsDataLoader {
       }
 
       await this.vehicleLogsRepository.save(logs);
-      this.logger.log(`Successfully loaded ${logs.length} vehicle logs`);
+      this.logger.log(`Successfully saved ${logs.length} vehicle logs`);
     } catch (error) {
       this.logger.error(
         `Failed to load initial vehicle logs data: ${(error as Error).message}`,
@@ -127,7 +122,7 @@ export class VehicleLogsDataLoader {
       timestamp.setSeconds(timestamp.getSeconds() - secondsAgo);
 
       // Pick random severity
-      const severity = this.pickRandom(this.severities);
+      const severity = this.pickRandom(Object.keys(LogSeverity)) as LogSeverity;
 
       // Generate code within severity range
       const codeRange = this.codRanges[severity];

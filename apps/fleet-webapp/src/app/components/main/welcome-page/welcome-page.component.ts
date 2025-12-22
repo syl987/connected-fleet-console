@@ -50,19 +50,6 @@ const techStack: AppTechStackItem[] = [
     image: 'https://rxjs.dev/generated/images/marketing/home/Rx_Logo-512-512.png',
   },
   {
-    title: `Firebase`,
-    subtitle: `Backend Services`,
-    description: `Using web hosting and app hosting services for a seamless deployment experience.`,
-    image: 'assets/img/logo/firebase_full_color.png',
-  },
-  {
-    title: `TypeORM`,
-    subtitle: `ORM Tool`,
-    description: `Object Relational Mapping for in-memory database interactions.`,
-    image: 'https://typeorm.io/img/typeorm-icon-white.png',
-    imageClass: 'pt-4 pb-1',
-  },
-  {
     title: `TailwindCSS 4`,
     subtitle: `CSS utilities`,
     description: `Consistent global utility syntax. Featuring layout, responsive grid, spacing, typography and more.`,
@@ -82,13 +69,6 @@ const techStack: AppTechStackItem[] = [
     image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/ESLint_logo.svg/192px-ESLint_logo.svg.png',
   },
   {
-    title: `Stylelint`,
-    subtitle: `Style Linting`,
-    description: `Standard SCSS configuration with plugins for standardized code automation.`,
-    image: 'https://stylelint.io/img/dark.svg',
-    imageClass: 'pt-2 w-2/3',
-  },
-  {
     title: `Prettier`,
     subtitle: `Code Formatting`,
     description: `Fully automated opinionated code quality tooling for consistency and opinionated appearance.`,
@@ -99,12 +79,6 @@ const techStack: AppTechStackItem[] = [
     subtitle: `Version Management`,
     description: `Structured and persistent development progression using branching, stashing, rebasing.`,
     image: 'https://cdn.freebiesupply.com/logos/large/2x/git-icon-logo-png-transparent.png',
-  },
-  {
-    title: `Github`,
-    subtitle: `Code Management`,
-    description: `Transparent development experience using pull requests and branch safety options.`,
-    image: 'assets/img/logo/github_mark.png',
   },
 ];
 

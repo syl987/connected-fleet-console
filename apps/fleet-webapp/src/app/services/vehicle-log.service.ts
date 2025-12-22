@@ -17,6 +17,8 @@ export class VehicleLogService extends EntityCollectionServiceBase<VehicleLog> {
     map((logs) => logs ?? []),
   );
 
+  readonly vehicleLogsLoading$ = this.store.select(vehicleLogsFeature.selectLoading);
+
   constructor() {
     super(EntityType.VehicleLog, inject(EntityCollectionServiceElementsFactory));
   }

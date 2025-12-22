@@ -3,6 +3,7 @@ import { WelcomePageComponent } from './components/main/welcome-page/welcome-pag
 import { loadVehicleLogsResolver } from './resolvers/load-vehicle-logs.resolver';
 import { loadVehicleResolver } from './resolvers/load-vehicle.resolver';
 import { loadVehiclesResolver } from './resolvers/load-vehicles.resolver';
+import { streamVehicleLogsSummaryResolver } from './resolvers/stream-vehicle-logs-summary.resolver';
 
 export const appRoutes: Route[] = [
   {
@@ -18,6 +19,7 @@ export const appRoutes: Route[] = [
   {
     path: 'dashboard',
     title: 'Dashboard',
+    resolve: { summary: streamVehicleLogsSummaryResolver },
     loadComponent: () =>
       import('./components/main/dashboard-page/dashboard-page.component').then((m) => m.DashboardPageComponent),
   },

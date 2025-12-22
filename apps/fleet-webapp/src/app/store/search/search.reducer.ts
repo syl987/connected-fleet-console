@@ -22,11 +22,11 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-  on(SearchActions.searchLogs, (state) => ({
+  on(SearchActions.searchVehicleLogs, (state) => ({
     ...state,
     loading: true,
   })),
-  on(SearchActions.searchLogsSUCCESS, (state, { page }) => ({
+  on(SearchActions.searchVehicleLogsSUCCESS, (state, { page }) => ({
     ...state,
     ids: page.data.map((log) => log.id),
     page: page.page,
@@ -35,12 +35,12 @@ export const reducer = createReducer(
     loading: false,
     loaded: true,
   })),
-  on(SearchActions.searchLogsERROR, (state) => ({
+  on(SearchActions.searchVehicleLogsERROR, (state) => ({
     ...state,
     loading: false,
     loaded: false,
   })),
-  on(SearchActions.clearLogs, (state) => ({
+  on(SearchActions.clearVehicleLogs, (state) => ({
     ...state,
     ids: [],
     page: 0,

@@ -1,13 +1,31 @@
-import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ApiBody, ApiConsumes, ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { GenerateVehicleLogsDto } from '../dto/generate-vehicle-logs.dto';
 import { VehicleLogDto } from '../dto/vehicle-log.dto';
-import { VehicleLogsService } from '../services/vehicle-logs.service';
+import { toVehicleLogDto } from '../mappers/vehicle-log.mapper';
+import { VehicleLogsUtilsService } from '../services/vehicle-logs-utils.service';
 
-@ApiTags('Logs')
+@ApiTags('Logs Utilities')
 @Controller('logs/utils/vehicles')
 export class VehicleLogsUtilsController {
-  constructor(private readonly vehicleLogsService: VehicleLogsService) {}
+  constructor(private readonly vehicleLogsUtilsService: VehicleLogsUtilsService) {}
+
+  @Post('generate/start')
+  @ApiOperation({ summary: 'Start generating vehicle logs in real-time for a specified duration.' })
+  @ApiBody({ type: GenerateVehicleLogsDto })
+  @ApiResponse({ status: 200, description: 'Triggered vehicle logs generation' })
+  @ApiResponse({ status: 409, description: 'Vehicle logs generation is already in progress' })
+  startGeneratingLogs(@Body() generateDto: GenerateVehicleLogsDto): void {
+    this.vehicleLogsUtilsService.startGeneratingLogs(generateDto);
+  }
+
+  @Post('generate/stop')
+  @ApiOperation({ summary: 'Stop generating vehicle logs.' })
+  @ApiResponse({ status: 200, description: 'Any potentially ongoing vehicle logs generation has been stopped' })
+  stopGeneratingLogs(): void {
+    this.vehicleLogsUtilsService.stopGeneratingLogs();
+  }
 
   @Post('parse-and-save')
   @UseInterceptors(FileInterceptor('file'))
@@ -19,8 +37,8 @@ export class VehicleLogsUtilsController {
     @UploadedFile() file: { originalname: string; filename: string; mimetype: string; size: number; buffer: Buffer },
   ): Promise<VehicleLogDto[]> {
     if (!file) {
-      throw new Error('No file uploaded');
+      throw new BadRequestException('No file uploaded');
     }
-    throw new Error('Method not implemented.');
+    return (await this.vehicleLogsUtilsService.parseAndSave(file)).map(toVehicleLogDto);
   }
 }

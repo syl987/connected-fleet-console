@@ -1,5 +1,123 @@
 <div class="container">
-  <app-title-bar />
+  <app-title-bar>
+    <button mat-stroked-button class="app-tertiary" (click)="startGeneratingLogs()">Start Generating Logs</button>
+    <button mat-stroked-button class="app-error" (click)="stopGeneratingLogs()" aria-label="Stop Generating Logs">
+      Stop
+    </button>
+  </app-title-bar>
 
-  <p>Quick overview of relevant data.</p>
+  <p>Overview of critical metrics based on vehicle logs.</p>
+
+  <p class="font-mono opacity-75">
+    server log generation start, stop / stream aggregated analytics via server-side events start, stop
+  </p>
+
+  @if (summary(); as data) {
+    <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">list_alt</mat-icon>
+          <mat-card-title>Total Logs</mat-card-title>
+        </mat-card-header>
+
+        <mat-divider class="mx-4 mb-3" />
+
+        <mat-card-content class="text-end">
+          <div class="text-lg font-medium">{{ data.totalLogs | number }}</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">mode_of_travel</mat-icon>
+          <mat-card-title>Highest Mileage</mat-card-title>
+        </mat-card-header>
+
+        <mat-divider class="mx-4 mb-3" />
+
+        <mat-card-content class="text-end">
+          <div class="text-lg font-medium">{{ data.highestMileage | number }} km</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">favorite_border</mat-icon>
+          <mat-card-title>Newest Car</mat-card-title>
+        </mat-card-header>
+
+        <mat-divider class="mx-4 mb-3" />
+
+        <mat-card-content class="text-end">
+          <div class="text-lg font-medium">{{ data.latestYear }}</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">calendar_month</mat-icon>
+          <mat-card-title>Time Span</mat-card-title>
+        </mat-card-header>
+
+        <mat-divider class="mx-4 mb-3" />
+
+        <mat-card-content class="text-end">
+          <div class="text-lg font-medium">{{ data.earliestDate | date }} - {{ data.latestDate | date }}</div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  }
+
+  <h2>Fleet Health Statistics</h2>
+
+  <div class="grid gap-6 xl:grid-cols-2">
+    @if (severityStats(); as data) {
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">report</mat-icon>
+          <mat-card-title>Severity Stats</mat-card-title>
+          <mat-card-subtitle class="opacity-75">Highest number of logs by severity</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-divider class="mx-4 my-3" />
+
+        <mat-card-content class="grow">
+          <div class="grid grid-cols-2">
+            @for (stat of data.stats; track stat.severity) {
+              <strong>{{ stat.severity | uppercase }}:</strong>
+              <span>{{ stat.count | number }} logs ({{ stat.vehicles }} vehicles)</span>
+            }
+          </div>
+        </mat-card-content>
+
+        <mat-divider class="mx-4 my-3" />
+
+        <mat-card-content>TODO implement charts for better visualization</mat-card-content>
+      </mat-card>
+    }
+    @if (criticalColorStats(); as data) {
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">color_lens</mat-icon>
+          <mat-card-title>Color Stats</mat-card-title>
+          <mat-card-subtitle class="opacity-75">Highest number of critical logs by vehicle color</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-divider class="mx-4 my-3" />
+
+        <mat-card-content class="grow">
+          <div class="grid grid-cols-2">
+            @for (stat of data.stats; track stat.color) {
+              <strong>{{ stat.color | uppercase }}:</strong>
+              <span>{{ stat.count | number }} logs ({{ stat.vehicles }} vehicles)</span>
+            }
+          </div>
+        </mat-card-content>
+
+        <mat-divider class="mx-4 my-3" />
+
+        <mat-card-content>TODO implement charts for better visualization</mat-card-content>
+      </mat-card>
+    }
+  </div>
 </div>

@@ -10,7 +10,10 @@
       "executor": "@angular/build:application",
       "outputs": ["{options.outputPath}"],
       "options": {
-        "outputPath": "dist/apps/fleet-webapp",
+        "outputPath": {
+          "base": "dist/apps/fleet-webapp",
+          "browser": ""
+        },
         "browser": "apps/fleet-webapp/src/main.ts",
         "tsConfig": "apps/fleet-webapp/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
@@ -77,7 +80,7 @@
       "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "fleet-webapp:build",
-        "staticFilePath": "dist/apps/fleet-webapp/browser",
+        "staticFilePath": "dist/apps/fleet-webapp",
         "spa": true
       }
     }
