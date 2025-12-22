@@ -31,6 +31,17 @@
 <mat-divider class="mx-4" />
 
 <mat-action-list>
+  <a
+    mat-list-item
+    href="https://github.com/syl987/connected-fleet-console"
+    target="_blank"
+    rel="noopener"
+    aria-label="View source on GitHub"
+  >
+    <mat-icon matListItemIcon>code</mat-icon>
+    GitHub
+  </a>
+
   <button mat-list-item (click)="themeService.toggleTheme()">
     <mat-icon matListItemIcon>
       @if (themeService.theme === 'dark') {
