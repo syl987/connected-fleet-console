@@ -10,6 +10,18 @@ import { VehicleLogsService } from './vehicle-logs.service';
 const INPUT_FILE_LOG_REGEX =
   /\[(?<timestamp>\w+)\] \[VEHICLE_ID:(?<vehicleId>\d+)\] \[(?<severity>\w+)\] \[CODE:(?<code>\w+)\] \[(?<message>\w+)\]/;
 
+const throwInvalidLogSeverity = () => {
+  throw new Error('Invalid log severity');
+};
+
+function getSeverity(severity: string): LogSeverity {
+  return Object.keys(LogSeverity).includes(severity)
+    ? (severity as LogSeverity)
+    : (() => {
+        throw new Error('Invalid log severity: ' + severity);
+      })();
+}
+
 @Injectable()
 export class VehicleLogsUtilsService {
   private readonly logger = new Logger(VehicleLogsUtilsService.name);
@@ -40,14 +52,11 @@ export class VehicleLogsUtilsService {
       .map((line) => {
         try {
           const { groups } = line.match(INPUT_FILE_LOG_REGEX);
+
           const vehicleLog: CreateVehicleLogDto = new CreateVehicleLogDto();
           vehicleLog.timestamp = new Date(groups.timestamp);
           vehicleLog.vehicleId = parseInt(groups.vehicleId, 10);
-          vehicleLog.severity = Object.keys(LogSeverity).includes(groups.severity)
-            ? (groups.severity as LogSeverity)
-            : (() => {
-                throw new Error(`Invalid log severity: ${groups.severity}`);
-              })();
+          vehicleLog.severity = getSeverity(groups.severity);
           vehicleLog.code = parseInt(groups.code, 10);
           vehicleLog.message = groups.message;
           return vehicleLog;
