@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mapResponse } from '@ngrx/operators';
-import { exhaustMap, switchMap, takeUntil, tap } from 'rxjs';
+import { exhaustMap, switchMap, tap } from 'rxjs';
 import { VehicleLogUtilsDataService } from '../../services/data/vehicle-log-utils-data.service';
 import { VehicleLogsAnalyticsStreamService } from '../../services/stream/vehicle-logs-stream.service';
 import { ToastService } from '../../services/toast.service';
@@ -76,7 +76,6 @@ export class DashboardEffects {
               return DashboardActions.streamSummaryERROR();
             },
           }),
-          takeUntil(this.actions.pipe(ofType(DashboardActions.streamSummarySTOP))), // TODO required?
         ),
       ),
     );
