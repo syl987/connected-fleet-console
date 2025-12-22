@@ -68,8 +68,8 @@ export class DashboardEffects {
       switchMap(() =>
         this.vehicleLogsAnalyticsStreamService.stream().pipe(
           mapResponse({
-            next: ({ summary }) => {
-              return DashboardActions.streamAnalyticsNEXT({ summary });
+            next: ({ summary, severityStats, colorStats }) => {
+              return DashboardActions.streamAnalyticsNEXT({ summary, severityStats, colorStats });
             },
             error: () => {
               this.toastService.showErrorToast('Error streaming vehicle logs analytics.');

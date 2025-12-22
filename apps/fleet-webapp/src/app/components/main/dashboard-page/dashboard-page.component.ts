@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
-import { GenerateVehicleLogsOptions } from '../../../models/vehicle-log.models';
+import { GenerateVehicleLogsOptions } from '../../../models/vehicle-logs-utils.models';
 import { DashboardService } from '../../../services/dashboard.service';
 import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
 
@@ -30,6 +30,9 @@ export class DashboardPageComponent implements OnDestroy {
   private readonly dashboardService = inject(DashboardService);
 
   readonly summary = toSignal(this.dashboardService.summary$, { requireSync: true });
+  readonly severityStats = toSignal(this.dashboardService.severityStats$, { requireSync: true });
+  readonly colorStats = toSignal(this.dashboardService.colorStats$, { requireSync: true });
+
   readonly streaming = toSignal(this.dashboardService.streaming$, { requireSync: true });
 
   ngOnDestroy(): void {
