@@ -1,5 +1,5 @@
 import { ConflictException, Injectable, Logger } from '@nestjs/common';
-import { concatMap, endWith, interval, Subject, takeUntil, timer } from 'rxjs';
+import { concatMap, endWith, interval, startWith, Subject, takeUntil, timer } from 'rxjs';
 import { GenerateVehicleLogsDto } from '../dto/generate-vehicle-logs.dto';
 import { VehicleLogsDataLoader } from '../loader/vehicle-logs-data.loader';
 
@@ -22,6 +22,7 @@ export class VehicleLogsUtilsService {
 
     interval(generateDto.interval)
       .pipe(
+        startWith(-1), // trigger immediately on subscription
         // generate logs on each interval tick and wait for each completion
         concatMap(() => this.vehicleLogsDataLoader.generateAndSaveVehicleLogs(generateDto.max)),
         takeUntil(

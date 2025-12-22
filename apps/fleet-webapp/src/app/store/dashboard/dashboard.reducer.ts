@@ -16,10 +16,10 @@ export const initialState: State = {
 
 export const reducer = createReducer(
   initialState,
-  on(DashboardActions.streamSummary, (state) => ({ ...state, streaming: true })),
-  on(DashboardActions.streamSummaryNEXT, (state, { summary }) => ({ ...state, summary })),
-  on(DashboardActions.streamSummaryERROR, (state) => ({ ...state, streaming: false })),
-  on(DashboardActions.streamSummarySTOP, (state) => ({ ...state, streaming: false })),
+  on(DashboardActions.streamAnalytics, (state) => ({ ...state, streaming: true })),
+  on(DashboardActions.streamAnalyticsNEXT, (state, { summary }) => ({ ...state, summary })),
+  on(DashboardActions.streamAnalyticsERROR, (state) => ({ ...state, streaming: false })),
+  on(DashboardActions.streamAnalyticsSTOP, (state) => ({ ...state, streaming: false })),
 );
 
 export const dashboardFeature = createFeature({
