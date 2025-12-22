@@ -3,14 +3,6 @@ import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { interval, Observable, startWith } from 'rxjs';
 import { VehicleLogsAnalyticsService } from '../services/vehicle-logs-analytics.service';
 
-const SEVERITY_VALUES = [
-  'DEBUG',
-  'INFO',
-  'WARNING',
-  'ERROR',
-  'CRITICAL',
-];
-
 @ApiTags('Logs Analytics Stream')
 @Controller('logs/analytics/vehicles/stream')
 export class VehicleLogsAnalyticsStreamController {
@@ -21,11 +13,9 @@ export class VehicleLogsAnalyticsStreamController {
   @Sse()
   @ApiOperation({ summary: 'Stream a collection of vehicle logs analytics' })
   @ApiQuery({ name: 'interval', required: false, type: Number, example: 5000, description: 'Polling interval in ms' })
-  @ApiQuery({ name: 'severity', required: false, type: String, example: 'CRITICAL', enum: SEVERITY_VALUES })
   @ApiResponse({ status: 200, description: 'SSE stream of vehicle logs analytics' })
   getSummary(
     @Query('interval', new DefaultValuePipe(5000), ParseIntPipe) intervalMs: number,
-    @Query('severity') severity?: string,
   ): Observable<MessageEvent> {
     this.logger.log(`Starting vehicle logs analytics SSE stream with ${intervalMs}ms interval`);
 
@@ -36,7 +26,7 @@ export class VehicleLogsAnalyticsStreamController {
           try {
             const summary = await this.vehicleLogsAnalyticsService.getSummary();
             const severityStats = await this.vehicleLogsAnalyticsService.getSeverityStats();
-            const colorStats = await this.vehicleLogsAnalyticsService.getColorStats(severity);
+            const colorStats = await this.vehicleLogsAnalyticsService.getColorStats();
 
             observer.next({
               data: JSON.stringify({ summary, severityStats, colorStats }),

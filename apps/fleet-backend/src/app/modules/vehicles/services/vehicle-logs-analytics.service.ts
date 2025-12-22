@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { LogSeverity } from '../../../common/entities/log.entity';
 import { VehicleLogsColorStatsDto } from '../dto/vehicle-logs-color-stats.dto';
 import { VehicleLogsSeverityStatsDto } from '../dto/vehicle-logs-severity-stats.dto';
 import { VehicleLogsSummaryDto } from '../dto/vehicle-logs-summary.dto';
@@ -53,22 +54,33 @@ export class VehicleLogsAnalyticsService {
     return { totalLogs, stats };
   }
 
-  async getColorStats(severity?: string): Promise<VehicleLogsColorStatsDto> {
-    const query = this.vehicleLogsRepository.createQueryBuilder('log').innerJoin('log.vehicle', 'vehicle');
+  async getColorStats(): Promise<VehicleLogsColorStatsDto> {
+    const totalLogs = await this.vehicleLogsRepository.count();
 
-    if (severity) {
-      query.andWhere('log.severity = :severity', { severity });
-    }
-    const stats = await query
-      .select('vehicle.color', 'color')
-      .addSelect('COUNT(log.id)', 'count')
-      .addSelect('COUNT(DISTINCT vehicle.id)', 'vehicles')
-      .groupBy('vehicle.color')
-      .orderBy('count', 'DESC')
-      .getRawMany();
+    const statsBySeverity = await Promise.all(
+      Object.keys(LogSeverity).map(async (severity: LogSeverity) => {
+        const colorStats = await this.vehicleLogsRepository
+          .createQueryBuilder('log')
+          .innerJoin('log.vehicle', 'vehicle')
+          .where('log.severity = :severity', { severity })
+          .select('log.severity', 'severity')
+          .select('vehicle.color', 'color')
+          .addSelect('COUNT(log.id)', 'count')
+          .addSelect('COUNT(DISTINCT vehicle.id)', 'vehicles')
+          .groupBy('vehicle.color')
+          .orderBy('count', 'DESC')
+          .getRawMany();
 
-    const totalLogs = stats.reduce((sum, stat) => sum + parseInt(stat.count, 10), 0);
+        const totalLogs = colorStats.reduce((sum, stat) => sum + parseInt(stat.count, 10), 0);
 
-    return { totalLogs, stats };
+        const stats = colorStats.map((stat) => ({
+          color: stat.color,
+          count: parseInt(stat.count, 10),
+          vehicles: parseInt(stat.vehicles, 10),
+        }));
+        return { totalLogs, stats, severity };
+      }),
+    );
+    return { totalLogs, stats: statsBySeverity };
   }
 }
