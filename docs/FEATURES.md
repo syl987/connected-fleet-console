@@ -2,19 +2,21 @@
 
 In general, individual pages list their main technical features below the title in monospace font.
 
+### Event Tracking
+
+Events and state changes in the webapp can be tracked inside the console or the redux browser plugin.
+
 ### Welcome Page
 
 Welcome text with a visual overview of technologies used in this project.
 
-<!-- ### Dashboard Page
+### Dashboard Page
 
-Disclaimer: not yet available / currently under construction...
+shows data in real-time using server-side events.
 
-Showcases real-time event tracking using interval-generated logs.
+<!-- Shows aggregated data. -->
 
-Aggregated data for specific data analytics.
-
-Visual charts for best readability and UX. -->
+<!-- Visual charts for best readability and UX. -->
 
 ### Vehicles Page
 

@@ -37,9 +37,14 @@
 ### 5. Organizational
 
 1. Document README.md
-2. Check Firebase hosting opportunities
-3. Open GitHub project to public
+2. Check hosting opportunities
+3. Deploy FE and BE to a publicly available server
+4. Open GitHub project to public
 
 ### 6. Feature: Real-Time Dashboard
 
-1. TODO Create concept...
+1. Implement logs generation start / stop mechanics
+2. Investigate real-time data streaming options
+3. Investigate how to implement SSE (server-side events)
+4. Implement a simple summary streaming with ngrx
+5. TODO Implement some simple data aggregation with streaming 

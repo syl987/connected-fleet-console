@@ -2,7 +2,7 @@
 
 ### Overview
 
-- [ ] Real-time event monitoring
+- [check] Real-time event monitoring
 - [check] Browse events using various search parameters -> Search Page
 - [ ] Quick overview of critical issues and affected vehicles
 - [check] Implement as full-stack application (Angular + NestJS)
@@ -11,11 +11,11 @@
 
 - [ ] Input and process logs (from a file or a stream)
 - [check] Database storage with flexible querying and aggregation -> Vehicle, VehicleLog (linked entities)
-- [ ] REST-API for logs with filters
+- [check] REST-API for logs with filters
 - [ ] Implement aggregated views (e.g. errors per vehicle, per code, per time range)
-- [ ] Implement as complex Observable streams and Signals
+- [check] Implement as complex Observable streams and Signals
 - [check] Search and filtering of logs -> Search Page
-- [ ] Live updates in dashboard
+- [check] Live updates in dashboard
 - [check] Two or more views of the same data -> Search Page / Vehicle Details (per vehicle)
 
 ### Non-Functional
@@ -75,4 +75,4 @@
 - [check] Create endpoints to start / stop generating logs in real-time
 - [check] Browseable vehicle metadata (interconnect with logs) -> Vehicles Page
 - [check] Editable vehicle metadata with CRUD operations -> Vehicles Controller
-- [ ] Check deployment opportunities with Firebase
+- [check] Check deployment opportunities and deploy

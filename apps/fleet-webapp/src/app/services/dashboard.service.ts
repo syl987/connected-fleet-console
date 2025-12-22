@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { GenerateVehicleLogsOptions } from '../models/vehicle-log.models';
 import { DashboardActions } from '../store/dashboard/dashboard.actions';
+import { dashboardFeature } from '../store/dashboard/dashboard.reducer';
 
 @Injectable({
   providedIn: 'root',
@@ -9,11 +10,22 @@ import { DashboardActions } from '../store/dashboard/dashboard.actions';
 export class DashboardService {
   private readonly store = inject(Store);
 
+  readonly summary$ = this.store.select(dashboardFeature.selectSummary);
+  readonly streaming$ = this.store.select(dashboardFeature.selectStreaming);
+
   startGeneratingLogs(options: GenerateVehicleLogsOptions): void {
     this.store.dispatch(DashboardActions.startGeneratingLogs({ options }));
   }
 
   stopGeneratingLogs(): void {
     this.store.dispatch(DashboardActions.stopGeneratingLogs());
+  }
+
+  streamSummary(): void {
+    this.store.dispatch(DashboardActions.streamSummary());
+  }
+
+  stopStreamingSummary(): void {
+    this.store.dispatch(DashboardActions.streamSummarySTOP());
   }
 }

@@ -8,5 +8,62 @@
 
   <p>Overview of critical metrics based on vehicle logs.</p>
 
-  <p class="font-mono opacity-75">async log generation start / stop</p>
+  <p class="font-mono opacity-75">server log generation start, stop / stream summary via SSE start, stop</p>
+
+  <!-- Summary Cards -->
+  @if (summary(); as data) {
+    <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">list_alt</mat-icon>
+          <mat-card-title>Total Logs</mat-card-title>
+        </mat-card-header>
+
+        <mat-divider class="mx-4 mb-3" />
+
+        <mat-card-content class="text-end">
+          <div class="text-lg font-medium">{{ data.totalLogs | number }}</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">mode_of_travel</mat-icon>
+          <mat-card-title>Highest Mileage</mat-card-title>
+        </mat-card-header>
+
+        <mat-divider class="mx-4 mb-3" />
+
+        <mat-card-content class="text-end">
+          <div class="text-lg font-medium">{{ data.highestMileage | number }} km</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">favorite_border</mat-icon>
+          <mat-card-title>Newest Car</mat-card-title>
+        </mat-card-header>
+
+        <mat-divider class="mx-4 mb-3" />
+
+        <mat-card-content class="text-end">
+          <div class="text-lg font-medium">{{ data.latestYear }}</div>
+        </mat-card-content>
+      </mat-card>
+
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">calendar_month</mat-icon>
+          <mat-card-title>Time Span</mat-card-title>
+        </mat-card-header>
+
+        <mat-divider class="mx-4 mb-3" />
+
+        <mat-card-content class="text-end">
+          <div class="text-lg font-medium">{{ data.earliestDate | date }} - {{ data.latestDate | date }}</div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  }
 </div>
