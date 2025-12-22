@@ -21,9 +21,11 @@ export class VehicleLogsAnalyticsStreamController {
   @Sse()
   @ApiOperation({ summary: 'Stream a collection of vehicle logs analytics' })
   @ApiQuery({ name: 'interval', required: false, type: Number, example: 5000, description: 'Polling interval in ms' })
+  @ApiQuery({ name: 'severity', required: false, type: String, example: 'CRITICAL', enum: SEVERITY_VALUES })
   @ApiResponse({ status: 200, description: 'SSE stream of vehicle logs analytics' })
   getSummary(
     @Query('interval', new DefaultValuePipe(5000), ParseIntPipe) intervalMs: number,
+    @Query('severity') severity?: string,
   ): Observable<MessageEvent> {
     this.logger.log(`Starting vehicle logs analytics SSE stream with ${intervalMs}ms interval`);
 
@@ -33,9 +35,11 @@ export class VehicleLogsAnalyticsStreamController {
         .subscribe(async () => {
           try {
             const summary = await this.vehicleLogsAnalyticsService.getSummary();
+            const severityStats = await this.vehicleLogsAnalyticsService.getSeverityStats();
+            const colorStats = await this.vehicleLogsAnalyticsService.getColorStats(severity);
 
             observer.next({
-              data: JSON.stringify({ summary }),
+              data: JSON.stringify({ summary, severityStats, colorStats }),
               type: 'analytics',
               id: Date.now().toString(),
               retry: intervalMs,
