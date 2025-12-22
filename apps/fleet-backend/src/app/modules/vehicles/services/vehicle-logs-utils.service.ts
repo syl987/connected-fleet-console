@@ -24,45 +24,6 @@ export class VehicleLogsUtilsService {
     private readonly vehicleLogsDataLoader: VehicleLogsDataLoader,
   ) {}
 
-  startGeneratingLogs(generateDto: GenerateVehicleLogsDto): void {
-    if (this._generating) {
-      throw new ConflictException('Vehicle logs generation is already in progress');
-    }
-    this._generating = true;
-    this.logger.log(`Starting vehicle logs generation for ${generateDto.duration} ms...`);
-
-    interval(generateDto.interval)
-      .pipe(
-        startWith(-1), // trigger immediately on subscription
-        // generate logs on each interval tick and wait for each completion
-        concatMap(() => this.vehicleLogsDataLoader.generateAndSaveVehicleLogs(generateDto.max)),
-        takeUntil(
-          // stop after the specified duration
-          timer(generateDto.duration).pipe(
-            // allow external stop signal
-            takeUntil(this._generateStopSignal),
-            // propagate external stop signal to the outer takeUntil
-            endWith(undefined),
-          ),
-        ),
-      )
-      .subscribe({
-        error: () => {
-          this._generating = false;
-          this.logger.log('Vehicle logs generation stopped due to error');
-        },
-        complete: () => {
-          this._generating = false;
-          this.logger.log('Stopped vehicle logs generation');
-        },
-      });
-  }
-
-  stopGeneratingLogs(): void {
-    this.logger.log('Stop signal sent for vehicle logs generation');
-    this._generateStopSignal.next();
-  }
-
   async parseAndSave(file: {
     originalname: string;
     filename: string;
@@ -105,5 +66,44 @@ export class VehicleLogsUtilsService {
     );
 
     return this.vehicleLogsService.createMany(vehicleLogs);
+  }
+
+  startGeneratingLogs(generateDto: GenerateVehicleLogsDto): void {
+    if (this._generating) {
+      throw new ConflictException('Vehicle logs generation is already in progress');
+    }
+    this._generating = true;
+    this.logger.log(`Starting vehicle logs generation for ${generateDto.duration} ms...`);
+
+    interval(generateDto.interval)
+      .pipe(
+        startWith(-1), // trigger immediately on subscription
+        // generate logs on each interval tick and wait for each completion
+        concatMap(() => this.vehicleLogsDataLoader.generateAndSaveVehicleLogs(generateDto.max)),
+        takeUntil(
+          // stop after the specified duration
+          timer(generateDto.duration).pipe(
+            // allow external stop signal
+            takeUntil(this._generateStopSignal),
+            // propagate external stop signal to the outer takeUntil
+            endWith(undefined),
+          ),
+        ),
+      )
+      .subscribe({
+        error: () => {
+          this._generating = false;
+          this.logger.log('Vehicle logs generation stopped due to error');
+        },
+        complete: () => {
+          this._generating = false;
+          this.logger.log('Stopped vehicle logs generation');
+        },
+      });
+  }
+
+  stopGeneratingLogs(): void {
+    this.logger.log('Stop signal sent for vehicle logs generation');
+    this._generateStopSignal.next();
   }
 }

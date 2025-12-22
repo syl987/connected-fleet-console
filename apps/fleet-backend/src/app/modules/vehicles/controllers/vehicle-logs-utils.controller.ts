@@ -11,6 +11,21 @@ import { VehicleLogsUtilsService } from '../services/vehicle-logs-utils.service'
 export class VehicleLogsUtilsController {
   constructor(private readonly vehicleLogsUtilsService: VehicleLogsUtilsService) {}
 
+  @Post('parse-and-save')
+  @UseInterceptors(FileInterceptor('file'))
+  @ApiOperation({ summary: 'Parse and save vehicle logs from a text file.' })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({ schema: { type: 'object', properties: { file: { type: 'string', format: 'binary' } } } })
+  @ApiResponse({ status: 201, description: 'File uploaded and parsed successfully', type: [VehicleLogDto] })
+  async parseAndSave(
+    @UploadedFile() file: { originalname: string; filename: string; mimetype: string; size: number; buffer: Buffer },
+  ): Promise<VehicleLogDto[]> {
+    if (!file) {
+      throw new BadRequestException('No file uploaded');
+    }
+    return (await this.vehicleLogsUtilsService.parseAndSave(file)).map(toVehicleLogDto);
+  }
+
   @Post('generate/start')
   @ApiOperation({ summary: 'Start generating vehicle logs in real-time for a specified duration.' })
   @ApiBody({ type: GenerateVehicleLogsDto })
@@ -25,20 +40,5 @@ export class VehicleLogsUtilsController {
   @ApiResponse({ status: 200, description: 'Any potentially ongoing vehicle logs generation has been stopped' })
   stopGeneratingLogs(): void {
     this.vehicleLogsUtilsService.stopGeneratingLogs();
-  }
-
-  @Post('parse-and-save')
-  @UseInterceptors(FileInterceptor('file'))
-  @ApiOperation({ summary: 'Parse and save vehicle logs from a text file.' })
-  @ApiConsumes('multipart/form-data')
-  @ApiBody({ schema: { type: 'object', properties: { file: { type: 'string', format: 'binary' } } } })
-  @ApiResponse({ status: 201, description: 'File uploaded and parsed successfully', type: [VehicleLogDto] })
-  async parseAndSave(
-    @UploadedFile() file: { originalname: string; filename: string; mimetype: string; size: number; buffer: Buffer },
-  ): Promise<VehicleLogDto[]> {
-    if (!file) {
-      throw new BadRequestException('No file uploaded');
-    }
-    return (await this.vehicleLogsUtilsService.parseAndSave(file)).map(toVehicleLogDto);
   }
 }
