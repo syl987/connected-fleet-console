@@ -10,7 +10,7 @@ export class VehicleLogsAnalyticsStreamService implements OnDestroy {
 
   private eventSource: EventSource | null = null;
 
-  readonly url = 'api/logs/stream/vehicles';
+  readonly url = 'api/logs/stream/vehicles/analytics';
 
   /**
    * Create an Observable stream of vehicle logs summary

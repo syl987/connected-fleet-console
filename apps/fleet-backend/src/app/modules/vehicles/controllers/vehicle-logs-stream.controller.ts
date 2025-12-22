@@ -4,7 +4,7 @@ import { interval, Observable } from 'rxjs';
 import { VehicleLogsAnalyticsService } from '../services/vehicle-logs-analytics.service';
 
 @ApiTags('Logs Analytics Stream')
-@Controller('logs/stream/vehicles')
+@Controller('logs/stream/vehicles/analytics')
 export class VehicleLogsStreamController {
   private readonly logger = new Logger(VehicleLogsStreamController.name);
 
