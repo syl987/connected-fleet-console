@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { GenerateVehicleLogsOptions } from '../../models/vehicle-log.models';
+import { GenerateVehicleLogsOptions } from '../../models/vehicle-logs-utils.models';
 
 @Injectable({ providedIn: 'root' })
 export class VehicleLogUtilsDataService {
