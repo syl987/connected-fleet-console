@@ -1,6 +1,7 @@
 import { Module, OnModuleInit } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { VehicleLogsStreamController } from './controllers/vehicle-logs-stream.controller';
+import { VehicleLogsAnalyticsStreamController } from './controllers/vehicle-logs-analytics-stream.controller';
+import { VehicleLogsAnalyticsController } from './controllers/vehicle-logs-analytics.controller';
 import { VehicleLogsUtilsController } from './controllers/vehicle-logs-utils.controller';
 import { VehicleLogsController } from './controllers/vehicle-logs.controller';
 import { VehiclesController } from './controllers/vehicles.controller';
@@ -26,8 +27,9 @@ import { VehiclesService } from './services/vehicles.service';
   controllers: [
     VehiclesController,
     VehicleLogsController,
-    VehicleLogsStreamController,
     VehicleLogsUtilsController,
+    VehicleLogsAnalyticsController,
+    VehicleLogsAnalyticsStreamController,
   ],
   exports: [
     VehiclesService,

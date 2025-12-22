@@ -12,9 +12,9 @@ export const DashboardActions = createActionGroup({
     stopGeneratingLogsSUCCESS: emptyProps(),
     stopGeneratingLogsERROR: emptyProps(),
 
-    streamSummary: emptyProps(),
-    streamSummaryNEXT: props<{ summary: VehicleLogsSummary }>(),
-    streamSummaryERROR: emptyProps(),
-    streamSummarySTOP: emptyProps(),
+    streamAnalytics: emptyProps(),
+    streamAnalyticsNEXT: props<{ summary: VehicleLogsSummary }>(),
+    streamAnalyticsERROR: emptyProps(),
+    streamAnalyticsSTOP: emptyProps(),
   },
 });

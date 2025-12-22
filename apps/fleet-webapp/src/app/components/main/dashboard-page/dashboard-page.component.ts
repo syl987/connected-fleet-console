@@ -33,7 +33,7 @@ export class DashboardPageComponent implements OnDestroy {
   readonly streaming = toSignal(this.dashboardService.streaming$, { requireSync: true });
 
   ngOnDestroy(): void {
-    this.dashboardService.stopStreamingSummary();
+    this.dashboardService.stopStreamingAnalytics();
   }
 
   startGeneratingLogs(): void {

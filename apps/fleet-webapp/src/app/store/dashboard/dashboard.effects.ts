@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mapResponse } from '@ngrx/operators';
 import { exhaustMap, switchMap, tap } from 'rxjs';
 import { VehicleLogUtilsDataService } from '../../services/data/vehicle-log-utils-data.service';
-import { VehicleLogsAnalyticsStreamService } from '../../services/stream/vehicle-logs-stream.service';
+import { VehicleLogsAnalyticsStreamService } from '../../services/stream/vehicle-logs-analytics-stream.service';
 import { ToastService } from '../../services/toast.service';
 import { DashboardActions } from './dashboard.actions';
 
@@ -64,16 +64,16 @@ export class DashboardEffects {
 
   readonly streamSummary = createEffect(() => {
     return this.actions.pipe(
-      ofType(DashboardActions.streamSummary),
+      ofType(DashboardActions.streamAnalytics),
       switchMap(() =>
-        this.vehicleLogsAnalyticsStreamService.streamVehicleLogsSummary().pipe(
+        this.vehicleLogsAnalyticsStreamService.stream().pipe(
           mapResponse({
-            next: (summary) => {
-              return DashboardActions.streamSummaryNEXT({ summary });
+            next: ({ summary }) => {
+              return DashboardActions.streamAnalyticsNEXT({ summary });
             },
             error: () => {
-              this.toastService.showErrorToast('Error streaming vehicle logs summary.');
-              return DashboardActions.streamSummaryERROR();
+              this.toastService.showErrorToast('Error streaming vehicle logs analytics.');
+              return DashboardActions.streamAnalyticsERROR();
             },
           }),
         ),
@@ -84,7 +84,7 @@ export class DashboardEffects {
   readonly stopStreamingSummary = createEffect(
     () => {
       return this.actions.pipe(
-        ofType(DashboardActions.streamSummarySTOP),
+        ofType(DashboardActions.streamAnalyticsSTOP),
         tap(() => this.vehicleLogsAnalyticsStreamService.disconnect()),
       );
     },
