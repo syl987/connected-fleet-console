@@ -24,7 +24,6 @@ export class VehicleLogsStreamController {
       const subscription = interval(intervalMs).subscribe(async () => {
         try {
           const summary = await this.vehicleLogsAnalyticsService.getSummary();
-          this.logger.log(summary);
 
           observer.next(summary);
         } catch (error) {
