@@ -66,63 +66,38 @@
     </div>
   }
 
-  @if (severityStats(); as stats) {
-    <div class="mt-8">
-      <h2 class="mb-4 text-2xl font-semibold">Log Severity Statistics</h2>
-      <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-4">
-        <mat-card *ngFor="let severity of ['info', 'warning', 'error', 'critical']">
-          <mat-card-header>
-            <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">
-              {{
-                severity === 'info'
-                  ? 'info'
-                  : severity === 'warning'
-                    ? 'warning'
-                    : severity === 'error'
-                      ? 'error'
-                      : 'report_problem'
-              }}
-            </mat-icon>
-            <mat-card-title>{{ severity | titlecase }} Logs</mat-card-title>
-          </mat-card-header>
+  <h2>Fleet Health Statistics</h2>
 
-          <mat-divider class="mx-4 mb-3" />
+  <div class="grid gap-6 xl:grid-cols-2">
+    @if (severityStats(); as data) {
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">report</mat-icon>
+          <mat-card-title>Severity Stats</mat-card-title>
+          <!-- <mat-card-subtitle class="text-end">Total Logs: {{ data.totalLogs }}</mat-card-subtitle> -->
+        </mat-card-header>
 
-          <mat-card-content class="text-end">
-            <div class="text-lg font-medium">ASDASD</div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  }
+        <mat-divider class="mx-4 my-3" />
 
-  @if (colorStats(); as colorStats) {
-    <div class="mt-8">
-      <h2 class="mb-4 text-2xl font-semibold">Log Color Statistics</h2>
-      <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-4">
-        <mat-card *ngFor="let color of ['red', 'blue', 'green', 'yellow']">
-          <mat-card-header>
-            <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">
-              {{
-                color === 'red'
-                  ? 'stop_circle'
-                  : color === 'blue'
-                    ? 'info'
-                    : color === 'green'
-                      ? 'check_circle'
-                      : 'warning'
-              }}
-            </mat-icon>
-            <mat-card-title>{{ color | titlecase }} Logs</mat-card-title>
-          </mat-card-header>
+        <mat-card-content>
+          <pre>{{ data.stats | json }}</pre>
+        </mat-card-content>
+      </mat-card>
+    }
+    @if (colorStats(); as data) {
+      <mat-card>
+        <mat-card-header>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">color_lens</mat-icon>
+          <mat-card-title>Color Stats</mat-card-title>
+          <!-- <mat-card-subtitle class="text-end">Total Logs: {{ data.totalLogs }}</mat-card-subtitle> -->
+        </mat-card-header>
 
-          <mat-divider class="mx-4 mb-3" />
+        <mat-divider class="mx-4 my-3" />
 
-          <mat-card-content class="text-end">
-            <div class="text-lg font-medium">ASDASD</div>
-          </mat-card-content>
-        </mat-card>
-      </div>
-    </div>
-  }
+        <mat-card-content>
+          <pre>{{ data.stats | json }}</pre>
+        </mat-card-content>
+      </mat-card>
+    }
+  </div>
 </div>
