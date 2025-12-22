@@ -3,6 +3,14 @@ import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { interval, Observable, startWith } from 'rxjs';
 import { VehicleLogsAnalyticsService } from '../services/vehicle-logs-analytics.service';
 
+const SEVERITY_VALUES = [
+  'DEBUG',
+  'INFO',
+  'WARNING',
+  'ERROR',
+  'CRITICAL',
+];
+
 @ApiTags('Logs Analytics Stream')
 @Controller('logs/stream/vehicles/analytics')
 export class VehicleLogsAnalyticsStreamController {
@@ -46,7 +54,6 @@ export class VehicleLogsAnalyticsStreamController {
   getSeverityStats(
     @Query('interval', new DefaultValuePipe(5000), ParseIntPipe) intervalMs: number,
   ): Observable<MessageEvent> {
-    // return this.vehicleLogsAnalyticsService.getSeverityStats();
     this.logger.log(`Starting vehicle logs severity-stats SSE stream with ${intervalMs}ms interval`);
 
     return new Observable<MessageEvent>((observer) => {
@@ -64,6 +71,36 @@ export class VehicleLogsAnalyticsStreamController {
             } as MessageEvent);
           } catch (error) {
             this.logger.error('Error streaming vehicle logs severity-stats:', error);
+          }
+        });
+      return () => subscription.unsubscribe();
+    });
+  }
+
+  @Sse('color-stats')
+  @ApiOperation({ summary: 'Get aggregated vehicle logs by color' })
+  @ApiQuery({ name: 'severity', required: false, type: String, example: 'CRITICAL', enum: SEVERITY_VALUES })
+  @ApiResponse({ status: 200, description: 'Aggregated color stats' })
+  getColorStats(
+    @Query('interval', new DefaultValuePipe(5000), ParseIntPipe) intervalMs: number,
+    @Query('severity') severity?: string,
+  ): Observable<MessageEvent> {
+    this.logger.log(`Starting vehicle logs color-stats SSE stream with ${intervalMs}ms interval`);
+
+    return new Observable<MessageEvent>((observer) => {
+      const subscription = interval(intervalMs)
+        .pipe(startWith(-1)) // emit immediately on subscription
+        .subscribe(async () => {
+          try {
+            const colorStats = await this.vehicleLogsAnalyticsService.getColorStats(severity);
+            observer.next({
+              data: JSON.stringify(colorStats),
+              type: 'color-stats',
+              id: Date.now().toString(),
+              retry: intervalMs,
+            } as MessageEvent);
+          } catch (error) {
+            this.logger.error('Error streaming vehicle logs color-stats:', error);
           }
         });
       return () => subscription.unsubscribe();
