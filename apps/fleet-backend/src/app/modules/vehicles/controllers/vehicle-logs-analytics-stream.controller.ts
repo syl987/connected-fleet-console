@@ -5,8 +5,8 @@ import { VehicleLogsAnalyticsService } from '../services/vehicle-logs-analytics.
 
 @ApiTags('Logs Analytics Stream')
 @Controller('logs/stream/vehicles/analytics')
-export class VehicleLogsStreamController {
-  private readonly logger = new Logger(VehicleLogsStreamController.name);
+export class VehicleLogsAnalyticsStreamController {
+  private readonly logger = new Logger(VehicleLogsAnalyticsStreamController.name);
 
   constructor(private readonly vehicleLogsAnalyticsService: VehicleLogsAnalyticsService) {}
 
@@ -34,6 +34,36 @@ export class VehicleLogsStreamController {
             } as MessageEvent);
           } catch (error) {
             this.logger.error('Error streaming vehicle logs summary:', error);
+          }
+        });
+      return () => subscription.unsubscribe();
+    });
+  }
+
+  @Sse('severity-stats')
+  @ApiOperation({ summary: 'Get aggregated vehicle logs by severity level' })
+  @ApiResponse({ status: 200, description: 'Aggregated severity stats' })
+  getSeverityStats(
+    @Query('interval', new DefaultValuePipe(5000), ParseIntPipe) intervalMs: number,
+  ): Observable<MessageEvent> {
+    // return this.vehicleLogsAnalyticsService.getSeverityStats();
+    this.logger.log(`Starting vehicle logs severity-stats SSE stream with ${intervalMs}ms interval`);
+
+    return new Observable<MessageEvent>((observer) => {
+      const subscription = interval(intervalMs)
+        .pipe(startWith(-1)) // emit immediately on subscription
+        .subscribe(async () => {
+          try {
+            const severityStats = await this.vehicleLogsAnalyticsService.getSeverityStats();
+
+            observer.next({
+              data: JSON.stringify(severityStats),
+              type: 'severity-stats',
+              id: Date.now().toString(),
+              retry: intervalMs,
+            } as MessageEvent);
+          } catch (error) {
+            this.logger.error('Error streaming vehicle logs severity-stats:', error);
           }
         });
       return () => subscription.unsubscribe();
