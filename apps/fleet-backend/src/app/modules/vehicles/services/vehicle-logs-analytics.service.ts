@@ -56,8 +56,10 @@ export class VehicleLogsAnalyticsService {
   async getColorStats(severity?: string): Promise<VehicleLogsColorStatsDto> {
     const query = this.vehicleLogsRepository.createQueryBuilder('log').innerJoin('log.vehicle', 'vehicle');
 
+    if (severity) {
+      query.andWhere('log.severity = :severity', { severity });
+    }
     const stats = await query
-      .where('log.severity = :severity', { severity })
       .select('vehicle.color', 'color')
       .addSelect('COUNT(log.id)', 'count')
       .addSelect('COUNT(DISTINCT vehicle.id)', 'vehicles')
