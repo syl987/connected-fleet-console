@@ -12,45 +12,56 @@
 
   <!-- Summary Cards -->
   @if (summary(); as data) {
-    <div class="summary-grid">
-      <mat-card appearance="outlined">
+    <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+      <mat-card>
         <mat-card-header>
-          <mat-icon mat-card-avatar>list_alt</mat-icon>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">list_alt</mat-icon>
           <mat-card-title>Total Logs</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
-          <div>{{ data.totalLogs | number }}</div>
+
+        <mat-divider class="mx-4 mb-3" />
+
+        <mat-card-content class="text-end">
+          <div class="text-lg font-medium">{{ data.totalLogs | number }}</div>
         </mat-card-content>
       </mat-card>
 
-      <mat-card appearance="outlined">
+      <mat-card>
         <mat-card-header>
-          <mat-icon mat-card-avatar>directions_car</mat-icon>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">mode_of_travel</mat-icon>
           <mat-card-title>Highest Mileage</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
-          <div>{{ data.highestMileage | number }} km</div>
+
+        <mat-divider class="mx-4 mb-3" />
+
+        <mat-card-content class="text-end">
+          <div class="text-lg font-medium">{{ data.highestMileage | number }} km</div>
         </mat-card-content>
       </mat-card>
 
-      <mat-card appearance="outlined">
+      <mat-card>
         <mat-card-header>
-          <mat-icon mat-card-avatar>code</mat-icon>
-          <mat-card-title>Latest Year</mat-card-title>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">favorite_border</mat-icon>
+          <mat-card-title>Newest Car</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
-          <div>{{ data.latestYear }}</div>
+
+        <mat-divider class="mx-4 mb-3" />
+
+        <mat-card-content class="text-end">
+          <div class="text-lg font-medium">{{ data.latestYear }}</div>
         </mat-card-content>
       </mat-card>
 
-      <mat-card appearance="outlined">
+      <mat-card>
         <mat-card-header>
-          <mat-icon mat-card-avatar>code</mat-icon>
+          <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">calendar_month</mat-icon>
           <mat-card-title>Time Span</mat-card-title>
         </mat-card-header>
-        <mat-card-content>
-          <div>{{ data.earliestDate | date }}</div>
-          <div>{{ data.latestDate | date }}</div>
+
+        <mat-divider class="mx-4 mb-3" />
+
+        <mat-card-content class="text-end">
+          <div class="text-lg font-medium">{{ data.earliestDate | date }} - {{ data.latestDate | date }}</div>
         </mat-card-content>
       </mat-card>
     </div>

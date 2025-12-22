@@ -3,6 +3,7 @@ import { ChangeDetectionStrategy, Component, inject, OnDestroy } from '@angular/
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
 import { GenerateVehicleLogsOptions } from '../../../models/vehicle-log.models';
 import { DashboardService } from '../../../services/dashboard.service';
@@ -18,6 +19,7 @@ const GENERATE_LOGS_MAX = 5;
     CommonModule,
     MatButtonModule,
     MatCardModule,
+    MatDividerModule,
     MatIconModule,
     TitleBarComponent,
   ],
