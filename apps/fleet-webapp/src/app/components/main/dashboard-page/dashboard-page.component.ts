@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnDestroy } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -34,6 +34,8 @@ export class DashboardPageComponent implements OnDestroy {
   readonly colorStats = toSignal(this.dashboardService.colorStats$, { requireSync: true });
 
   readonly streaming = toSignal(this.dashboardService.streaming$, { requireSync: true });
+
+  readonly criticalColorStats = computed(() => this.colorStats()?.stats.find((s) => s.severity === 'CRITICAL'));
 
   ngOnDestroy(): void {
     this.dashboardService.stopStreamingAnalytics();

@@ -74,29 +74,47 @@
         <mat-card-header>
           <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">report</mat-icon>
           <mat-card-title>Severity Stats</mat-card-title>
-          <!-- <mat-card-subtitle class="text-end">Total Logs: {{ data.totalLogs }}</mat-card-subtitle> -->
+          <mat-card-subtitle class="opacity-75">Highest number of logs by severity</mat-card-subtitle>
         </mat-card-header>
 
         <mat-divider class="mx-4 my-3" />
 
-        <mat-card-content>
-          <pre>{{ data.stats | json }}</pre>
+        <mat-card-content class="grow">
+          <div class="grid grid-cols-2">
+            @for (stat of data.stats; track stat.severity) {
+              <strong>{{ stat.severity | uppercase }}:</strong>
+              <span>{{ stat.count | number }} logs ({{ stat.vehicles }} vehicles)</span>
+            }
+          </div>
         </mat-card-content>
+
+        <mat-divider class="mx-4 my-3" />
+
+        <mat-card-content>TODO implement charts for better visualization</mat-card-content>
       </mat-card>
     }
-    @if (colorStats(); as data) {
+    @if (criticalColorStats(); as data) {
       <mat-card>
         <mat-card-header>
           <mat-icon mat-card-avatar class="mb-0" style="font-size: 1.75rem">color_lens</mat-icon>
           <mat-card-title>Color Stats</mat-card-title>
-          <!-- <mat-card-subtitle class="text-end">Total Logs: {{ data.totalLogs }}</mat-card-subtitle> -->
+          <mat-card-subtitle class="opacity-75">Highest number of critical logs by vehicle color</mat-card-subtitle>
         </mat-card-header>
 
         <mat-divider class="mx-4 my-3" />
 
-        <mat-card-content>
-          <pre>{{ data.stats | json }}</pre>
+        <mat-card-content class="grow">
+          <div class="grid grid-cols-2">
+            @for (stat of data.stats; track stat.color) {
+              <strong>{{ stat.color | uppercase }}:</strong>
+              <span>{{ stat.count | number }} logs ({{ stat.vehicles }} vehicles)</span>
+            }
+          </div>
         </mat-card-content>
+
+        <mat-divider class="mx-4 my-3" />
+
+        <mat-card-content>TODO implement charts for better visualization</mat-card-content>
       </mat-card>
     }
   </div>
