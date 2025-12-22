@@ -12,24 +12,25 @@ The **DUAL Store Design** connects "Entity Cache" and custom "State"s via comple
 
 ```
 
-                                           Action   ┌───────────────┐  [alters]   ┌──────────────────────────┐
-                                 ┌────────────────> │    Reducer    ├───────────> │  State (ids, misc data)  │
-                                 │                  │  (controller) │             │          (model)         │
-                                 │                  └───────────────┘             └─────────────┬────────────┘
-                                 │                                                              │
-┌───────────┐   Method   ┌───────┴──────┐  Action   ┌───────────────────────┐                   │
-│ Component ├──────────> │   Service    ├─────────> │      Entity Cache     ├──┐                │
-│  (view)   │ <──────────┤ (controller) │ <───┐     │ (controller + model)  │  │                │
-└───────────┘ Observable └───────┬──────┘     │     └───────────┬───────────┘  │                │
-            (into Signals)    ^  │            └─────────────────┴<──────────────────────────────┘
-                              │  │         Selector (merging multiple states)  │
-                              │  │                                    ┌────────┘
-                              │  │  Action  ┌─────────────────┐       │         ┌──────────────────────────┐
-                              │  └────────> │     Effects     ├──────>┴───────> │         Back-End         │
-                              │             │   (controller)  │   HTTP request  │ (REST API, ORM entities) │
-                              │             └────────┬────────┘                 └──────────────────────────┘
-                              └──────────────────────┘
-          new Action (i.e., follow-up operations for Entity Cache, Reducer or Effects)
+                                                             Action   ┌───────────────┐  [alters]   ┌──────────────────────────┐
+                                                   ┌────────────────> │    Reducer    ├───────────> │  State (ids, misc data)  │
+                                                   │                  │  (controller) │             │          (model)         │
+                                                   │                  └───────────────┘             └─────────────┬────────────┘
+                                                   │                                                              │
+┌───────────┐   Method   ┌──────────────┐          │    Action   ┌───────────────────────┐                        │
+│ Component ├──────────> │   Service    ├──────────┼───────────> │      Entity Cache     ├────┐                   │
+│  (view)   │ <──────────┤ (controller) │     ^    │             │ (controller + model)  │    │                   │
+└───────────┘ Observable └──────────────┘     │    │             └───────────┬───────────┘    │                   │
+            (into Signals)       ^            │    │                         │                │                   │
+                                 └────────────│──────────────────────────────┴────────────────────────────────────┘
+                                              │    │      Selector (merging multiple states)  │
+                                              │    │                                          │
+                                              │    │        ┌─────────────────┐      Method   │   ┌──────────────────────────┐  HTTP Request    ┌──────────────────┐
+                                              │    └──────> │     Effects     ├───────────────┴─> │  Data / Stream Services  ├────────────────> │     Back End     │
+                                              │    Action   │   (controller)  │ <─────────────────│        (REST API)        │ <────────────────│  (ORM Entities)  │
+                                              │             └────────┬────────┘     Observable    └──────────────────────────┘   HTTP Response  └──────────────────┘
+                                              └──────────────────────┘
+                                                     new Action
 
 ```
 

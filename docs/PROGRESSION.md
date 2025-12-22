@@ -48,4 +48,5 @@
 3. Investigate how to implement SSE (server-side events)
 4. Implement a simple summary streaming with ngrx
 5. Implement some statistical data aggregation with streaming
-6. TODO implement charts
+6. IN PROGRESS implement file upload and parse
+7. TODO implement dashboard charts
