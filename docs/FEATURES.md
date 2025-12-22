@@ -2,6 +2,10 @@
 
 In general, individual pages list their main technical features below the title in monospace font.
 
+### Event Tracking
+
+Events and state changes in the webapp can be tracked inside the console or the redux browser plugin.
+
 ### Welcome Page
 
 Welcome text with a visual overview of technologies used in this project.
