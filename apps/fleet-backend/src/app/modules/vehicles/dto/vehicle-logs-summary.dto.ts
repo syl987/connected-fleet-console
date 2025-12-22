@@ -11,8 +11,8 @@ export class VehicleLogsSummaryDto {
   latestDate: string;
 
   @ApiProperty({ description: 'Highest vehicle mileage recorded in logs' })
-  highestMileage: string;
+  highestMileage: number;
 
-  /* @ApiProperty({ description: '' })
-  latestYear: string; */
+  @ApiProperty({ description: 'Latest vehicle year recorded in logs' })
+  latestYear: number;
 }
