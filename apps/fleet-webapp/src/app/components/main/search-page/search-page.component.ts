@@ -55,8 +55,8 @@ export class SearchPageComponent {
     year: new FormControl<string | null>(null),
     severity: new FormControl<string | null>(null),
     code: new FormControl<string | null>(null),
-    from: new FormControl<string | null>(null),
-    to: new FormControl<string | null>(null),
+    from: new FormControl<Date | null>(null),
+    to: new FormControl<Date | null>(null),
   });
 
   readonly vehicleLogs = toSignal(this.searchService.vehicleLogs$, { requireSync: true });
@@ -85,8 +85,8 @@ export class SearchPageComponent {
       year: this.form.value.year || undefined,
       severity: this.form.value.severity || undefined,
       code: this.form.value.code || undefined,
-      from: this.form.value.from || undefined,
-      to: this.form.value.to || undefined,
+      from: this.form.value.from?.toISOString() || undefined,
+      to: this.form.value.to?.toISOString() || undefined,
 
       page: options?.page ?? 1,
       size: options?.size ?? this.paginator()?.pageSize ?? 5,
