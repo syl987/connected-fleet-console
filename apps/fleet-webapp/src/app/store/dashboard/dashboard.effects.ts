@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { mapResponse } from '@ngrx/operators';
 import { exhaustMap, switchMap, tap } from 'rxjs';
 import { VehicleLogUtilsDataService } from '../../services/data/vehicle-log-utils-data.service';
-import { VehicleLogsAnalyticsStreamService } from '../../services/stream/vehicle-logs-stream.service';
+import { VehicleLogsAnalyticsStreamService } from '../../services/stream/vehicle-logs-analytics-stream.service';
 import { ToastService } from '../../services/toast.service';
 import { DashboardActions } from './dashboard.actions';
 
