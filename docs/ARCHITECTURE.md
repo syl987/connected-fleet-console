@@ -17,18 +17,18 @@ The **DUAL Store Design** connects "Entity Cache" and custom "State"s via comple
                                                    │                  │  (controller) │             │          (model)         │
                                                    │                  └───────────────┘             └─────────────┬────────────┘
                                                    │                                                              │
-┌───────────┐   Method   ┌──────────────┐          │    Action   ┌───────────────────────┐                        │
-│ Component ├──────────> │   Service    ├──────────┼───────────> │      Entity Cache     ├────┐                   │
-│  (view)   │ <──────────┤ (controller) │     ^    │             │ (controller + model)  │    │                   │
+┌───────────┐   Method   ┌──────────────┐  Action  │    Action   ┌───────────────────────┐                        │ Selector (simple and complex)
+│ Component ├──────────> │   Service    ├──────────┼───────────> │     Entity Cache      ├────┐                   │
+│  (view)   │ <──────────┤ (controller) │     ^    │             │ (controller + model)  │    │ Method            │
 └───────────┘ Observable └──────────────┘     │    │             └───────────┬───────────┘    │                   │
-            (into Signals)       ^            │    │                         │                │                   │
-                                 └────────────│──────────────────────────────┴────────────────────────────────────┘
-                                              │    │      Selector (merging multiple states)  │
-                                              │    │                                          │
-                                              │    │        ┌─────────────────┐      Method   │   ┌──────────────────────────┐  HTTP Request    ┌──────────────────┐
-                                              │    └──────> │     Effects     ├───────────────┴─> │  Data / Stream Services  ├────────────────> │     Back End     │
-                                              │    Action   │   (controller)  │ <─────────────────│        (REST API)        │ <────────────────│  (ORM Entities)  │
-                                              │             └────────┬────────┘     Observable    └──────────────────────────┘   HTTP Response  └──────────────────┘
+            (into Signals)       ^            │    │                         │ Selector       │                   │
+                                 └───────────────────────────────────────────┴────────────────────────────────────┘
+                              Selector        │    │     Selector (merging states + cache)    │
+                        (simple and complex)  │    │                                          │
+                                              │    │        ┌─────────────────┐      Method   │   ┌──────────────────────────┐  HTTP Request    ┌──────────────┐
+                                              │    └──────> │     Effects     ├───────────────┴─> │  Data / Stream Services  ├────────────────> │   Back End   │
+                                              │    Action   │   (controller)  │ <─────────────────│     (REST API calls)     │ <────────────────│  (REST API)  │
+                                              │             └────────┬────────┘     Observable    └──────────────────────────┘   HTTP Response  └──────────────┘
                                               └──────────────────────┘
                                                      new Action
 
