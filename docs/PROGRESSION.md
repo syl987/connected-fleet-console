@@ -47,4 +47,5 @@
 2. Investigate real-time data streaming options
 3. Investigate how to implement SSE (server-side events)
 4. Implement a simple summary streaming with ngrx
-5. TODO Implement some simple data aggregation with streaming 
+5. Implement some statistical data aggregation with streaming
+6. TODO implement charts

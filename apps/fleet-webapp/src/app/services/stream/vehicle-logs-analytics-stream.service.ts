@@ -1,9 +1,15 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subject, takeUntil } from 'rxjs';
-import { VehicleLogsSummary } from '../../models/vehicle-log.models';
+import {
+  VehicleLogsColorStats,
+  VehicleLogsSeverityStats,
+  VehicleLogsSummary,
+} from '../../models/vehicle-logs-analytics.models';
 
 type VehicleLogsAnalyticsStreamResponse = {
   summary: VehicleLogsSummary;
+  severityStats: VehicleLogsSeverityStats;
+  colorStats: VehicleLogsColorStats;
 };
 
 @Injectable({

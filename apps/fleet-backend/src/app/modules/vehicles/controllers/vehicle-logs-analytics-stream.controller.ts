@@ -3,14 +3,6 @@ import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { interval, Observable, startWith } from 'rxjs';
 import { VehicleLogsAnalyticsService } from '../services/vehicle-logs-analytics.service';
 
-const SEVERITY_VALUES = [
-  'DEBUG',
-  'INFO',
-  'WARNING',
-  'ERROR',
-  'CRITICAL',
-];
-
 @ApiTags('Logs Analytics Stream')
 @Controller('logs/analytics/vehicles/stream')
 export class VehicleLogsAnalyticsStreamController {
@@ -33,9 +25,11 @@ export class VehicleLogsAnalyticsStreamController {
         .subscribe(async () => {
           try {
             const summary = await this.vehicleLogsAnalyticsService.getSummary();
+            const severityStats = await this.vehicleLogsAnalyticsService.getSeverityStats();
+            const colorStats = await this.vehicleLogsAnalyticsService.getColorStats();
 
             observer.next({
-              data: JSON.stringify({ summary }),
+              data: JSON.stringify({ summary, severityStats, colorStats }),
               type: 'analytics',
               id: Date.now().toString(),
               retry: intervalMs,

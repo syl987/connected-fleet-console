@@ -1,17 +1,9 @@
-import { Controller, Get, Logger, Query } from '@nestjs/common';
-import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Controller, Get, Logger } from '@nestjs/common';
+import { ApiOperation, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { VehicleLogsColorStatsDto } from '../dto/vehicle-logs-color-stats.dto';
 import { VehicleLogsSeverityStatsDto } from '../dto/vehicle-logs-severity-stats.dto';
 import { VehicleLogsSummaryDto } from '../dto/vehicle-logs-summary.dto';
 import { VehicleLogsAnalyticsService } from '../services/vehicle-logs-analytics.service';
-
-const SEVERITY_VALUES = [
-  'DEBUG',
-  'INFO',
-  'WARNING',
-  'ERROR',
-  'CRITICAL',
-];
 
 @ApiTags('Logs Analytics')
 @Controller('logs/analytics/vehicles')
@@ -36,9 +28,8 @@ export class VehicleLogsAnalyticsController {
 
   @Get('color-stats')
   @ApiOperation({ summary: 'Get aggregated vehicle logs by color' })
-  @ApiQuery({ name: 'severity', required: false, type: String, example: 'CRITICAL', enum: SEVERITY_VALUES })
   @ApiResponse({ status: 200, description: 'Aggregated color stats' })
-  getColorStats(@Query('severity') severity?: string): Promise<VehicleLogsColorStatsDto> {
-    return this.vehicleLogsAnalyticsService.getColorStats(severity);
+  getColorStats(): Promise<VehicleLogsColorStatsDto> {
+    return this.vehicleLogsAnalyticsService.getColorStats();
   }
 }

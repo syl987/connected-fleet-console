@@ -1,5 +1,10 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { GenerateVehicleLogsOptions, VehicleLogsSummary } from '../../models/vehicle-log.models';
+import {
+  VehicleLogsColorStats,
+  VehicleLogsSeverityStats,
+  VehicleLogsSummary,
+} from '../../models/vehicle-logs-analytics.models';
+import { GenerateVehicleLogsOptions } from '../../models/vehicle-logs-utils.models';
 
 export const DashboardActions = createActionGroup({
   source: 'VehicleLogs/API',
@@ -13,7 +18,11 @@ export const DashboardActions = createActionGroup({
     stopGeneratingLogsERROR: emptyProps(),
 
     streamAnalytics: emptyProps(),
-    streamAnalyticsNEXT: props<{ summary: VehicleLogsSummary }>(),
+    streamAnalyticsNEXT: props<{
+      summary: VehicleLogsSummary;
+      severityStats: VehicleLogsSeverityStats;
+      colorStats: VehicleLogsColorStats;
+    }>(),
     streamAnalyticsERROR: emptyProps(),
     streamAnalyticsSTOP: emptyProps(),
   },
