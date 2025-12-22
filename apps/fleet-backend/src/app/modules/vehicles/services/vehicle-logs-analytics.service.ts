@@ -71,14 +71,14 @@ export class VehicleLogsAnalyticsService {
           .orderBy('count', 'DESC')
           .getRawMany();
 
-        const totalLogs = colorStats.reduce((sum, stat) => sum + parseInt(stat.count, 10), 0);
+        const totalLogsBySeverity = colorStats.reduce((sum, stat) => sum + parseInt(stat.count, 10), 0);
 
         const stats = colorStats.map((stat) => ({
           color: stat.color,
           count: parseInt(stat.count, 10),
           vehicles: parseInt(stat.vehicles, 10),
         }));
-        return { totalLogs, stats, severity };
+        return { totalLogs: totalLogsBySeverity, severity, stats };
       }),
     );
     return { totalLogs, stats: statsBySeverity };

@@ -16,11 +16,11 @@ export class SeverityColorStatsDto {
   @ApiProperty({ description: 'Total number of logs analyzed' })
   totalLogs: number;
 
-  @ApiProperty({ description: 'Statistics grouped by color', type: [ColorStatsDto] })
-  stats: ColorStatsDto[];
-
   @ApiProperty({ description: 'Log severity level', enum: LogSeverity })
   severity: LogSeverity;
+
+  @ApiProperty({ description: 'Statistics grouped by color', type: [ColorStatsDto] })
+  stats: ColorStatsDto[];
 }
 
 export class VehicleLogsColorStatsDto {
