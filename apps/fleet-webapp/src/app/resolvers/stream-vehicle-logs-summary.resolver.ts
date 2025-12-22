@@ -3,6 +3,6 @@ import { ResolveFn } from '@angular/router';
 import { DashboardService } from '../services/dashboard.service';
 
 export const streamVehicleLogsSummaryResolver: ResolveFn<void> = () => {
-  inject(DashboardService).streamSummary();
+  inject(DashboardService).streamAnalytics();
   return; // return void to avoid blocking navigation
 };

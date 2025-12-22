@@ -21,11 +21,11 @@ export class DashboardService {
     this.store.dispatch(DashboardActions.stopGeneratingLogs());
   }
 
-  streamSummary(): void {
-    this.store.dispatch(DashboardActions.streamSummary());
+  streamAnalytics(): void {
+    this.store.dispatch(DashboardActions.streamAnalytics());
   }
 
-  stopStreamingSummary(): void {
-    this.store.dispatch(DashboardActions.streamSummarySTOP());
+  stopStreamingAnalytics(): void {
+    this.store.dispatch(DashboardActions.streamAnalyticsSTOP());
   }
 }
