@@ -1,38 +1,24 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { VehicleLogsSummaryDto } from '../dto/vehicle-logs-summary.dto';
 import { VehicleLog } from '../entities/vehicle-log.entity';
 
 @Injectable()
 export class VehicleLogsAnalyticsService {
   constructor(@InjectRepository(VehicleLog) private readonly vehicleLogsRepository: Repository<VehicleLog>) {}
 
-  async getSummary() {
+  async getSummary(): Promise<VehicleLogsSummaryDto> {
     const totalLogs = await this.vehicleLogsRepository.count();
 
-    const uniqueVehicles = await this.vehicleLogsRepository
+    const { earliestDate, latestDate, highestMileage } = await this.vehicleLogsRepository
       .createQueryBuilder('log')
-      .select('COUNT(DISTINCT log.vehicleId)', 'count')
-      .getRawOne()
-      .then(({ count }) => parseInt(count));
-
-    const uniqueCodes = await this.vehicleLogsRepository
-      .createQueryBuilder('log')
-      .select('COUNT(DISTINCT log.code)', 'count')
-      .getRawOne()
-      .then(({ count }) => parseInt(count));
-
-    const { earliest, latest } = await this.vehicleLogsRepository
-      .createQueryBuilder('log')
-      .select('MIN(log.timestamp)', 'earliest')
-      .addSelect('MAX(log.timestamp)', 'latest')
+      .leftJoinAndSelect('log.vehicle', 'vehicle')
+      .select('MIN(log.timestamp)', 'earliestDate')
+      .addSelect('MAX(log.timestamp)', 'latestDate')
+      .addSelect('MAX(vehicle.mileage)', 'highestMileage')
       .getRawOne();
 
-    return {
-      totalLogs,
-      uniqueVehicles,
-      uniqueCodes,
-      dateRange: { earliest, latest },
-    };
+    return { totalLogs, earliestDate, latestDate, highestMileage };
   }
 }
