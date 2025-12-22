@@ -3,7 +3,7 @@ import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { interval, Observable } from 'rxjs';
 import { VehicleLogsAnalyticsService } from '../services/vehicle-logs-analytics.service';
 
-@ApiTags('Logs Stream')
+@ApiTags('Logs Analytics Stream')
 @Controller('logs/stream/vehicles')
 export class VehicleLogsStreamController {
   private readonly logger = new Logger(VehicleLogsStreamController.name);
