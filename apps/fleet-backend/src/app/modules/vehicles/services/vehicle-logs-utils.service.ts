@@ -1,7 +1,15 @@
 import { ConflictException, Injectable, Logger } from '@nestjs/common';
+import { readFile } from 'fs/promises';
 import { concatMap, endWith, interval, startWith, Subject, takeUntil, timer } from 'rxjs';
+import { LogSeverity } from '../../../common/entities/log.entity';
+import { CreateVehicleLogDto } from '../dto/create-vehicle-log.dto';
 import { GenerateVehicleLogsDto } from '../dto/generate-vehicle-logs.dto';
+import { VehicleLog } from '../entities/vehicle-log.entity';
 import { VehicleLogsDataLoader } from '../loader/vehicle-logs-data.loader';
+import { VehicleLogsService } from './vehicle-logs.service';
+
+const INPUT_FILE_LOG_REGEX =
+  /\[(?<timestamp>[^\]]+)\] \[VEHICLE_ID:(?<vehicleId>\d+)\] \[(?<severity>[^\]]+)\] \[CODE:(?<code>[^\]]+)\] \[(?<message>[^\]]+)\]/;
 
 @Injectable()
 export class VehicleLogsUtilsService {
@@ -11,7 +19,10 @@ export class VehicleLogsUtilsService {
 
   private _generating = false;
 
-  constructor(private readonly vehicleLogsDataLoader: VehicleLogsDataLoader) {}
+  constructor(
+    private readonly vehicleLogsService: VehicleLogsService,
+    private readonly vehicleLogsDataLoader: VehicleLogsDataLoader,
+  ) {}
 
   startGeneratingLogs(generateDto: GenerateVehicleLogsDto): void {
     if (this._generating) {
@@ -50,5 +61,49 @@ export class VehicleLogsUtilsService {
   stopGeneratingLogs(): void {
     this.logger.log('Stop signal sent for vehicle logs generation');
     this._generateStopSignal.next();
+  }
+
+  async parseAndSave(file: {
+    originalname: string;
+    filename: string;
+    mimetype: string;
+    size: number;
+    buffer: Buffer;
+  }): Promise<VehicleLog[]> {
+    this.logger.log(`File received: ${file.originalname} (${file.mimetype}, ${file.size} bytes)`);
+
+    const data = await readFile(file.buffer, 'utf-8');
+    const lines = data.split('\n');
+
+    let skippedLines = 0;
+
+    const vehicleLogs = lines
+      .map((line) => {
+        try {
+          const { groups } = line.match(INPUT_FILE_LOG_REGEX);
+          const vehicleLog: CreateVehicleLogDto = new CreateVehicleLogDto();
+          vehicleLog.timestamp = new Date(groups.timestamp);
+          vehicleLog.vehicleId = parseInt(groups.vehicleId, 10);
+          vehicleLog.severity = Object.keys(LogSeverity).includes(groups.severity)
+            ? (groups.severity as LogSeverity)
+            : (() => {
+                throw new Error(`Invalid log severity: ${groups.severity}`);
+              })();
+          vehicleLog.code = parseInt(groups.code, 10);
+          vehicleLog.message = groups.message;
+          return vehicleLog;
+        } catch (error) {
+          this.logger.error(`Failed to parse line: ${line}. Error: ${error.message}`);
+          skippedLines++;
+          return null;
+        }
+      })
+      .filter((log): log is CreateVehicleLogDto => log !== null);
+
+    this.logger.log(
+      `Successfully read ${vehicleLogs.length} logs. Skipped ${skippedLines} invalid lines. Saving to database...`,
+    );
+
+    return this.vehicleLogsService.createMany(vehicleLogs);
   }
 }
