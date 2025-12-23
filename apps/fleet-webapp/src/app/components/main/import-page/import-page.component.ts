@@ -1,12 +1,13 @@
 import { JsonPipe } from '@angular/common';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { MatButtonModule } from '@angular/material/button';
 import { ImportService } from '../../../services/import.service';
 import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
 
 @Component({
   selector: 'app-import-page',
-  imports: [TitleBarComponent, JsonPipe],
+  imports: [MatButtonModule, TitleBarComponent, JsonPipe],
   templateUrl: './import-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
