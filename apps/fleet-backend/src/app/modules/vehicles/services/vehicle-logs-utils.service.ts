@@ -8,7 +8,7 @@ import { VehicleLogsDataLoader } from '../loader/vehicle-logs-data.loader';
 import { VehicleLogsService } from './vehicle-logs.service';
 
 const INPUT_FILE_LOG_REGEX =
-  /\[(?<timestamp>\w+)\] \[VEHICLE_ID:(?<vehicleId>\d+)\] \[(?<severity>\w+)\] \[CODE:(?<code>\w+)\] \[(?<message>[^\]]+)\]/;
+  /\[(?<timestamp>[^\]]+)\] \[VEHICLE_ID:(?<vehicleId>\d+)\] \[(?<severity>[^\]]+)\] \[CODE:(?<code>[^\]]+)\] \[(?<message>[^\]]+)\]/;
 
 function getSeverity(severity: string): LogSeverity {
   return Object.values(LogSeverity).includes(severity as LogSeverity)
