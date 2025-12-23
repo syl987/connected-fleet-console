@@ -11,7 +11,7 @@ const INPUT_FILE_LOG_REGEX =
   /\[(?<timestamp>\w+)\] \[VEHICLE_ID:(?<vehicleId>\d+)\] \[(?<severity>\w+)\] \[CODE:(?<code>\w+)\] \[(?<message>[^\]]+)\]/;
 
 function getSeverity(severity: string): LogSeverity {
-  return Object.keys(LogSeverity).includes(severity)
+  return Object.values(LogSeverity).includes(severity as LogSeverity)
     ? (severity as LogSeverity)
     : (() => {
         throw new Error('Invalid log severity: ' + severity);
