@@ -4,7 +4,13 @@
     <button mat-stroked-button (click)="clearVehicleLogs()">Clear Logs</button>
   </app-title-bar>
 
-  <input type="file" accept=".txt,.log,text/plain" #picker hidden (change)="picker.files ? import(picker.files[0]) : null" />
+  <input
+    type="file"
+    accept=".txt,.log,text/plain"
+    #picker
+    hidden
+    (change)="picker.files ? import(picker.files[0]) : null"
+  />
 
   <p>Import vehicle logs from a file.</p>
 
@@ -32,6 +38,36 @@
           <ng-container matColumnDef="message">
             <th mat-header-cell *matHeaderCellDef>Message</th>
             <td mat-cell *matCellDef="let log">{{ log.message }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="brand">
+            <th mat-header-cell *matHeaderCellDef>Brand</th>
+            <td mat-cell *matCellDef="let log">{{ log.vehicle?.brand }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="model">
+            <th mat-header-cell *matHeaderCellDef>Model</th>
+            <td mat-cell *matCellDef="let log">{{ log.vehicle?.model }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="year">
+            <th mat-header-cell *matHeaderCellDef>Year</th>
+            <td mat-cell *matCellDef="let log">{{ log.vehicle?.year }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="fuelType">
+            <th mat-header-cell *matHeaderCellDef>Fuel Type</th>
+            <td mat-cell *matCellDef="let log">{{ log.vehicle?.fuelType }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="color">
+            <th mat-header-cell *matHeaderCellDef>Color</th>
+            <td mat-cell *matCellDef="let log">{{ log.vehicle?.color }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="mileage">
+            <th mat-header-cell *matHeaderCellDef>Mileage</th>
+            <td mat-cell *matCellDef="let log">{{ log.vehicle?.mileage }} km</td>
           </ng-container>
 
           <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
