@@ -23,6 +23,10 @@ export class VehicleLogsUtilsController {
     if (!file) {
       throw new BadRequestException('No file uploaded');
     }
+    const mimetype = file.mimetype;
+    if (!mimetype || (!mimetype.startsWith('text/') && mimetype !== 'text/plain')) {
+      throw new BadRequestException('Invalid file type. Only text files are allowed.');
+    }
     return (await this.vehicleLogsUtilsService.parseAndSave(file)).map(toVehicleLogDto);
   }
 
