@@ -68,7 +68,8 @@ export class VehicleLogsUtilsService {
           }
           return vehicleLog;
         } catch (error) {
-          this.logger.error(`Failed to parse line: ${line}. Error: ${error.message}`);
+          const errorMessage = error instanceof Error ? error.message : String(error);
+          this.logger.error(`Failed to parse line: ${line}. Error: ${errorMessage}`);
           skippedLines++;
           return null;
         }
