@@ -1,4 +1,5 @@
 import { ConflictException, Injectable, Logger } from '@nestjs/common';
+import { validate } from 'class-validator';
 import { concatMap, endWith, interval, startWith, Subject, takeUntil, timer } from 'rxjs';
 import { LogSeverity } from '../../../common/entities/log.entity';
 import { CreateVehicleLogDto } from '../dto/create-vehicle-log.dto';
@@ -44,8 +45,8 @@ export class VehicleLogsUtilsService {
 
     let skippedLines = 0;
 
-    const vehicleLogs = lines
-      .map((line) => {
+    const vehicleLogs = await Promise.all(
+      lines.map(async (line) => {
         try {
           const match = line.match(INPUT_FILE_LOG_REGEX);
           if (!match || !match.groups) {
@@ -59,14 +60,20 @@ export class VehicleLogsUtilsService {
           vehicleLog.severity = getSeverity(groups.severity);
           vehicleLog.code = parseInt(groups.code, 10);
           vehicleLog.message = groups.message;
+
+          const errors = await validate(vehicleLog);
+
+          if (errors.length > 0) {
+            throw new Error('Validation failed: ' + JSON.stringify(errors));
+          }
           return vehicleLog;
         } catch (error) {
           this.logger.error(`Failed to parse line: ${line}. Error: ${error.message}`);
           skippedLines++;
           return null;
         }
-      })
-      .filter((log): log is CreateVehicleLogDto => log !== null);
+      }),
+    ).then((results) => results.filter((log): log is CreateVehicleLogDto => log !== null));
 
     this.logger.log(
       `Successfully read ${vehicleLogs.length} logs. Skipped ${skippedLines} invalid lines. Saving to database...`,
