@@ -38,12 +38,14 @@ export class VehicleLogsUtilsService {
 
     try {
       const vehicleLogs = await Promise.all(
-        lines.map(async (line) => {
-          const match = line.match(INPUT_FILE_LOG_REGEX);
-          if (!match || !match.groups) {
-            throw new Error('Invalid log line format');
-          }
-          const { groups } = match;
+        lines
+          .filter((line) => line.trim().length > 0)
+          .map(async (line) => {
+            const match = line.match(INPUT_FILE_LOG_REGEX);
+            if (!match || !match.groups) {
+              throw new Error('Invalid log line format');
+            }
+            const { groups } = match;
 
           const vehicleLog = new CreateVehicleLogDto();
           vehicleLog.timestamp = parse(groups.timestamp, 'yyyy-MM-dd HH:mm:ss', new Date());
