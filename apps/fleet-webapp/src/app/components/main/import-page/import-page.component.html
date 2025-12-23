@@ -1,0 +1,14 @@
+<div class="container">
+  <app-title-bar>
+    <button mat-stroked-button class="app-tertiary" (click)="picker.click()">Select File</button>
+    <button mat-stroked-button (click)="clearVehicleLogs()">Clear Logs</button>
+  </app-title-bar>
+
+  <input type="file" #picker hidden (change)="picker.files ? import(picker.files[0]) : null" />
+
+  <p>Overview of critical metrics based on vehicle logs.</p>
+
+  <p class="font-mono opacity-75">file upload / parse file data and save content</p>
+
+  <pre>{{ vehicleLogs() | json }}</pre>
+</div>
