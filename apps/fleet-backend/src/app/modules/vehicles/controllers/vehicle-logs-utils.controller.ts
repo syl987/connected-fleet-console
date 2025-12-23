@@ -23,6 +23,12 @@ export class VehicleLogsUtilsController {
     if (!file) {
       throw new BadRequestException('No file uploaded');
     }
+    if (file.size === 0) {
+      throw new BadRequestException('Uploaded file is empty');
+    }
+    if (file.size > 10 * 1024 * 1024) {
+      throw new BadRequestException('Uploaded file is too large. Maximum allowed size is 10MB.');
+    }
     const mimetype = file.mimetype;
     if (!mimetype || (!mimetype.startsWith('text/') && mimetype !== 'text/plain')) {
       throw new BadRequestException('Invalid file type. Only text files are allowed.');
