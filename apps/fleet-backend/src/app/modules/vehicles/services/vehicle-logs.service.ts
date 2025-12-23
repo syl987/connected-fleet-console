@@ -54,7 +54,7 @@ export class VehicleLogsService {
     // Create logs
     const logs = createDtos.map((dto) =>
       this.vehicleLogsRepository.create({
-        timestamp: new Date(dto.timestamp),
+        timestamp: dto.timestamp,
         severity: dto.severity,
         code: dto.code,
         message: dto.message,
