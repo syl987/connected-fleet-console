@@ -4,7 +4,7 @@
     <button mat-stroked-button (click)="clearVehicleLogs()">Clear Logs</button>
   </app-title-bar>
 
-  <input type="file" #picker hidden (change)="picker.files && import(picker.files[0])" />
+  <input type="file" accept=".txt,.log,text/plain" #picker hidden (change)="picker.files ? import(picker.files[0]) : null" />
 
   <p>Import vehicle logs from a file.</p>
 
