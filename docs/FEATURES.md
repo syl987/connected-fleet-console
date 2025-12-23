@@ -12,7 +12,7 @@ Welcome text with a visual overview of technologies used in this project.
 
 ### Dashboard Page
 
-shows data in real-time using server-side events.
+Shows data in real-time using server-side events.
 
 Shows aggregated data.
 

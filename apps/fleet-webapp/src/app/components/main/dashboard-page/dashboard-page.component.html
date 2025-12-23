@@ -67,8 +67,9 @@
       </mat-card>
     </div>
   }
-
-  <h2>Fleet Health Statistics</h2>
+  @if (severityStats() && colorStats()) {
+    <h2>Fleet Health Statistics</h2>
+  }
 
   <div class="grid gap-6 xl:grid-cols-2">
     @if (severityStats(); as data) {
