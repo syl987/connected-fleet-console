@@ -21,6 +21,7 @@ export class ImportEffects {
         this.vehicleLogUtilsDataService.parseAndSave(file).pipe(
           mapResponse({
             next: (logs) => {
+              this.toastService.showSuccessToast('Vehicle logs saved successfully.');
               this.vehicleLogService.upsertManyInCache(logs);
               return ImportActions.importVehicleLogsSUCCESS({ logs });
             },
