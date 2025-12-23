@@ -37,12 +37,10 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
 export class HeaderComponent extends SidenavComponent {
   protected readonly breakpointObserver = inject(BreakpointObserver);
 
-  private readonly large$ = this.breakpointObserver
-    .observe([Breakpoints.Medium, Breakpoints.Large, Breakpoints.XLarge])
-    .pipe(
-      map(({ matches }) => matches),
-      distinctUntilChanged(),
-    );
+  private readonly large$ = this.breakpointObserver.observe([Breakpoints.Large, Breakpoints.XLarge]).pipe(
+    map(({ matches }) => matches),
+    distinctUntilChanged(),
+  );
   readonly large = toSignal(this.large$, { requireSync: true });
 
   readonly sidenavToggle = output();

@@ -30,6 +30,11 @@
       </a>
 
       <mat-divider vertical class="h-8" />
+    }
+    @if (large()) {
+      <a mat-button href="/api" target="_blank" rel="noopener">View API</a>
+
+      <mat-divider vertical class="h-8" />
 
       <button mat-icon-button (click)="themeService.toggleTheme()" aria-label="Toggle Theme">
         @if (themeService.theme === 'dark') {
