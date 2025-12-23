@@ -8,8 +8,8 @@ export class LogDto extends BaseDto {
   @ApiProperty({ description: 'Severity' })
   severity!: string;
 
-  @ApiProperty({ description: 'Numeric code' })
-  code!: number;
+  @ApiProperty({ description: 'Text code' })
+  code!: string;
 
   @ApiProperty({ description: 'Message' })
   message!: string;

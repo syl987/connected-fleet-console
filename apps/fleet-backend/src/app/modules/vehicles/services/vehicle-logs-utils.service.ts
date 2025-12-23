@@ -1,5 +1,6 @@
-import { ConflictException, Injectable, Logger } from '@nestjs/common';
+import { BadRequestException, ConflictException, Injectable, Logger } from '@nestjs/common';
 import { validate } from 'class-validator';
+import { parse } from 'date-fns';
 import { concatMap, endWith, interval, startWith, Subject, takeUntil, timer } from 'rxjs';
 import { LogSeverity } from '../../../common/entities/log.entity';
 import { CreateVehicleLogDto } from '../dto/create-vehicle-log.dto';
@@ -10,14 +11,6 @@ import { VehicleLogsService } from './vehicle-logs.service';
 
 const INPUT_FILE_LOG_REGEX =
   /\[(?<timestamp>[^\]]+)\] \[VEHICLE_ID:(?<vehicleId>\d+)\] \[(?<severity>[^\]]+)\] \[CODE:(?<code>[^\]]+)\] \[(?<message>[^\]]+)\]/;
-
-function getSeverity(severity: string): LogSeverity {
-  return Object.values(LogSeverity).includes(severity as LogSeverity)
-    ? (severity as LogSeverity)
-    : (() => {
-        throw new Error('Invalid log severity: ' + severity);
-      })();
-}
 
 @Injectable()
 export class VehicleLogsUtilsService {
@@ -43,22 +36,20 @@ export class VehicleLogsUtilsService {
 
     const lines = file.buffer.toString('utf-8').split('\n');
 
-    let skippedLines = 0;
-
-    const vehicleLogs = await Promise.all(
-      lines.map(async (line) => {
-        try {
+    try {
+      const vehicleLogs = await Promise.all(
+        lines.map(async (line) => {
           const match = line.match(INPUT_FILE_LOG_REGEX);
           if (!match || !match.groups) {
             throw new Error('Invalid log line format');
           }
           const { groups } = match;
 
-          const vehicleLog: CreateVehicleLogDto = new CreateVehicleLogDto();
-          vehicleLog.timestamp = new Date(groups.timestamp);
+          const vehicleLog = new CreateVehicleLogDto();
+          vehicleLog.timestamp = parse(groups.timestamp, 'yyyy-MM-dd HH:mm:ss', new Date());
           vehicleLog.vehicleId = parseInt(groups.vehicleId, 10);
-          vehicleLog.severity = getSeverity(groups.severity);
-          vehicleLog.code = parseInt(groups.code, 10);
+          vehicleLog.severity = groups.severity as LogSeverity;
+          vehicleLog.code = groups.code;
           vehicleLog.message = groups.message;
 
           const errors = await validate(vehicleLog);
@@ -67,20 +58,16 @@ export class VehicleLogsUtilsService {
             throw new Error('Validation failed: ' + JSON.stringify(errors));
           }
           return vehicleLog;
-        } catch (error) {
-          const errorMessage = error instanceof Error ? error.message : String(error);
-          this.logger.error(`Failed to parse line: ${line}. Error: ${errorMessage}`);
-          skippedLines++;
-          return null;
-        }
-      }),
-    ).then((results) => results.filter((log): log is CreateVehicleLogDto => log !== null));
+        }),
+      ).then((results) => results.filter((log): log is CreateVehicleLogDto => log !== null));
 
-    this.logger.log(
-      `Successfully read ${vehicleLogs.length} logs. Skipped ${skippedLines} invalid lines. Saving to database...`,
-    );
-
-    return this.vehicleLogsService.createMany(vehicleLogs);
+      this.logger.log(`Successfully read ${vehicleLogs.length} logs. Saving to database...`);
+      return this.vehicleLogsService.createMany(vehicleLogs);
+    } catch (e: unknown) {
+      const message = e instanceof Error ? e.message : String(e);
+      this.logger.error(`Failed to parse: Error: ${message}`);
+      throw new BadRequestException('Failed to parse uploaded file: ' + message);
+    }
   }
 
   startGeneratingLogs(generateDto: GenerateVehicleLogsDto): void {

@@ -1,12 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsDateString, IsEnum, IsInt, IsNotEmpty, IsNumber, IsString, Min } from 'class-validator';
+import { IsDate, IsEnum, IsNotEmpty, IsNumber, IsString, Min } from 'class-validator';
 import { LogSeverity } from '../../../common/entities/log.entity';
 
 export class CreateVehicleLogDto {
   @ApiProperty({ description: 'Log timestamp', example: '2024-01-15T10:30:00Z', type: String })
-  @IsDateString()
-  @IsNotEmpty()
+  @IsDate()
   timestamp!: Date;
 
   @ApiProperty({ description: 'Log severity level', example: 'ERROR', enum: LogSeverity })
@@ -22,9 +21,9 @@ export class CreateVehicleLogDto {
   severity!: LogSeverity;
 
   @ApiProperty({ description: 'Error or event code', example: 1001 })
-  @Type(() => Number)
-  @IsInt()
-  code!: number;
+  @IsString()
+  @IsNotEmpty()
+  code!: string;
 
   @ApiProperty({ description: 'Log message', example: 'Engine temperature warning' })
   @IsString()
