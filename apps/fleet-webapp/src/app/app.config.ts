@@ -42,6 +42,7 @@ const links: AppLinks = [
   { label: `Dashboard`, icon: 'dashboard', path: '/dashboard' },
   { label: `Vehicles`, icon: 'directions_car', path: '/vehicles' },
   { label: `Search`, icon: 'search', path: '/search' },
+  { label: `Import`, icon: 'file_upload', path: '/import' },
   { label: `Docs`, icon: 'library_books', path: '/documentation' },
 ];
 
