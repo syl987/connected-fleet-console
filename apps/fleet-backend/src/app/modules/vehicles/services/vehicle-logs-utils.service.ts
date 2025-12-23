@@ -59,7 +59,7 @@ export class VehicleLogsUtilsService {
           }
           return vehicleLog;
         }),
-      ).then((results) => results.filter((log): log is CreateVehicleLogDto => log !== null));
+      );
 
       this.logger.log(`Successfully read ${vehicleLogs.length} logs. Saving to database...`);
       return this.vehicleLogsService.createMany(vehicleLogs);
