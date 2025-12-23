@@ -14,7 +14,7 @@ export class ImportEffects {
   protected readonly vehicleLogUtilsDataService = inject(VehicleLogUtilsDataService);
   protected readonly vehicleLogService = inject(VehicleLogService);
 
-  readonly searchVehicleLogs = createEffect(() => {
+  readonly importVehicleLogs = createEffect(() => {
     return this.actions.pipe(
       ofType(ImportActions.importVehicleLogs),
       switchMap(({ file }) =>
