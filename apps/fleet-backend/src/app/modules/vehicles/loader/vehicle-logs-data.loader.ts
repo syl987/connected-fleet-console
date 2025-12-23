@@ -122,11 +122,11 @@ export class VehicleLogsDataLoader {
       timestamp.setSeconds(timestamp.getSeconds() - secondsAgo);
 
       // Pick random severity
-      const severity = this.pickRandom(Object.keys(LogSeverity)) as LogSeverity;
+      const severity = this.pickRandom(Object.values(LogSeverity));
 
       // Generate code within severity range
       const codeRange = this.codRanges[severity];
-      const code = this.randomInt(codeRange.min, codeRange.max);
+      const code = '' + this.randomInt(codeRange.min, codeRange.max);
 
       // Pick random message for severity
       const message = this.pickRandom(this.messages[severity as keyof typeof this.messages]);

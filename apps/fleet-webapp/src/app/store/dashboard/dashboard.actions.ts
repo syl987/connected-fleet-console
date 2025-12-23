@@ -7,7 +7,7 @@ import {
 import { GenerateVehicleLogsOptions } from '../../models/vehicle-logs-utils.models';
 
 export const DashboardActions = createActionGroup({
-  source: 'VehicleLogs/API',
+  source: 'VehicleLogs/analytics/API',
   events: {
     startGeneratingLogs: props<{ options: GenerateVehicleLogsOptions }>(),
     startGeneratingLogsSUCCESS: emptyProps(),

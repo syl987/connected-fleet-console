@@ -1,0 +1,85 @@
+<div class="container">
+  <app-title-bar>
+    <button mat-stroked-button class="app-tertiary" (click)="picker.files = null; picker.click()">Select File</button>
+    <button mat-stroked-button (click)="clearVehicleLogs()">Clear Logs</button>
+  </app-title-bar>
+
+  <input
+    type="file"
+    accept=".txt,.log,text/plain"
+    #picker
+    hidden
+    (change)="picker.files ? import(picker.files[0]) : null"
+  />
+
+  <p>Import vehicle logs from a file.</p>
+
+  <p class="font-mono opacity-75">file upload / parse file data / validate and save data</p>
+
+  @if (vehicleLogs().length > 0) {
+    <mat-card>
+      <div class="overflow-x-auto rounded-md">
+        <table mat-table [dataSource]="dataSource">
+          <ng-container matColumnDef="timestamp">
+            <th mat-header-cell *matHeaderCellDef>Timestamp</th>
+            <td mat-cell *matCellDef="let log">{{ log.timestamp | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="severity">
+            <th mat-header-cell *matHeaderCellDef>Severity</th>
+            <td mat-cell *matCellDef="let log">{{ log.severity }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="code">
+            <th mat-header-cell *matHeaderCellDef>Code</th>
+            <td mat-cell *matCellDef="let log">{{ log.code }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="message">
+            <th mat-header-cell *matHeaderCellDef>Message</th>
+            <td mat-cell *matCellDef="let log">{{ log.message }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="brand">
+            <th mat-header-cell *matHeaderCellDef>Brand</th>
+            <td mat-cell *matCellDef="let log">{{ log.vehicle?.brand }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="model">
+            <th mat-header-cell *matHeaderCellDef>Model</th>
+            <td mat-cell *matCellDef="let log">{{ log.vehicle?.model }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="year">
+            <th mat-header-cell *matHeaderCellDef>Year</th>
+            <td mat-cell *matCellDef="let log">{{ log.vehicle?.year }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="fuelType">
+            <th mat-header-cell *matHeaderCellDef>Fuel Type</th>
+            <td mat-cell *matCellDef="let log">{{ log.vehicle?.fuelType }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="color">
+            <th mat-header-cell *matHeaderCellDef>Color</th>
+            <td mat-cell *matCellDef="let log">{{ log.vehicle?.color }}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="mileage">
+            <th mat-header-cell *matHeaderCellDef>Mileage</th>
+            <td mat-cell *matCellDef="let log">{{ log.vehicle?.mileage }} km</td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="tableColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: tableColumns" class="font-mono"></tr>
+        </table>
+
+        <mat-paginator [pageSizeOptions]="[5, 10, 20, 100]" showFirstLastButtons aria-label="Select page" />
+      </div>
+    </mat-card>
+  } @else if (loading()) {
+    <mat-spinner class="mb-4" aria-label="Loading" />
+  } @else if (loaded()) {
+    <p class="text-secondary col-span-full py-2 text-center">No logs were parsed.</p>
+  }
+</div>

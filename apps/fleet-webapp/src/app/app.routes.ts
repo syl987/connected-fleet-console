@@ -48,6 +48,12 @@ export const appRoutes: Route[] = [
       import('./components/main/search-page/search-page.component').then((m) => m.SearchPageComponent),
   },
   {
+    path: 'import',
+    title: 'Import Vehicle Logs',
+    loadComponent: () =>
+      import('./components/main/import-page/import-page.component').then((m) => m.ImportPageComponent),
+  },
+  {
     path: 'documentation',
     title: 'Documentation',
     loadComponent: () =>

@@ -9,7 +9,7 @@
 
 ### Objectives
 
-- [TODO] Input and process logs (from a file or a stream)
+- [check] Input and process logs (from a file or a stream)
 - [check] Database storage with flexible querying and aggregation -> Vehicle, VehicleLog (linked entities)
 - [check] REST-API for logs with filters
 - [check] Implement aggregated views (e.g. errors per vehicle, per code, per time range)
@@ -26,12 +26,12 @@
 
 ### Input Data
 
-- [TODO] Support log text format
+- [check] Support log text format
 - [check] Support either file upload, seed script or a simple generator -> seed script, generated data
 
 ### Back-End
 
-- [TODO] Parse log text file into the database
+- [check] Parse log text file into the database
 - [check] Store data in memory and a simple database -> in-memory database
 - [check] Design a query API with various filter params -> VehicleLogController
 - [check] Provide an aggregated endpoint (errors per vehicle in a time range, most frequent error codes, vehicles in critical state)

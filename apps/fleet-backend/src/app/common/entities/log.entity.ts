@@ -17,8 +17,8 @@ export class LogEntity extends BaseEntity {
   @Column()
   severity!: LogSeverity;
 
-  @Column()
-  code!: number;
+  @Column('text')
+  code!: string;
 
   @Column('text')
   message!: string;
