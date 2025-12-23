@@ -47,7 +47,11 @@ export class VehicleLogsUtilsService {
     const vehicleLogs = lines
       .map((line) => {
         try {
-          const { groups } = line.match(INPUT_FILE_LOG_REGEX);
+          const match = line.match(INPUT_FILE_LOG_REGEX);
+          if (!match || !match.groups) {
+            throw new Error('Invalid log line format');
+          }
+          const { groups } = match;
 
           const vehicleLog: CreateVehicleLogDto = new CreateVehicleLogDto();
           vehicleLog.timestamp = new Date(groups.timestamp);
