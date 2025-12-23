@@ -58,7 +58,7 @@ export class VehicleLogsAnalyticsService {
     const totalLogs = await this.vehicleLogsRepository.count();
 
     const statsBySeverity = await Promise.all(
-      Object.keys(LogSeverity).map(async (severity: LogSeverity) => {
+      Object.values(LogSeverity).map(async (severity) => {
         const colorStats = await this.vehicleLogsRepository
           .createQueryBuilder('log')
           .innerJoin('log.vehicle', 'vehicle')
