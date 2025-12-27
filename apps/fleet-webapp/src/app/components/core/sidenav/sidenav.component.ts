@@ -5,6 +5,7 @@ import { MatListModule } from '@angular/material/list';
 import { Router, RouterModule } from '@angular/router';
 import { APP_LINKS, APP_OPTIONS } from '../../../models/app.models';
 import { ThemeService } from '../../../services/theme.service';
+import { LogoComponent } from '../logo/logo.component';
 
 @Component({
   selector: 'app-sidenav',
@@ -13,6 +14,7 @@ import { ThemeService } from '../../../services/theme.service';
     MatButtonModule,
     MatIconModule,
     MatListModule,
+    LogoComponent,
   ],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.scss',

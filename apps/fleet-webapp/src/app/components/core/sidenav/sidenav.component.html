@@ -1,13 +1,13 @@
-<div class="mt-10 mb-4 flex flex-col items-center">
-  <div class="mb-2 rounded-lg border p-1 text-xs font-normal" style="width: 128px; height: 128px">
+<div class="mt-7 mb-4 flex flex-col items-center">
+  <div class="mb-4 rounded-lg border p-1 text-xs font-normal" style="width: 96px; height: 96px">
     <div
-      class="bg-surface-container-highest text-primary flex h-full w-full flex-col items-center justify-center rounded-md text-4xl"
+      class="bg-surface-container-highest text-primary flex h-full w-full flex-col items-center justify-center rounded-md text-xl font-bold"
     >
       CFC
     </div>
   </div>
 
-  <div class="text-primary mt-2 text-xl">{{ options.applicationName }}</div>
+  <app-logo [name]="options.applicationName" size="20" />
 </div>
 
 <mat-divider class="mx-4" />

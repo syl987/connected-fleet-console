@@ -13,6 +13,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { distinctUntilChanged, map } from 'rxjs';
 
+import { LogoComponent } from '../logo/logo.component';
 import { SidenavComponent } from '../sidenav/sidenav.component';
 
 @Component({
@@ -28,6 +29,7 @@ import { SidenavComponent } from '../sidenav/sidenav.component';
     MatProgressSpinnerModule,
     MatTabsModule,
     MatToolbarModule,
+    LogoComponent,
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',

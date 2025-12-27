@@ -5,7 +5,7 @@
         <mat-icon>menu</mat-icon>
       </button>
     }
-    <div class="text-primary truncate text-base sm:text-lg lg:text-xl">{{ options.applicationName }}</div>
+    <app-logo [name]="options.applicationName" size="20" />
 
     @if (large()) {
       <nav mat-tab-nav-bar [tabPanel]="tabPanel" class="ms-2">
