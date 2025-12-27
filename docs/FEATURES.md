@@ -16,7 +16,7 @@ Shows data in real-time using server-side events.
 
 Shows aggregated data.
 
-<!-- Visual charts for best readability and UX. -->
+Visual charts for best readability and UX.
 
 ### Vehicles Page
 
