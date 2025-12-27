@@ -12,8 +12,8 @@ import { DashboardService } from '../../../services/dashboard.service';
 import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
 
 const GENERATE_LOGS_DURATION = 2 * 60 * 1000;
-const GENERATE_LOGS_INTERVAL = 5 * 1000;
-const GENERATE_LOGS_MAX = 5;
+const GENERATE_LOGS_INTERVAL = 2 * 1000;
+const GENERATE_LOGS_MAX = 1;
 
 const colors = {
   CRITICAL: 'red',

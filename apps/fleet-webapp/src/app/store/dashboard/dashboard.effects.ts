@@ -66,7 +66,7 @@ export class DashboardEffects {
     return this.actions.pipe(
       ofType(DashboardActions.streamAnalytics),
       switchMap(() =>
-        this.vehicleLogsAnalyticsStreamService.stream().pipe(
+        this.vehicleLogsAnalyticsStreamService.stream({ interval: 2000 }).pipe(
           mapResponse({
             next: ({ summary, severityStats, colorStats }) => {
               return DashboardActions.streamAnalyticsNEXT({ summary, severityStats, colorStats });

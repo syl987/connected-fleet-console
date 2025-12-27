@@ -67,7 +67,7 @@ export class VehicleLogsDataLoader {
     @InjectRepository(Vehicle) private readonly vehiclesRepository: Repository<Vehicle>,
   ) {}
 
-  async loadInitialData(maxLogsPerVehicle = 20): Promise<void> {
+  async loadInitialData(maxLogsPerVehicle = 10): Promise<void> {
     const count = await this.vehicleLogsRepository.count();
 
     if (count > 0) {

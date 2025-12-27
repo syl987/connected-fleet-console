@@ -27,10 +27,10 @@ export class VehicleLogsAnalyticsStreamService implements OnDestroy {
    * @param interval Polling interval in milliseconds (default: 5000)
    * @returns Observable that emits VehicleLogsSummary data
    */
-  stream(interval = 5000): Observable<VehicleLogsAnalyticsStreamResponse> {
+  stream(options: { interval?: number } = { interval: 5000 }): Observable<VehicleLogsAnalyticsStreamResponse> {
     this.disconnect();
 
-    const url = `${this.url}?interval=${interval}`;
+    const url = `${this.url}?interval=${options.interval}`;
 
     return new Observable<VehicleLogsAnalyticsStreamResponse>((observer) => {
       const eventSource = new EventSource(url);
