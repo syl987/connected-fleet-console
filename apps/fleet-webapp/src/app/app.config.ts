@@ -12,6 +12,7 @@ import { provideEffects } from '@ngrx/effects';
 import { provideRouterStore } from '@ngrx/router-store';
 import { provideStore } from '@ngrx/store';
 import { provideStoreDevtools } from '@ngrx/store-devtools';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 import { provideMarkdown } from 'ngx-markdown';
 import { appRoutes } from './app.routes';
 import { APP_LINKS, APP_OPTIONS, AppLinks, AppOptions } from './models/app.models';
@@ -60,6 +61,7 @@ export const appConfig: ApplicationConfig = {
     provideStoreDevtools({ maxAge: 25 }),
 
     provideMarkdown(),
+    provideCharts(withDefaultRegisterables()),
 
     { provide: DefaultDataServiceFactory, useClass: AppDefaultDataServiceFactory },
     { provide: DefaultDataServiceConfig, useValue: entityDataServiceConfig },

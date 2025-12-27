@@ -5,6 +5,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatIconModule } from '@angular/material/icon';
+import { ChartData } from 'chart.js';
+import { BaseChartDirective } from 'ng2-charts';
 import { GenerateVehicleLogsOptions } from '../../../models/vehicle-logs-utils.models';
 import { DashboardService } from '../../../services/dashboard.service';
 import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
@@ -12,6 +14,14 @@ import { TitleBarComponent } from '../../core/title-bar/title-bar.component';
 const GENERATE_LOGS_DURATION = 2 * 60 * 1000;
 const GENERATE_LOGS_INTERVAL = 5 * 1000;
 const GENERATE_LOGS_MAX = 5;
+
+const colors = {
+  CRITICAL: 'red',
+  ERROR: 'darkorange',
+  WARNING: 'gold',
+  INFO: 'cornflowerblue',
+  DEBUG: 'silver',
+};
 
 @Component({
   selector: 'app-dashboard-page',
@@ -21,6 +31,7 @@ const GENERATE_LOGS_MAX = 5;
     MatCardModule,
     MatDividerModule,
     MatIconModule,
+    BaseChartDirective,
     TitleBarComponent,
   ],
   templateUrl: './dashboard-page.component.html',
@@ -35,7 +46,35 @@ export class DashboardPageComponent implements OnDestroy {
 
   readonly streaming = toSignal(this.dashboardService.streaming$, { requireSync: true });
 
-  readonly criticalColorStats = computed(() => this.colorStats()?.stats.find((s) => s.severity === 'CRITICAL'));
+  readonly severityChartData = computed<ChartData>(() => {
+    const stats = this.severityStats()?.stats ?? [];
+
+    return {
+      labels: stats.map(({ severity }) => severity),
+      datasets: [
+        {
+          data: stats.map(({ count }) => count),
+          backgroundColor: stats.map(({ severity }) => colors[severity as keyof typeof colors]),
+          animation: false,
+        },
+      ],
+    };
+  });
+
+  readonly colorChartData = computed<ChartData>(() => {
+    const stats = this.colorStats()?.stats.find((s) => s.severity === 'CRITICAL')?.stats ?? [];
+
+    return {
+      labels: stats.map(({ color }) => color),
+      datasets: [
+        {
+          data: stats.map(({ count }) => count),
+          backgroundColor: stats.map(({ color }) => color.toLowerCase()),
+          animation: false,
+        },
+      ],
+    };
+  });
 
   ngOnDestroy(): void {
     this.dashboardService.stopStreamingAnalytics();
