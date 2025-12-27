@@ -91,7 +91,7 @@ export class VehicleLogsDataLoader {
       const logs: VehicleLog[] = [];
 
       for (const vehicle of vehicles) {
-        const vehicleLogs = this.generateLogsForVehicle(vehicle, Math.floor(Math.random() * maxLogsPerVehicle));
+        const vehicleLogs = this.generateLogsForVehicle(vehicle, Math.floor(Math.random() * (maxLogsPerVehicle + 1)));
         logs.push(...vehicleLogs);
       }
 
