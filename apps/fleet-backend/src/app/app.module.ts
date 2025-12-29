@@ -6,7 +6,7 @@ import { VehiclesModule } from './modules/vehicles/vehicles.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'sqlite',
-      database: ':memory:',
+      database: 'database.sqlite',
       synchronize: true,
       autoLoadEntities: true,
     }),
