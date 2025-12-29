@@ -47,20 +47,20 @@ export class VehicleLogsUtilsService {
             }
             const { groups } = match;
 
-          const vehicleLog = new CreateVehicleLogDto();
-          vehicleLog.timestamp = parse(groups.timestamp, 'yyyy-MM-dd HH:mm:ss', new Date());
-          vehicleLog.vehicleId = parseInt(groups.vehicleId, 10);
-          vehicleLog.severity = groups.severity as LogSeverity;
-          vehicleLog.code = groups.code;
-          vehicleLog.message = groups.message;
+            const vehicleLog = new CreateVehicleLogDto();
+            vehicleLog.timestamp = parse(groups.timestamp, 'yyyy-MM-dd HH:mm:ss', new Date());
+            vehicleLog.vehicleId = parseInt(groups.vehicleId, 10);
+            vehicleLog.severity = groups.severity as LogSeverity;
+            vehicleLog.code = groups.code;
+            vehicleLog.message = groups.message;
 
-          const errors = await validate(vehicleLog);
+            const errors = await validate(vehicleLog);
 
-          if (errors.length > 0) {
-            throw new Error('Validation failed: ' + JSON.stringify(errors));
-          }
-          return vehicleLog;
-        }),
+            if (errors.length > 0) {
+              throw new Error('Validation failed: ' + JSON.stringify(errors));
+            }
+            return vehicleLog;
+          }),
       );
 
       this.logger.log(`Successfully read ${vehicleLogs.length} logs. Saving to database...`);
